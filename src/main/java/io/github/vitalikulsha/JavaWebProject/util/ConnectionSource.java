@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject;
+package io.github.vitalikulsha.JavaWebProject.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -45,7 +45,6 @@ public class ConnectionSource {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private static String getSql(final String resourceName) {
