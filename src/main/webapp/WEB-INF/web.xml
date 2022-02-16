@@ -11,7 +11,7 @@
 
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
-        <url-pattern>/index</url-pattern>
+        <url-pattern>/servlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

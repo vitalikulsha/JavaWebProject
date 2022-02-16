@@ -3,15 +3,15 @@ package io.github.vitalikulsha.JavaWebProject.model;
 import java.util.Objects;
 
 public class Category {
-    private final Long id;
-    private final String name;
+    private Integer id;
+    private String name;
 
-    public Category(Long id, String name) {
+    public Category(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 

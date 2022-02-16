@@ -13,7 +13,7 @@ public class ConnectionSource {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.hsqldb.jdbc.JDBCDriver";
-    private static final String DB_URL = "jdbc:hsqldb:mem:myDb";
+    private static final String DB_URL = "jdbc:hsqldb:mem:libraryDb";
 
     //  Database credentials
     private static final String USER = "sa";
