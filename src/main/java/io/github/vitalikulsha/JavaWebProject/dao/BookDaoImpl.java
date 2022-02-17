@@ -82,13 +82,12 @@ public class BookDaoImpl implements BookDao {
         try {
             Integer id = resultSet.getInt("book_id");
             String title = resultSet.getString("title");
-            String publisher = resultSet.getString("publisher");
             Integer yearIssue = resultSet.getInt("yearIssue");
             Integer numberPages = resultSet.getInt("numberPages");
             Integer categoryId = resultSet.getInt("category");
             String categoryName = resultSet.getString("name");
             List<Author> authors = getAuthors(id);
-            return new Book(id, title, authors, publisher, yearIssue, numberPages, new Category(categoryId, categoryName));
+            return new Book(id, title, authors, yearIssue, numberPages, new Category(categoryId, categoryName));
         } catch (SQLException e) {
             log.error(e.toString());
             return null;
