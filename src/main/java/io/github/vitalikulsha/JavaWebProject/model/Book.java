@@ -6,16 +6,14 @@ public class Book {
     private Integer id;
     private String title;
     private List<Author> authors;
-    private String publisher;
     private Integer yearIssue;
     private Integer numberPages;
     private Category category;
 
-    public Book(Integer id, String title, List<Author> authors, String publisher, Integer yearIssue, Integer numberPages, Category category) {
+    public Book(Integer id, String title, List<Author> authors, Integer yearIssue, Integer numberPages, Category category) {
         this.id = id;
         this.title = title;
         this.authors = authors;
-        this.publisher = publisher;
         this.yearIssue = yearIssue;
         this.numberPages = numberPages;
         this.category = category;
@@ -27,7 +25,6 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", authors=" + authors +
-                ", publisher='" + publisher + '\'' +
                 ", yearIssue=" + yearIssue +
                 ", numberPages=" + numberPages +
                 ", category=" + category +
