@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.model.Author;
-import io.github.vitalikulsha.JavaWebProject.model.Book;
-import io.github.vitalikulsha.JavaWebProject.model.Category;
+import io.github.vitalikulsha.JavaWebProject.domain.Author;
+import io.github.vitalikulsha.JavaWebProject.domain.Book;
+import io.github.vitalikulsha.JavaWebProject.domain.Category;
 import io.github.vitalikulsha.JavaWebProject.util.ConnectionSource;
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,11 +37,10 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getByTitle(String title){
         List<Book> books = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.id WHERE title=?";
+        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.id WHERE title LIKE '%%%s%%'";
         try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)){
-            preparedStatement.setString(1, title);
-            ResultSet resultSet = preparedStatement.executeQuery();
+             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, title));
+             ResultSet resultSet = preparedStatement.executeQuery()){
             while (resultSet.next()) {
                books.add(getBook(resultSet));
             }

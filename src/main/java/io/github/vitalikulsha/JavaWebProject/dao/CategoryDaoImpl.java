@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
 import io.github.vitalikulsha.JavaWebProject.util.ConnectionSource;
-import io.github.vitalikulsha.JavaWebProject.model.Category;
+import io.github.vitalikulsha.JavaWebProject.domain.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,19 +31,19 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public Optional<Category> getByName(String name){
-        String sqlQuery = "SELECT * FROM category WHERE name=?";
+    public List<Category> getByName(String name) {
+        List<Category> categories = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM category WHERE name LIKE '%%%s%%'";
         try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return Optional.ofNullable(getCategory(resultSet));
+             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, name));
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                categories.add(getCategory(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return categories;
     }
 
     @Override

@@ -1,9 +1,9 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.model.Category;
+import io.github.vitalikulsha.JavaWebProject.domain.Category;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface CategoryDao extends Dao<Category, Integer>{
-    Optional<Category> getByName(String name);
+    List<Category> getByName(String name);
 }

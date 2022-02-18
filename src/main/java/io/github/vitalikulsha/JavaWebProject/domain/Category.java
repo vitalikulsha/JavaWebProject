@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.model;
+package io.github.vitalikulsha.JavaWebProject.domain;
 
 import java.util.Objects;
 
