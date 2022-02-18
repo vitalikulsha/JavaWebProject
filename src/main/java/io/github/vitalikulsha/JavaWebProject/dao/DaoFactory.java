@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-public class DaoFactory <T extends Dao > {
+public class DaoFactory {
 
     public BookDao bookDao() {
         return new BookDaoImpl();

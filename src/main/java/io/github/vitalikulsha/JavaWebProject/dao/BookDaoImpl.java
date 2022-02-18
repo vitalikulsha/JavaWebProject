@@ -35,14 +35,16 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> getByTitle(String title){
+    public List<Book> getByName(String title) {
         List<Book> books = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.id WHERE title LIKE '%%%s%%'";
+        String sqlQuery = "SELECT * FROM book" +
+                " INNER JOIN category cat ON book.category=cat.id" +
+                " WHERE title LIKE '%%%s%%'";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, title));
-             ResultSet resultSet = preparedStatement.executeQuery()){
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-               books.add(getBook(resultSet));
+                books.add(getBook(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +55,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getAll() {
         List<Book> books = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM book LEFT JOIN category cat ON book.category=cat.id";
+        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.id";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -62,7 +64,6 @@ public class BookDaoImpl implements BookDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
         return books;
     }
@@ -75,6 +76,44 @@ public class BookDaoImpl implements BookDao {
     @Override
     public void delete(Book book) {
 
+    }
+
+    @Override
+    public List<Book> getByAuthorId(Integer authorId) {
+        List<Book> books = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM book_author b_a" +
+                " INNER JOIN book ON b_a.book_id=book.book_id" +
+                " WHERE b_a.author_id=?";
+        try (Connection connection = connectionSource.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setInt(1, authorId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer bookId = resultSet.getInt("book_id");
+                books.add(getById(bookId).get());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+
+    @Override
+    public List<Book> getByCategoryId(Integer categoryId) {
+        List<Book> books = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM category cat INNER JOIN book ON cat.id=book.category WHERE id=?";
+        try (Connection connection = connectionSource.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setInt(1, categoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer bookId = resultSet.getInt("book_id");
+                books.add(getById(bookId).get());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return books;
     }
 
     private Book getBook(ResultSet resultSet) {
@@ -94,10 +133,10 @@ public class BookDaoImpl implements BookDao {
     }
 
     private List<Author> getAuthors(Integer bookId) {
-        String sqlQuery = "SELECT * FROM book_author b_a" +
-                " LEFT JOIN author ON b_a.author_id=author.author_id" +
-                " WHERE b_a.book_id=?";
         List<Author> authors = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM book_author b_a" +
+                " INNER JOIN author ON b_a.author_id=author.author_id" +
+                " WHERE b_a.book_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, bookId);
@@ -110,7 +149,6 @@ public class BookDaoImpl implements BookDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            return null;
         }
         return authors;
     }
