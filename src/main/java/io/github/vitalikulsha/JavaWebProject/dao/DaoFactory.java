@@ -13,4 +13,8 @@ public class DaoFactory {
     public AuthorDao authorDao() {
         return new AuthorDaoImpl();
     }
+
+    public BookCatalogDao bookCatalogDao() {
+        return new BookCatalogDaoImpl();
+    }
 }

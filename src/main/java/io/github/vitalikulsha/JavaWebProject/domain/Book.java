@@ -19,14 +19,36 @@ public class Book {
         this.category = category;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public Integer getYearIssue() {
+        return yearIssue;
+    }
+
+    public Integer getNumberPages() {
+        return numberPages;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", authors=" + authors +
-                ", yearIssue=" + yearIssue +
-                ", numberPages=" + numberPages +
                 ", category=" + category +
                 '}';
     }

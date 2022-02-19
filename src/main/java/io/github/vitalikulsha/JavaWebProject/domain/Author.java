@@ -11,6 +11,18 @@ public class Author {
         this.lastName = lastName;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
