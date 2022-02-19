@@ -1,0 +1,39 @@
+table {
+     border-collapse: collapse;
+}
+
+td, th {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid black;
+}
+
+.entry-block {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+}
+
+.entry-field {
+    padding: 10px;
+    font-size: 15px;
+    width: 200px;
+    outline: none;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+#column {
+    vertical-align: center;
+    text-align: center;
+    font-size:20px;
+    font-weight: bold;
+}
+
+

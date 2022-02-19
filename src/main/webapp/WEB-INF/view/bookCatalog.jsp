@@ -3,47 +3,52 @@
 
 <html>
 <head>
-    <title>Book catalog</title>
+    <title>Каталог книг</title>
     <style>
-        table{
-            width: 900px;
-            border-collapse: collapse;
-        }
-        td, th{
-            border: 1px solid black;
-        }
-        #column{
-            vertical-align: center;
-            text-align: center;
-        }
+          <%@include file='/WEB-INF/css/bookCatalogStyle.css' %>
+          <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
-<body>
-<h2>Список книг в каталоге:</h2>
-<table>
+<body class="block">
+<h2>Выберите книгу из списка</h2>
+<form action="<%= request.getContextPath() %>/book-catalog" method="post">
+    <ul class="entry-block">
+        <li>Введите код книги для заказа:</li>
+        <li><input class="entry-field" type="text" name="bookId" placeholder="Код книги" required></li>
+        <li><input class="submit" type="submit" value="Заказать"/></li>
+        <li><a href="<%= request.getContextPath() %>/book-search"> Назад </a></li>
+    </ul>
+</form>
+
+<h3>Список книг в каталоге:</h3>
+<table style="with: 900px;">
     <thead>
-        <tr>
-            <th>Код</th>
-            <th>Название</th>
-            <th>Авторы</th>
-            <th>Категория</th>
-            <th>Количество</th>
-        </tr>
+    <tr>
+        <th>Код</th>
+        <th>Название</th>
+        <th>Авторы</th>
+        <th>Категория</th>
+        <th>Количество</th>
+    </tr>
     </thead>
     <tbody>
-        <c:forEach var="catalog" items="${bookCatalog}" >
-            <tr>
-                <td>${catalog.book.id}</td>
-                <td>${catalog.book.title}</td>
-                <td>
-                    <c:forEach var="author" items="${catalog.book.authors}">
-                        ${author.firstName} ${author.lastName}<br>
-                    </c:forEach>
-                </td>
-                <td>${catalog.book.category.name}</td>
-                <td id="column">${catalog.number}</td>
-            </tr>
-        </c:forEach>
+    <c:forEach var="catalog" items="${bookCatalog}">
+        <tr>
+            <td>
+                <form action="<%= request.getContextPath() %>/order" method="post">
+                    <input type="submit" name="bookId" id="book-id" value="${catalog.book.id}">
+                </form>
+            </td>
+            <td>${catalog.book.title}</td>
+            <td>
+                <c:forEach var="author" items="${catalog.book.authors}">
+                    ${author.firstName} ${author.lastName}<br>
+                </c:forEach>
+            </td>
+            <td>${catalog.book.category.name}</td>
+            <td id="column">${catalog.number}</td>
+        </tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>
