@@ -5,7 +5,7 @@
 <head>
     <title>Поиск книги</title>
     <style>
-        <%@include file='/WEB-INF/css/bookSearchStyle.css' %>
+        <%@include file='/WEB-INF/css/book-search-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
@@ -13,7 +13,7 @@
 <h4> Добро пожаловать!</h4>
 <h2>Поиск книг</h2>
 <table>
-    <form action="/" method="POST" id="book-title-form">
+    <form action="<%= request.getContextPath() %>/book-catalog" method="post">
         <tr>
             <th>Найти книги по названию:</th>
             <td>
@@ -21,22 +21,22 @@
                        placeholder="Введите название книги поностью или частично" required>
             </td>
             <td>
-                <input class="submit" type="submit" name="submit" id="book-title-submit" value="Найти">
+                <input class="submit" type="submit" value="Найти">
             </td>
         </tr>
     </form>
-    <form action="/" method="POST" id="author-name-form">
+    <form action="<%= request.getContextPath() %>/book-catalog" method="post">
         <tr>
             <th>Найти книги по автору:</th>
-            <td><input class="entry-field" type="password" name="authorName"
+            <td><input class="entry-field" type="text" name="authorName"
                        placeholder="Введите имя или фамилию автора полностью или частично" required>
             </td>
             <td>
-                <input class="submit" type="submit" name="submit" id="author-name-submit" value="Найти">
+                <input class="submit" type="submit" value="Найти">
             </td>
         </tr>
     </form>
-    <form action="/" method="POST" id="category-name-form">
+    <form action="<%= request.getContextPath() %>/book-catalog" method="post">
         <tr>
             <th>Найти книги по категории:</th>
             <td>
@@ -44,16 +44,16 @@
                        placeholder="Введиет название категории полностью или частично" required>
             </td>
             <td>
-                <input class="submit" type="submit" name="submit" id="category-name-submit" value="Найти">
+                <input class="submit" type="submit" value="Найти">
             </td>
         </tr>
     </form>
-    <form action="<%= request.getContextPath() %>/book-catalog" method="get" id="all-book-form">
+    <form action="<%= request.getContextPath() %>/book-catalog" method="get">
         <tr>
             <th>Получить весь список книг:</th>
             <td></td>
             <td>
-                <input class="submit" type="submit" name="allBooks" id="all-books-submit" value="Получить">
+                <input class="submit" type="submit" name="allBooks" value="Получить">
             </td>
         </tr>
     </form>

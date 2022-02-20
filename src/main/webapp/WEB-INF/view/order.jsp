@@ -5,7 +5,7 @@
 <head>
     <title>Оформление заказа</title>
     <style>
-        <%@include file='/WEB-INF/css/orderStyle.css' %>
+        <%@include file='/WEB-INF/css/order-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
@@ -44,13 +44,13 @@
     <tr>
         <th>Место чтения</th>
         <td>
-            <select>
+            <select style="font-size: 15px">
                 <option>Читальный зал</option>
                 <option>Абонемент</option>
             </select>
         </td>
     </tr>
 </table>
-
+<h3 style="text-align: center;"><a  href="<%= request.getContextPath() %>/book-search"> Поиск книг </a></h3>
 </body>
 </html>

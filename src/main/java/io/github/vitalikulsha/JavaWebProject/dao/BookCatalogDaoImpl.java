@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BookCatalogDaoImpl implements BookCatalogDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
@@ -40,7 +42,10 @@ public class BookCatalogDaoImpl implements BookCatalogDao {
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                catalogs.add(getBookCatalog(resultSet));
+                BookCatalog bookCatalog = getBookCatalog(resultSet);
+                if (bookCatalog != null) {
+                    catalogs.add(getBookCatalog(resultSet));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -51,21 +56,72 @@ public class BookCatalogDaoImpl implements BookCatalogDao {
 
     @Override
     public List<BookCatalog> getByName(String title) {
-        List<BookCatalog> catalogs = new ArrayList<>();
+//        List<BookCatalog> catalogs = new ArrayList<>();
         String sqlQuery = "SELECT * FROM book_catalog b_c" +
                 " INNER JOIN book ON b_c.book_id=book.book_id" +
                 " WHERE title LIKE '%%%s%%'";
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, title));
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                catalogs.add(getBookCatalog(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return catalogs;
+        return getBookCatalogList(title, sqlQuery);
+
+//        try (Connection connection = connectionSource.createConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, title));
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            while (resultSet.next()) {
+//                catalogs.add(getBookCatalog(resultSet));
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return catalogs;
     }
+
+    @Override
+    public List<BookCatalog> getByAuthorName(String name) {
+//        List<BookCatalog> catalogs = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM book_catalog b_c" +
+                " INNER JOIN book_author b_a ON b_c.book_id=b_a.book_id" +
+                " INNER JOIN author ON b_a.author_id=author.author_id" +
+                " WHERE firstName LIKE '%%%s%%' OR lastName LIKE '%%%s%%'";
+        return getBookCatalogList(name, sqlQuery);
+
+//        try (Connection connection = connectionSource.createConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, name, name));
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            while (resultSet.next()) {
+//                BookCatalog bookCatalog = getBookCatalog(resultSet);
+//                if (bookCatalog != null) {
+//                    catalogs.add(getBookCatalog(resultSet));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return catalogs;
+    }
+
+    @Override
+    public List<BookCatalog> getByCategoryName(String name) {
+//        List<BookCatalog> catalogs = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM book_catalog b_c" +
+                " INNER JOIN book ON b_c.book_id=book.book_id" +
+                " INNER JOIN category cat ON book.category=cat.id" +
+                " WHERE name LIKE '%%%s%%'";
+        return getBookCatalogList(name, sqlQuery);
+
+//        try (Connection connection = connectionSource.createConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, name));
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//            while (resultSet.next()) {
+//                BookCatalog bookCatalog = getBookCatalog(resultSet);
+//                if (bookCatalog != null) {
+//                    catalogs.add(getBookCatalog(resultSet));
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return catalogs;
+    }
+
 
     @Override
     public BookCatalog save(BookCatalog bookCatalog) {
@@ -77,13 +133,36 @@ public class BookCatalogDaoImpl implements BookCatalogDao {
 
     }
 
+    private List<BookCatalog> getBookCatalogList(String name, String sqlQuery){
+        List<String> names = new ArrayList<>();
+        Pattern pattern = Pattern.compile("%s%");
+        Matcher matcher = pattern.matcher(sqlQuery);
+        while (matcher.find()){
+            names.add(name);
+        }
+        List<BookCatalog> catalogs = new ArrayList<>();
+        try (Connection connection = connectionSource.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, names.toArray()));
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                BookCatalog bookCatalog = getBookCatalog(resultSet);
+                if (bookCatalog != null) {
+                    catalogs.add(getBookCatalog(resultSet));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return catalogs;
+    }
+
     private BookCatalog getBookCatalog(ResultSet resultSet) {
         BookDao bookDao = factory.bookDao();
         try {
             Integer bookId = resultSet.getInt("book_id");
             Integer number = resultSet.getInt("number");
             Book book = bookDao.getById(bookId).get();
-            return new BookCatalog(book, number);
+            return number.equals(0) ? null : new BookCatalog(book, number);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

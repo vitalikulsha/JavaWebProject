@@ -5,7 +5,7 @@
 <head>
     <title>Каталог книг</title>
     <style>
-          <%@include file='/WEB-INF/css/bookCatalogStyle.css' %>
+          <%@include file='/WEB-INF/css/book-catalog-style.css' %>
           <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
@@ -19,9 +19,8 @@
         <li><a href="<%= request.getContextPath() %>/book-search"> Назад </a></li>
     </ul>
 </form>
-
 <h3>Список книг в каталоге:</h3>
-<table style="with: 900px;">
+<table style="with: 900px; margin: auto;">
     <thead>
     <tr>
         <th>Код</th>
@@ -36,7 +35,7 @@
         <tr>
             <td>
                 <form action="<%= request.getContextPath() %>/order" method="post">
-                    <input type="submit" name="bookId" id="book-id" value="${catalog.book.id}">
+                    <input style="font-size: 15px;" type="submit" name="bookId" id="book-id" value="${catalog.book.id}">
                 </form>
             </td>
             <td>${catalog.book.title}</td>

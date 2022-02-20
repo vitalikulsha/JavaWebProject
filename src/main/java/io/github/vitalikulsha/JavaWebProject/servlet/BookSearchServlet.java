@@ -16,7 +16,7 @@ public class BookSearchServlet extends HttpServlet {
 
 
 
-        getServletContext().getRequestDispatcher("/WEB-INF/view/bookSearch.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/book-search.jsp").forward(req, resp);
     }
 
 

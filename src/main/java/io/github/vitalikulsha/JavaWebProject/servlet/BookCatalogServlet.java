@@ -33,19 +33,25 @@ public class BookCatalogServlet extends HttpServlet {
             catalogs = catalogDao.getAll();
         }
         req.setAttribute("bookCatalog", catalogs);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/bookCatalog.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/book-catalog.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        BookDao bookDao = factory.bookDao();
-        Book book = (Book) session.getAttribute("book");
-        Integer bookId = Integer.valueOf(req.getParameter("bookId"));
-        if(book==null){
-            book = bookDao.getById(bookId).get();
+        BookCatalogDao catalogDao = factory.bookCatalogDao();
+        List<BookCatalog> catalogs = (List<BookCatalog>) session.getAttribute("bookCatalog");
+        String bookTitle = req.getParameter("bookTitle");
+        String authorName = req.getParameter("authorName");
+        String categoryName = req.getParameter("categoryName");
+        if (bookTitle != null) {
+            catalogs = catalogDao.getByName(bookTitle);
+        } else if(authorName !=null){
+            catalogs = catalogDao.getByAuthorName(authorName);
+        } else if(categoryName !=null){
+            catalogs = catalogDao.getByCategoryName(categoryName);
         }
-        req.setAttribute("book", book);
-        resp.sendRedirect("/library/order");
+        req.setAttribute("bookCatalog", catalogs);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/book-catalog.jsp").forward(req, resp);
     }
 }

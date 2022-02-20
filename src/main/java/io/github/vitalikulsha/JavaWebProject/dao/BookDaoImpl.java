@@ -69,16 +69,6 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public Book save(Book book) {
-        return null;
-    }
-
-    @Override
-    public void delete(Book book) {
-
-    }
-
-    @Override
     public List<Book> getByAuthorId(Integer authorId) {
         List<Book> books = new ArrayList<>();
         String sqlQuery = "SELECT * FROM book_author b_a" +
@@ -114,6 +104,16 @@ public class BookDaoImpl implements BookDao {
             e.printStackTrace();
         }
         return books;
+    }
+
+    @Override
+    public Book save(Book book) {
+        return null;
+    }
+
+    @Override
+    public void delete(Book book) {
+
     }
 
     private Book getBook(ResultSet resultSet) {

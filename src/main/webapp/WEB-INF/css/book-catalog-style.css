@@ -8,6 +8,7 @@ td, th {
     padding-top: 5px;
     padding-bottom: 5px;
     border: 1px solid black;
+    vertical-align: center;
 }
 
 .entry-block {
@@ -30,10 +31,9 @@ td, th {
 }
 
 #column {
-    vertical-align: center;
-    text-align: center;
     font-size:20px;
     font-weight: bold;
+    text-align: center;
 }
 
 
