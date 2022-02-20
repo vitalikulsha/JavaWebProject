@@ -9,8 +9,6 @@ public interface Dao<T, Id> {
 
     List<T> getAll();
 
-    List<T> getByName(String name);
-
     T save(T t);
 
     void delete(T t);

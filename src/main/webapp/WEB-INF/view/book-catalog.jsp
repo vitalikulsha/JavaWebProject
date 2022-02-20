@@ -10,16 +10,13 @@
     </style>
 </head>
 <body class="block">
+<c:if test="${bookCatalog == null}">
+    <c:redirect url="/book-search">
+        <c:param name="found" value="0"/>
+    </c:redirect>
+</c:if>
 <h2>Выберите книгу из списка</h2>
-<form action="<%= request.getContextPath() %>/book-catalog" method="post">
-    <ul class="entry-block">
-        <li>Введите код книги для заказа:</li>
-        <li><input class="entry-field" type="text" name="bookId" placeholder="Код книги" required></li>
-        <li><input class="submit" type="submit" value="Заказать"/></li>
-        <li><a href="<%= request.getContextPath() %>/book-search"> Назад </a></li>
-    </ul>
-</form>
-<h3>Список книг в каталоге:</h3>
+<h3>Для оформления заказа нажмите на код понравившейся книги</h3>
 <table style="with: 900px; margin: auto;">
     <thead>
     <tr>
@@ -50,5 +47,6 @@
     </c:forEach>
     </tbody>
 </table>
+<h3 style="text-align: right;"><a href="<%= request.getContextPath() %>/book-search"> Назад </a></h3>
 </body>
 </html>

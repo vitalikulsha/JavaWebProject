@@ -12,7 +12,23 @@
 <body class="block">
 <h4> Добро пожаловать!</h4>
 <h2>Поиск книг</h2>
+<c:if test="${param.found eq 0}">
+    <h3 class="error">Ничего не найдено, повторите поиск.</h3>
+</c:if>
 <table>
+    <form action="<%= request.getContextPath() %>/order" method="post">
+        <tr>
+            <th>Найти книги по коду:</th>
+            <td>
+                <input class="entry-field" type="text" name="bookId"
+                       placeholder="Введите код книги" required>
+            </td>
+            <td>
+                <input class="submit" type="submit" value="Найти">
+            </td>
+        </tr>
+    </form>
+
     <form action="<%= request.getContextPath() %>/book-catalog" method="post">
         <tr>
             <th>Найти книги по названию:</th>
@@ -25,6 +41,7 @@
             </td>
         </tr>
     </form>
+
     <form action="<%= request.getContextPath() %>/book-catalog" method="post">
         <tr>
             <th>Найти книги по автору:</th>
@@ -36,6 +53,7 @@
             </td>
         </tr>
     </form>
+
     <form action="<%= request.getContextPath() %>/book-catalog" method="post">
         <tr>
             <th>Найти книги по категории:</th>
@@ -48,6 +66,7 @@
             </td>
         </tr>
     </form>
+
     <form action="<%= request.getContextPath() %>/book-catalog" method="get">
         <tr>
             <th>Получить весь список книг:</th>

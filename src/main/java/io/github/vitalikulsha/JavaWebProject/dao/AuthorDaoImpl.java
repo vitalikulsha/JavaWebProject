@@ -47,22 +47,6 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public List<Author> getByName(String name) {
-        List<Author> authors = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM author WHERE firstName LIKE '%%%s%%' OR lastName LIKE '%%%s%%'";
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, name, name));
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                authors.add(getAuthor(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return authors;
-    }
-
-    @Override
     public Author save(Author author) {
         return null;
     }

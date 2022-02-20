@@ -22,5 +22,11 @@ th {
     border-radius: 5px;
 }
 
+.error{
+    color: red;
+    font-size: 30px;
+    text-align: center;
+}
+
 
 

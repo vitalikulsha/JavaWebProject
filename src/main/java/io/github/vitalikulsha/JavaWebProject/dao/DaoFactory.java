@@ -17,4 +17,8 @@ public class DaoFactory {
     public BookCatalogDao bookCatalogDao() {
         return new BookCatalogDaoImpl();
     }
+
+    public UserDao userDao() {
+        return new UserDaoIml();
+    }
 }

@@ -31,22 +31,6 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public List<Category> getByName(String name) {
-        List<Category> categories = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM category WHERE name LIKE '%%%s%%'";
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, name));
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                categories.add(getCategory(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return categories;
-    }
-
-    @Override
     public List<Category> getAll() {
         List<Category> categories = new ArrayList<>();
         String sqlQuery = "SELECT * FROM category";
