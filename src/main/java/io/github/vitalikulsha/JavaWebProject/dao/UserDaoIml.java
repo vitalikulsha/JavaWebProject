@@ -63,10 +63,10 @@ public class UserDaoIml implements UserDao{
     private User getUser(ResultSet resultSet) {
         try {
             Integer id = resultSet.getInt("user_id");
-            String login = resultSet.getString("login");
+            String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             Role role = Role.valueOf(resultSet.getString("role"));
-            return new User(id, login, password, role);
+            return new User(id, username, password, role);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
