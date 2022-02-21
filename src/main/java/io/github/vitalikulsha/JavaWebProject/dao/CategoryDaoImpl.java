@@ -16,7 +16,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public Optional<Category> getById(Integer id) {
-        String sqlQuery = "SELECT * FROM category WHERE id=?";
+        String sqlQuery = "SELECT * FROM category WHERE category_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, id);
@@ -58,7 +58,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     private Category getCategory(ResultSet resultSet) {
         try {
-            Integer id = resultSet.getInt("id");
+            Integer id = resultSet.getInt("category_id");
             String name = resultSet.getString("name");
             return new Category(id, name);
         } catch (SQLException e) {
