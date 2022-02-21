@@ -20,7 +20,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public Optional<Book> getById(Integer id) {
-        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.id WHERE book_id=?";
+        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.category_id WHERE book_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, id);
@@ -38,7 +38,7 @@ public class BookDaoImpl implements BookDao {
     public List<Book> getByName(String title) {
         List<Book> books = new ArrayList<>();
         String sqlQuery = "SELECT * FROM book" +
-                " INNER JOIN category cat ON book.category=cat.id" +
+                " INNER JOIN category cat ON book.category=cat.category_id" +
                 " WHERE title LIKE '%%%s%%'";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, title));
@@ -55,7 +55,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getAll() {
         List<Book> books = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.id";
+        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.category_id";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -91,7 +91,7 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> getByCategoryId(Integer categoryId) {
         List<Book> books = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM category cat INNER JOIN book ON cat.id=book.category WHERE id=?";
+        String sqlQuery = "SELECT * FROM category cat INNER JOIN book ON cat.category_id=book.category WHERE id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, categoryId);
