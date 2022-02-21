@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
 import io.github.vitalikulsha.JavaWebProject.domain.Author;
-import io.github.vitalikulsha.JavaWebProject.util.ConnectionSource;
+import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

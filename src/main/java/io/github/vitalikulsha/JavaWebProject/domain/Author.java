@@ -1,6 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.domain;
 
-public class Author {
+import java.io.Serializable;
+
+public class Author implements Serializable {
     private Integer id;
     private String firstName;
     private String lastName;

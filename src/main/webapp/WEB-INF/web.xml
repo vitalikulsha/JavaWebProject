@@ -12,7 +12,6 @@
         <servlet-name>MyServlet</servlet-name>
         <servlet-class>io.github.vitalikulsha.JavaWebProject.MyServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>MyServlet</servlet-name>
         <url-pattern>/servlet</url-pattern>

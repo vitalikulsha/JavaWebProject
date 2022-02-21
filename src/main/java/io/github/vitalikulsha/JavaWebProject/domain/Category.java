@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.domain;
 
-import java.util.Objects;
+import java.io.Serializable;
 
-public class Category {
+public class Category implements Serializable {
     private Integer id;
     private String name;
 

@@ -11,7 +11,7 @@
 </head>
 <body class="block">
 <c:if test="${bookCatalog == null}">
-    <c:redirect url="/book-search">
+    <c:redirect url="/reader/book-search">
         <c:param name="found" value="0"/>
     </c:redirect>
 </c:if>
@@ -31,7 +31,7 @@
     <c:forEach var="catalog" items="${bookCatalog}">
         <tr>
             <td>
-                <form action="<%= request.getContextPath() %>/order" method="post">
+                <form action="<%= request.getContextPath() %>/reader/order" method="post">
                     <input style="font-size: 15px;" type="submit" name="bookId" id="book-id" value="${catalog.book.id}">
                 </form>
             </td>
@@ -47,6 +47,6 @@
     </c:forEach>
     </tbody>
 </table>
-<h3 style="text-align: right;"><a href="<%= request.getContextPath() %>/book-search"> Назад </a></h3>
+<h3 style="text-align: right;"><a href="<%= request.getContextPath() %>/reader/book-search"> Назад </a></h3>
 </body>
 </html>

@@ -1,6 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer id;
     private String login;
     private String password;
@@ -37,5 +39,11 @@ public class User {
                 ", password='" + password + '\'' +
                 ", role=" + role +
                 '}';
+    }
+
+    public enum Role {
+        ADMIN,
+        USER,
+        GUEST
     }
 }

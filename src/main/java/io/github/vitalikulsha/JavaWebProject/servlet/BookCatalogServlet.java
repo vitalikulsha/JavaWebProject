@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/book-catalog")
+@WebServlet("/reader/book-catalog")
 public class BookCatalogServlet extends HttpServlet {
     private DaoFactory factory;
 
@@ -40,6 +40,7 @@ public class BookCatalogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         BookCatalogDao catalogDao = factory.bookCatalogDao();
+        @SuppressWarnings("unchecked")
         List<BookCatalog> catalogs = (List<BookCatalog>) session.getAttribute("bookCatalog");
         String bookTitle = req.getParameter("bookTitle");
         String authorName = req.getParameter("authorName");

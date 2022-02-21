@@ -1,4 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.domain;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 }

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/order")
+@WebServlet("/reader/order")
 public class OrderServlet extends HttpServlet {
     private DaoFactory factory;
 

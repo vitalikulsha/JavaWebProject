@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.dao;
 import io.github.vitalikulsha.JavaWebProject.domain.Author;
 import io.github.vitalikulsha.JavaWebProject.domain.Book;
 import io.github.vitalikulsha.JavaWebProject.domain.Category;
-import io.github.vitalikulsha.JavaWebProject.util.ConnectionSource;
+import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;

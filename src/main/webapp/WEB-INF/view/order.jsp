@@ -51,6 +51,6 @@
         </td>
     </tr>
 </table>
-<h3 style="text-align: center;"><a  href="<%= request.getContextPath() %>/book-search"> Поиск книг </a></h3>
+<h3 style="text-align: center;"><a  href="<%= request.getContextPath() %>/reader/book-search"> Поиск книг </a></h3>
 </body>
 </html>

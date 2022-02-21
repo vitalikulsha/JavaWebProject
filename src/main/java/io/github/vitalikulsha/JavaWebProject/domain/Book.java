@@ -1,8 +1,9 @@
 package io.github.vitalikulsha.JavaWebProject.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
     private Integer id;
     private String title;
     private List<Author> authors;

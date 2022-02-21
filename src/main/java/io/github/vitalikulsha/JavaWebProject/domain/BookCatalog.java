@@ -1,6 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.domain;
 
-public class BookCatalog {
+import java.io.Serializable;
+
+public class BookCatalog implements Serializable {
     private Book book;
     private Integer number;
 

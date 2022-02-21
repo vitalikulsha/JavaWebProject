@@ -2,7 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.dao;
 
 import io.github.vitalikulsha.JavaWebProject.domain.Book;
 import io.github.vitalikulsha.JavaWebProject.domain.BookCatalog;
-import io.github.vitalikulsha.JavaWebProject.util.ConnectionSource;
+import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -64,7 +64,7 @@ public class BookCatalogDaoImpl implements BookCatalogDao {
     public List<BookCatalog> getByCategoryName(String name) {
         String sqlQuery = "SELECT * FROM book_catalog b_c" +
                 " INNER JOIN book ON b_c.book_id=book.book_id" +
-                " INNER JOIN category cat ON book.category=cat.id" +
+                " INNER JOIN category cat ON book.category=cat.category_id" +
                 " WHERE name LIKE '%%%s%%'";
         return getBookCatalogList(name, sqlQuery);
     }

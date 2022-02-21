@@ -6,4 +6,6 @@ import java.util.Optional;
 
 public interface UserDao extends Dao<User, Integer>{
     Optional<User> getByLogin(String login);
+
+    boolean isExist(String login, String password);
 }

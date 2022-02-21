@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.util;
+package io.github.vitalikulsha.JavaWebProject.config;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

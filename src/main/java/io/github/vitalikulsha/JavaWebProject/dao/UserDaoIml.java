@@ -1,8 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.domain.Role;
 import io.github.vitalikulsha.JavaWebProject.domain.User;
-import io.github.vitalikulsha.JavaWebProject.util.ConnectionSource;
+import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class UserDaoIml implements UserDao{
+public class UserDaoIml implements UserDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
 
     @Override
@@ -45,6 +44,7 @@ public class UserDaoIml implements UserDao{
         }
         return Optional.empty();
     }
+
     @Override
     public List<User> getAll() {
         return null;
@@ -60,12 +60,21 @@ public class UserDaoIml implements UserDao{
 
     }
 
+    @Override
+    public boolean isExist(String login, String password) {
+        Optional<User> user = getByLogin(login);
+        if (user.isEmpty()) {
+            return false;
+        } else return user.get().getLogin().equals(login)
+                && user.get().getPassword().equals(password);
+    }
+
     private User getUser(ResultSet resultSet) {
         try {
             Integer id = resultSet.getInt("user_id");
-            String username = resultSet.getString("username");
+            String username = resultSet.getString("login");
             String password = resultSet.getString("password");
-            Role role = Role.valueOf(resultSet.getString("role"));
+            User.Role role = User.Role.valueOf(resultSet.getString("role"));
             return new User(id, username, password, role);
         } catch (SQLException e) {
             e.printStackTrace();
