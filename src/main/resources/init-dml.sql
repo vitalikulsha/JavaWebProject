@@ -120,9 +120,9 @@ INSERT INTO BOOK_CATALOG VALUES (90001, 0);
 INSERT INTO BOOK_CATALOG VALUES (90002, 5);
 
 INSERT INTO USER VALUES (1, 'Admin', 'admin', 'admin@gmail.com', 'ADMIN');
-INSERT INTO USER VALUES (2, 'Librarian', 'librarian', 'librarian@gmail.com', 'LIBRARIAN');
-INSERT INTO USER VALUES (3, 'User', 'user', 'user@gmail.com', 'READER');
-INSERT INTO USER VALUES (4, 'Reader', 'reader', 'reader@gmail.com', 'READER');
+INSERT INTO USER VALUES (2, 'Librarian', 'librarian', 'librarian@gmail.com', 'ADMIN');
+INSERT INTO USER VALUES (3, 'User', 'user', 'user@gmail.com', 'USER');
+INSERT INTO USER VALUES (4, 'Reader', 'reader', 'reader@gmail.com', 'USER');
 
 INSERT INTO ORDER_BOOK VALUES (1, 90002, 3, 'Читальный зал');
 INSERT INTO ORDER_BOOK VALUES (2, 50001, 4, 'Абонемент');
