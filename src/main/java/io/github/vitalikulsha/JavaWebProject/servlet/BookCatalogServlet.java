@@ -5,6 +5,7 @@ import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.domain.Book;
 import io.github.vitalikulsha.JavaWebProject.domain.BookCatalog;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+@Slf4j
 @WebServlet("/reader/book-catalog")
 public class BookCatalogServlet extends HttpServlet {
     private DaoFactory factory;
@@ -22,12 +24,16 @@ public class BookCatalogServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         factory = new DaoFactory();
+        log.debug("BookCatalogServlet starting");
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        log.debug("BookCatalogServlet doGet() starting");
         HttpSession session = req.getSession();
         BookCatalogDao catalogDao = factory.bookCatalogDao();
+        @SuppressWarnings("unchecked")
         List<BookCatalog> catalogs = (List<BookCatalog>) session.getAttribute("bookCatalog");
         if (catalogs == null) {
             catalogs = catalogDao.getAll();
@@ -39,6 +45,7 @@ public class BookCatalogServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        log.debug("BookCatalogServlet doPost() starting");
         BookCatalogDao catalogDao = factory.bookCatalogDao();
         @SuppressWarnings("unchecked")
         List<BookCatalog> catalogs = (List<BookCatalog>) session.getAttribute("bookCatalog");

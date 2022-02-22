@@ -1,18 +1,20 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
-public enum UserPages {
+public enum UserPages{
+    LOGIN("/login"),
+    LOGOUT("/logout"),
+    NOT_FOUND("/not-found"),
     BOOK_SEARCH("/reader/book-search"),
     BOOK_CATALOG("/reader/book-catalog"),
-    ORDER("/reader/order"),
-    LOGIN("/login");
+    ORDER("/reader/order");
 
-    private String path;
+    private final String path;
 
     UserPages(String path) {
         this.path = path;
     }
 
-    public String getPath() {
+    public String getPage() {
         return path;
     }
 }

@@ -7,10 +7,14 @@
     <style>
         <%@include file='/WEB-INF/css/book-search-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
+
     </style>
 </head>
 <body class="block">
-<h4> Добро пожаловать!</h4>
+<h4 style="text-align: right;"><a href="<%= request.getContextPath() %>/logout"> Выйти </a></h4>
+<h4 style="text-align: right;">
+    Добро пожаловать, ${sessionScope.user.login}! Доступ с правами ${sessionScope.user.role}.
+</h4>
 <h2>Поиск книг</h2>
 <c:if test="${param.found eq 0}">
     <h3 class="error">Ничего не найдено, повторите поиск.</h3>

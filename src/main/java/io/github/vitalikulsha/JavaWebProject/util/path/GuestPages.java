@@ -1,14 +1,12 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
-public enum AdminPages{
+public enum GuestPages{
     LOGIN("/login"),
-    LOGOUT("/logout"),
-    NOT_FOUND("/not-found"),
-    ADMIN("/admin");
+    NOT_FOUND("/not-found");
 
     private final String path;
 
-    AdminPages(String path) {
+    GuestPages(String path) {
         this.path = path;
     }
 

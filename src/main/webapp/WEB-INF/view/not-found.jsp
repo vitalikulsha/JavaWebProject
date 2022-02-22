@@ -10,6 +10,5 @@
 </head>
 <body class="block">
 <h2>Ничего не найдено</h2>
-<h3 style="text-align: right;"><a href="<%= request.getContextPath() %>/book-search"> Повторить поиск </a></h3>
 </body>
 </html>
