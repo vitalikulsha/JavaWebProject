@@ -1,5 +1,6 @@
-package io.github.vitalikulsha.JavaWebProject.dao;
+package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
+import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;

@@ -1,5 +1,8 @@
-package io.github.vitalikulsha.JavaWebProject.dao;
+package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
+import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
+import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
+import io.github.vitalikulsha.JavaWebProject.dao.RecordBookDao;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.RecordBook;
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;

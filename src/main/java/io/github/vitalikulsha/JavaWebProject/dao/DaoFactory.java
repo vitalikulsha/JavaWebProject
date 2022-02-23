@@ -1,5 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
+import io.github.vitalikulsha.JavaWebProject.dao.impl.*;
+
 public class DaoFactory {
 
     public BookDao bookDao() {

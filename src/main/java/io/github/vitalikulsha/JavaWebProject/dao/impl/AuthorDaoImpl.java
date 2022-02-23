@@ -1,5 +1,6 @@
-package io.github.vitalikulsha.JavaWebProject.dao;
+package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
+import io.github.vitalikulsha.JavaWebProject.dao.AuthorDao;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 

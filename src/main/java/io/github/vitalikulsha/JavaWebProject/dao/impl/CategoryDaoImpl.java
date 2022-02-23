@@ -1,6 +1,7 @@
-package io.github.vitalikulsha.JavaWebProject.dao;
+package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
+import io.github.vitalikulsha.JavaWebProject.dao.CategoryDao;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
 
 import java.sql.Connection;

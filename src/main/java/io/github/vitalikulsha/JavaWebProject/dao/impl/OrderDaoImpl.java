@@ -1,6 +1,10 @@
-package io.github.vitalikulsha.JavaWebProject.dao;
+package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
+import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
+import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
+import io.github.vitalikulsha.JavaWebProject.dao.OrderDao;
+import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
 import io.github.vitalikulsha.JavaWebProject.entity.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class OrderDaoImpl implements OrderDao{
+public class OrderDaoImpl implements OrderDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
     private final DaoFactory factory = new DaoFactory();
 
