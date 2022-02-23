@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.domain.Author;
-import io.github.vitalikulsha.JavaWebProject.domain.Book;
-import io.github.vitalikulsha.JavaWebProject.domain.Category;
+import io.github.vitalikulsha.JavaWebProject.entity.Author;
+import io.github.vitalikulsha.JavaWebProject.entity.Book;
+import io.github.vitalikulsha.JavaWebProject.entity.Category;
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,26 +12,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 public class BookDaoImpl implements BookDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
 
     @Override
-    public Optional<Book> getById(Integer id) {
+    public Book getById(Integer id) {
         String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.category_id WHERE book_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.ofNullable(getBook(resultSet));
+                return getBook(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class BookDaoImpl implements BookDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Integer bookId = resultSet.getInt("book_id");
-                books.add(getById(bookId).get());
+                books.add(getById(bookId));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,7 +97,7 @@ public class BookDaoImpl implements BookDao {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Integer bookId = resultSet.getInt("book_id");
-                books.add(getById(bookId).get());
+                books.add(getById(bookId));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,11 +117,11 @@ public class BookDaoImpl implements BookDao {
 
     private Book getBook(ResultSet resultSet) {
         try {
-            Integer id = resultSet.getInt("book_id");
+            int id = resultSet.getInt("book_id");
             String title = resultSet.getString("title");
-            Integer yearIssue = resultSet.getInt("yearIssue");
-            Integer numberPages = resultSet.getInt("numberPages");
-            Integer categoryId = resultSet.getInt("category");
+            int yearIssue = resultSet.getInt("yearIssue");
+            int numberPages = resultSet.getInt("numberPages");
+            int categoryId = resultSet.getInt("category");
             String categoryName = resultSet.getString("name");
             List<Author> authors = getAuthors(id);
             return new Book(id, title, authors, yearIssue, numberPages, new Category(categoryId, categoryName));
@@ -142,7 +141,7 @@ public class BookDaoImpl implements BookDao {
             preparedStatement.setInt(1, bookId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Integer authorId = resultSet.getInt("author_id");
+                int authorId = resultSet.getInt("author_id");
                 String firstName = resultSet.getString("firstName");
                 String lastName = resultSet.getString("lastName");
                 authors.add(new Author(authorId, firstName, lastName));

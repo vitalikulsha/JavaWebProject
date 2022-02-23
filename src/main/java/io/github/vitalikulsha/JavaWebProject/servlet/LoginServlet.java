@@ -2,8 +2,9 @@ package io.github.vitalikulsha.JavaWebProject.servlet;
 
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
-import io.github.vitalikulsha.JavaWebProject.domain.User;
-import io.github.vitalikulsha.JavaWebProject.util.constant.SessionAttribute;
+import io.github.vitalikulsha.JavaWebProject.entity.User;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
 
 @Slf4j
 @WebServlet("/login")
@@ -36,25 +36,19 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("LoginServlet doPost() starting");
         HttpSession session = request.getSession();
-        String login = request.getParameter(SessionAttribute.LOGIN);
-        String password = request.getParameter(SessionAttribute.PASSWORD);
+        String login = request.getParameter(Parameter.LOGIN);
+        String password = request.getParameter(Parameter.PASSWORD);
         UserDao userDao = factory.userDao();
-        Optional<User> userOptional = userDao.getByLogin(login);
-        if(userOptional.isEmpty()){
-            session.setAttribute("notFound", "user");
-            request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
-            return;
-        }
-        User user = userOptional.get();
-        if (user.getPassword().equals(password)) {
-            session.setAttribute(SessionAttribute.USER, user);
+        if (userDao.isExist(login, password)) {
+            User user = userDao.getByLogin(login);
+            session.setAttribute(Attribute.USER, user);
             if (user.getRole() == User.Role.USER) {
                 response.sendRedirect("/library/reader/book-search");
             } else if (user.getRole() == User.Role.ADMIN) {
-                response.sendRedirect("/WEB-INF/view/admin.jsp");
+                response.sendRedirect("/library/admin");
             }
         } else {
-            session.setAttribute("notFound", "password");
+            session.setAttribute("user", null);
             request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
         }
     }

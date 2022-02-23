@@ -1,12 +1,12 @@
-package io.github.vitalikulsha.JavaWebProject.domain;
+package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
 
-public class BookCatalog implements Serializable {
+public class RecordBook implements Serializable {
     private Book book;
     private Integer number;
 
-    public BookCatalog(Book book, Integer number) {
+    public RecordBook(Book book, Integer number) {
         this.book = book;
         this.number = number;
     }

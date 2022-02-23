@@ -1,7 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet;
 
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.util.constant.SessionAttribute;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -25,13 +24,8 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("LogoutServlet doGet() starting");
-//        request.getRequestDispatcher("/login").include(request, response);
-//        HttpSession session = request.getSession();
-//        session.invalidate();
-
-
         HttpSession session = request.getSession();
-        session.removeAttribute(SessionAttribute.USER);
+        session.removeAttribute(Attribute.USER);
         response.sendRedirect("/library/login");
         log.info("Session invalidated successfully.");
         log.info("User logged out successfully.");

@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.util.path;
+package io.github.vitalikulsha.JavaWebProject.util.page;
 
 public enum AdminPages{
     LOGIN("/login"),

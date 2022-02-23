@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface Dao<T, Id> {
 
-    Optional<T> getById(Id id);
+    T getById(Id id);
 
     List<T> getAll();
 

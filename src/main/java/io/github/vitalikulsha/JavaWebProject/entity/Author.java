@@ -1,19 +1,19 @@
-package io.github.vitalikulsha.JavaWebProject.domain;
+package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
 
 public class Author implements Serializable {
-    private Integer id;
+    private int id;
     private String firstName;
     private String lastName;
 
-    public Author(Integer id, String firstName, String lastName) {
+    public Author(int id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

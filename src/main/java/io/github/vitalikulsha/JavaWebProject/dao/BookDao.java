@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.domain.Book;
+import io.github.vitalikulsha.JavaWebProject.entity.Book;
 
 import java.util.List;
 

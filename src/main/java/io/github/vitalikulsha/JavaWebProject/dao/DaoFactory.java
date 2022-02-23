@@ -14,11 +14,15 @@ public class DaoFactory {
         return new AuthorDaoImpl();
     }
 
-    public BookCatalogDao bookCatalogDao() {
-        return new BookCatalogDaoImpl();
+    public RecordBookDao bookCatalogDao() {
+        return new RecordBookDaoImpl();
     }
 
     public UserDao userDao() {
         return new UserDaoIml();
+    }
+
+    public OrderDao orderDao() {
+        return new OrderDaoImpl();
     }
 }

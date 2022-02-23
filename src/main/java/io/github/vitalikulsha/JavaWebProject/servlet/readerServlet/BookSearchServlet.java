@@ -1,6 +1,5 @@
-package io.github.vitalikulsha.JavaWebProject.servlet;
+package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -22,9 +21,6 @@ public class BookSearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.debug("BookSearchServlet doGet() starting");
-        getServletContext().getRequestDispatcher("/WEB-INF/view/book-search.jsp").forward(req, resp);
-
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/book-search.jsp").forward(req, resp);
     }
-
-
 }

@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.domain;
+package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
 

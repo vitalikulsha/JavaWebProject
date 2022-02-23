@@ -1,17 +1,17 @@
-package io.github.vitalikulsha.JavaWebProject.domain;
+package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class Book implements Serializable {
-    private Integer id;
+    private int id;
     private String title;
     private List<Author> authors;
-    private Integer yearIssue;
-    private Integer numberPages;
+    private int yearIssue;
+    private int numberPages;
     private Category category;
 
-    public Book(Integer id, String title, List<Author> authors, Integer yearIssue, Integer numberPages, Category category) {
+    public Book(int id, String title, List<Author> authors, int yearIssue, int numberPages, Category category) {
         this.id = id;
         this.title = title;
         this.authors = authors;
@@ -20,7 +20,7 @@ public class Book implements Serializable {
         this.category = category;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -32,11 +32,11 @@ public class Book implements Serializable {
         return authors;
     }
 
-    public Integer getYearIssue() {
+    public int getYearIssue() {
         return yearIssue;
     }
 
-    public Integer getNumberPages() {
+    public int getNumberPages() {
         return numberPages;
     }
 

@@ -1,10 +1,10 @@
 package io.github.vitalikulsha.JavaWebProject.filter;
 
-import io.github.vitalikulsha.JavaWebProject.domain.User;
-import io.github.vitalikulsha.JavaWebProject.util.constant.SessionAttribute;
-import io.github.vitalikulsha.JavaWebProject.util.path.AdminPages;
-import io.github.vitalikulsha.JavaWebProject.util.path.GuestPages;
-import io.github.vitalikulsha.JavaWebProject.util.path.UserPages;
+import io.github.vitalikulsha.JavaWebProject.entity.User;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.page.AdminPages;
+import io.github.vitalikulsha.JavaWebProject.util.page.GuestPages;
+import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
@@ -49,12 +49,12 @@ public class AccessFilter implements Filter {
         HttpSession session = request.getSession();
         String servletPath = request.getServletPath();
         log.debug("Servlet path = " + servletPath);
-        User user = (User) session.getAttribute(SessionAttribute.USER);
+        User user = (User) session.getAttribute(Attribute.USER);
         if(servletPath.equals(UserPages.LOGOUT.getPage())){
             chain.doFilter(servletRequest, servletResponse);
             return;
         }
-        log.info("Session attribute user = " + session.getAttribute(SessionAttribute.USER));
+        log.info("Session attribute user = " + session.getAttribute(Attribute.USER));
         log.info("User = " + user);
         log.debug("isAdminPage = " + isAdminPage(servletPath));
         log.debug("isUserPage = " + isUserPage(servletPath));

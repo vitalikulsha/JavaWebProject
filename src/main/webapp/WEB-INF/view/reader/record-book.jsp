@@ -10,7 +10,7 @@
     </style>
 </head>
 <body class="block">
-<c:if test="${bookCatalog == null}">
+<c:if test="${recordBook == null}">
     <c:redirect url="/reader/book-search">
         <c:param name="found" value="0"/>
     </c:redirect>
@@ -28,7 +28,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="catalog" items="${bookCatalog}">
+    <c:forEach var="catalog" items="${recordBook}">
         <tr>
             <td>
                 <form action="<%= request.getContextPath() %>/reader/order" method="post">

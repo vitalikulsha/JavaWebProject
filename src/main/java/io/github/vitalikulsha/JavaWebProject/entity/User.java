@@ -1,21 +1,27 @@
-package io.github.vitalikulsha.JavaWebProject.domain;
+package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private Integer id;
+    private int id;
     private String login;
     private String password;
+    private String userName;
+    private long phoneNumber;
+    private String email;
     private Role role;
 
-    public User(Integer id, String login, String password, Role role) {
+    public User(int id, String login, String password, String userName, long phoneNumber, String email, Role role) {
         this.id = id;
         this.login = login;
         this.password = password;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.role = role;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -25,6 +31,18 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public long getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Role getRole() {
@@ -37,6 +55,9 @@ public class User implements Serializable {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", userName='" + userName + '\'' +
+                ", phone_number=" + phoneNumber +
+                ", email='" + email + '\'' +
                 ", role=" + role +
                 '}';
     }

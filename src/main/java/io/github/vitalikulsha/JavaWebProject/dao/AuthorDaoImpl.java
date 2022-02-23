@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.domain.Author;
+import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 
 import java.sql.Connection;
@@ -9,25 +9,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class AuthorDaoImpl implements AuthorDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
 
     @Override
-    public Optional<Author> getById(Integer id) {
+    public Author getById(Integer id) {
         String sqlQuery = "SELECT * FROM author WHERE id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.ofNullable(getAuthor(resultSet));
+                return getAuthor(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -58,7 +57,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
     private Author getAuthor(ResultSet resultSet) {
         try {
-            Integer id = resultSet.getInt("author_id");
+            int id = resultSet.getInt("author_id");
             String firstName = resultSet.getString("firstName");
             String lastName = resultSet.getString("lastName");
             return new Author(id, firstName, lastName);

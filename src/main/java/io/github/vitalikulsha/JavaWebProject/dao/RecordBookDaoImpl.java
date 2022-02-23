@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
-import io.github.vitalikulsha.JavaWebProject.domain.Book;
-import io.github.vitalikulsha.JavaWebProject.domain.BookCatalog;
+import io.github.vitalikulsha.JavaWebProject.entity.Book;
+import io.github.vitalikulsha.JavaWebProject.entity.RecordBook;
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 
 import java.sql.Connection;
@@ -10,89 +10,88 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class BookCatalogDaoImpl implements BookCatalogDao {
+public class RecordBookDaoImpl implements RecordBookDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
     private final DaoFactory factory = new DaoFactory();
 
     @Override
-    public Optional<BookCatalog> getById(Integer bookId) {
-        String sqlQuery = "SELECT * FROM book_catalog b_k WHERE book_id=?";
+    public RecordBook getById(Integer bookId) {
+        String sqlQuery = "SELECT * FROM record_book WHERE book_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, bookId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                BookCatalog bookCatalog = getBookCatalog(resultSet);
-                if (bookCatalog != null) {
-                    return Optional.ofNullable(getBookCatalog(resultSet));
+                RecordBook recordBook = getBookCatalog(resultSet);
+                if (recordBook != null) {
+                    return getBookCatalog(resultSet);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
-    public List<BookCatalog> getAll() {
-        String sqlQuery = "SELECT * FROM book_catalog";
+    public List<RecordBook> getAll() {
+        String sqlQuery = "SELECT * FROM record_book";
         return getBookCatalogList(null, sqlQuery);
     }
 
     @Override
-    public List<BookCatalog> getByName(String title) {
-        String sqlQuery = "SELECT * FROM book_catalog b_c" +
-                " INNER JOIN book ON b_c.book_id=book.book_id" +
+    public List<RecordBook> getByName(String title) {
+        String sqlQuery = "SELECT * FROM record_book r_b" +
+                " INNER JOIN book ON r_b.book_id=book.book_id" +
                 " WHERE title LIKE '%%%s%%'";
         return getBookCatalogList(title, sqlQuery);
     }
 
     @Override
-    public List<BookCatalog> getByAuthorName(String name) {
-        String sqlQuery = "SELECT * FROM book_catalog b_c" +
-                " INNER JOIN book_author b_a ON b_c.book_id=b_a.book_id" +
+    public List<RecordBook> getByAuthorName(String name) {
+        String sqlQuery = "SELECT * FROM record_book r_b" +
+                " INNER JOIN book_author b_a ON r_b.book_id=b_a.book_id" +
                 " INNER JOIN author ON b_a.author_id=author.author_id" +
                 " WHERE firstName LIKE '%%%s%%' OR lastName LIKE '%%%s%%'";
         return getBookCatalogList(name, sqlQuery);
     }
 
     @Override
-    public List<BookCatalog> getByCategoryName(String name) {
-        String sqlQuery = "SELECT * FROM book_catalog b_c" +
-                " INNER JOIN book ON b_c.book_id=book.book_id" +
+    public List<RecordBook> getByCategoryName(String name) {
+        String sqlQuery = "SELECT * FROM record_book r_b" +
+                " INNER JOIN book ON r_b.book_id=book.book_id" +
                 " INNER JOIN category cat ON book.category=cat.category_id" +
                 " WHERE name LIKE '%%%s%%'";
         return getBookCatalogList(name, sqlQuery);
     }
 
     @Override
-    public BookCatalog save(BookCatalog bookCatalog) {
+    public RecordBook save(RecordBook recordBook) {
         return null;
     }
 
     @Override
-    public void delete(BookCatalog bookCatalog) {
+    public void delete(RecordBook recordBook) {
 
     }
 
-    private List<BookCatalog> getBookCatalogList(String name, String sqlQuery) {
+    private List<RecordBook> getBookCatalogList(String name, String sqlQuery) {
         List<String> names = new ArrayList<>();
         Pattern pattern = Pattern.compile("%s%");
         Matcher matcher = pattern.matcher(sqlQuery);
         while (matcher.find()) {
             names.add(name);
         }
-        List<BookCatalog> catalogs = new ArrayList<>();
+        List<RecordBook> catalogs = new ArrayList<>();
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, names.toArray()));
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                BookCatalog bookCatalog = getBookCatalog(resultSet);
-                if (bookCatalog != null) {
+                RecordBook recordBook = getBookCatalog(resultSet);
+                if (recordBook != null) {
                     catalogs.add(getBookCatalog(resultSet));
                 }
             }
@@ -102,13 +101,13 @@ public class BookCatalogDaoImpl implements BookCatalogDao {
         return catalogs.isEmpty() ? null : catalogs;
     }
 
-    private BookCatalog getBookCatalog(ResultSet resultSet) {
+    private RecordBook getBookCatalog(ResultSet resultSet) {
         BookDao bookDao = factory.bookDao();
         try {
-            Integer bookId = resultSet.getInt("book_id");
-            Integer number = resultSet.getInt("number");
-            Book book = bookDao.getById(bookId).get();
-            return number.equals(0) ? null : new BookCatalog(book, number);
+            int bookId = resultSet.getInt("book_id");
+            int number = resultSet.getInt("number");
+            Book book = bookDao.getById(bookId);
+            return number ==0 ? null : new RecordBook(book, number);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

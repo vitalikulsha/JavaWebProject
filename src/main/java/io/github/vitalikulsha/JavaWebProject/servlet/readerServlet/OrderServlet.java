@@ -1,8 +1,8 @@
-package io.github.vitalikulsha.JavaWebProject.servlet;
+package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
 import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.domain.Book;
+import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -31,11 +31,11 @@ public class OrderServlet extends HttpServlet {
         HttpSession session = req.getSession();
         BookDao bookDao = factory.bookDao();
         Book book = (Book) session.getAttribute("book");
-        Integer bookId = Integer.valueOf(req.getParameter("bookId"));
+        int bookId = Integer.parseInt(req.getParameter("bookId"));
         if (book == null) {
-            book = bookDao.getById(bookId).get();
+            book = bookDao.getById(bookId);
         }
         req.setAttribute("book", book);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/order.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/order.jsp").forward(req, resp);
     }
 }

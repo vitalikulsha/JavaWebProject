@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
-import io.github.vitalikulsha.JavaWebProject.domain.Category;
+import io.github.vitalikulsha.JavaWebProject.entity.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,25 +9,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CategoryDaoImpl implements CategoryDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
 
     @Override
-    public Optional<Category> getById(Integer id) {
+    public Category getById(Integer id) {
         String sqlQuery = "SELECT * FROM category WHERE category_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return Optional.ofNullable(getCategory(resultSet));
+                return getCategory(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.empty();
+        return null;
     }
 
     @Override
@@ -58,7 +57,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
     private Category getCategory(ResultSet resultSet) {
         try {
-            Integer id = resultSet.getInt("category_id");
+            int id = resultSet.getInt("category_id");
             String name = resultSet.getString("name");
             return new Category(id, name);
         } catch (SQLException e) {
