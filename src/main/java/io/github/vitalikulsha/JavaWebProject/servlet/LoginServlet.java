@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        factory = new DaoFactory();
+        factory = DaoFactory.getInstance();
         log.debug("LoginServlet starting");
     }
 
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String login = request.getParameter(Parameter.LOGIN);
         String password = request.getParameter(Parameter.PASSWORD);
-        UserDao userDao = factory.userDao();
+        UserDao userDao = factory.getUserDao();
         if (userDao.isExist(login, password)) {
             User user = userDao.getByLogin(login);
             session.setAttribute(Attribute.USER, user);

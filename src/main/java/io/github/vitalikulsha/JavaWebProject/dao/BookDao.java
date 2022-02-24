@@ -4,7 +4,7 @@ import io.github.vitalikulsha.JavaWebProject.entity.Book;
 
 import java.util.List;
 
-public interface BookDao extends Dao<Book, Integer>{
+public interface BookDao extends Dao<Book>{
     List<Book> getByName(String title);
 
     List<Book> getByAuthorId(Integer authorId);

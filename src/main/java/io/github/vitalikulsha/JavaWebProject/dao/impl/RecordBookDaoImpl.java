@@ -18,10 +18,10 @@ import java.util.regex.Pattern;
 
 public class RecordBookDaoImpl implements RecordBookDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
-    private final DaoFactory factory = new DaoFactory();
+    private final DaoFactory factory = DaoFactory.getInstance();
 
     @Override
-    public RecordBook getById(Integer bookId) {
+    public RecordBook getById(int bookId) {
         String sqlQuery = "SELECT * FROM record_book WHERE book_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -30,7 +30,7 @@ public class RecordBookDaoImpl implements RecordBookDao {
             if (resultSet.next()) {
                 RecordBook recordBook = getBookCatalog(resultSet);
                 if (recordBook != null) {
-                    return getBookCatalog(resultSet);
+                    return recordBook;
                 }
             }
         } catch (SQLException e) {
@@ -105,12 +105,12 @@ public class RecordBookDaoImpl implements RecordBookDao {
     }
 
     private RecordBook getBookCatalog(ResultSet resultSet) {
-        BookDao bookDao = factory.bookDao();
+        BookDao bookDao = factory.getBookDao();
         try {
             int bookId = resultSet.getInt("book_id");
             int number = resultSet.getInt("number");
             Book book = bookDao.getById(bookId);
-            return number ==0 ? null : new RecordBook(book, number);
+            return number == 0 ? null : new RecordBook(book, number);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

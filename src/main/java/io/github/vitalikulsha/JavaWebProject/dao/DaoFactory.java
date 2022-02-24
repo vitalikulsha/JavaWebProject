@@ -3,28 +3,33 @@ package io.github.vitalikulsha.JavaWebProject.dao;
 import io.github.vitalikulsha.JavaWebProject.dao.impl.*;
 
 public class DaoFactory {
+    private final static DaoFactory instance = new DaoFactory();
 
-    public BookDao bookDao() {
-        return new BookDaoImpl();
+    private final static BookDao bookDao = new BookDaoImpl();
+    private final static RecordBookDao recordBookDao = new RecordBookDaoImpl();
+    private final static UserDao userDao = new UserDaoIml();
+    private final static OrderDao orderDao = new OrderDaoImpl();
+
+    private DaoFactory() {
     }
 
-    public CategoryDao categoryDao() {
-        return new CategoryDaoImpl();
+    public static DaoFactory getInstance() {
+        return instance;
     }
 
-    public AuthorDao authorDao() {
-        return new AuthorDaoImpl();
+    public BookDao getBookDao() {
+        return bookDao;
     }
 
-    public RecordBookDao bookCatalogDao() {
-        return new RecordBookDaoImpl();
+    public RecordBookDao getBookCatalogDao() {
+        return recordBookDao;
     }
 
-    public UserDao userDao() {
-        return new UserDaoIml();
+    public UserDao getUserDao() {
+        return userDao;
     }
 
-    public OrderDao orderDao() {
-        return new OrderDaoImpl();
+    public OrderDao getOrderDao() {
+        return orderDao;
     }
 }

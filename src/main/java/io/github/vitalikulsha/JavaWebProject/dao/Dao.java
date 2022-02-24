@@ -1,11 +1,10 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface Dao<T, Id> {
+public interface Dao<T> {
 
-    T getById(Id id);
+    T getById(int id);
 
     List<T> getAll();
 

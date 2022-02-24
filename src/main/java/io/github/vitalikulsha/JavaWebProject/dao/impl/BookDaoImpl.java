@@ -19,7 +19,7 @@ public class BookDaoImpl implements BookDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
 
     @Override
-    public Book getById(Integer id) {
+    public Book getById(int id) {
         String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.category_id WHERE book_id=?";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -30,6 +30,7 @@ public class BookDaoImpl implements BookDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            return null;
         }
         return null;
     }
