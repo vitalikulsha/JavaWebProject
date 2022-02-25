@@ -1,26 +1,29 @@
 package io.github.vitalikulsha.JavaWebProject.dao.rowmapper;
 
 
-import io.github.vitalikulsha.JavaWebProject.entity.Order;
-
 public class RowMapperFactory {
     private final static RowMapperFactory instance = new RowMapperFactory();
 
     private final static OrderRowMapper orderRowMapper = new OrderRowMapper();
     private final static UserRowMapper userRowMapper = new UserRowMapper();
+    private final static BookRowMapper bookRowMapper = new BookRowMapper();
 
     private RowMapperFactory() {
     }
 
-    public static RowMapperFactory getInstance() {
+    public static RowMapperFactory instance() {
         return instance;
     }
 
-    public OrderRowMapper getOrderRowMapper() {
+    public OrderRowMapper orderRowMapper() {
         return orderRowMapper;
     }
 
-    public UserRowMapper getUserRowMapper(){
+    public UserRowMapper userRowMapper() {
         return userRowMapper;
+    }
+
+    public BookRowMapper bookRowMapper() {
+        return bookRowMapper;
     }
 }

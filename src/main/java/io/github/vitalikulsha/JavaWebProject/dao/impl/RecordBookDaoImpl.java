@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class RecordBookDaoImpl implements RecordBookDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
-    private final DaoFactory factory = DaoFactory.getInstance();
+    private final DaoFactory factory = DaoFactory.instance();
 
     @Override
     public RecordBook getById(int bookId) {
@@ -105,7 +105,7 @@ public class RecordBookDaoImpl implements RecordBookDao {
     }
 
     private RecordBook getBookCatalog(ResultSet resultSet) {
-        BookDao bookDao = factory.getBookDao();
+        BookDao bookDao = factory.bookDao();
         try {
             int bookId = resultSet.getInt("book_id");
             int number = resultSet.getInt("number");

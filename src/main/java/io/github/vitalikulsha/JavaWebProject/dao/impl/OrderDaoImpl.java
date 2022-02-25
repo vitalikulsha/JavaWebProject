@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     public OrderDaoImpl() {
-        super(RowMapperFactory.getInstance().getOrderRowMapper(),
+        super(RowMapperFactory.instance().orderRowMapper(),
                 OrderSqlQuery.FIND_ALL, OrderSqlQuery.FIND_BY_ID);
     }
 

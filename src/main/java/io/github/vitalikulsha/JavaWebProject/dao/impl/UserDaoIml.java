@@ -6,15 +6,10 @@ import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.UserSqlQuery;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     public UserDaoIml() {
-        super(RowMapperFactory.getInstance().getUserRowMapper(),
+        super(RowMapperFactory.instance().userRowMapper(),
                 UserSqlQuery.FIND_ALL, UserSqlQuery.FIND_BY_ID);
     }
 
@@ -22,24 +17,6 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     public User getByLogin(String login) {
         return queryOperator.executeSingleEntityQuery(UserSqlQuery.FIND_BY_LOGIN, login);
     }
-
-//    @Override
-//    public User getByLogin(String login) {
-//        String sqlQuery = "SELECT * FROM user WHERE login=?";
-//        try (Connection connection = connectionSource.createConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-//            preparedStatement.setString(1, login);
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//            if (resultSet.next()) {
-//                return getUser(resultSet);
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-
-
 
     @Override
     public int maxId() {

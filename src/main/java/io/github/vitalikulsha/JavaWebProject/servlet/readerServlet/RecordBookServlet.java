@@ -21,7 +21,7 @@ public class RecordBookServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        factory = DaoFactory.getInstance();
+        factory = DaoFactory.instance();
         log.debug("BookCatalogServlet starting");
     }
 
@@ -30,7 +30,7 @@ public class RecordBookServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("BookCatalogServlet doGet() starting");
         HttpSession session = req.getSession();
-        RecordBookDao catalogDao = factory.getBookCatalogDao();
+        RecordBookDao catalogDao = factory.recordBookDao();
         @SuppressWarnings("unchecked")
         List<RecordBook> catalogs = (List<RecordBook>) session.getAttribute("recordBook");
         if (catalogs == null) {
@@ -44,7 +44,7 @@ public class RecordBookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         log.debug("BookCatalogServlet doPost() starting");
-        RecordBookDao catalogDao = factory.getBookCatalogDao();
+        RecordBookDao catalogDao = factory.recordBookDao();
         @SuppressWarnings("unchecked")
         List<RecordBook> records = (List<RecordBook>) session.getAttribute("recordBook");
         String bookTitle = req.getParameter("bookTitle");

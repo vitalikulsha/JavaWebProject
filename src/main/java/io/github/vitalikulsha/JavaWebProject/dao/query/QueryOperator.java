@@ -2,9 +2,6 @@ package io.github.vitalikulsha.JavaWebProject.dao.query;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapper;
-import io.github.vitalikulsha.JavaWebProject.entity.Order;
-import io.github.vitalikulsha.JavaWebProject.entity.RecordBook;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
@@ -25,13 +22,13 @@ public class QueryOperator<T> {
         this.mapper = mapper;
     }
 
-    public List<T> executeSqlQuery(String sqlQuery, String... param) {
+    public List<T> executeEntityListQueryWithoutParam(String sqlQuery) {
         List<T> result = new ArrayList<>();
         try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(completeSqlQuery(sqlQuery, param));
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                result.add(mapper.map(resultSet));
+                result.add(mapper.getEntity(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,11 +39,11 @@ public class QueryOperator<T> {
 
     public T executeSingleEntityQuery(String sqlQuery, Object param) {
         try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, param));
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            System.out.println("query: " + String.format(sqlQuery, param));
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setObject(1, param);
+            ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return mapper.map(resultSet);
+                return mapper.getEntity(resultSet);
             }
         } catch (SQLException e) {
             e.printStackTrace();

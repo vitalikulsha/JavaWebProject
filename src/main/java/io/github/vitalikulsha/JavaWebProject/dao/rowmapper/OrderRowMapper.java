@@ -14,12 +14,12 @@ import java.sql.SQLException;
 
 @Slf4j
 public class OrderRowMapper implements RowMapper<Order> {
-    private final static DaoFactory factory = DaoFactory.getInstance();
+    private final static DaoFactory factory = DaoFactory.instance();
 
     @Override
-    public Order map(ResultSet resultSet) throws SQLException {
-        BookDao bookDao = factory.getBookDao();
-        UserDao userDao = factory.getUserDao();
+    public Order getEntity(ResultSet resultSet) throws SQLException {
+        BookDao bookDao = factory.bookDao();
+        UserDao userDao = factory.userDao();
         try {
             int id = resultSet.getInt(Column.ORDER_ID.name());
             int bookId = resultSet.getInt(Column.BOOK_ID.name());

@@ -13,23 +13,23 @@ public class DaoFactory {
     private DaoFactory() {
     }
 
-    public static DaoFactory getInstance() {
+    public static DaoFactory instance() {
         return instance;
     }
 
-    public BookDao getBookDao() {
+    public BookDao bookDao() {
         return bookDao;
     }
 
-    public RecordBookDao getBookCatalogDao() {
+    public RecordBookDao recordBookDao() {
         return recordBookDao;
     }
 
-    public UserDao getUserDao() {
+    public UserDao userDao() {
         return userDao;
     }
 
-    public OrderDao getOrderDao() {
+    public OrderDao orderDao() {
         return orderDao;
     }
 }

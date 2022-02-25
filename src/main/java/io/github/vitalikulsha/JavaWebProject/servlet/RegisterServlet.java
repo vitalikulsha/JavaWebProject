@@ -22,7 +22,7 @@ public class RegisterServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        factory = DaoFactory.getInstance();
+        factory = DaoFactory.instance();
         log.debug("RegisterServlet starting");
     }
 
@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
         String userName = request.getParameter(Parameter.USERNAME);
         long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
         String email = request.getParameter(Parameter.EMAIL);
-        UserDao userDao = factory.getUserDao();
+        UserDao userDao = factory.userDao();
         if (userDao.getByLogin(login) != null) {
             //придумать отрибут для session, который бы фиксировал существующий login
             getServletContext().getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);

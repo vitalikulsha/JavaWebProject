@@ -26,7 +26,7 @@ public abstract class AbstractDao<T> implements Dao<T>{
 
     @Override
     public List<T> getAll() {
-        return queryOperator.executeSqlQuery(FIND_ALL_QUERY);
+        return queryOperator.executeEntityListQueryWithoutParam(FIND_ALL_QUERY);
     }
 
     @Override

@@ -1,6 +1,10 @@
 package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
+import io.github.vitalikulsha.JavaWebProject.dao.AbstractDao;
 import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
+import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.BookSqlQuery;
+import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.UserSqlQuery;
+import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
@@ -15,24 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
-public class BookDaoImpl implements BookDao {
+public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
 
-    @Override
-    public Book getById(int id) {
-        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.category_id WHERE book_id=?";
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return getBook(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return null;
+    public BookDaoImpl() {
+        super(RowMapperFactory.instance().bookRowMapper(),
+                BookSqlQuery.FIND_ALL, BookSqlQuery.FIND_BY_ID);
     }
 
     @Override
@@ -43,22 +35,6 @@ public class BookDaoImpl implements BookDao {
                 " WHERE title LIKE '%%%s%%'";
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(String.format(sqlQuery, title));
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                books.add(getBook(resultSet));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return books;
-    }
-
-    @Override
-    public List<Book> getAll() {
-        List<Book> books = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM book INNER JOIN category cat ON book.category=cat.category_id";
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 books.add(getBook(resultSet));

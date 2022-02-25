@@ -20,7 +20,7 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        factory = DaoFactory.getInstance();
+        factory = DaoFactory.instance();
         log.debug("LoginServlet starting");
     }
 
@@ -29,7 +29,7 @@ public class OrderServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("LoginServlet doGet() starting");
         HttpSession session = req.getSession();
-        BookDao bookDao = factory.getBookDao();
+        BookDao bookDao = factory.bookDao();
         Book book = (Book) session.getAttribute("book");
         int bookId = Integer.parseInt(req.getParameter("bookId"));
         if (book == null) {

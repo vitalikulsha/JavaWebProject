@@ -6,6 +6,8 @@ public enum Column {
     YEARISSUE,
     NUMBERPAGES,
     CATEGORY,
+    CATEGORY_ID,
+    NAME,
     AUTHOR_ID,
     FIRSTNAME,
     LASTNAME,

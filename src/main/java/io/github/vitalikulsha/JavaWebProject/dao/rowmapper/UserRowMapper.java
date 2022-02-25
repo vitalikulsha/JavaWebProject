@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UserRowMapper implements RowMapper<User> {
     @Override
-    public User map(ResultSet resultSet) throws SQLException {
+    public User getEntity(ResultSet resultSet) throws SQLException {
         try {
             int id = resultSet.getInt(Column.USER_ID.name());
             String login = resultSet.getString(Column.LOGIN.name());
