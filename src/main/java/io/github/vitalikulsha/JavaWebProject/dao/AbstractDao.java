@@ -15,8 +15,8 @@ public abstract class AbstractDao<T> implements Dao<T>{
     public AbstractDao(RowMapper<T> mapper, String findAllQuery, String findById) {
         this.mapper = mapper;
         this.queryOperator = new QueryOperator<>(mapper);
-        FIND_ALL_QUERY = findAllQuery;
-        FIND_BY_ID_QUERY = findById;
+        this.FIND_ALL_QUERY = findAllQuery;
+        this.FIND_BY_ID_QUERY = findById;
     }
 
     @Override

@@ -7,7 +7,11 @@ import java.util.List;
 public interface BookDao extends Dao<Book>{
     List<Book> getByName(String title);
 
-    List<Book> getByAuthorId(Integer authorId);
+    List<Book> getByCategoryName(String categoryName);
 
-    List<Book> getByCategoryId(Integer categoryId);
+    List<Book> getByAuthorName(String authorName);
+
+//    List<Book> getByAuthorId(Integer authorId);
+
+//    List<Book> getByCategoryId(Integer categoryId);
 }

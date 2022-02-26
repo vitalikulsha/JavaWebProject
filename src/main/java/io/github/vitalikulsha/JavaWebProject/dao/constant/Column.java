@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.dao.constant;
 public enum Column {
     BOOK_ID,
     TITLE,
-    YEARISSUE,
+    PUBLICATIONYEAR,
     NUMBERPAGES,
     CATEGORY,
     CATEGORY_ID,

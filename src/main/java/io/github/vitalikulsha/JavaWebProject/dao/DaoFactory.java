@@ -9,6 +9,8 @@ public class DaoFactory {
     private final static RecordBookDao recordBookDao = new RecordBookDaoImpl();
     private final static UserDao userDao = new UserDaoIml();
     private final static OrderDao orderDao = new OrderDaoImpl();
+    private final static CategoryDao categoryDao = new CategoryDaoImpl();
+    private final static AuthorDao authorDao = new AuthorDaoImpl();
 
     private DaoFactory() {
     }
@@ -31,5 +33,13 @@ public class DaoFactory {
 
     public OrderDao orderDao() {
         return orderDao;
+    }
+
+    public CategoryDao categoryDao() {
+        return categoryDao;
+    }
+
+    public AuthorDao authorDao() {
+        return authorDao;
     }
 }

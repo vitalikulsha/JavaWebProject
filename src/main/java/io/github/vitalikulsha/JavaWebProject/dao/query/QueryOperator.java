@@ -37,6 +37,28 @@ public class QueryOperator<T> {
         return result;
     }
 
+    public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) {
+        String query = completeSqlQuery(sqlQuery, param);
+        return executeEntityListQueryWithoutParam(query);
+    }
+
+    public List<T> executeEntityListQueryWithParam(String sqlQuery, Object param) {
+        List<T> result = new ArrayList<>();
+        try (Connection connection = connectionSource.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            preparedStatement.setObject(1, param);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                T entity = mapper.getEntity(resultSet);
+                result.add(entity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return result;
+    }
+
     public T executeSingleEntityQuery(String sqlQuery, Object param) {
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
