@@ -31,7 +31,7 @@
     </tr>
     <tr>
         <th>Год издания</th>
-        <td>${book.yearIssue}</td>
+        <td>${book.publicationYear}</td>
     </tr>
     <tr>
         <th>Количество страниц</th>

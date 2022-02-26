@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
 import io.github.vitalikulsha.JavaWebProject.dao.*;
-import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.OrderSqlQuery;
-import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.SqlQueryFactory;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.OrderSqlQuery;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.*;
 

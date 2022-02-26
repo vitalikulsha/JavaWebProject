@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery;
+package io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery;
 
 public abstract class AbstractSqlQuery {
     public final String FIND_ALL;

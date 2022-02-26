@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.dao.rowmapper;
 import io.github.vitalikulsha.JavaWebProject.dao.AuthorDao;
 import io.github.vitalikulsha.JavaWebProject.dao.CategoryDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.dao.constant.Column;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Column;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;

@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.dao.rowmapper;
 
-import io.github.vitalikulsha.JavaWebProject.dao.constant.Column;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Column;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
 
 import java.sql.ResultSet;

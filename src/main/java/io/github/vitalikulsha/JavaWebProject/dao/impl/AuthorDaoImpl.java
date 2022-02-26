@@ -2,8 +2,8 @@ package io.github.vitalikulsha.JavaWebProject.dao.impl;
 
 import io.github.vitalikulsha.JavaWebProject.dao.AbstractDao;
 import io.github.vitalikulsha.JavaWebProject.dao.AuthorDao;
-import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.AuthorSqlQuery;
-import io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery.SqlQueryFactory;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.AuthorSqlQuery;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 

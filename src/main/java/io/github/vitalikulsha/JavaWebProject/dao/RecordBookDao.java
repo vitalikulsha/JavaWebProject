@@ -5,7 +5,7 @@ import io.github.vitalikulsha.JavaWebProject.entity.RecordBook;
 import java.util.List;
 
 public interface RecordBookDao extends Dao<RecordBook>{
-    List<RecordBook> getByName(String title);
+    List<RecordBook> getByBookTitle(String title);
 
     List<RecordBook> getByAuthorName(String name);
 

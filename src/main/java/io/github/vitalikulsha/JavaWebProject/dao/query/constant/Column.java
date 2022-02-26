@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.dao.constant;
+package io.github.vitalikulsha.JavaWebProject.dao.query.constant;
 
 public enum Column {
     BOOK_ID,

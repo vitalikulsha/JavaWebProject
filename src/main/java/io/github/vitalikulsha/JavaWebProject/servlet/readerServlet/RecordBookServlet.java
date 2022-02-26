@@ -51,7 +51,7 @@ public class RecordBookServlet extends HttpServlet {
         String authorName = req.getParameter("authorName");
         String categoryName = req.getParameter("categoryName");
         if (bookTitle != null) {
-            records = catalogDao.getByName(bookTitle);
+            records = catalogDao.getByBookTitle(bookTitle);
         } else if (authorName != null) {
             records = catalogDao.getByAuthorName(authorName);
         } else if (categoryName != null) {

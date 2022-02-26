@@ -1,7 +1,7 @@
-package io.github.vitalikulsha.JavaWebProject.dao.constant.sqlquery;
+package io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery;
 
-import io.github.vitalikulsha.JavaWebProject.dao.constant.Column;
-import io.github.vitalikulsha.JavaWebProject.dao.constant.Table;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Column;
+import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Table;
 
 public class UserSqlQuery extends AbstractSqlQuery{
     public final String FIND_BY_LOGIN;
