@@ -25,9 +25,10 @@ public class BookRowMapper implements RowMapper<Book> {
             int publicationYear = resultSet.getInt(Column.PUBLICATIONYEAR.name());
             int numberPages = resultSet.getInt(Column.NUMBERPAGES.name());
             int categoryId = resultSet.getInt(Column.CATEGORY.name());
+            int number = resultSet.getInt(Column.NUMBER.name());
             Category category = categoryDao.getById(categoryId);
             List<Author> authors = authorDao.getAuthorsByBookId(id);
-            return new Book(id, title, authors, publicationYear, numberPages, category);
+            return new Book(id, title, authors, publicationYear, numberPages, category, number);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

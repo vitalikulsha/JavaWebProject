@@ -8,12 +8,29 @@ import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 @Slf4j
 public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     private final static BookSqlQuery bookSqlQuery = SqlQueryFactory.instance().bookSqlQuery();
 
     public BookDaoImpl() {
         super(RowMapperFactory.instance().bookRowMapper(), bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_BY_ID);
+    }
+
+    @Override
+    public List<Book> getByBookTitle(String title) {
+        return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_TITLE, title);
+    }
+
+    @Override
+    public List<Book> getByAuthorName(String name) {
+        return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_AUTHOR_NAME, name);
+    }
+
+    @Override
+    public List<Book> getByCategoryName(String name) {
+        return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
     }
 
     @Override
