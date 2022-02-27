@@ -20,12 +20,12 @@ public abstract class AbstractDao<T> implements Dao<T>{
     }
 
     @Override
-    public T getById(int id) {
+    public T findById(int id) {
         return queryOperator.executeSingleEntityQuery(FIND_BY_ID_QUERY, id);
     }
 
     @Override
-    public List<T> getAll() {
+    public List<T> findAll() {
         return queryOperator.executeEntityListQueryWithoutParam(FIND_ALL_QUERY);
     }
 

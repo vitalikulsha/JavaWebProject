@@ -8,7 +8,6 @@ public class SqlQueryFactory {
     private final static BookSqlQuery bookSqlQuery = new BookSqlQuery();
     private final static OrderSqlQuery orderSqlQuery = new OrderSqlQuery();
     private final static UserSqlQuery userSqlQuery = new UserSqlQuery();
-    private final static RecordBookSqlQuery recordBookSqlQuery = new RecordBookSqlQuery();
 
     private SqlQueryFactory() {
     }
@@ -35,9 +34,5 @@ public class SqlQueryFactory {
 
     public UserSqlQuery userSqlQuery() {
         return userSqlQuery;
-    }
-
-    public RecordBookSqlQuery recordBookSqlQuery() {
-        return recordBookSqlQuery;
     }
 }

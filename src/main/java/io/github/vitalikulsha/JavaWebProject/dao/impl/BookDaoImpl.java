@@ -19,17 +19,17 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
-    public List<Book> getByBookTitle(String title) {
+    public List<Book> findByBookTitle(String title) {
         return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_TITLE, title);
     }
 
     @Override
-    public List<Book> getByAuthorName(String name) {
+    public List<Book> findByAuthorName(String name) {
         return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_AUTHOR_NAME, name);
     }
 
     @Override
-    public List<Book> getByCategoryName(String name) {
+    public List<Book> findByCategoryName(String name) {
         return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
     }
 

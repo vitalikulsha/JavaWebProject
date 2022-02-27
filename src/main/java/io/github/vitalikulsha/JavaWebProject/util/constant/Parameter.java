@@ -6,6 +6,7 @@ public class Parameter {
     public final static String USERNAME = "userName";
     public final static String PHONE_NUMBER = "phoneNumber";
     public final static String EMAIL = "email";
+    public final static String BOOK_ID = "bookId";
 
     private Parameter() {
     }

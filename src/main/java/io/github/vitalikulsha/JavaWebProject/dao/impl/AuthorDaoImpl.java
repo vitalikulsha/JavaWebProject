@@ -17,7 +17,7 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
     }
 
     @Override
-    public List<Author> getAuthorsByBookId(int bookId) {
+    public List<Author> findAuthorsByBookId(int bookId) {
         return queryOperator.executeEntityListQueryWithParam(authorSqlQuery.FIND_BY_BOOK_ID, bookId);
     }
 }

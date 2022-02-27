@@ -1,8 +1,9 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.entity.Book;
+import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.service.BookService;
+import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -16,12 +17,12 @@ import java.util.List;
 
 @Slf4j
 @WebServlet("/reader/catalog")
-public class RecordBookServlet extends HttpServlet {
-    private DaoFactory factory;
+public class CatalogServlet extends HttpServlet {
+    private ServiceFactory factory;
 
     @Override
     public void init() throws ServletException {
-        factory = DaoFactory.instance();
+        factory = ServiceFactory.instance();
         log.debug("BookCatalogServlet starting");
     }
 
@@ -30,14 +31,13 @@ public class RecordBookServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("BookCatalogServlet doGet() starting");
         HttpSession session = req.getSession();
-
-        BookDao bookDao = factory.bookDao();
+        BookService bookService = factory.bookService();
         @SuppressWarnings("unchecked")
-        List<Book> catalog = (List<Book>) session.getAttribute("catalog");
+        List<BookDto> catalog = (List<BookDto>) session.getAttribute(Attribute.CATALOG);
         if (catalog == null) {
-            catalog = bookDao.getAll();
+            catalog = bookService.getAll();
         }
-        req.setAttribute("catalog", catalog);
+        req.setAttribute(Attribute.CATALOG, catalog);
         getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(req, resp);
     }
 
@@ -45,21 +45,20 @@ public class RecordBookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         log.debug("BookCatalogServlet doPost() starting");
-
-        BookDao bookDao = factory.bookDao();
+        BookService bookService = factory.bookService();
         @SuppressWarnings("unchecked")
-        List<Book> catalog = (List<Book>) session.getAttribute("catalog");
-        String bookTitle = req.getParameter("bookTitle");
-        String authorName = req.getParameter("authorName");
-        String categoryName = req.getParameter("categoryName");
+        List<BookDto> catalog = (List<BookDto>) session.getAttribute(Attribute.CATALOG);
+        String bookTitle = req.getParameter(Attribute.BOOK_TITLE);
+        String authorName = req.getParameter(Attribute.AUTHOR_NAME);
+        String categoryName = req.getParameter(Attribute.CATEGORY_NAME);
         if (bookTitle != null) {
-            catalog = bookDao.getByBookTitle(bookTitle);
+            catalog = bookService.getBooksByTitle(bookTitle);
         } else if (authorName != null) {
-            catalog = bookDao.getByAuthorName(authorName);
+            catalog = bookService.getBooksByAuthorName(authorName);
         } else if (categoryName != null) {
-            catalog = bookDao.getByCategoryName(categoryName);
+            catalog = bookService.getBooksByCategoryName(categoryName);
         }
-        req.setAttribute("catalog", catalog);
+        req.setAttribute(Attribute.CATALOG, catalog);
         getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(req, resp);
     }
 }

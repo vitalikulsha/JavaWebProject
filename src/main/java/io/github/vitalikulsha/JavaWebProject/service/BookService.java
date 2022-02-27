@@ -1,32 +1,13 @@
 package io.github.vitalikulsha.JavaWebProject.service;
 
-import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.entity.Book;
+import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
 
 import java.util.List;
 
-public class BookService implements Service<Book>{
+public interface BookService extends Service<BookDto>{
+    List<BookDto> getBooksByTitle(String title);
 
-    @Override
-    public Book getById(int id) {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        Book book = bookDao.getById(id);
-        return null;
-    }
+    List<BookDto> getBooksByAuthorName(String authorName);
 
-    @Override
-    public List<Book> getAll() {
-        return null;
-    }
-
-    @Override
-    public Book save(Book book) {
-        return null;
-    }
-
-    @Override
-    public void delete(Book book) {
-
-    }
+    List<BookDto> getBooksByCategoryName(String categoryName);
 }

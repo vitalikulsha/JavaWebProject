@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter(Parameter.PASSWORD);
         UserDao userDao = factory.userDao();
         if (userDao.isExist(login, password)) {
-            User user = userDao.getByLogin(login);
+            User user = userDao.findByLogin(login);
             session.setAttribute(Attribute.USER, user);
             if (user.getRole() == User.Role.USER) {
                 response.sendRedirect("/library/reader");

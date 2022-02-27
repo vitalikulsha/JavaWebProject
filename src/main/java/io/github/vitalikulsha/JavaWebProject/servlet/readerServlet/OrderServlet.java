@@ -1,8 +1,10 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.entity.Book;
+import io.github.vitalikulsha.JavaWebProject.dto.BookDto;;
+import io.github.vitalikulsha.JavaWebProject.service.BookService;
+import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -16,11 +18,11 @@ import java.io.IOException;
 @Slf4j
 @WebServlet("/reader/order")
 public class OrderServlet extends HttpServlet {
-    private DaoFactory factory;
+    private ServiceFactory factory;
 
     @Override
     public void init() throws ServletException {
-        factory = DaoFactory.instance();
+        factory = ServiceFactory.instance();
         log.debug("LoginServlet starting");
     }
 
@@ -29,13 +31,13 @@ public class OrderServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("LoginServlet doGet() starting");
         HttpSession session = req.getSession();
-        BookDao bookDao = factory.bookDao();
-        Book book = (Book) session.getAttribute("book");
-        int bookId = Integer.parseInt(req.getParameter("bookId"));
-        if (book == null) {
-            book = bookDao.getById(bookId);
+        BookService bookService = factory.bookService();
+        BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
+        int bookId = Integer.parseInt(req.getParameter(Parameter.BOOK_ID));
+        if (bookDto == null) {
+            bookDto = bookService.getById(bookId);
         }
-        req.setAttribute("book", book);
+        req.setAttribute(Attribute.BOOK, bookDto);
         getServletContext().getRequestDispatcher("/WEB-INF/view/reader/order.jsp").forward(req, resp);
     }
 }

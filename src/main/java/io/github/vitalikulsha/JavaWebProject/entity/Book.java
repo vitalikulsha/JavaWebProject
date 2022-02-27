@@ -1,24 +1,24 @@
 package io.github.vitalikulsha.JavaWebProject.entity;
 
+import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class Book implements Serializable {
     private int id;
     private String title;
-    private List<Author> authors;
     private int publicationYear;
     private int numberPages;
-    private Category category;
+    private int categoryId;
     private int number;
 
-    public Book(int id, String title, List<Author> authors, int publicationYear, int numberPages, Category category, int number) {
+    public Book(int id, String title, int publicationYear, int numberPages, int categoryId, int number) {
         this.id = id;
         this.title = title;
-        this.authors = authors;
         this.publicationYear = publicationYear;
         this.numberPages = numberPages;
-        this.category = category;
+        this.categoryId = categoryId;
         this.number = number;
     }
 
@@ -26,39 +26,59 @@ public class Book implements Serializable {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getPublicationYear() {
         return publicationYear;
     }
 
+    public void setPublicationYear(int publicationYear) {
+        this.publicationYear = publicationYear;
+    }
+
     public int getNumberPages() {
         return numberPages;
     }
 
-    public Category getCategory() {
-        return category;
+    public void setNumberPages(int numberPages) {
+        this.numberPages = numberPages;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public int getNumber() {
         return number;
     }
 
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", authors=" + authors +
-                ", category=" + category +
-                "number=" + number +
+                ", publicationYear=" + publicationYear +
+                ", numberPages=" + numberPages +
+                ", categoryId=" + categoryId +
+                ", number=" + number +
                 '}';
     }
 }

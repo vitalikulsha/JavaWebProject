@@ -6,7 +6,6 @@ public class DaoFactory {
     private final static DaoFactory instance = new DaoFactory();
 
     private final static BookDao bookDao = new BookDaoImpl();
-    private final static RecordBookDao recordBookDao = new RecordBookDaoImpl();
     private final static UserDao userDao = new UserDaoIml();
     private final static OrderDao orderDao = new OrderDaoImpl();
     private final static CategoryDao categoryDao = new CategoryDaoImpl();
@@ -21,10 +20,6 @@ public class DaoFactory {
 
     public BookDao bookDao() {
         return bookDao;
-    }
-
-    public RecordBookDao recordBookDao() {
-        return recordBookDao;
     }
 
     public UserDao userDao() {

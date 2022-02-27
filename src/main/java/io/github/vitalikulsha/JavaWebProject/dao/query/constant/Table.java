@@ -5,7 +5,6 @@ public enum Table {
     AUTHOR,
     CATEGORY,
     BOOK_AUTHOR,
-    RECORD_BOOK,
     USER,
     ORDER_BOOK
 }

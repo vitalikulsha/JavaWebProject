@@ -16,7 +16,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public User getByLogin(String login) {
+    public User findByLogin(String login) {
         return queryOperator.executeSingleEntityQuery(userSqlQuery.FIND_BY_LOGIN, login);
     }
 
@@ -27,7 +27,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     @Override
     public boolean isExist(String login, String password) {
-        User user = getByLogin(login);
+        User user = findByLogin(login);
         if (user == null) {
             return false;
         } else return user.getLogin().equals(login)

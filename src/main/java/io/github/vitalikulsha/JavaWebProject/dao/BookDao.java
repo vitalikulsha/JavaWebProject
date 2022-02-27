@@ -6,9 +6,9 @@ import java.util.List;
 
 
 public interface BookDao extends Dao<Book>{
-    List<Book> getByBookTitle(String title);
+    List<Book> findByBookTitle(String title);
 
-    List<Book> getByAuthorName(String name);
+    List<Book> findByAuthorName(String name);
 
-    List<Book> getByCategoryName(String name);
+    List<Book> findByCategoryName(String name);
 }

@@ -20,6 +20,6 @@ public enum Column {
     EMAIL,
     ROLE,
     ORDER_ID,
-    LOCATION,
+    RESERVED,
     APPROVED
 }

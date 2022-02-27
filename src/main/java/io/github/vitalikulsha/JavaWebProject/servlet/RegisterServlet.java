@@ -42,7 +42,7 @@ public class RegisterServlet extends HttpServlet {
         long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
         String email = request.getParameter(Parameter.EMAIL);
         UserDao userDao = factory.userDao();
-        if (userDao.getByLogin(login) != null) {
+        if (userDao.findByLogin(login) != null) {
             //придумать отрибут для session, который бы фиксировал существующий login
             getServletContext().getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
             return;

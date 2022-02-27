@@ -13,7 +13,6 @@
 <body class="block">
 <h4 style="text-align: right;">
     <a href="<%= request.getContextPath() %>/reader"> Личный кабинет</a>
-    <a href="<%= request.getContextPath() %>/logout"> Выйти </a>
 </h4>
 <h4 style="text-align: right;">
     Добро пожаловать, ${sessionScope.user.userName}! Доступ с правами ${sessionScope.user.role}.
@@ -53,7 +52,7 @@
         <tr>
             <th>Найти книги по автору:</th>
             <td><input class="entry-field" type="text" name="authorName"
-                       placeholder="Введите имя или фамилию автора полностью или частично" required>
+                       placeholder="Введите фамилию автора полностью или частично" required>
             </td>
             <td>
                 <input class="submit" type="submit" value="Найти">

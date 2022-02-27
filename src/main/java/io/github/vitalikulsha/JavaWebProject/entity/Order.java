@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Order implements Serializable {
     private int id;
-    private Book book;
-    private User user;
+    private int bookId;
+    private int userId;
     private LocationReserve locationReserve;
     private boolean isApproved;
 
-    public Order(int id, Book book, User user, LocationReserve locationReserve, boolean isApproved) {
+    public Order(int id, int bookId, int userId, LocationReserve locationReserve, boolean isApproved) {
         this.id = id;
-        this.book = book;
-        this.user = user;
+        this.bookId = bookId;
+        this.userId = userId;
         this.locationReserve = locationReserve;
         this.isApproved = isApproved;
     }
@@ -21,29 +21,49 @@ public class Order implements Serializable {
         return id;
     }
 
-    public Book getBook() {
-        return book;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public int getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public LocationReserve getLocationReserve() {
         return locationReserve;
     }
 
+    public void setLocationReserve(LocationReserve locationReserve) {
+        this.locationReserve = locationReserve;
+    }
+
     public boolean isApproved() {
         return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", book=" + book +
-                ", user=" + user +
-                ", locationReserve='" + locationReserve.get() + '\'' +
+                ", bookId=" + bookId +
+                ", userId=" + userId +
+                ", locationReserve=" + locationReserve +
                 ", isApproved=" + isApproved +
                 '}';
     }

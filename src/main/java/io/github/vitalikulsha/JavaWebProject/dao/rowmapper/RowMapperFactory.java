@@ -9,7 +9,6 @@ public class RowMapperFactory {
     private final static BookRowMapper bookRowMapper = new BookRowMapper();
     private final static CategoryRowMapper categoryRowMapper = new CategoryRowMapper();
     private final static AuthorRowMapper authorRowMapper = new AuthorRowMapper();
-    private final static RecordBookRowMapper recordBookRowMapper = new RecordBookRowMapper();
 
     private RowMapperFactory() {
     }
@@ -37,9 +36,5 @@ public class RowMapperFactory {
 
     public AuthorRowMapper authorRowMapper() {
         return authorRowMapper;
-    }
-
-    public RecordBookRowMapper recordBookRowMapper() {
-        return recordBookRowMapper;
     }
 }
