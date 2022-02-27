@@ -4,8 +4,10 @@ public enum UserPages{
     LOGIN("/login"),
     LOGOUT("/logout"),
     NOT_FOUND("/not-found"),
+    READER("/reader"),
     BOOK_SEARCH("/reader/book-search"),
-    RECORD_BOOK("/reader/record-book"),
+//    RECORD_BOOK("/reader/record-book"),
+    CATALOG("/reader/catalog"),
     ORDER("/reader/order");
 
     private final String page;

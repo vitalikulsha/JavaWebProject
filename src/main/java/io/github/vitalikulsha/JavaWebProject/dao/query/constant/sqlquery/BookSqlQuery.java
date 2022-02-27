@@ -8,7 +8,6 @@ public class BookSqlQuery extends AbstractSqlQuery {
     public final String FIND_BY_CATEGORY_NAME;
     public final String FIND_BY_AUTHOR_NAME;
 
-
     public BookSqlQuery() {
         super(Table.BOOK.name(), Column.BOOK_ID.name());
         String PATTERN = "%%s%";

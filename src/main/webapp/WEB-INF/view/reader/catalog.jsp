@@ -10,7 +10,7 @@
     </style>
 </head>
 <body class="block">
-<c:if test="${recordBook == null}">
+<c:if test="${catalog == null}">
     <c:redirect url="/reader/book-search">
         <c:param name="found" value="0"/>
     </c:redirect>
@@ -28,20 +28,20 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="catalog" items="${recordBook}">
+    <c:forEach var="catalog" items="${catalog}">
         <tr>
             <td>
                 <form action="<%= request.getContextPath() %>/reader/order" method="post">
-                    <input style="font-size: 15px;" type="submit" name="bookId" id="book-id" value="${catalog.book.id}">
+                    <input style="font-size: 15px;" type="submit" name="bookId" value="${catalog.id}">
                 </form>
             </td>
-            <td>${catalog.book.title}</td>
+            <td>${catalog.title}</td>
             <td>
-                <c:forEach var="author" items="${catalog.book.authors}">
+                <c:forEach var="author" items="${catalog.authors}">
                     ${author.firstName} ${author.lastName}<br>
                 </c:forEach>
             </td>
-            <td>${catalog.book.category.name}</td>
+            <td>${catalog.category.name}</td>
             <td id="column">${catalog.number}</td>
         </tr>
     </c:forEach>

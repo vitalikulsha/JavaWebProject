@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dao.RecordBookDao;
+import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.entity.RecordBook;
+import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@WebServlet("/reader/record-book")
+@WebServlet("/reader/catalog")
 public class RecordBookServlet extends HttpServlet {
     private DaoFactory factory;
 
@@ -30,34 +30,36 @@ public class RecordBookServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("BookCatalogServlet doGet() starting");
         HttpSession session = req.getSession();
-        RecordBookDao catalogDao = factory.recordBookDao();
+
+        BookDao bookDao = factory.bookDao();
         @SuppressWarnings("unchecked")
-        List<RecordBook> catalogs = (List<RecordBook>) session.getAttribute("recordBook");
-        if (catalogs == null) {
-            catalogs = catalogDao.getAll();
+        List<Book> catalog = (List<Book>) session.getAttribute("catalog");
+        if (catalog == null) {
+            catalog = bookDao.getAll();
         }
-        req.setAttribute("recordBook", catalogs);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/record-book.jsp").forward(req, resp);
+        req.setAttribute("catalog", catalog);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         log.debug("BookCatalogServlet doPost() starting");
-        RecordBookDao catalogDao = factory.recordBookDao();
+
+        BookDao bookDao = factory.bookDao();
         @SuppressWarnings("unchecked")
-        List<RecordBook> records = (List<RecordBook>) session.getAttribute("recordBook");
+        List<Book> catalog = (List<Book>) session.getAttribute("catalog");
         String bookTitle = req.getParameter("bookTitle");
         String authorName = req.getParameter("authorName");
         String categoryName = req.getParameter("categoryName");
         if (bookTitle != null) {
-            records = catalogDao.getByBookTitle(bookTitle);
+            catalog = bookDao.getByBookTitle(bookTitle);
         } else if (authorName != null) {
-            records = catalogDao.getByAuthorName(authorName);
+            catalog = bookDao.getByAuthorName(authorName);
         } else if (categoryName != null) {
-            records = catalogDao.getByCategoryName(categoryName);
+            catalog = bookDao.getByCategoryName(categoryName);
         }
-        req.setAttribute("recordBook", records);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/record-book.jsp").forward(req, resp);
+        req.setAttribute("catalog", catalog);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(req, resp);
     }
 }

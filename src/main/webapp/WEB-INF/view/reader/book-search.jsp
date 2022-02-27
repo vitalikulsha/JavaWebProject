@@ -11,7 +11,10 @@
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;"><a href="<%= request.getContextPath() %>/logout"> Выйти </a></h4>
+<h4 style="text-align: right;">
+    <a href="<%= request.getContextPath() %>/reader"> Личный кабинет</a>
+    <a href="<%= request.getContextPath() %>/logout"> Выйти </a>
+</h4>
 <h4 style="text-align: right;">
     Добро пожаловать, ${sessionScope.user.userName}! Доступ с правами ${sessionScope.user.role}.
 </h4>
@@ -33,7 +36,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/record-book" method="post">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="post">
         <tr>
             <th>Найти книги по названию:</th>
             <td>
@@ -46,7 +49,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/record-book" method="post">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="post">
         <tr>
             <th>Найти книги по автору:</th>
             <td><input class="entry-field" type="text" name="authorName"
@@ -58,7 +61,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/record-book" method="post">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="post">
         <tr>
             <th>Найти книги по категории:</th>
             <td>
@@ -71,7 +74,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/record-book" method="get">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="get">
         <tr>
             <th>Получить весь список книг:</th>
             <td></td>

@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
             User user = userDao.getByLogin(login);
             session.setAttribute(Attribute.USER, user);
             if (user.getRole() == User.Role.USER) {
-                response.sendRedirect("/library/reader/book-search");
+                response.sendRedirect("/library/reader");
             } else if (user.getRole() == User.Role.ADMIN) {
                 response.sendRedirect("/library/admin");
             }
