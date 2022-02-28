@@ -14,9 +14,6 @@
 <h4 style="text-align: right;">
     <a href="<%= request.getContextPath() %>/reader"> Личный кабинет</a>
 </h4>
-<h4 style="text-align: right;">
-    Добро пожаловать, ${sessionScope.user.userName}! Доступ с правами ${sessionScope.user.role}.
-</h4>
 <h2>Поиск книг</h2>
 <c:if test="${param.found eq 0}">
     <h3 class="error">Ничего не найдено, повторите поиск.</h3>

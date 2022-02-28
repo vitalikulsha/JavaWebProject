@@ -3,18 +3,20 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 import java.io.Serializable;
 
 public class Order implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private int id;
     private int bookId;
     private int userId;
-    private LocationReserve locationReserve;
-    private boolean isApproved;
+    private ReserveStatus reserveStatus;
+    private boolean approved;
 
-    public Order(int id, int bookId, int userId, LocationReserve locationReserve, boolean isApproved) {
+    public Order(int id, int bookId, int userId, ReserveStatus reserveStatus, boolean approved) {
         this.id = id;
         this.bookId = bookId;
         this.userId = userId;
-        this.locationReserve = locationReserve;
-        this.isApproved = isApproved;
+        this.reserveStatus = reserveStatus;
+        this.approved = approved;
     }
 
     public int getId() {
@@ -41,20 +43,20 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public LocationReserve getLocationReserve() {
-        return locationReserve;
+    public ReserveStatus getReserveStatus() {
+        return reserveStatus;
     }
 
-    public void setLocationReserve(LocationReserve locationReserve) {
-        this.locationReserve = locationReserve;
+    public void setReserveStatus(ReserveStatus reserveStatus) {
+        this.reserveStatus = reserveStatus;
     }
 
-    public boolean isApproved() {
-        return isApproved;
+    public boolean getApproved() {
+        return approved;
     }
 
     public void setApproved(boolean approved) {
-        isApproved = approved;
+        this.approved = approved;
     }
 
     @Override
@@ -63,23 +65,9 @@ public class Order implements Serializable {
                 "id=" + id +
                 ", bookId=" + bookId +
                 ", userId=" + userId +
-                ", locationReserve=" + locationReserve +
-                ", isApproved=" + isApproved +
+                ", reserveStatus=" + reserveStatus +
+                ", isApproved=" + approved +
                 '}';
     }
 
-    public enum LocationReserve {
-        READING_ROOM("Читальный зал"),
-        LOANED("Абонемент"),
-        AVAILABLE("Доступна");
-        private final String locationReserve;
-
-        LocationReserve(String locationReserve) {
-            this.locationReserve = locationReserve;
-        }
-
-        public String get() {
-            return locationReserve;
-        }
-    }
 }

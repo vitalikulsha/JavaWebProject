@@ -1,34 +1,35 @@
 package io.github.vitalikulsha.JavaWebProject.service.impl;
 
-import io.github.vitalikulsha.JavaWebProject.dao.AuthorDao;
 import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
-import io.github.vitalikulsha.JavaWebProject.dao.CategoryDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
-import io.github.vitalikulsha.JavaWebProject.entity.Author;
+import io.github.vitalikulsha.JavaWebProject.dto.DtoConverter;
+import io.github.vitalikulsha.JavaWebProject.dto.DtoConverterFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
-import io.github.vitalikulsha.JavaWebProject.entity.Category;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
-    private final DaoFactory factory = DaoFactory.instance();
-    private final BookDao bookDao = factory.bookDao();
-    private final AuthorDao authorDao = factory.authorDao();
-    private final CategoryDao categoryDao = factory.categoryDao();
+    private final BookDao bookDao;
+    private final DtoConverter<BookDto, Book> bookDtoConverter;
+
+    public BookServiceImpl() {
+        bookDao = DaoFactory.instance().bookDao();
+        bookDtoConverter = DtoConverterFactory.instance().bookDtoConverter();
+    }
 
     @Override
     public BookDto getById(int id) {
-        return toBookDto(bookDao.findById(id));
+        return bookDtoConverter.toDto(bookDao.findById(id));
     }
 
     @Override
     public List<BookDto> getAll() {
         return bookDao.findAll()
                 .stream()
-                .map(this::toBookDto)
+                .map(bookDtoConverter::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -36,7 +37,7 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getBooksByTitle(String title) {
         return bookDao.findByBookTitle(title)
                 .stream()
-                .map(this::toBookDto)
+                .map(bookDtoConverter::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +45,7 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getBooksByAuthorName(String authorName) {
         return bookDao.findByAuthorName(authorName)
                 .stream()
-                .map(this::toBookDto)
+                .map(bookDtoConverter::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -52,7 +53,7 @@ public class BookServiceImpl implements BookService {
     public List<BookDto> getBooksByCategoryName(String categoryName) {
         return bookDao.findByCategoryName(categoryName)
                 .stream()
-                .map(this::toBookDto)
+                .map(bookDtoConverter::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -64,19 +65,5 @@ public class BookServiceImpl implements BookService {
     @Override
     public void delete(BookDto bookDto) {
 
-    }
-
-    private BookDto toBookDto(Book book) {
-        List<Author> authors = authorDao.findAuthorsByBookId(book.getId());
-        Category category = categoryDao.findById(book.getCategoryId());
-        return new BookDto.Builder()
-                .fixId(book.getId())
-                .fixTitle(book.getTitle())
-                .fixAuthors(authors)
-                .fixPublicationYear(book.getPublicationYear())
-                .fixNumberPages(book.getNumberPages())
-                .fixCategory(category)
-                .fixNumber(book.getNumber())
-                .build();
     }
 }

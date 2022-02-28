@@ -3,6 +3,8 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 import java.io.Serializable;
 
 public class Author implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private int id;
     private String firstName;
     private String lastName;

@@ -27,30 +27,31 @@ public class CatalogServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("BookCatalogServlet doGet() starting");
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         BookService bookService = factory.bookService();
         @SuppressWarnings("unchecked")
         List<BookDto> catalog = (List<BookDto>) session.getAttribute(Attribute.CATALOG);
         if (catalog == null) {
             catalog = bookService.getAll();
         }
-        req.setAttribute(Attribute.CATALOG, catalog);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(req, resp);
+        request.setAttribute(Attribute.CATALOG, catalog);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();
         log.debug("BookCatalogServlet doPost() starting");
         BookService bookService = factory.bookService();
         @SuppressWarnings("unchecked")
         List<BookDto> catalog = (List<BookDto>) session.getAttribute(Attribute.CATALOG);
-        String bookTitle = req.getParameter(Attribute.BOOK_TITLE);
-        String authorName = req.getParameter(Attribute.AUTHOR_NAME);
-        String categoryName = req.getParameter(Attribute.CATEGORY_NAME);
+        String bookTitle = request.getParameter(Attribute.BOOK_TITLE);
+        String authorName = request.getParameter(Attribute.AUTHOR_NAME);
+        String categoryName = request.getParameter(Attribute.CATEGORY_NAME);
         if (bookTitle != null) {
             catalog = bookService.getBooksByTitle(bookTitle);
         } else if (authorName != null) {
@@ -58,7 +59,7 @@ public class CatalogServlet extends HttpServlet {
         } else if (categoryName != null) {
             catalog = bookService.getBooksByCategoryName(categoryName);
         }
-        req.setAttribute(Attribute.CATALOG, catalog);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(req, resp);
+        request.setAttribute(Attribute.CATALOG, catalog);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(request, response);
     }
 }

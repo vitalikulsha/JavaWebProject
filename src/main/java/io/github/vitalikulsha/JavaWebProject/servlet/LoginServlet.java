@@ -2,6 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet;
 
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
@@ -42,9 +43,9 @@ public class LoginServlet extends HttpServlet {
         if (userDao.isExist(login, password)) {
             User user = userDao.findByLogin(login);
             session.setAttribute(Attribute.USER, user);
-            if (user.getRole() == User.Role.USER) {
+            if (user.getRole() == Role.USER) {
                 response.sendRedirect("/library/reader");
-            } else if (user.getRole() == User.Role.ADMIN) {
+            } else if (user.getRole() == Role.ADMIN) {
                 response.sendRedirect("/library/admin");
             }
         } else {

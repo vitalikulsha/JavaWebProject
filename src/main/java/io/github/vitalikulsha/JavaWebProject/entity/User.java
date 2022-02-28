@@ -3,6 +3,8 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 import java.io.Serializable;
 
 public class User implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private int id;
     private String login;
     private String password;
@@ -62,9 +64,4 @@ public class User implements Serializable {
                 '}';
     }
 
-    public enum Role {
-        ADMIN,
-        USER,
-        GUEST
-    }
 }

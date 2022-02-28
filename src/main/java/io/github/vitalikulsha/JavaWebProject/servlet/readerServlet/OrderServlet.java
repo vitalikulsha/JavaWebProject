@@ -27,17 +27,17 @@ public class OrderServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("LoginServlet doGet() starting");
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         BookService bookService = factory.bookService();
         BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
-        int bookId = Integer.parseInt(req.getParameter(Parameter.BOOK_ID));
+        int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
         if (bookDto == null) {
             bookDto = bookService.getById(bookId);
         }
-        req.setAttribute(Attribute.BOOK, bookDto);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/order.jsp").forward(req, resp);
+        request.setAttribute(Attribute.BOOK, bookDto);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/order.jsp").forward(request, response);
     }
 }

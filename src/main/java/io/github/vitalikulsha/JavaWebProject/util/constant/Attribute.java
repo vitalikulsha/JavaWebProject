@@ -7,6 +7,7 @@ public class Attribute {
     public static final String AUTHOR_NAME = "authorName";
     public static final String CATEGORY_NAME = "categoryName";
     public static final String BOOK = "book";
+    public static final String USER_ORDERS = "userOrders";
 
     private Attribute() {
     }

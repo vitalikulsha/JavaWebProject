@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.filter;
 
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.page.AdminPages;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @WebFilter("/*")
 public class AccessFilter implements Filter {
-    private final Map<User.Role, List<String>> rolePages = new EnumMap<>(User.Role.class);
+    private final Map<Role, List<String>> rolePages = new EnumMap<>(Role.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -27,17 +28,17 @@ public class AccessFilter implements Filter {
         List<String> userPages = Arrays.stream(UserPages.values())
                 .map(UserPages::getPage)
                 .collect(Collectors.toList());
-        rolePages.put(User.Role.USER, userPages);
+        rolePages.put(Role.USER, userPages);
 
         List<String> adminPath = Arrays.stream(AdminPages.values())
                 .map(AdminPages::getPage)
                 .collect(Collectors.toList());
-        rolePages.put(User.Role.ADMIN, adminPath);
+        rolePages.put(Role.ADMIN, adminPath);
 
         List<String> guestPath = Arrays.stream(GuestPages.values())
                 .map(GuestPages::getPage)
                 .collect(Collectors.toList());
-        rolePages.put(User.Role.GUEST, guestPath);
+        rolePages.put(Role.GUEST, guestPath);
     }
 
     @Override
@@ -66,9 +67,9 @@ public class AccessFilter implements Filter {
                 log.debug("Is user == null");
                 chain.doFilter(servletRequest, servletResponse);
                 log.debug("The AccessFilter has worked");
-            } else if (user.getRole() == User.Role.USER) {
+            } else if (user.getRole() == Role.USER) {
                 response.sendRedirect("/library/reader");
-            } else if (user.getRole() == User.Role.ADMIN) {
+            } else if (user.getRole() == Role.ADMIN) {
                 response.sendRedirect("/library/login");
             } else {
                 response.sendRedirect("/library/login");
@@ -89,20 +90,20 @@ public class AccessFilter implements Filter {
     }
 
     private boolean isAdminPage(String servletPath) {
-        return rolePages.get(User.Role.ADMIN).contains(servletPath);
+        return rolePages.get(Role.ADMIN).contains(servletPath);
     }
 
     private boolean isUserPage(String servletPath) {
-        return rolePages.get(User.Role.USER).contains(servletPath);
+        return rolePages.get(Role.USER).contains(servletPath);
     }
 
     private boolean isGuestPage(String servletPath) {
-        return rolePages.get(User.Role.GUEST).contains(servletPath);
+        return rolePages.get(Role.GUEST).contains(servletPath);
     }
 
     private boolean isAuthorized(String servletPath, User user) {
-        return (isAdminPage(servletPath) && user.getRole() == User.Role.ADMIN)
-                || (isUserPage(servletPath) && user.getRole() == User.Role.USER);
+        return (isAdminPage(servletPath) && user.getRole() == Role.ADMIN)
+                || (isUserPage(servletPath) && user.getRole() == Role.USER);
     }
 
 

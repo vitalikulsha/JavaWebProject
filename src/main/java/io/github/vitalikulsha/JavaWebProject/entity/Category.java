@@ -3,6 +3,8 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 import java.io.Serializable;
 
 public class Category implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private Integer id;
     private String name;
 

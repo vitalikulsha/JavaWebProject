@@ -19,8 +19,8 @@ public class BookSearchServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("BookSearchServlet doGet() starting");
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/book-search.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/book-search.jsp").forward(request, response);
     }
 }

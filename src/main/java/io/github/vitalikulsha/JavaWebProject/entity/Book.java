@@ -1,11 +1,10 @@
 package io.github.vitalikulsha.JavaWebProject.entity;
 
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
-
 import java.io.Serializable;
-import java.util.List;
 
 public class Book implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private int id;
     private String title;
     private int publicationYear;

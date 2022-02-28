@@ -1,19 +1,27 @@
 package io.github.vitalikulsha.JavaWebProject.dto;
 
-import io.github.vitalikulsha.JavaWebProject.entity.Book;
-import io.github.vitalikulsha.JavaWebProject.entity.Order;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
+import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 
 import java.io.Serializable;
 
 public class OrderDto implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private int id;
-    private Book book;
-    private User user;
-    private Order.LocationReserve locationReserve;
-    private boolean isApproved;
+    private BookDto bookDto;
+    private UserDto userDto;
+    private ReserveStatus reserveStatus;
+    private boolean approved;
 
     private OrderDto() {
+    }
+
+    public OrderDto(int id, BookDto bookDto, UserDto userDto, ReserveStatus reserveStatus, boolean approved) {
+        this.id = id;
+        this.bookDto = bookDto;
+        this.userDto = userDto;
+        this.reserveStatus = reserveStatus;
+        this.approved = approved;
     }
 
     public int getId() {
@@ -24,46 +32,46 @@ public class OrderDto implements Serializable {
         this.id = id;
     }
 
-    public Book getBook() {
-        return book;
+    public BookDto getBookDto() {
+        return bookDto;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
+    public void setBookDto(BookDto bookDto) {
+        this.bookDto = bookDto;
     }
 
-    public User getUser() {
-        return user;
+    public UserDto getUserDto() {
+        return userDto;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 
-    public Order.LocationReserve getLocationReserve() {
-        return locationReserve;
+    public ReserveStatus getReserveStatus() {
+        return reserveStatus;
     }
 
-    public void setLocationReserve(Order.LocationReserve locationReserve) {
-        this.locationReserve = locationReserve;
+    public void setReserveStatus(ReserveStatus reserveStatus) {
+        this.reserveStatus = reserveStatus;
     }
 
-    public boolean isApproved() {
-        return isApproved;
+    public boolean getApproved() {
+        return approved;
     }
 
     public void setApproved(boolean approved) {
-        isApproved = approved;
+        this.approved = approved;
     }
 
     @Override
     public String toString() {
         return "OrderDto{" +
                 "id=" + id +
-                ", book=" + book +
-                ", user=" + user +
-                ", locationReserve=" + locationReserve +
-                ", isApproved=" + isApproved +
+                ", book=" + bookDto +
+                ", user=" + userDto +
+                ", reserveStatus=" + reserveStatus +
+                ", isApproved=" + approved +
                 '}';
     }
 
@@ -79,23 +87,23 @@ public class OrderDto implements Serializable {
             return this;
         }
 
-        public Builder fixBook(Book book) {
-            orderDto.book = book;
+        public Builder fixBookDto(BookDto bookDto) {
+            orderDto.bookDto = bookDto;
             return this;
         }
 
-        public Builder fixUser(User user) {
-            orderDto.user = user;
+        public Builder fixUser(UserDto userDto) {
+            orderDto.userDto = userDto;
             return this;
         }
 
-        public Builder fixLocationReserve(Order.LocationReserve locationReserve) {
-            orderDto.locationReserve = locationReserve;
+        public Builder fixReserveStatus(ReserveStatus reserveStatus) {
+            orderDto.reserveStatus = reserveStatus;
             return this;
         }
 
-        public Builder isApproved(boolean isApproved) {
-            orderDto.isApproved = isApproved;
+        public Builder fixApproved(boolean approved) {
+            orderDto.approved = approved;
             return this;
         }
 

@@ -6,6 +6,8 @@ import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.SqlQuer
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.*;
 
+import java.util.List;
+
 public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     private final static OrderSqlQuery orderSqlQuery = SqlQueryFactory.instance().orderSqlQuery();
 
@@ -14,7 +16,10 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
                 orderSqlQuery.FIND_ALL, orderSqlQuery.FIND_BY_ID);
     }
 
-
+    @Override
+    public List<Order> findByUserId(int userId) {
+        return queryOperator.executeEntityListQueryWithParam(orderSqlQuery.FIND_BY_USER_ID, userId);
+    }
 
 
 }

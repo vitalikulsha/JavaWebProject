@@ -1,13 +1,14 @@
 package io.github.vitalikulsha.JavaWebProject.dto;
 
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
-import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class BookDto implements Serializable {
+    private final static long serialVersionUID = 1L;
+
     private int id;
     private String title;
     private List<Author> authors;

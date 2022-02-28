@@ -2,6 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet;
 
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
@@ -48,7 +49,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         int id = userDao.maxId() + 1;
-        User user = new User(id, login, password, userName, phoneNumber, email, User.Role.USER);
+        User user = new User(id, login, password, userName, phoneNumber, email, Role.USER);
         session.setAttribute(Attribute.USER, user);
 
 

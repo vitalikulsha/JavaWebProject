@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.dao.rowmapper;
 
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Column;
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ public class UserRowMapper implements RowMapper<User> {
             String userName = resultSet.getString(Column.USERNAME.name());
             long phoneNumber = resultSet.getLong(Column.PHONENUMBER.name());
             String email = resultSet.getString(Column.EMAIL.name());
-            User.Role role = User.Role.valueOf(resultSet.getString(Column.ROLE.name()));
+            Role role = Role.valueOf(resultSet.getString(Column.ROLE.name()));
             return new User(id, login, password, userName, phoneNumber, email, role);
         } catch (SQLException e) {
             e.printStackTrace();
