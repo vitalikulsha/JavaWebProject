@@ -10,11 +10,6 @@
     </style>
 </head>
 <body class="block">
-<c:if test="${catalog == null}">
-    <c:redirect url="/reader/book-search">
-        <c:param name="found" value="0"/>
-    </c:redirect>
-</c:if>
 <h2>Выберите книгу из списка</h2>
 <h3>Для оформления заказа нажмите на код понравившейся книги</h3>
 <table style="with: 900px; margin: auto;">

@@ -86,6 +86,23 @@ public class QueryOperator<T> {
         return 0;
     }
 
+    public List<T> execute(String sqlQuery, int items) {
+        String query = String.format(sqlQuery, items, items + 10);
+        List<T> result = new ArrayList<>();
+        try (Connection connection = connectionSource.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                T entity = mapper.getEntity(resultSet);
+                result.add(entity);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return result;
+    }
+
     private String completeSqlQuery(String sqlQuery, String... param) {
         List<String> params = new ArrayList<>();
         Pattern pattern = Pattern.compile("%s%");

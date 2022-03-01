@@ -34,30 +34,18 @@ public class CatalogServlet extends HttpServlet {
         BookService bookService = factory.bookService();
         @SuppressWarnings("unchecked")
         List<BookDto> catalog = (List<BookDto>) session.getAttribute(Attribute.CATALOG);
-        if (catalog == null) {
-            catalog = bookService.getAll();
-        }
-        request.setAttribute(Attribute.CATALOG, catalog);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        log.debug("BookCatalogServlet doPost() starting");
-        BookService bookService = factory.bookService();
-        @SuppressWarnings("unchecked")
-        List<BookDto> catalog = (List<BookDto>) session.getAttribute(Attribute.CATALOG);
         String bookTitle = request.getParameter(Attribute.BOOK_TITLE);
         String authorName = request.getParameter(Attribute.AUTHOR_NAME);
         String categoryName = request.getParameter(Attribute.CATEGORY_NAME);
+        String allBooks = request.getParameter(Attribute.ALL_BOOKS);
         if (bookTitle != null) {
             catalog = bookService.getBooksByTitle(bookTitle);
         } else if (authorName != null) {
             catalog = bookService.getBooksByAuthorName(authorName);
         } else if (categoryName != null) {
             catalog = bookService.getBooksByCategoryName(categoryName);
+        } else if (allBooks != null) {
+            catalog = bookService.getAll();
         }
         request.setAttribute(Attribute.CATALOG, catalog);
         getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(request, response);

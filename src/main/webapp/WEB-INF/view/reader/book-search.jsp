@@ -15,9 +15,6 @@
     <a href="<%= request.getContextPath() %>/reader"> Личный кабинет</a>
 </h4>
 <h2>Поиск книг</h2>
-<c:if test="${param.found eq 0}">
-    <h3 class="error">Ничего не найдено, повторите поиск.</h3>
-</c:if>
 <table>
     <form action="<%= request.getContextPath() %>/reader/order" method="post">
         <tr>
@@ -32,7 +29,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/catalog" method="post">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="get">
         <tr>
             <th>Найти книги по названию:</th>
             <td>
@@ -45,7 +42,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/catalog" method="post">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="get">
         <tr>
             <th>Найти книги по автору:</th>
             <td><input class="entry-field" type="text" name="authorName"
@@ -57,7 +54,7 @@
         </tr>
     </form>
 
-    <form action="<%= request.getContextPath() %>/reader/catalog" method="post">
+    <form action="<%= request.getContextPath() %>/reader/catalog" method="get">
         <tr>
             <th>Найти книги по категории:</th>
             <td>
