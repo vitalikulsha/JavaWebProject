@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Slf4j
 public class QueryOperator<T> {
@@ -38,7 +36,7 @@ public class QueryOperator<T> {
     }
 
     public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) {
-        String query = completeSqlQuery(sqlQuery, param);
+        String query = String.format(sqlQuery, param);
         return executeEntityListQueryWithoutParam(query);
     }
 
@@ -73,7 +71,7 @@ public class QueryOperator<T> {
         return null;
     }
 
-    public int executeMaxIdQuery(String sqlQuery) {
+    public int executeSimpleQuery(String sqlQuery) {
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -84,32 +82,5 @@ public class QueryOperator<T> {
             e.printStackTrace();
         }
         return 0;
-    }
-
-    public List<T> execute(String sqlQuery, int items) {
-        String query = String.format(sqlQuery, items, items + 10);
-        List<T> result = new ArrayList<>();
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                T entity = mapper.getEntity(resultSet);
-                result.add(entity);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return result;
-    }
-
-    private String completeSqlQuery(String sqlQuery, String... param) {
-        List<String> params = new ArrayList<>();
-        Pattern pattern = Pattern.compile("%s%");
-        Matcher matcher = pattern.matcher(sqlQuery);
-        while (matcher.find()) {
-            params.add(param[0]);
-        }
-        return String.format(sqlQuery, params.toArray());
     }
 }

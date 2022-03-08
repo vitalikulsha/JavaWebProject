@@ -7,6 +7,7 @@
     <style>
           <%@include file='/WEB-INF/css/book-catalog-style.css' %>
           <%@include file='/WEB-INF/css/style.css' %>
+
     </style>
 </head>
 <body class="block">
@@ -26,8 +27,8 @@
     <c:forEach var="catalog" items="${catalog}">
         <tr>
             <td>
-                <form action="<%= request.getContextPath() %>/reader/order" method="post">
-                    <input style="font-size: 15px;" type="submit" name="bookId" value="${catalog.id}">
+                <form action="${pageContext.request.contextPath}/reader/order" method="post">
+                    <input style="font-size: 15px; " type="submit" name="bookId" value="${catalog.id}">
                 </form>
             </td>
             <td>${catalog.title}</td>
@@ -42,6 +43,12 @@
     </c:forEach>
     </tbody>
 </table>
-<h3 style="text-align: right;"><a href="<%= request.getContextPath() %>/reader/book-search"> Назад </a></h3>
+<h4>Сраница ${param.page}</h4>
+<nav style="font-size: 20px; text-align: center;">
+    <c:forEach var="page" items="${pages}">
+        <a href="${sessionScope.url}&page=${page}">| - ${page} - |</a>
+    </c:forEach>
+</nav>
+<h3 style="text-align: right;"><a href="${pageContext.request.contextPath}/reader/book-search"> Поиск книг </a></h3>
 </body>
 </html>

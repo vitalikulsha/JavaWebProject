@@ -3,10 +3,10 @@ package io.github.vitalikulsha.JavaWebProject.util.page;
 public enum UserPages{
     LOGIN("/login"),
     LOGOUT("/logout"),
+    REGISTER("/register"),
     NOT_FOUND("/not-found"),
     READER("/reader"),
     BOOK_SEARCH("/reader/book-search"),
-//    RECORD_BOOK("/reader/record-book"),
     CATALOG("/reader/catalog"),
     ORDER("/reader/order");
 

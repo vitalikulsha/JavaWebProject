@@ -12,7 +12,7 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="<%= request.getContextPath() %>/logout"> Выйти </a>
+    <a href="${pageContext.request.contextPath}/logout"> Выйти </a>
 </h4>
 <h2>Личный кабинет</h2>
 <c:set var="user" scope="request" value="${user}"/>
@@ -59,6 +59,6 @@
     </tbody>
 </table>
 
-<h3 style="text-align: center;"><a href="<%= request.getContextPath() %>/reader/book-search"> Поиск книг </a></h3>
+<h3 style="text-align: center;"><a href="${pageContext.request.contextPath}/reader/book-search"> Поиск книг </a></h3>
 </body>
 </html>

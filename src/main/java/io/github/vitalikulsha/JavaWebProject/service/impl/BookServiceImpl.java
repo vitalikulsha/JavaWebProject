@@ -34,14 +34,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getAllPage(int items){
-        return bookDao.findAll(items)
-                .stream()
-                .map(bookDtoConverter::toDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<BookDto> getBooksByTitle(String title) {
         return bookDao.findByBookTitle(title)
                 .stream()

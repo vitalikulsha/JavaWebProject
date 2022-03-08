@@ -4,8 +4,7 @@ import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
 
 import java.util.List;
 
-public interface BookService extends Service<BookDto>{
-    List<BookDto> getAllPage(int bookId);
+public interface BookService extends Service<BookDto> {
 
     List<BookDto> getBooksByTitle(String title);
 

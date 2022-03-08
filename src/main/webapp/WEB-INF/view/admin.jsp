@@ -10,7 +10,7 @@
 </head>
 <body class="block">
 <h2>Страница администратора</h2>
-<h4 style="text-align: right;"><a href="<%= request.getContextPath() %>/logout"> Выйти </a></h4>
+<h4 style="text-align: right;"><a href="${pageContext.request.contextPath}/logout"> Выйти </a></h4>
 <h4 style="text-align: right;">
     Добро пожаловать, ${sessionScope.user.userName}! Доступ с правами ${sessionScope.user.role}.
 </h4>

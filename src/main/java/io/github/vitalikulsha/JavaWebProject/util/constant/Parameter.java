@@ -7,7 +7,10 @@ public class Parameter {
     public final static String PHONE_NUMBER = "phoneNumber";
     public final static String EMAIL = "email";
     public final static String BOOK_ID = "bookId";
-    public final static String FOUND = "found";
+    public static final String PAGE = "page";
+    public static final String BOOK_TITLE = "bookTitle";
+    public static final String AUTHOR_NAME = "authorName";
+    public static final String CATEGORY_NAME = "categoryName";
 
     private Parameter() {
     }

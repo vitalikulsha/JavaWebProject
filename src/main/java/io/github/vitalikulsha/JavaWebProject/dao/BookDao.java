@@ -11,6 +11,4 @@ public interface BookDao extends Dao<Book>{
     List<Book> findByAuthorName(String name);
 
     List<Book> findByCategoryName(String name);
-
-    List<Book> findAll(int bookId);
 }

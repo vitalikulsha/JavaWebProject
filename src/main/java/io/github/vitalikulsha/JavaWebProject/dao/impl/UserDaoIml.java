@@ -22,7 +22,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     @Override
     public int maxId() {
-        return queryOperator.executeMaxIdQuery(userSqlQuery.FIND_MAX_ID);
+        return queryOperator.executeSimpleQuery(userSqlQuery.FIND_MAX_ID);
     }
 
     @Override

@@ -34,11 +34,6 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
-    public List<Book> findAll(int bookId){
-        return queryOperator.execute(bookSqlQuery.FIND_ALL_PAGE, bookId);
-    }
-
-    @Override
     public Book save(Book book) {
         return null;
     }

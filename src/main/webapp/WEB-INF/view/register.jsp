@@ -9,12 +9,29 @@
 </head>
 <body class="block">
 <h2>Регистрация нового пользователя</h2>
-<form method="post" action="<%= request.getContextPath() %>/reader">
-    <input type="text" required placeholder="login" name="login"><br>
-    <input type="password" required placeholder="password" name="password"><br>
-    <input type="text" required placeholder="userName" name="userName"><br>
-    <input type="number" required placeholder="phoneNumber" name="phoneNumber"><br>
-    <input type="email" required placeholder="email" name="email"><br><br>
+<form method="post" action="${pageContext.request.contextPath}/reader">
+    <table>
+        <tr>
+            <th>Логин</th>
+            <td><input type="text" placeholder="Введите логин" required name="login"></td>
+        </tr>
+        <tr>
+            <th>Пароль</th>
+            <td><input type="password" placeholder="Введите пароль" required name="password"></td>
+        </tr>
+        <tr>
+            <th>Имя пользователя</th>
+            <td><input type="text" placeholder="Введите имя пользователя" required name="userName"></td>
+        </tr>
+        <tr>
+            <th>Номер телефона</th>
+            <td><input type="number" placeholder="Введите номер телефона" required name="phoneNumber"></td>
+        </tr>
+        <tr>
+            <th>E-mail</th>
+            <td><input type="email" placeholder="Введите e-mail" required name="email"></td>
+        </tr>
+    </table>
     <input class="button" type="submit" value="Зарегистрировать">
 </form>
 </body>

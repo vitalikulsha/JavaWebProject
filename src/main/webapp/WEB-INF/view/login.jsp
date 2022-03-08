@@ -13,17 +13,11 @@
 <c:if test="${empty sessionScope.user}">
     <h3 class="error">Пользователь не найден.<br>Повторите попытку</h3>
 </c:if>
-<!--<c:if test="${sessionScope.notFound eq 'user'}">-->
-<!--    <h3 class="error">Пользователь '${param.login}' не найден.<br>Повторите попытку</h3>-->
-<!--</c:if>-->
-<!--<c:if test="${sessionScope.notFound eq 'password'}">-->
-<!--    <h3 class="error">Пользователь '${param.login}' найден, но не верный пароль.<br>Повторите попытку</h3>-->
-<!--</c:if>-->
-<form method="post" action="<%= request.getContextPath() %>/login">
-    <input type="text" required placeholder="login" name="login"><br>
-    <input type="password" required placeholder="password" name="password"><br><br>
+<form method="post" action="${pageContext.request.contextPath}/login">
+    <input type="text" placeholder="login" required name="login"><br>
+    <input type="password" placeholder="password" required name="password"><br><br>
     <input class="button" type="submit" value="Войти">
 </form>
-<h4 style="text-align: right;"><a href="<%= request.getContextPath() %>/register"> Регистрация </a></h4>
+<h4 style="text-align: right;"><a href="${pageContext.request.contextPath}/register"> Регистрация </a></h4>
 </body>
 </html>
