@@ -43,7 +43,7 @@ public class CatalogServlet extends HttpServlet {
         String authorName = request.getParameter(Parameter.AUTHOR_NAME);
         String categoryName = request.getParameter(Parameter.CATEGORY_NAME);
         String page = request.getParameter(Parameter.PAGE);
-        String url = session.getServletContext().getContextPath() + UserPages.CATALOG.getPage() + "?";
+        String url = session.getServletContext().getContextPath() + request.getServletPath() + "?";
         if (bookTitle != null) {
             url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
             catalog = bookService.getBooksByTitle(bookTitle);
@@ -59,7 +59,7 @@ public class CatalogServlet extends HttpServlet {
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = pagination.getPageNumbers(catalog);
         catalog = pagination.getItemsPerPage(catalog, pageNumber);
-        session.setAttribute(Attribute.URL, url);
+        request.setAttribute(Attribute.URL, url);
         request.setAttribute(Attribute.PAGES, pages);
         request.setAttribute(Attribute.CATALOG, catalog);
         getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(request, response);

@@ -7,11 +7,19 @@
     <style>
         <%@include file='/WEB-INF/css/order-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
+
     </style>
 </head>
 <body class="block">
+<h4 style="text-align: right;">
+    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
+    <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+</h4>
 <h2>Оформление заказа</h2>
 <c:set var="book" scope="request" value="${book}"/>
+<form id="order" action="${pageContext.request.contextPath}/reader/order" method="post">
+</form>
 <table>
     <tr>
         <th>Код книги</th>
@@ -42,15 +50,15 @@
         <td>${book.category.name}</td>
     </tr>
     <tr>
-        <th>Место чтения</th>
+        <th>Зарезервировать</th>
         <td>
-            <select style="font-size: 15px">
-                <option>Читальный зал</option>
-                <option>Абонемент</option>
+            <select style="font-size: 15px" name="reserveStatus" form="order">
+                <option value="READING_ROOM">Читальный зал</option>
+                <option value="LOANED"> Абонемент</option>
             </select>
         </td>
     </tr>
 </table>
-<h3 style="text-align: center;"><a  href="${pageContext.request.contextPath}/reader/book-search"> Поиск книг </a></h3>
+<input type="submit" form="order" value="Оформить заказ">
 </body>
 </html>

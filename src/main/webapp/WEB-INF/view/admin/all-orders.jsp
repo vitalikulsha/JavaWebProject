@@ -12,11 +12,10 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/admin"> Личный кабинет</a>
-    <a href="${pageContext.request.contextPath}/logout"> Выйти </a>
+    <a href="${pageContext.request.contextPath}/admin">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
 <h2>Список всех заказов читателей</h2>
-<c:set var="user" scope="request" value="${user}"/>
 <table style="with: 900px; margin: auto;">
     <thead>
     <tr>
@@ -25,6 +24,7 @@
         <th>Название книги</th>
         <th>Статус резерва</th>
         <th>Статус одобрения</th>
+        <th>Количество книг</th>
         <th>Код пользователя</th>
     </tr>
     </thead>
@@ -38,8 +38,9 @@
                 </form>
             </td>
             <td>${order.bookDto.title}</td>
-            <td>${order.reserveStatus}</td>
+            <td>${order.reserveStatus.title}</td>
             <td>${order.approved}</td>
+            <td>${order.bookDto.number}</td>
             <td>
                 <form action="${pageContext.request.contextPath}/admin/reader-info" method="post">
                     <input style="font-size: 15px; " type="submit" name="readerId" value="${order.userDto.id}">
@@ -50,19 +51,7 @@
     </tbody>
 </table>
 
-<c:choose>
-    <c:when test="${empty param.page}">
-        <h4>Страница 1</h4>
-    </c:when>
-    <c:otherwise>
-        <h4>Страница ${param.page}</h4>
-    </c:otherwise>
-</c:choose>
-<nav style="font-size: 20px; text-align: center;">
-    <c:forEach var="page" items="${pages}">
-        <a href="${sessionScope.url}&page=${page}">| - ${page} - |</a>
-    </c:forEach>
-</nav>
+<jsp:include page="/WEB-INF/view/template/pagination.jsp" />
 
 </body>
 </html>

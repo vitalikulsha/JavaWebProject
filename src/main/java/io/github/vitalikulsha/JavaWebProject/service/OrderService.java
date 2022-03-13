@@ -1,9 +1,12 @@
 package io.github.vitalikulsha.JavaWebProject.service;
 
 import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
+import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 
 import java.util.List;
 
 public interface OrderService extends Service<OrderDto> {
-    List<OrderDto> getOrderByUserId(int userId);
+    List<OrderDto> getOrdersByUserId(int userId);
+
+    boolean applyForBook(int bookId, int userId, ReserveStatus reserveStatus);
 }

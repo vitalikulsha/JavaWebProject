@@ -7,8 +7,10 @@ public enum AdminPages{
     NOT_FOUND("/not-found"),
     ADMIN("/admin"),
     ALL_ORDERS("/admin/all-orders"),
+    ALL_READERS("/admin/all-readers"),
     BOOK_INFO("/admin/book-info"),
-    READER_INFO("/admin/reader-info");
+    READER_INFO("/admin/reader-info"),
+    ORDER_INFO("/admin/order-info");
 
     private final String path;
 

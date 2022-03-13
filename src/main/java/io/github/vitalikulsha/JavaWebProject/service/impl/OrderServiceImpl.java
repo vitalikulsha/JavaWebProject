@@ -5,6 +5,7 @@ import io.github.vitalikulsha.JavaWebProject.dto.DtoConverter;
 import io.github.vitalikulsha.JavaWebProject.dto.DtoConverterFactory;
 import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Order;
+import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrderByUserId(int userId) {
+    public List<OrderDto> getOrdersByUserId(int userId) {
         return orderDao.findByUserId(userId)
                 .stream()
                 .map(orderDtoConverter::toDto)
@@ -41,8 +42,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto save(OrderDto orderDto) {
-        return null;
+    public boolean applyForBook(int bookId, int userId, ReserveStatus reserveStatus) {
+        Order order = new Order(0, bookId, userId, reserveStatus, false);
+        return orderDao.save(order) == 1;
     }
 
     @Override

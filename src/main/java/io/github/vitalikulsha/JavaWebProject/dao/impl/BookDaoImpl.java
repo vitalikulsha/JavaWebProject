@@ -34,8 +34,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
-    public Book save(Book book) {
-        return null;
+    public int save(Book book) {
+        return 0;
     }
 
     @Override

@@ -21,5 +21,10 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
         return queryOperator.executeEntityListQueryWithParam(orderSqlQuery.FIND_BY_USER_ID, userId);
     }
 
+    @Override
+    public int save(Order order) {
+        return queryOperator.executeUpdate(orderSqlQuery.SAVE,
+                order.getBookId(), order.getUserId(), order.getReserveStatus().name(), order.getApproved());
+    }
 
 }

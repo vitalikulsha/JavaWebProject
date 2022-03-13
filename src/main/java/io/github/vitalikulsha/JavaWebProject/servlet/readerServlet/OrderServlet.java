@@ -1,10 +1,14 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
 import io.github.vitalikulsha.JavaWebProject.dto.BookDto;;
+import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
+import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
+import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
+import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -23,21 +27,35 @@ public class OrderServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         factory = ServiceFactory.instance();
-        log.debug("LoginServlet starting");
+        log.debug("OrderServlet starting");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        log.debug("OrderServlet doGet() starting");
+        HttpSession session = request.getSession();
+        BookService bookService = factory.bookService();
+        int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
+        BookDto bookDto = bookService.getById(bookId);
+        session.setAttribute(Attribute.BOOK, bookDto);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/order.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.debug("LoginServlet doGet() starting");
+        log.debug("OrderServlet doPost() starting");
         HttpSession session = request.getSession();
-        BookService bookService = factory.bookService();
+        OrderService orderService = factory.orderService();
         BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
-        int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
-        if (bookDto == null) {
-            bookDto = bookService.getById(bookId);
-        }
-        request.setAttribute(Attribute.BOOK, bookDto);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/order.jsp").forward(request, response);
+        User user = (User) session.getAttribute(Attribute.USER);
+        ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
+        log.info("bookId: " + bookDto.getId() + "; userId: " + user.getId() + "; reserveStatus: " + reserveStatus);
+        session.setAttribute(Attribute.USER, user);
+        session.setAttribute(Attribute.BOOK, bookDto);
+        orderService.applyForBook(bookDto.getId(), user.getId(), reserveStatus);
+        String contextPath = session.getServletContext().getContextPath();
+        response.sendRedirect(contextPath + UserPages.READER_ORDERS.getPage());
     }
 }

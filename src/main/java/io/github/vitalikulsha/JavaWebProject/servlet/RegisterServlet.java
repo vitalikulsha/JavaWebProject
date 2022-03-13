@@ -48,11 +48,11 @@ public class RegisterServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
             return;
         }
-        int id = userDao.maxId() + 1;
-        User user = new User(id, login, password, userName, phoneNumber, email, Role.USER);
-        session.setAttribute(Attribute.USER, user);
+//        int id = userDao.maxId() + 1;
+//        User user = new User(id, login, password, userName, phoneNumber, email, Role.USER);
+//        session.setAttribute(Attribute.USER, user);
 
 
-        response.sendRedirect("/library/reader/book-search");
+        response.sendRedirect("/library/reader");
     }
 }

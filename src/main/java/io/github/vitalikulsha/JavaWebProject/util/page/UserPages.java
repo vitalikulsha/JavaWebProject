@@ -8,7 +8,8 @@ public enum UserPages{
     READER("/reader"),
     BOOK_SEARCH("/reader/book-search"),
     CATALOG("/reader/catalog"),
-    ORDER("/reader/order");
+    ORDER("/reader/order"),
+    READER_ORDERS("/reader/reader-orders");
 
     private final String page;
 

@@ -11,9 +11,7 @@
     </style>
 </head>
 <body class="block">
-<h2>Страница администратора</h2>
 <h4 style="text-align: right;">
-    Добро пожаловать, ${sessionScope.user.userName}! Доступ с правами ${sessionScope.user.role}.
     <a href="${pageContext.request.contextPath}/logout"> Выйти </a></h4>
 <h2>Личный кабинет</h2>
 <c:set var="user" scope="request" value="${user}"/>
@@ -37,7 +35,8 @@
 </table>
 
 <h3 style="text-align: center;">
-    <a href="${pageContext.request.contextPath}/admin/all-orders"> Список всех заказов </a>
+    <a href="${pageContext.request.contextPath}/admin/all-orders">| Список всех заказов |</a>
+    <a href="${pageContext.request.contextPath}/admin/all-readers">| Список всех читателей |</a>
 </h3>
 
 </body>

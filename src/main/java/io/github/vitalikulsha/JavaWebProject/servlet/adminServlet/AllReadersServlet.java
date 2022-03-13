@@ -1,8 +1,9 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.adminServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
-import io.github.vitalikulsha.JavaWebProject.service.OrderService;
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
+import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
+import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
@@ -19,10 +20,10 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@WebServlet("/admin/all-orders")
-public class AllOrdersServlet extends HttpServlet {
+@WebServlet("/admin/all-readers")
+public class AllReadersServlet extends HttpServlet {
     private final static int ITEM_PER_PAGE = 5;
-    private Pagination<OrderDto> pagination;
+    private Pagination<User> pagination;
     private ServiceFactory factory;
 
     @Override
@@ -37,16 +38,16 @@ public class AllOrdersServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("AllOrdersServlet doGet() starting");
         HttpSession session = request.getSession();
-        OrderService orderService = factory.orderService();
+        UserService userService = factory.userService();
         String page = request.getParameter(Parameter.PAGE);
-        String url = session.getServletContext().getContextPath() + AdminPages.ALL_ORDERS.getPage() + "?";
-        List<OrderDto> allOrders =  orderService.getAll();
+        String url = session.getServletContext().getContextPath() + AdminPages.ALL_READERS.getPage() + "?";
+        List<User> allReaders =  userService.getUsersByRole(Role.USER);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
-        List<Integer> pages = pagination.getPageNumbers(allOrders);
-        allOrders = pagination.getItemsPerPage(allOrders, pageNumber);
+        List<Integer> pages = pagination.getPageNumbers(allReaders);
+        allReaders = pagination.getItemsPerPage(allReaders, pageNumber);
         request.setAttribute(Attribute.URL, url);
         request.setAttribute(Attribute.PAGES, pages);
-        request.setAttribute(Attribute.ALL_ORDERS, allOrders);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/admin/all-orders.jsp").forward(request, response);
+        request.setAttribute(Attribute.ALL_READERS, allReaders);
+        getServletContext().getRequestDispatcher("/WEB-INF/view/admin/all-readers.jsp").forward(request, response);
     }
 }

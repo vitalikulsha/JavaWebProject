@@ -30,7 +30,7 @@
         <th>Авторы</th>
         <td>
             <c:forEach var="author" items="${book.authors}">
-                ${author.firstName} ${author.lastName}<br>
+                [${author.id}] - ${author.firstName} ${author.lastName}<br>
             </c:forEach>
         </td>
     </tr>
@@ -44,7 +44,7 @@
     </tr>
     <tr>
         <th>Категория</th>
-        <td>${book.category.name}</td>
+        <td>[${book.category.id}] - ${book.category.name}</td>
     </tr>
     <tr>
         <th>Количество книг</th>

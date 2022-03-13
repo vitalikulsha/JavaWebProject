@@ -9,6 +9,9 @@ public class Attribute {
     public final static String URL = "url";
     public static final String ALL_ORDERS = "allOrders";
     public static final String READER = "reader";
+    public static final String ORDER = "order";
+    public static final String READER_ORDERS = "readerOrders";
+    public static final String ALL_READERS = "allReaders";
 
     private Attribute() {
     }

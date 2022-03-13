@@ -12,6 +12,9 @@ public class Parameter {
     public static final String BOOK_TITLE = "bookTitle";
     public static final String AUTHOR_NAME = "authorName";
     public static final String CATEGORY_NAME = "categoryName";
+    public static final String USER_ID = "userId";
+    public static final String RESERVE_STATUS = "reserveStatus";
+    public static final String ORDER_ID = "orderId";
 
     private Parameter() {
     }

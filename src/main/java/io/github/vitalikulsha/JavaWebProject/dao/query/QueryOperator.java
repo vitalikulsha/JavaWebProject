@@ -4,10 +4,7 @@ import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapper;
 import lombok.extern.slf4j.Slf4j;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,5 +79,22 @@ public class QueryOperator<T> {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public int executeUpdate(String sqlQuery, Object... params) {
+        try (Connection connection = connectionSource.createConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
+            setStatementParam(preparedStatement, params);
+            return preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    private void setStatementParam(PreparedStatement preparedStatement, Object... params) throws SQLException {
+        for (int i = 0; i < params.length; i++) {
+            preparedStatement.setObject(i + 1, params[i]);
+        }
     }
 }

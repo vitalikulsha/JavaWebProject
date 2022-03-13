@@ -7,7 +7,5 @@ public interface Service<T> {
 
     List<T> getAll();
 
-    T save(T t);
-
     void delete(T t);
 }

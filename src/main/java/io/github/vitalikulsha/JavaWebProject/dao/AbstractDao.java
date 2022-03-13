@@ -30,8 +30,8 @@ public abstract class AbstractDao<T> implements Dao<T>{
     }
 
     @Override
-    public T save(T t) {
-        return null;
+    public int save(T t) {
+        return 0;
     }
 
     @Override

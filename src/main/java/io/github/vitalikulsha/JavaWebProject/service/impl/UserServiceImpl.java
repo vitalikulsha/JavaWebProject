@@ -2,6 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.service.impl;
 
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 
@@ -25,6 +26,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUsersByRole(Role role){
+        return userDao.findByRole(role);
+    }
+
     public User save(User user) {
         return null;
     }

@@ -8,7 +8,7 @@ public interface Dao<T> {
 
     List<T> findAll();
 
-    T save(T t);
+    int save(T t);
 
     void delete(T t);
 }

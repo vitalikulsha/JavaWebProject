@@ -7,6 +7,10 @@
     <style>
         <%@include file='/WEB-INF/css/order-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
+
+
+
+
     </style>
 </head>
 <body class="block">
@@ -23,7 +27,7 @@
         <td>${user.id}</td>
     </tr>
     <tr>
-        <th>Имя пользователя</th>
+        <th>Имя читателя</th>
         <td>${user.userName}</td>
     </tr>
     <tr>
@@ -37,6 +41,24 @@
     <tr>
         <th>Права доступа</th>
         <td>${user.role}</td>
+    </tr>
+    <tr>
+        <th>Список заказов</th>
+        <td>
+            <table>
+                <tr>
+                    <th>Код заказа</th>
+                    <th>Название книги</th>
+                </tr>
+                <c:forEach var="order" items="${readerOrders}">
+                    <tr>
+                        <td>${order.id}</td>
+                        <td>${order.bookDto.title}</td>
+                    </tr>
+                </c:forEach>
+            </table>
+
+        </td>
     </tr>
 </table>
 </body>

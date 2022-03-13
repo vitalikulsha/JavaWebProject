@@ -33,34 +33,11 @@
         <td>${user.role}</td>
     </tr>
 </table>
-<table>
-    <tr>
-        <th style="text-align: center;">Список заказов</th>
-    </tr>
-</table>
-<table style="with: 900px; margin: auto;">
-    <thead>
-    <tr>
-        <th>Код заказа</th>
-        <th>Код книги</th>
-        <th>Название книги</th>
-        <th>Статус резерва</th>
-        <th>Статус одобрения</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="order" items="${userOrders}">
-        <tr>
-            <td>${order.id}</td>
-            <td>${order.bookDto.id}</td>
-            <td>${order.bookDto.title}</td>
-            <td>${order.reserveStatus}</td>
-            <td>${order.approved}</td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
 
-<h3 style="text-align: center;"><a href="${pageContext.request.contextPath}/reader/book-search"> Поиск книг </a></h3>
+<h3 style="text-align: center;">
+    <a href="${pageContext.request.contextPath}/reader/reader-orders">| Список заказов |</a>
+    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
+</h3>
+
 </body>
 </html>

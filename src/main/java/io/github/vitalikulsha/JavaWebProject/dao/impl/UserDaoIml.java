@@ -5,7 +5,10 @@ import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.UserSqlQuery;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
+import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
+
+import java.util.List;
 
 public class UserDaoIml extends AbstractDao<User> implements UserDao {
     private final static UserSqlQuery userSqlQuery = SqlQueryFactory.instance().userSqlQuery();
@@ -21,8 +24,8 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public int maxId() {
-        return queryOperator.executeSimpleQuery(userSqlQuery.FIND_MAX_ID);
+    public List<User> findByRole(Role role){
+        return queryOperator.executeEntityListQueryWithParam(userSqlQuery.FIND_BY_ROLE, role.name());
     }
 
     @Override

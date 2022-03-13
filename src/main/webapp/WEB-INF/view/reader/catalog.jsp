@@ -11,6 +11,11 @@
     </style>
 </head>
 <body class="block">
+<h4 style="text-align: right;">
+    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
+    <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+</h4>
 <h2>Выберите книгу из списка</h2>
 <h3>Для оформления заказа нажмите на код понравившейся книги</h3>
 <table style="with: 900px; margin: auto;">
@@ -24,31 +29,25 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="catalog" items="${catalog}">
+    <c:forEach var="book" items="${catalog}">
         <tr>
             <td>
-                <form action="${pageContext.request.contextPath}/reader/order" method="post">
-                    <input style="font-size: 15px; " type="submit" name="bookId" value="${catalog.id}">
+                <form action="${pageContext.request.contextPath}/reader/order" method="get">
+                    <input style="font-size: 15px; " type="submit" name="bookId" value="${book.id}">
                 </form>
             </td>
-            <td>${catalog.title}</td>
+            <td>${book.title}</td>
             <td>
-                <c:forEach var="author" items="${catalog.authors}">
+                <c:forEach var="author" items="${book.authors}">
                     ${author.firstName} ${author.lastName}<br>
                 </c:forEach>
             </td>
-            <td>${catalog.category.name}</td>
-            <td id="column">${catalog.number}</td>
+            <td>${book.category.name}</td>
+            <td id="column">${book.number}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<h4>Страница ${param.page}</h4>
-<nav style="font-size: 20px; text-align: center;">
-    <c:forEach var="page" items="${pages}">
-        <a href="${sessionScope.url}&page=${page}">| - ${page} - |</a>
-    </c:forEach>
-</nav>
-<h3 style="text-align: right;"><a href="${pageContext.request.contextPath}/reader/book-search"> Поиск книг </a></h3>
+<jsp:include page="/WEB-INF/view/template/pagination.jsp" />
 </body>
 </html>

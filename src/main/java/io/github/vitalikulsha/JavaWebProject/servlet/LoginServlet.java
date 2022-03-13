@@ -6,6 +6,8 @@ import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
+import io.github.vitalikulsha.JavaWebProject.util.page.AdminPages;
+import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -37,6 +39,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.debug("LoginServlet doPost() starting");
         HttpSession session = request.getSession();
+        String contextPath = session.getServletContext().getContextPath();
         String login = request.getParameter(Parameter.LOGIN);
         String password = request.getParameter(Parameter.PASSWORD);
         UserDao userDao = factory.userDao();
@@ -44,9 +47,9 @@ public class LoginServlet extends HttpServlet {
             User user = userDao.findByLogin(login);
             session.setAttribute(Attribute.USER, user);
             if (user.getRole() == Role.USER) {
-                response.sendRedirect("/library/reader");
+                response.sendRedirect(contextPath + UserPages.READER.getPage());
             } else if (user.getRole() == Role.ADMIN) {
-                response.sendRedirect("/library/admin");
+                response.sendRedirect(contextPath + AdminPages.ADMIN.getPage());
             }
         } else {
             session.setAttribute("user", null);

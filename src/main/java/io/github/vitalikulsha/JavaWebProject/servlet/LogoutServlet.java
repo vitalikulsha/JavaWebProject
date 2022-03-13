@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.servlet;
 
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @Slf4j
 @WebServlet("/logout")
@@ -25,10 +27,12 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         log.debug("LogoutServlet doGet() starting");
         HttpSession session = request.getSession();
-        session.removeAttribute(Attribute.USER);
-        response.sendRedirect("/library/login");
-        log.info("Session invalidated successfully.");
-        log.info("User logged out successfully.");
+        String contextPath = session.getServletContext().getContextPath();
+        Enumeration<String> attributes = session.getAttributeNames();
+        while (attributes.hasMoreElements()) {
+            session.removeAttribute(attributes.nextElement());
+        }
+        response.sendRedirect(contextPath + UserPages.LOGIN.getPage());
     }
 
 }
