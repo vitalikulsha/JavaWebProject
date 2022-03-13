@@ -36,7 +36,7 @@ public class ReaderServlet extends HttpServlet {
         OrderService orderService = factory.orderService();
         @SuppressWarnings("unchecked")
         List<OrderDto> orders = (List<OrderDto>) session.getAttribute(Attribute.USER_ORDERS);
-        if(orders == null){
+        if (orders == null) {
             orders = orderService.getOrderByUserId(user.getId());
         }
         request.setAttribute(Attribute.USER_ORDERS, orders);

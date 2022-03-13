@@ -2,12 +2,14 @@ package io.github.vitalikulsha.JavaWebProject.service;
 
 import io.github.vitalikulsha.JavaWebProject.service.impl.BookServiceImpl;
 import io.github.vitalikulsha.JavaWebProject.service.impl.OrderServiceImpl;
+import io.github.vitalikulsha.JavaWebProject.service.impl.UserServiceImpl;
 
 public class ServiceFactory {
     private final static ServiceFactory instance = new ServiceFactory();
 
     private final static BookService bookService = new BookServiceImpl();
     private final static OrderService orderService = new OrderServiceImpl();
+    private final static UserService userService = new UserServiceImpl();
 
     private ServiceFactory() {
     }
@@ -22,5 +24,9 @@ public class ServiceFactory {
 
     public OrderService orderService(){
         return orderService;
+    }
+
+    public UserService userService(){
+        return userService;
     }
 }

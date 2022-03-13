@@ -43,7 +43,7 @@
     </c:forEach>
     </tbody>
 </table>
-<h4>Сраница ${param.page}</h4>
+<h4>Страница ${param.page}</h4>
 <nav style="font-size: 20px; text-align: center;">
     <c:forEach var="page" items="${pages}">
         <a href="${sessionScope.url}&page=${page}">| - ${page} - |</a>

@@ -22,8 +22,8 @@ import java.util.List;
 @WebServlet("/reader/catalog")
 public class CatalogServlet extends HttpServlet {
     private final static int ITEM_PER_PAGE = 5;
-    private ServiceFactory factory;
     private Pagination<BookDto> pagination;
+    private ServiceFactory factory;
 
     @Override
     public void init() throws ServletException {

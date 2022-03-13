@@ -5,7 +5,10 @@ public enum AdminPages{
     LOGOUT("/logout"),
     REGISTER("/register"),
     NOT_FOUND("/not-found"),
-    ADMIN("/admin");
+    ADMIN("/admin"),
+    ALL_ORDERS("/admin/all-orders"),
+    BOOK_INFO("/admin/book-info"),
+    READER_INFO("/admin/reader-info");
 
     private final String path;
 

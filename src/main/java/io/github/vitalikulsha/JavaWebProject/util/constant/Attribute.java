@@ -7,6 +7,8 @@ public class Attribute {
     public static final String USER_ORDERS = "userOrders";
     public final static String PAGES = "pages";
     public final static String URL = "url";
+    public static final String ALL_ORDERS = "allOrders";
+    public static final String READER = "reader";
 
     private Attribute() {
     }

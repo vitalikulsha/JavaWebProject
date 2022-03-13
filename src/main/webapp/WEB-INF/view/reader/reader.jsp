@@ -8,12 +8,11 @@
         <%@include file='/WEB-INF/css/reader-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
 
+
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/logout"> Выйти </a>
-</h4>
+<h4 style="text-align: right;"><a href="${pageContext.request.contextPath}/logout"> Выйти </a></h4>
 <h2>Личный кабинет</h2>
 <c:set var="user" scope="request" value="${user}"/>
 <table>
@@ -34,10 +33,13 @@
         <td>${user.role}</td>
     </tr>
 </table>
-<table><tr><th style="text-align: center;">Список заказов</th></tr></table>
+<table>
+    <tr>
+        <th style="text-align: center;">Список заказов</th>
+    </tr>
+</table>
 <table style="with: 900px; margin: auto;">
     <thead>
-
     <tr>
         <th>Код заказа</th>
         <th>Код книги</th>
