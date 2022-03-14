@@ -11,7 +11,6 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/admin/all-orders"> Список заказов </a>
     <a href="${pageContext.request.contextPath}/admin"> Личный кабинет</a>
     <a href="${pageContext.request.contextPath}/logout"> Выйти </a>
 </h4>

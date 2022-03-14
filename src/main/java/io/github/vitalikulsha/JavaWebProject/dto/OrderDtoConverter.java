@@ -22,7 +22,6 @@ public class OrderDtoConverter implements DtoConverter<OrderDto, Order> {
                 .fixBookDto(bookDto)
                 .fixUser(userDto)
                 .fixReserveStatus(order.getReserveStatus())
-                .fixReserveStatus(order.getReserveStatus())
                 .fixApproved(order.getApproved())
                 .build();
     }

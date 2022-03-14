@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.filter;
 
+import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
@@ -50,17 +51,13 @@ public class AccessFilter implements Filter {
         HttpSession session = request.getSession();
         String servletPath = request.getServletPath();
         log.debug("Servlet path = " + servletPath);
-        User user = (User) session.getAttribute(Attribute.USER);
+        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
         if (servletPath.equals(UserPages.LOGOUT.getPage())) {
             chain.doFilter(servletRequest, servletResponse);
             return;
         }
         log.info("Session attribute user = " + session.getAttribute(Attribute.USER));
-        log.info("User = " + user);
-        log.debug("isAdminPage = " + isAdminPage(servletPath));
-        log.debug("isUserPage = " + isUserPage(servletPath));
-
-
+        log.debug("isAdminPage = " + isAdminPage(servletPath) + "isUserPage = " + isUserPage(servletPath));
         if (isAdminPage(servletPath) && isUserPage(servletPath) && isGuestPage(servletPath)) {
             log.debug("Is method isAdminPage && isUserPage");
             if (user == null) {
@@ -101,7 +98,7 @@ public class AccessFilter implements Filter {
         return rolePages.get(Role.GUEST).contains(servletPath);
     }
 
-    private boolean isAuthorized(String servletPath, User user) {
+    private boolean isAuthorized(String servletPath, UserDto user) {
         return (isAdminPage(servletPath) && user.getRole() == Role.ADMIN)
                 || (isUserPage(servletPath) && user.getRole() == Role.USER);
     }

@@ -8,5 +8,5 @@ import java.util.List;
 public interface OrderService extends Service<OrderDto> {
     List<OrderDto> getOrdersByUserId(int userId);
 
-    boolean applyForBook(int bookId, int userId, ReserveStatus reserveStatus);
+    boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus);
 }

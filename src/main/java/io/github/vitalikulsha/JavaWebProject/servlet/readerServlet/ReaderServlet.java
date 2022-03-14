@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
 import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
+import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
@@ -40,7 +41,7 @@ public class ReaderServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String servletPath = request.getServletPath();
         if (servletPath.equals(UserPages.READER_ORDERS.getPage())) {
-            User user = (User) session.getAttribute(Attribute.USER);
+            UserDto user = (UserDto) session.getAttribute(Attribute.USER);
             String page = request.getParameter(Parameter.PAGE);
             OrderService orderService = factory.orderService();
             List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());

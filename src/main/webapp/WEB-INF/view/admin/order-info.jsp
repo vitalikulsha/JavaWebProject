@@ -25,13 +25,13 @@
     <tr>
         <th>Код книги</th>
         <td>
-            <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${order.booDto.id}"> ${order.booDto.id} </a>
+            <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${order.bookDto.id}"> ${order.bookDto.id} </a>
         </td>
     </tr>
     <tr>
         <th>Код пользователя</th>
         <td>
-            <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${order.userDto.id}"> ${order.userDto.id} </a>
+            <a href="${pageContext.request.contextPath}/admin/reader-info?readerId=${order.userDto.id}"> ${order.userDto.id} </a>
         </td>
     </tr>
     <tr>
@@ -43,8 +43,5 @@
         <td>${order.approved}</td>
     </tr>
 </table>
-
-<jsp:include page="/WEB-INF/view/template/pagination.jsp" />
-
 </body>
 </html>

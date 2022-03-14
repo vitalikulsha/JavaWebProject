@@ -31,21 +31,15 @@
     <tbody>
     <c:forEach var="order" items="${allOrders}">
         <tr>
-            <td>${order.id}</td>
             <td>
-                <form action="${pageContext.request.contextPath}/admin/book-info" method="post">
-                    <input style="font-size: 15px; " type="submit" name="bookId" value="${order.bookDto.id}">
-                </form>
+                <a href="${pageContext.request.contextPath}/admin/order-info?orderId=${order.id}"> ${order.id} </a>
             </td>
+            <td>${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>
             <td>${order.reserveStatus.title}</td>
             <td>${order.approved}</td>
             <td>${order.bookDto.number}</td>
-            <td>
-                <form action="${pageContext.request.contextPath}/admin/reader-info" method="post">
-                    <input style="font-size: 15px; " type="submit" name="readerId" value="${order.userDto.id}">
-                </form>
-            </td>
+            <td>${order.userDto.id}</td>
         </tr>
     </c:forEach>
     </tbody>

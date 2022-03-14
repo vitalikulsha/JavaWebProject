@@ -32,9 +32,7 @@
     <c:forEach var="book" items="${catalog}">
         <tr>
             <td>
-                <form action="${pageContext.request.contextPath}/reader/order" method="get">
-                    <input style="font-size: 15px; " type="submit" name="bookId" value="${book.id}">
-                </form>
+                <a href="${pageContext.request.contextPath}/reader/order?bookId=${book.id}"> ${book.id} </a>
             </td>
             <td>${book.title}</td>
             <td>

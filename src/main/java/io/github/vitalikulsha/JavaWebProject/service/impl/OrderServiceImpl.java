@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean applyForBook(int bookId, int userId, ReserveStatus reserveStatus) {
+    public boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus) {
         Order order = new Order(0, bookId, userId, reserveStatus, false);
         return orderDao.save(order) == 1;
     }

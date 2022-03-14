@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.adminServlet;
 
+import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
@@ -23,7 +24,7 @@ import java.util.List;
 @WebServlet("/admin/all-readers")
 public class AllReadersServlet extends HttpServlet {
     private final static int ITEM_PER_PAGE = 5;
-    private Pagination<User> pagination;
+    private Pagination<UserDto> pagination;
     private ServiceFactory factory;
 
     @Override
@@ -41,7 +42,7 @@ public class AllReadersServlet extends HttpServlet {
         UserService userService = factory.userService();
         String page = request.getParameter(Parameter.PAGE);
         String url = session.getServletContext().getContextPath() + AdminPages.ALL_READERS.getPage() + "?";
-        List<User> allReaders =  userService.getUsersByRole(Role.USER);
+        List<UserDto> allReaders =  userService.getUsersByRole(Role.USER);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = pagination.getPageNumbers(allReaders);
         allReaders = pagination.getItemsPerPage(allReaders, pageNumber);

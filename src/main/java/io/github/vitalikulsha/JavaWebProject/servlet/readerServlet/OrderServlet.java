@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
 import io.github.vitalikulsha.JavaWebProject.dto.BookDto;;
+import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
@@ -49,12 +50,12 @@ public class OrderServlet extends HttpServlet {
         HttpSession session = request.getSession();
         OrderService orderService = factory.orderService();
         BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
-        User user = (User) session.getAttribute(Attribute.USER);
+        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
         ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
         log.info("bookId: " + bookDto.getId() + "; userId: " + user.getId() + "; reserveStatus: " + reserveStatus);
         session.setAttribute(Attribute.USER, user);
         session.setAttribute(Attribute.BOOK, bookDto);
-        orderService.applyForBook(bookDto.getId(), user.getId(), reserveStatus);
+        orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
         String contextPath = session.getServletContext().getContextPath();
         response.sendRedirect(contextPath + UserPages.READER_ORDERS.getPage());
     }

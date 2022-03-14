@@ -13,6 +13,7 @@
 <body class="block">
 <h4 style="text-align: right;">
     <a href="${pageContext.request.contextPath}/reader"> Личный кабинет</a>
+    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
 <h2>Поиск книг</h2>
 <table>

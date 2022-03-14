@@ -11,11 +11,11 @@
 
 
 
+
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/admin/all-orders"> Список заказов </a>
     <a href="${pageContext.request.contextPath}/admin"> Личный кабинет</a>
     <a href="${pageContext.request.contextPath}/logout"> Выйти </a>
 </h4>
@@ -42,24 +42,28 @@
         <th>Права доступа</th>
         <td>${user.role}</td>
     </tr>
-    <tr>
-        <th>Список заказов</th>
-        <td>
-            <table>
-                <tr>
-                    <th>Код заказа</th>
-                    <th>Название книги</th>
-                </tr>
-                <c:forEach var="order" items="${readerOrders}">
-                    <tr>
-                        <td>${order.id}</td>
-                        <td>${order.bookDto.title}</td>
-                    </tr>
-                </c:forEach>
-            </table>
-
-        </td>
-    </tr>
 </table>
+<h3 style="text-align: center;">Список заказов</h3>
+<table>
+    <tr>
+        <th>Код заказа</th>
+        <th>Название книги</th>
+        <th>Статус резерва</th>
+        <th>Статус одобрения</th>
+    </tr>
+    <c:forEach var="order" items="${readerOrders}">
+        <tr>
+            <td>
+                <a href="${pageContext.request.contextPath}/admin/order-info?orderId=${order.id}"> ${order.id} </a>
+            </td>
+            <td>${order.bookDto.title}</td>
+            <td>${order.reserveStatus.title}</td>
+            <td>${order.approved}</td>
+        </tr>
+    </c:forEach>
+</table>
+
+<jsp:include page="/WEB-INF/view/template/pagination.jsp" />
+
 </body>
 </html>

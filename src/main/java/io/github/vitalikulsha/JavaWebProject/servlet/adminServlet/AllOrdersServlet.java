@@ -36,10 +36,10 @@ public class AllOrdersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("AllOrdersServlet doGet() starting");
-        HttpSession session = request.getSession();
+//        HttpSession session = request.getSession();
         OrderService orderService = factory.orderService();
         String page = request.getParameter(Parameter.PAGE);
-        String url = session.getServletContext().getContextPath() + AdminPages.ALL_ORDERS.getPage() + "?";
+        String url = request.getServletContext().getContextPath() + AdminPages.ALL_ORDERS.getPage() + "?";
         List<OrderDto> allOrders =  orderService.getAll();
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = pagination.getPageNumbers(allOrders);
