@@ -28,6 +28,7 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.debug("AdminServlet doGet() starting");
+
         String servletPath = request.getServletPath();
         log.info("servletPath: " + servletPath);
         Command command = commandFactory.getCommand(servletPath);
