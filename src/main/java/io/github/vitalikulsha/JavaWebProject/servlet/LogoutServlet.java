@@ -1,7 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet;
 
-import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
-import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
+import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -32,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
         while (attributes.hasMoreElements()) {
             session.removeAttribute(attributes.nextElement());
         }
-        response.sendRedirect(contextPath + UserPages.LOGIN.getPage());
+        response.sendRedirect(contextPath + UserPath.LOGIN.getPath());
     }
 
 }

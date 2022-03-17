@@ -6,7 +6,6 @@ import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
-import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;

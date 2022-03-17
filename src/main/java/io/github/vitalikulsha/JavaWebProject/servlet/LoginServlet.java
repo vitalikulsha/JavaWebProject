@@ -1,15 +1,13 @@
 package io.github.vitalikulsha.JavaWebProject.servlet;
 
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
-import io.github.vitalikulsha.JavaWebProject.util.page.AdminPages;
-import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
+import io.github.vitalikulsha.JavaWebProject.util.path.AdminPath;
+import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -49,9 +47,9 @@ public class LoginServlet extends HttpServlet {
             UserDto user = userService.getByLogin(login);
             session.setAttribute(Attribute.USER, user);
             if (user.getRole() == Role.USER) {
-                response.sendRedirect(contextPath + UserPages.READER.getPage());
+                response.sendRedirect(contextPath + UserPath.READER.getPath());
             } else if (user.getRole() == Role.ADMIN) {
-                response.sendRedirect(contextPath + AdminPages.ADMIN.getPage());
+                response.sendRedirect(contextPath + AdminPath.ADMIN.getPath());
             }
         } else {
             session.setAttribute(Attribute.USER, null);

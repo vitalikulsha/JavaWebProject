@@ -2,13 +2,12 @@ package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
 import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
-import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
+import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -40,7 +39,7 @@ public class ReaderServlet extends HttpServlet {
         log.debug("ReaderServlet doGet() starting");
         HttpSession session = request.getSession();
         String servletPath = request.getServletPath();
-        if (servletPath.equals(UserPages.READER_ORDERS.getPage())) {
+        if (servletPath.equals(UserPath.READER_ORDERS.getPath())) {
             UserDto user = (UserDto) session.getAttribute(Attribute.USER);
             String page = request.getParameter(Parameter.PAGE);
             OrderService orderService = factory.orderService();

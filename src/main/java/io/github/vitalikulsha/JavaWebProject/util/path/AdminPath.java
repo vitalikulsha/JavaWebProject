@@ -1,6 +1,6 @@
-package io.github.vitalikulsha.JavaWebProject.util.page;
+package io.github.vitalikulsha.JavaWebProject.util.path;
 
-public enum AdminPages{
+public enum AdminPath {
     LOGIN("/login"),
     LOGOUT("/logout"),
     REGISTER("/register"),
@@ -14,11 +14,11 @@ public enum AdminPages{
 
     private final String path;
 
-    AdminPages(String path) {
+    AdminPath(String path) {
         this.path = path;
     }
 
-    public String getPage() {
+    public String getPath() {
         return path;
     }
 }

@@ -22,24 +22,15 @@
     <tr>
         <th>Код читателя</th>
         <th>Имя читателя</th>
-        <th>Список заказов</th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="reader" items="${allReaders}">
         <tr>
             <td>
-                <form action="${pageContext.request.contextPath}/admin/reader-info" method="post">
-                    <input style="font-size: 15px; " type="submit" name="readerId" value="${reader.id}">
-                </form>
+                <a href="${pageContext.request.contextPath}/admin/reader-info?readerId=${reader.id}"> ${reader.id} </a>
             </td>
             <td>${reader.userName}</td>
-                <c:forEach var="order" items="${readerOrders}">
-                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
-                        <input style="font-size: 15px; " type="submit" name="orderId" value="${order.id}">
-                    </form>
-                </c:forEach>
-            </td>
         </tr>
     </c:forEach>
     </tbody>

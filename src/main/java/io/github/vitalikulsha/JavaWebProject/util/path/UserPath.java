@@ -1,6 +1,6 @@
-package io.github.vitalikulsha.JavaWebProject.util.page;
+package io.github.vitalikulsha.JavaWebProject.util.path;
 
-public enum UserPages{
+public enum UserPath {
     LOGIN("/login"),
     LOGOUT("/logout"),
     REGISTER("/register"),
@@ -11,13 +11,13 @@ public enum UserPages{
     ORDER("/reader/order"),
     READER_ORDERS("/reader/reader-orders");
 
-    private final String page;
+    private final String path;
 
-    UserPages(String page) {
-        this.page = page;
+    UserPath(String path) {
+        this.path = path;
     }
 
-    public String getPage() {
-        return page;
+    public String getPath() {
+        return path;
     }
 }

@@ -3,13 +3,12 @@ package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 import io.github.vitalikulsha.JavaWebProject.dto.BookDto;;
 import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
-import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
+import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -57,6 +56,6 @@ public class OrderServlet extends HttpServlet {
         session.setAttribute(Attribute.BOOK, bookDto);
         orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
         String contextPath = session.getServletContext().getContextPath();
-        response.sendRedirect(contextPath + UserPages.READER_ORDERS.getPage());
+        response.sendRedirect(contextPath + UserPath.READER_ORDERS.getPath());
     }
 }

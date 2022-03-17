@@ -2,11 +2,10 @@ package io.github.vitalikulsha.JavaWebProject.filter;
 
 import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
-import io.github.vitalikulsha.JavaWebProject.util.page.AdminPages;
-import io.github.vitalikulsha.JavaWebProject.util.page.GuestPages;
-import io.github.vitalikulsha.JavaWebProject.util.page.UserPages;
+import io.github.vitalikulsha.JavaWebProject.util.path.AdminPath;
+import io.github.vitalikulsha.JavaWebProject.util.path.GuestPath;
+import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
@@ -26,18 +25,18 @@ public class AccessFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         log.debug("AccessFilter initialization");
-        List<String> userPages = Arrays.stream(UserPages.values())
-                .map(UserPages::getPage)
+        List<String> userPages = Arrays.stream(UserPath.values())
+                .map(UserPath::getPath)
                 .collect(Collectors.toList());
         rolePages.put(Role.USER, userPages);
 
-        List<String> adminPath = Arrays.stream(AdminPages.values())
-                .map(AdminPages::getPage)
+        List<String> adminPath = Arrays.stream(AdminPath.values())
+                .map(AdminPath::getPath)
                 .collect(Collectors.toList());
         rolePages.put(Role.ADMIN, adminPath);
 
-        List<String> guestPath = Arrays.stream(GuestPages.values())
-                .map(GuestPages::getPage)
+        List<String> guestPath = Arrays.stream(GuestPath.values())
+                .map(GuestPath::getPage)
                 .collect(Collectors.toList());
         rolePages.put(Role.GUEST, guestPath);
     }
@@ -52,7 +51,7 @@ public class AccessFilter implements Filter {
         String servletPath = request.getServletPath();
         log.debug("Servlet path = " + servletPath);
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
-        if (servletPath.equals(UserPages.LOGOUT.getPage())) {
+        if (servletPath.equals(UserPath.LOGOUT.getPath())) {
             chain.doFilter(servletRequest, servletResponse);
             return;
         }
