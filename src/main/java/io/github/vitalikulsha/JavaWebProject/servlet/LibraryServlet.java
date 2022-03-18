@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.servlet.adminServlet;
+package io.github.vitalikulsha.JavaWebProject.servlet;
 
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandFactory;
@@ -17,7 +17,7 @@ import java.io.IOException;
         "/admin/all-orders", "/admin/all-readers",
         "/reader", "/reader/reader-orders", "/reader/book-search", "/reader/catalog", "/reader/order",
         "/logout"})
-public class AdminServlet extends HttpServlet {
+public class LibraryServlet extends HttpServlet {
     private CommandFactory commandFactory;
 
     @Override
