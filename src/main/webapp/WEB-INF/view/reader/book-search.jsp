@@ -17,7 +17,7 @@
 </h4>
 <h2>Поиск книг</h2>
 <table>
-    <form action="${pageContext.request.contextPath}/reader/order" method="post">
+    <form action="${pageContext.request.contextPath}/reader/order" method="get">
         <tr>
             <th>Найти книги по коду:</th>
             <td>

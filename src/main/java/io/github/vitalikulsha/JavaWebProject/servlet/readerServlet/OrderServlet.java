@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
+import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
-import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
@@ -48,14 +48,12 @@ public class OrderServlet extends HttpServlet {
         log.debug("OrderServlet doPost() starting");
         HttpSession session = request.getSession();
         OrderService orderService = factory.orderService();
+        ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
         BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
-        ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
         log.info("bookId: " + bookDto.getId() + "; userId: " + user.getId() + "; reserveStatus: " + reserveStatus);
-        session.setAttribute(Attribute.USER, user);
-        session.setAttribute(Attribute.BOOK, bookDto);
         orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
-        String contextPath = session.getServletContext().getContextPath();
+        String contextPath = request.getContextPath();
         response.sendRedirect(contextPath + UserPath.READER_ORDERS.getPath());
     }
 }

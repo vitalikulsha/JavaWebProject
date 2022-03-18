@@ -14,7 +14,8 @@ import java.io.IOException;
 
 @Slf4j
 @WebServlet(urlPatterns = {"/admin", "/admin/book-info", "/admin/reader-info", "/admin/order-info",
-        "/admin/all-orders", "/admin/all-readers", "/reader", "/reader/reader-orders", "/reader/book-search"})
+        "/admin/all-orders", "/admin/all-readers",
+        "/reader", "/reader/reader-orders", "/reader/book-search", "/reader/catalog"})
 public class AdminServlet extends HttpServlet {
     private CommandFactory commandFactory;
 

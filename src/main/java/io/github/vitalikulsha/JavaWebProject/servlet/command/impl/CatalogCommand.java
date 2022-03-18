@@ -1,48 +1,33 @@
-package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
+package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
+import io.github.vitalikulsha.JavaWebProject.config.ConfigParameter;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
+import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
+import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandInfo;
+import io.github.vitalikulsha.JavaWebProject.servlet.command.RoutingType;
 import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
-import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.List;
 
-@Slf4j
-@WebServlet("/reader/catalog")
-public class CatalogServlet extends HttpServlet {
-    private final static int ITEM_PER_PAGE = 5;
-    private Pagination<BookDto> pagination;
-    private ServiceFactory factory;
+public class CatalogCommand implements Command {
 
     @Override
-    public void init() throws ServletException {
-        factory = ServiceFactory.instance();
-        pagination = new Pagination<>(ITEM_PER_PAGE);
-        log.debug("BookCatalogServlet starting");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        log.debug("BookCatalogServlet doGet() starting");
-        HttpSession session = request.getSession();
-        BookService bookService = factory.bookService();
+    public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
+        BookService bookService = ServiceFactory.instance().bookService();
+        Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         List<BookDto> catalog;
         String bookTitle = request.getParameter(Parameter.BOOK_TITLE);
         String authorName = request.getParameter(Parameter.AUTHOR_NAME);
         String categoryName = request.getParameter(Parameter.CATEGORY_NAME);
         String page = request.getParameter(Parameter.PAGE);
-        String url = session.getServletContext().getContextPath() + request.getServletPath() + "?";
+        String url = request.getContextPath() + request.getServletPath() + "?";
         if (bookTitle != null) {
             url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
             catalog = bookService.getBooksByTitle(bookTitle);
@@ -61,6 +46,6 @@ public class CatalogServlet extends HttpServlet {
         request.setAttribute(Attribute.URL, url);
         request.setAttribute(Attribute.PAGES, pages);
         request.setAttribute(Attribute.CATALOG, catalog);
-        getServletContext().getRequestDispatcher("/WEB-INF/view/reader/catalog.jsp").forward(request, response);
+        return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
     }
 }

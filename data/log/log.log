@@ -25976,3 +25976,502 @@
 2022-03-17 22:02:35 DEBUG [qtp1657509754-20]: The EncodingFilter has worked
 2022-03-17 22:02:42 DEBUG [Thread-1]: EncodingFilter destruction
 2022-03-17 22:02:42 DEBUG [Thread-1]: AccessFilter destruction
+2022-03-18 11:03:52 DEBUG [main]: AccessFilter initialization
+2022-03-18 11:03:52 DEBUG [main]: EncodingFilter initialization
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: LoginServlet starting
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: AccessFilter method doFilter() starting
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: Servlet path = /login
+2022-03-18 11:04:04 INFO  [qtp1892463551-23]: Session attribute user = null
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: isAdminPage = trueisUserPage = true
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: Is method isAdminPage && isUserPage
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: Is user == null
+2022-03-18 11:04:04 DEBUG [qtp1892463551-23]: LoginServlet doGet() starting
+2022-03-18 11:04:06 DEBUG [qtp1892463551-23]: The EncodingFilter has worked
+2022-03-18 11:04:06 DEBUG [qtp1892463551-23]: The AccessFilter has worked
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: AccessFilter method doFilter() starting
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: Servlet path = /login
+2022-03-18 11:04:09 INFO  [qtp1892463551-21]: Session attribute user = null
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: isAdminPage = trueisUserPage = true
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: Is method isAdminPage && isUserPage
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: Is user == null
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: LoginServlet doPost() starting
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: The EncodingFilter has worked
+2022-03-18 11:04:09 DEBUG [qtp1892463551-21]: The AccessFilter has worked
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: AdminServlet starting
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: AccessFilter method doFilter() starting
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: Servlet path = /reader
+2022-03-18 11:04:09 INFO  [qtp1892463551-19]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: isAdminPage = falseisUserPage = true
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: User not null and isAuthorized
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: processRequest starting
+2022-03-18 11:04:09 INFO  [qtp1892463551-19]: servletPath: /reader
+2022-03-18 11:04:09 INFO  [qtp1892463551-19]: Resource path: /WEB-INF/view/reader/reader.jsp
+2022-03-18 11:04:09 DEBUG [qtp1892463551-19]: The EncodingFilter has worked
+2022-03-18 11:04:13 DEBUG [qtp1892463551-22]: AccessFilter method doFilter() starting
+2022-03-18 11:04:13 DEBUG [qtp1892463551-22]: Servlet path = /reader/book-search
+2022-03-18 11:04:13 INFO  [qtp1892463551-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:04:13 DEBUG [qtp1892463551-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:04:13 DEBUG [qtp1892463551-22]: User not null and isAuthorized
+2022-03-18 11:04:13 DEBUG [qtp1892463551-22]: processRequest starting
+2022-03-18 11:04:13 INFO  [qtp1892463551-22]: servletPath: /reader/book-search
+2022-03-18 11:04:13 INFO  [qtp1892463551-22]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:04:14 DEBUG [qtp1892463551-22]: The EncodingFilter has worked
+2022-03-18 11:04:18 DEBUG [qtp1892463551-19]: BookCatalogServlet starting
+2022-03-18 11:04:18 DEBUG [qtp1892463551-19]: AccessFilter method doFilter() starting
+2022-03-18 11:04:18 DEBUG [qtp1892463551-19]: Servlet path = /reader/catalog
+2022-03-18 11:04:18 INFO  [qtp1892463551-19]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:04:18 DEBUG [qtp1892463551-19]: isAdminPage = falseisUserPage = true
+2022-03-18 11:04:18 DEBUG [qtp1892463551-19]: User not null and isAuthorized
+2022-03-18 11:04:18 DEBUG [qtp1892463551-19]: BookCatalogServlet doGet() starting
+2022-03-18 11:04:20 DEBUG [qtp1892463551-19]: The EncodingFilter has worked
+2022-03-18 11:04:23 DEBUG [qtp1892463551-22]: AccessFilter method doFilter() starting
+2022-03-18 11:04:23 DEBUG [qtp1892463551-22]: Servlet path = /reader/catalog
+2022-03-18 11:04:23 INFO  [qtp1892463551-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:04:23 DEBUG [qtp1892463551-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:04:23 DEBUG [qtp1892463551-22]: User not null and isAuthorized
+2022-03-18 11:04:23 DEBUG [qtp1892463551-22]: BookCatalogServlet doGet() starting
+2022-03-18 11:04:23 DEBUG [qtp1892463551-22]: The EncodingFilter has worked
+2022-03-18 11:04:30 DEBUG [qtp1892463551-19]: AccessFilter method doFilter() starting
+2022-03-18 11:04:30 DEBUG [qtp1892463551-19]: Servlet path = /reader/catalog
+2022-03-18 11:04:30 INFO  [qtp1892463551-19]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:04:30 DEBUG [qtp1892463551-19]: isAdminPage = falseisUserPage = true
+2022-03-18 11:04:30 DEBUG [qtp1892463551-19]: User not null and isAuthorized
+2022-03-18 11:04:30 DEBUG [qtp1892463551-19]: BookCatalogServlet doGet() starting
+2022-03-18 11:04:31 DEBUG [qtp1892463551-19]: The EncodingFilter has worked
+2022-03-18 11:04:35 DEBUG [qtp1892463551-22]: OrderServlet starting
+2022-03-18 11:04:35 DEBUG [qtp1892463551-22]: AccessFilter method doFilter() starting
+2022-03-18 11:04:35 DEBUG [qtp1892463551-22]: Servlet path = /reader/order
+2022-03-18 11:04:35 INFO  [qtp1892463551-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:04:35 DEBUG [qtp1892463551-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:04:35 DEBUG [qtp1892463551-22]: User not null and isAuthorized
+2022-03-18 11:04:35 DEBUG [qtp1892463551-22]: OrderServlet doGet() starting
+2022-03-18 11:04:36 DEBUG [qtp1892463551-22]: The EncodingFilter has worked
+2022-03-18 11:05:00 DEBUG [Thread-1]: EncodingFilter destruction
+2022-03-18 11:05:00 DEBUG [Thread-1]: AccessFilter destruction
+2022-03-18 11:12:12 DEBUG [main]: AccessFilter initialization
+2022-03-18 11:12:12 DEBUG [main]: EncodingFilter initialization
+2022-03-18 11:12:17 DEBUG [PathWatcher@46c093b4]: EncodingFilter destruction
+2022-03-18 11:12:17 DEBUG [PathWatcher@46c093b4]: AccessFilter destruction
+2022-03-18 11:12:22 DEBUG [PathWatcher@46c093b4]: AccessFilter initialization
+2022-03-18 11:12:22 DEBUG [PathWatcher@46c093b4]: EncodingFilter initialization
+2022-03-18 11:12:22 DEBUG [qtp1191732945-22]: AdminServlet starting
+2022-03-18 11:12:22 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:22 DEBUG [qtp1191732945-22]: Servlet path = /reader/catalog
+2022-03-18 11:12:22 INFO  [qtp1191732945-22]: Session attribute user = null
+2022-03-18 11:12:22 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:22 DEBUG [qtp1191732945-22]: No rights: redirecting login
+2022-03-18 11:12:22 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: LoginServlet starting
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: Servlet path = /login
+2022-03-18 11:12:25 INFO  [qtp1191732945-24]: Session attribute user = null
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: isAdminPage = trueisUserPage = true
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: Is method isAdminPage && isUserPage
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: Is user == null
+2022-03-18 11:12:25 DEBUG [qtp1191732945-24]: LoginServlet doGet() starting
+2022-03-18 11:12:27 DEBUG [qtp1191732945-24]: The AccessFilter has worked
+2022-03-18 11:12:27 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: Servlet path = /login
+2022-03-18 11:12:29 INFO  [qtp1191732945-22]: Session attribute user = null
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: isAdminPage = trueisUserPage = true
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: Is method isAdminPage && isUserPage
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: Is user == null
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: LoginServlet doPost() starting
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: The AccessFilter has worked
+2022-03-18 11:12:29 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:29 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:29 DEBUG [qtp1191732945-24]: Servlet path = /reader
+2022-03-18 11:12:29 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:29 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:29 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:12:29 DEBUG [qtp1191732945-24]: processRequest starting
+2022-03-18 11:12:29 INFO  [qtp1191732945-24]: servletPath: /reader
+2022-03-18 11:12:29 INFO  [qtp1191732945-24]: Resource path: /WEB-INF/view/reader/reader.jsp
+2022-03-18 11:12:30 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:12:33 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:33 DEBUG [qtp1191732945-22]: Servlet path = /reader/book-search
+2022-03-18 11:12:33 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:33 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:33 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:12:33 DEBUG [qtp1191732945-22]: processRequest starting
+2022-03-18 11:12:33 INFO  [qtp1191732945-22]: servletPath: /reader/book-search
+2022-03-18 11:12:33 INFO  [qtp1191732945-22]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:12:33 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:35 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:35 DEBUG [qtp1191732945-24]: Servlet path = /reader/catalog
+2022-03-18 11:12:35 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:35 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:35 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:12:35 DEBUG [qtp1191732945-24]: processRequest starting
+2022-03-18 11:12:35 INFO  [qtp1191732945-24]: servletPath: /reader/catalog
+2022-03-18 11:12:35 INFO  [qtp1191732945-24]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:12:36 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:12:38 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:38 DEBUG [qtp1191732945-22]: Servlet path = /reader/catalog
+2022-03-18 11:12:38 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:38 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:38 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:12:38 DEBUG [qtp1191732945-22]: processRequest starting
+2022-03-18 11:12:38 INFO  [qtp1191732945-22]: servletPath: /reader/catalog
+2022-03-18 11:12:38 INFO  [qtp1191732945-22]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:12:38 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:40 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:40 DEBUG [qtp1191732945-24]: Servlet path = /reader/catalog
+2022-03-18 11:12:40 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:40 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:40 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:12:40 DEBUG [qtp1191732945-24]: processRequest starting
+2022-03-18 11:12:40 INFO  [qtp1191732945-24]: servletPath: /reader/catalog
+2022-03-18 11:12:40 INFO  [qtp1191732945-24]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:12:40 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:12:43 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:43 DEBUG [qtp1191732945-22]: Servlet path = /reader/book-search
+2022-03-18 11:12:43 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:43 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:43 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:12:43 DEBUG [qtp1191732945-22]: processRequest starting
+2022-03-18 11:12:43 INFO  [qtp1191732945-22]: servletPath: /reader/book-search
+2022-03-18 11:12:43 INFO  [qtp1191732945-22]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:12:43 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:46 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:46 DEBUG [qtp1191732945-24]: Servlet path = /reader/catalog
+2022-03-18 11:12:46 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:46 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:46 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:12:46 DEBUG [qtp1191732945-24]: processRequest starting
+2022-03-18 11:12:46 INFO  [qtp1191732945-24]: servletPath: /reader/catalog
+2022-03-18 11:12:46 INFO  [qtp1191732945-24]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:12:46 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:12:49 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:49 DEBUG [qtp1191732945-22]: Servlet path = /reader/book-search
+2022-03-18 11:12:49 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:49 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:49 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:12:49 DEBUG [qtp1191732945-22]: processRequest starting
+2022-03-18 11:12:49 INFO  [qtp1191732945-22]: servletPath: /reader/book-search
+2022-03-18 11:12:49 INFO  [qtp1191732945-22]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:12:49 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:53 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:53 DEBUG [qtp1191732945-24]: Servlet path = /reader/catalog
+2022-03-18 11:12:53 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:53 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:53 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:12:53 DEBUG [qtp1191732945-24]: processRequest starting
+2022-03-18 11:12:53 INFO  [qtp1191732945-24]: servletPath: /reader/catalog
+2022-03-18 11:12:53 INFO  [qtp1191732945-24]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:12:53 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:12:55 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:12:55 DEBUG [qtp1191732945-22]: Servlet path = /reader/catalog
+2022-03-18 11:12:55 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:55 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:55 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:12:55 DEBUG [qtp1191732945-22]: processRequest starting
+2022-03-18 11:12:55 INFO  [qtp1191732945-22]: servletPath: /reader/catalog
+2022-03-18 11:12:55 INFO  [qtp1191732945-22]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:12:55 DEBUG [qtp1191732945-22]: The EncodingFilter has worked
+2022-03-18 11:12:59 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:12:59 DEBUG [qtp1191732945-24]: Servlet path = /reader/book-search
+2022-03-18 11:12:59 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:12:59 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:12:59 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:12:59 DEBUG [qtp1191732945-24]: processRequest starting
+2022-03-18 11:12:59 INFO  [qtp1191732945-24]: servletPath: /reader/book-search
+2022-03-18 11:12:59 INFO  [qtp1191732945-24]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:12:59 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:13:02 DEBUG [qtp1191732945-22]: OrderServlet starting
+2022-03-18 11:13:02 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:13:02 DEBUG [qtp1191732945-22]: Servlet path = /reader/order
+2022-03-18 11:13:02 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:13:02 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:13:02 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:13:02 DEBUG [qtp1191732945-22]: OrderServlet doPost() starting
+2022-03-18 11:13:09 DEBUG [qtp1191732945-18]: AccessFilter method doFilter() starting
+2022-03-18 11:13:09 DEBUG [qtp1191732945-18]: Servlet path = /reader/order
+2022-03-18 11:13:09 INFO  [qtp1191732945-18]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:13:09 DEBUG [qtp1191732945-18]: isAdminPage = falseisUserPage = true
+2022-03-18 11:13:09 DEBUG [qtp1191732945-18]: User not null and isAuthorized
+2022-03-18 11:13:09 DEBUG [qtp1191732945-18]: OrderServlet doPost() starting
+2022-03-18 11:13:14 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:13:14 DEBUG [qtp1191732945-24]: Servlet path = /reader/order
+2022-03-18 11:13:14 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:13:14 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:13:14 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:13:14 DEBUG [qtp1191732945-24]: OrderServlet doPost() starting
+2022-03-18 11:13:21 DEBUG [qtp1191732945-22]: AccessFilter method doFilter() starting
+2022-03-18 11:13:21 DEBUG [qtp1191732945-22]: Servlet path = /reader/order
+2022-03-18 11:13:21 INFO  [qtp1191732945-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:13:21 DEBUG [qtp1191732945-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:13:21 DEBUG [qtp1191732945-22]: User not null and isAuthorized
+2022-03-18 11:13:21 DEBUG [qtp1191732945-22]: OrderServlet doPost() starting
+2022-03-18 11:13:48 DEBUG [qtp1191732945-30]: AccessFilter method doFilter() starting
+2022-03-18 11:13:48 DEBUG [qtp1191732945-30]: Servlet path = /reader/catalog
+2022-03-18 11:13:48 INFO  [qtp1191732945-30]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:13:48 DEBUG [qtp1191732945-30]: isAdminPage = falseisUserPage = true
+2022-03-18 11:13:48 DEBUG [qtp1191732945-30]: User not null and isAuthorized
+2022-03-18 11:13:48 DEBUG [qtp1191732945-30]: processRequest starting
+2022-03-18 11:13:48 INFO  [qtp1191732945-30]: servletPath: /reader/catalog
+2022-03-18 11:13:48 INFO  [qtp1191732945-30]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:13:48 DEBUG [qtp1191732945-30]: The EncodingFilter has worked
+2022-03-18 11:13:50 DEBUG [qtp1191732945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:13:50 DEBUG [qtp1191732945-24]: Servlet path = /reader/order
+2022-03-18 11:13:50 INFO  [qtp1191732945-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:13:50 DEBUG [qtp1191732945-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:13:50 DEBUG [qtp1191732945-24]: User not null and isAuthorized
+2022-03-18 11:13:50 DEBUG [qtp1191732945-24]: OrderServlet doGet() starting
+2022-03-18 11:13:51 DEBUG [qtp1191732945-24]: The EncodingFilter has worked
+2022-03-18 11:18:38 DEBUG [Thread-1]: EncodingFilter destruction
+2022-03-18 11:18:38 DEBUG [Thread-1]: AccessFilter destruction
+2022-03-18 11:21:12 DEBUG [main]: AccessFilter initialization
+2022-03-18 11:21:12 DEBUG [main]: EncodingFilter initialization
+2022-03-18 11:21:18 DEBUG [qtp354764137-23]: OrderServlet starting
+2022-03-18 11:21:18 DEBUG [qtp354764137-23]: AccessFilter method doFilter() starting
+2022-03-18 11:21:18 DEBUG [qtp354764137-23]: Servlet path = /reader/order
+2022-03-18 11:21:18 INFO  [qtp354764137-23]: Session attribute user = null
+2022-03-18 11:21:18 DEBUG [qtp354764137-23]: isAdminPage = falseisUserPage = true
+2022-03-18 11:21:18 DEBUG [qtp354764137-23]: No rights: redirecting login
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: LoginServlet starting
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: AccessFilter method doFilter() starting
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: Servlet path = /login
+2022-03-18 11:21:18 INFO  [qtp354764137-22]: Session attribute user = null
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: isAdminPage = trueisUserPage = true
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: Is method isAdminPage && isUserPage
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: Is user == null
+2022-03-18 11:21:18 DEBUG [qtp354764137-22]: LoginServlet doGet() starting
+2022-03-18 11:21:20 DEBUG [qtp354764137-22]: The EncodingFilter has worked
+2022-03-18 11:21:20 DEBUG [qtp354764137-22]: The AccessFilter has worked
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: AccessFilter method doFilter() starting
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: Servlet path = /login
+2022-03-18 11:21:22 INFO  [qtp354764137-24]: Session attribute user = null
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: isAdminPage = trueisUserPage = true
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: Is method isAdminPage && isUserPage
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: Is user == null
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: LoginServlet doPost() starting
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: The EncodingFilter has worked
+2022-03-18 11:21:22 DEBUG [qtp354764137-24]: The AccessFilter has worked
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: AdminServlet starting
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: AccessFilter method doFilter() starting
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: Servlet path = /reader
+2022-03-18 11:21:22 INFO  [qtp354764137-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: User not null and isAuthorized
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: processRequest starting
+2022-03-18 11:21:22 INFO  [qtp354764137-20]: servletPath: /reader
+2022-03-18 11:21:22 INFO  [qtp354764137-20]: Resource path: /WEB-INF/view/reader/reader.jsp
+2022-03-18 11:21:22 DEBUG [qtp354764137-20]: The EncodingFilter has worked
+2022-03-18 11:21:25 DEBUG [qtp354764137-24]: AccessFilter method doFilter() starting
+2022-03-18 11:21:25 DEBUG [qtp354764137-24]: Servlet path = /reader/book-search
+2022-03-18 11:21:25 INFO  [qtp354764137-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:21:25 DEBUG [qtp354764137-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:21:25 DEBUG [qtp354764137-24]: User not null and isAuthorized
+2022-03-18 11:21:25 DEBUG [qtp354764137-24]: processRequest starting
+2022-03-18 11:21:25 INFO  [qtp354764137-24]: servletPath: /reader/book-search
+2022-03-18 11:21:25 INFO  [qtp354764137-24]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:21:26 DEBUG [qtp354764137-24]: The EncodingFilter has worked
+2022-03-18 11:21:28 DEBUG [qtp354764137-20]: AccessFilter method doFilter() starting
+2022-03-18 11:21:28 DEBUG [qtp354764137-20]: Servlet path = /reader/order
+2022-03-18 11:21:28 INFO  [qtp354764137-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:21:28 DEBUG [qtp354764137-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:21:28 DEBUG [qtp354764137-20]: User not null and isAuthorized
+2022-03-18 11:21:28 DEBUG [qtp354764137-20]: OrderServlet doGet() starting
+2022-03-18 11:21:29 DEBUG [qtp354764137-20]: The EncodingFilter has worked
+2022-03-18 11:21:39 DEBUG [Thread-1]: EncodingFilter destruction
+2022-03-18 11:21:39 DEBUG [Thread-1]: AccessFilter destruction
+2022-03-18 11:25:39 DEBUG [main]: AccessFilter initialization
+2022-03-18 11:25:39 DEBUG [main]: EncodingFilter initialization
+2022-03-18 11:25:45 DEBUG [qtp1569330262-18]: AdminServlet starting
+2022-03-18 11:25:45 DEBUG [qtp1569330262-18]: AccessFilter method doFilter() starting
+2022-03-18 11:25:45 DEBUG [qtp1569330262-18]: Servlet path = /reader/order
+2022-03-18 11:25:45 INFO  [qtp1569330262-18]: Session attribute user = null
+2022-03-18 11:25:45 DEBUG [qtp1569330262-18]: isAdminPage = falseisUserPage = true
+2022-03-18 11:25:45 DEBUG [qtp1569330262-18]: No rights: redirecting login
+2022-03-18 11:25:45 DEBUG [PathWatcher@49314684]: EncodingFilter destruction
+2022-03-18 11:25:45 DEBUG [PathWatcher@49314684]: AccessFilter destruction
+2022-03-18 11:25:50 DEBUG [PathWatcher@49314684]: AccessFilter initialization
+2022-03-18 11:25:50 DEBUG [PathWatcher@49314684]: EncodingFilter initialization
+2022-03-18 11:25:53 DEBUG [qtp1569330262-22]: LoginServlet starting
+2022-03-18 11:25:53 DEBUG [qtp1569330262-22]: AccessFilter method doFilter() starting
+2022-03-18 11:25:53 DEBUG [qtp1569330262-22]: Servlet path = /login
+2022-03-18 11:25:53 INFO  [qtp1569330262-22]: Session attribute user = null
+2022-03-18 11:25:53 DEBUG [qtp1569330262-22]: isAdminPage = trueisUserPage = true
+2022-03-18 11:25:53 DEBUG [qtp1569330262-22]: Is method isAdminPage && isUserPage
+2022-03-18 11:25:54 DEBUG [qtp1569330262-22]: Is user == null
+2022-03-18 11:25:54 DEBUG [qtp1569330262-22]: LoginServlet doGet() starting
+2022-03-18 11:25:55 DEBUG [qtp1569330262-22]: The AccessFilter has worked
+2022-03-18 11:25:55 DEBUG [qtp1569330262-22]: The EncodingFilter has worked
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: AccessFilter method doFilter() starting
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: Servlet path = /login
+2022-03-18 11:25:57 INFO  [qtp1569330262-20]: Session attribute user = null
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: isAdminPage = trueisUserPage = true
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: Is method isAdminPage && isUserPage
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: Is user == null
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: LoginServlet doPost() starting
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: The AccessFilter has worked
+2022-03-18 11:25:57 DEBUG [qtp1569330262-20]: The EncodingFilter has worked
+2022-03-18 11:25:57 DEBUG [qtp1569330262-22]: AdminServlet starting
+2022-03-18 11:25:57 DEBUG [qtp1569330262-22]: AccessFilter method doFilter() starting
+2022-03-18 11:25:57 DEBUG [qtp1569330262-22]: Servlet path = /reader
+2022-03-18 11:25:57 INFO  [qtp1569330262-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:25:57 DEBUG [qtp1569330262-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:25:57 DEBUG [qtp1569330262-22]: User not null and isAuthorized
+2022-03-18 11:25:57 DEBUG [qtp1569330262-22]: processRequest starting
+2022-03-18 11:25:57 INFO  [qtp1569330262-22]: servletPath: /reader
+2022-03-18 11:25:57 INFO  [qtp1569330262-22]: Resource path: /WEB-INF/view/reader/reader.jsp
+2022-03-18 11:25:58 DEBUG [qtp1569330262-22]: The EncodingFilter has worked
+2022-03-18 11:26:01 DEBUG [qtp1569330262-20]: AccessFilter method doFilter() starting
+2022-03-18 11:26:01 DEBUG [qtp1569330262-20]: Servlet path = /reader/book-search
+2022-03-18 11:26:01 INFO  [qtp1569330262-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:26:01 DEBUG [qtp1569330262-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:26:01 DEBUG [qtp1569330262-20]: User not null and isAuthorized
+2022-03-18 11:26:01 DEBUG [qtp1569330262-20]: processRequest starting
+2022-03-18 11:26:01 INFO  [qtp1569330262-20]: servletPath: /reader/book-search
+2022-03-18 11:26:01 INFO  [qtp1569330262-20]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:26:01 DEBUG [qtp1569330262-20]: The EncodingFilter has worked
+2022-03-18 11:26:04 DEBUG [qtp1569330262-22]: AccessFilter method doFilter() starting
+2022-03-18 11:26:04 DEBUG [qtp1569330262-22]: Servlet path = /reader/order
+2022-03-18 11:26:04 INFO  [qtp1569330262-22]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:26:04 DEBUG [qtp1569330262-22]: isAdminPage = falseisUserPage = true
+2022-03-18 11:26:04 DEBUG [qtp1569330262-22]: User not null and isAuthorized
+2022-03-18 11:26:04 DEBUG [qtp1569330262-22]: processRequest starting
+2022-03-18 11:26:04 INFO  [qtp1569330262-22]: servletPath: /reader/order
+2022-03-18 11:26:26 DEBUG [Thread-1]: EncodingFilter destruction
+2022-03-18 11:26:26 DEBUG [Thread-1]: AccessFilter destruction
+2022-03-18 11:27:18 DEBUG [main]: AccessFilter initialization
+2022-03-18 11:27:18 DEBUG [main]: EncodingFilter initialization
+2022-03-18 11:27:24 DEBUG [qtp571101539-23]: AdminServlet starting
+2022-03-18 11:27:24 DEBUG [qtp571101539-23]: AccessFilter method doFilter() starting
+2022-03-18 11:27:24 DEBUG [qtp571101539-23]: Servlet path = /reader/order
+2022-03-18 11:27:24 INFO  [qtp571101539-23]: Session attribute user = null
+2022-03-18 11:27:24 DEBUG [qtp571101539-23]: isAdminPage = falseisUserPage = true
+2022-03-18 11:27:24 DEBUG [qtp571101539-23]: No rights: redirecting login
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: LoginServlet starting
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: AccessFilter method doFilter() starting
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: Servlet path = /login
+2022-03-18 11:27:27 INFO  [qtp571101539-22]: Session attribute user = null
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: isAdminPage = trueisUserPage = true
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: Is method isAdminPage && isUserPage
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: Is user == null
+2022-03-18 11:27:27 DEBUG [qtp571101539-22]: LoginServlet doGet() starting
+2022-03-18 11:27:29 DEBUG [qtp571101539-22]: The EncodingFilter has worked
+2022-03-18 11:27:29 DEBUG [qtp571101539-22]: The AccessFilter has worked
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: AccessFilter method doFilter() starting
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: Servlet path = /login
+2022-03-18 11:27:30 INFO  [qtp571101539-24]: Session attribute user = null
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: isAdminPage = trueisUserPage = true
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: Is method isAdminPage && isUserPage
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: Is user == null
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: LoginServlet doPost() starting
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: The EncodingFilter has worked
+2022-03-18 11:27:30 DEBUG [qtp571101539-24]: The AccessFilter has worked
+2022-03-18 11:27:31 DEBUG [qtp571101539-20]: AccessFilter method doFilter() starting
+2022-03-18 11:27:31 DEBUG [qtp571101539-20]: Servlet path = /reader
+2022-03-18 11:27:31 INFO  [qtp571101539-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:27:31 DEBUG [qtp571101539-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:27:31 DEBUG [qtp571101539-20]: User not null and isAuthorized
+2022-03-18 11:27:31 DEBUG [qtp571101539-20]: processRequest starting
+2022-03-18 11:27:31 INFO  [qtp571101539-20]: servletPath: /reader
+2022-03-18 11:27:31 INFO  [qtp571101539-20]: Resource path: /WEB-INF/view/reader/reader.jsp
+2022-03-18 11:27:31 DEBUG [qtp571101539-20]: The EncodingFilter has worked
+2022-03-18 11:27:34 DEBUG [qtp571101539-24]: AccessFilter method doFilter() starting
+2022-03-18 11:27:34 DEBUG [qtp571101539-24]: Servlet path = /reader/book-search
+2022-03-18 11:27:34 INFO  [qtp571101539-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:27:34 DEBUG [qtp571101539-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:27:34 DEBUG [qtp571101539-24]: User not null and isAuthorized
+2022-03-18 11:27:34 DEBUG [qtp571101539-24]: processRequest starting
+2022-03-18 11:27:34 INFO  [qtp571101539-24]: servletPath: /reader/book-search
+2022-03-18 11:27:34 INFO  [qtp571101539-24]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:27:34 DEBUG [qtp571101539-24]: The EncodingFilter has worked
+2022-03-18 11:27:37 DEBUG [qtp571101539-20]: AccessFilter method doFilter() starting
+2022-03-18 11:27:37 DEBUG [qtp571101539-20]: Servlet path = /reader/order
+2022-03-18 11:27:37 INFO  [qtp571101539-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:27:37 DEBUG [qtp571101539-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:27:37 DEBUG [qtp571101539-20]: User not null and isAuthorized
+2022-03-18 11:27:37 DEBUG [qtp571101539-20]: processRequest starting
+2022-03-18 11:27:37 INFO  [qtp571101539-20]: servletPath: /reader/order
+2022-03-18 11:27:37 INFO  [qtp571101539-20]: Resource path: /WEB-INF/view/reader/order.jsp
+2022-03-18 11:27:38 DEBUG [qtp571101539-20]: The EncodingFilter has worked
+2022-03-18 11:27:40 DEBUG [qtp571101539-24]: AccessFilter method doFilter() starting
+2022-03-18 11:27:40 DEBUG [qtp571101539-24]: Servlet path = /reader/order
+2022-03-18 11:27:40 INFO  [qtp571101539-24]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:27:40 DEBUG [qtp571101539-24]: isAdminPage = falseisUserPage = true
+2022-03-18 11:27:40 DEBUG [qtp571101539-24]: User not null and isAuthorized
+2022-03-18 11:27:40 DEBUG [qtp571101539-24]: processRequest starting
+2022-03-18 11:27:40 INFO  [qtp571101539-24]: servletPath: /reader/order
+2022-03-18 11:28:00 DEBUG [Thread-1]: EncodingFilter destruction
+2022-03-18 11:28:00 DEBUG [Thread-1]: AccessFilter destruction
+2022-03-18 11:42:02 DEBUG [main]: AccessFilter initialization
+2022-03-18 11:42:02 DEBUG [main]: EncodingFilter initialization
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: LoginServlet starting
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: AccessFilter method doFilter() starting
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: Servlet path = /login
+2022-03-18 11:42:19 INFO  [qtp57525945-23]: Session attribute user = null
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: isAdminPage = trueisUserPage = true
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: Is method isAdminPage && isUserPage
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: Is user == null
+2022-03-18 11:42:19 DEBUG [qtp57525945-23]: LoginServlet doGet() starting
+2022-03-18 11:42:21 DEBUG [qtp57525945-23]: The EncodingFilter has worked
+2022-03-18 11:42:21 DEBUG [qtp57525945-23]: The AccessFilter has worked
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: AccessFilter method doFilter() starting
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: Servlet path = /login
+2022-03-18 11:42:23 INFO  [qtp57525945-24]: Session attribute user = null
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: isAdminPage = trueisUserPage = true
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: Is method isAdminPage && isUserPage
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: Is user == null
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: LoginServlet doPost() starting
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: The EncodingFilter has worked
+2022-03-18 11:42:23 DEBUG [qtp57525945-24]: The AccessFilter has worked
+2022-03-18 11:42:23 DEBUG [qtp57525945-21]: AdminServlet starting
+2022-03-18 11:42:23 DEBUG [qtp57525945-21]: AccessFilter method doFilter() starting
+2022-03-18 11:42:23 DEBUG [qtp57525945-21]: Servlet path = /reader
+2022-03-18 11:42:23 INFO  [qtp57525945-21]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:42:23 DEBUG [qtp57525945-21]: isAdminPage = falseisUserPage = true
+2022-03-18 11:42:23 DEBUG [qtp57525945-21]: User not null and isAuthorized
+2022-03-18 11:42:23 DEBUG [qtp57525945-21]: processRequest starting
+2022-03-18 11:42:23 INFO  [qtp57525945-21]: servletPath: /reader
+2022-03-18 11:42:23 INFO  [qtp57525945-21]: Resource path: /WEB-INF/view/reader/reader.jsp
+2022-03-18 11:42:24 DEBUG [qtp57525945-21]: The EncodingFilter has worked
+2022-03-18 11:42:26 DEBUG [qtp57525945-20]: AccessFilter method doFilter() starting
+2022-03-18 11:42:26 DEBUG [qtp57525945-20]: Servlet path = /reader/book-search
+2022-03-18 11:42:26 INFO  [qtp57525945-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:42:26 DEBUG [qtp57525945-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:42:26 DEBUG [qtp57525945-20]: User not null and isAuthorized
+2022-03-18 11:42:26 DEBUG [qtp57525945-20]: processRequest starting
+2022-03-18 11:42:26 INFO  [qtp57525945-20]: servletPath: /reader/book-search
+2022-03-18 11:42:26 INFO  [qtp57525945-20]: Resource path: /WEB-INF/view/reader/book-search.jsp
+2022-03-18 11:42:27 DEBUG [qtp57525945-20]: The EncodingFilter has worked
+2022-03-18 11:42:29 DEBUG [qtp57525945-21]: AccessFilter method doFilter() starting
+2022-03-18 11:42:29 DEBUG [qtp57525945-21]: Servlet path = /reader/catalog
+2022-03-18 11:42:29 INFO  [qtp57525945-21]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:42:29 DEBUG [qtp57525945-21]: isAdminPage = falseisUserPage = true
+2022-03-18 11:42:29 DEBUG [qtp57525945-21]: User not null and isAuthorized
+2022-03-18 11:42:29 DEBUG [qtp57525945-21]: processRequest starting
+2022-03-18 11:42:29 INFO  [qtp57525945-21]: servletPath: /reader/catalog
+2022-03-18 11:42:29 INFO  [qtp57525945-21]: Resource path: /WEB-INF/view/reader/catalog.jsp
+2022-03-18 11:42:30 DEBUG [qtp57525945-21]: The EncodingFilter has worked
+2022-03-18 11:42:32 DEBUG [qtp57525945-20]: OrderServlet starting
+2022-03-18 11:42:32 DEBUG [qtp57525945-20]: AccessFilter method doFilter() starting
+2022-03-18 11:42:32 DEBUG [qtp57525945-20]: Servlet path = /reader/order
+2022-03-18 11:42:32 INFO  [qtp57525945-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:42:32 DEBUG [qtp57525945-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:42:32 DEBUG [qtp57525945-20]: User not null and isAuthorized
+2022-03-18 11:42:32 DEBUG [qtp57525945-20]: OrderServlet doGet() starting
+2022-03-18 11:42:33 DEBUG [qtp57525945-20]: The EncodingFilter has worked
+2022-03-18 11:42:45 DEBUG [qtp57525945-21]: AccessFilter method doFilter() starting
+2022-03-18 11:42:45 DEBUG [qtp57525945-21]: Servlet path = /reader/order
+2022-03-18 11:42:45 INFO  [qtp57525945-21]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:42:45 DEBUG [qtp57525945-21]: isAdminPage = falseisUserPage = true
+2022-03-18 11:42:45 DEBUG [qtp57525945-21]: User not null and isAuthorized
+2022-03-18 11:42:45 DEBUG [qtp57525945-21]: OrderServlet doPost() starting
+2022-03-18 11:42:45 INFO  [qtp57525945-21]: bookId: 10100; userId: 3; reserveStatus: READING_ROOM
+2022-03-18 11:42:45 DEBUG [qtp57525945-21]: The EncodingFilter has worked
+2022-03-18 11:42:45 DEBUG [qtp57525945-20]: AccessFilter method doFilter() starting
+2022-03-18 11:42:45 DEBUG [qtp57525945-20]: Servlet path = /reader/reader-orders
+2022-03-18 11:42:45 INFO  [qtp57525945-20]: Session attribute user = UserDto{id=3, userName='Sergey Sergeev', phoneNumber=375441234567, email='user@gmail.com', role=USER}
+2022-03-18 11:42:45 DEBUG [qtp57525945-20]: isAdminPage = falseisUserPage = true
+2022-03-18 11:42:45 DEBUG [qtp57525945-20]: User not null and isAuthorized
+2022-03-18 11:42:45 DEBUG [qtp57525945-20]: processRequest starting
+2022-03-18 11:42:45 INFO  [qtp57525945-20]: servletPath: /reader/reader-orders
+2022-03-18 11:42:45 INFO  [qtp57525945-20]: Resource path: /WEB-INF/view/reader/reader-orders.jsp
+2022-03-18 11:42:46 DEBUG [qtp57525945-20]: The EncodingFilter has worked
+2022-03-18 11:44:01 DEBUG [Thread-1]: EncodingFilter destruction
+2022-03-18 11:44:01 DEBUG [Thread-1]: AccessFilter destruction
