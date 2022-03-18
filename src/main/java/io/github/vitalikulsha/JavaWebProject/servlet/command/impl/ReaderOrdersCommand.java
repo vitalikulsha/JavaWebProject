@@ -31,7 +31,6 @@ public class ReaderOrdersCommand implements Command {
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = pagination.getPageNumbers(orders);
         orders = pagination.getItemsPerPage(orders, pageNumber);
-//        String url = session.getServletContext().getContextPath() + request.getServletPath() + "?";
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(Attribute.URL, url);
         request.setAttribute(Attribute.PAGES, pages);

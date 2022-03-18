@@ -56,7 +56,7 @@ public class AccessFilter implements Filter {
             return;
         }
         log.info("Session attribute user = " + session.getAttribute(Attribute.USER));
-        log.debug("isAdminPage = " + isAdminPage(servletPath) + "isUserPage = " + isUserPage(servletPath));
+        log.debug("isAdminPage = " + isAdminPage(servletPath) + "; isUserPage = " + isUserPage(servletPath));
         if (isAdminPage(servletPath) && isUserPage(servletPath) && isGuestPage(servletPath)) {
             log.debug("Is method isAdminPage && isUserPage");
             if (user == null) {

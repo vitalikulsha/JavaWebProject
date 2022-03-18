@@ -15,25 +15,28 @@ import java.io.IOException;
 @Slf4j
 @WebServlet(urlPatterns = {"/admin", "/admin/book-info", "/admin/reader-info", "/admin/order-info",
         "/admin/all-orders", "/admin/all-readers",
-        "/reader", "/reader/reader-orders", "/reader/book-search", "/reader/catalog"})
+        "/reader", "/reader/reader-orders", "/reader/book-search", "/reader/catalog", "/reader/order",
+        "/logout"})
 public class AdminServlet extends HttpServlet {
     private CommandFactory commandFactory;
 
     @Override
     public void init() throws ServletException {
         commandFactory = CommandFactory.instance();
-        log.debug("AdminServlet starting");
+        log.debug("Servlet starting");
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        log.info("Method doGet() starting");
         processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        log.info("Method doPost() starting");
         processRequest(request, response);
     }
 
@@ -48,9 +51,11 @@ public class AdminServlet extends HttpServlet {
         log.info("Resource path: " + resource);
         switch (commandInfo.getRoutingType()) {
             case FORWARD:
+                log.info("Routing type is FORWARD");
                 getServletContext().getRequestDispatcher(resource).forward(request, response);
                 break;
             case REDIRECT:
+                log.info("Routing type is REDIRECT");
                 response.sendRedirect(request.getContextPath() + resource);
                 break;
         }
