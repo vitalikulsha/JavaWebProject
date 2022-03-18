@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.RoutingType;
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;

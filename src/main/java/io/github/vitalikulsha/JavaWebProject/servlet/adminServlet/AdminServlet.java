@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @Slf4j
 @WebServlet(urlPatterns = {"/admin", "/admin/book-info", "/admin/reader-info", "/admin/order-info",
-        "/admin/all-orders", "/admin/all-readers"})
+        "/admin/all-orders", "/admin/all-readers", "/reader", "/reader/reader-orders", "/reader/book-search"})
 public class AdminServlet extends HttpServlet {
     private CommandFactory commandFactory;
 
@@ -27,8 +27,18 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.debug("AdminServlet doGet() starting");
+        processRequest(request, response);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        log.debug("processRequest starting");
         String servletPath = request.getServletPath();
         log.info("servletPath: " + servletPath);
         Command command = commandFactory.getCommand(servletPath);
@@ -43,10 +53,5 @@ public class AdminServlet extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + resource);
                 break;
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
     }
 }

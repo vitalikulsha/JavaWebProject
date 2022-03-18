@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;;
-import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;

@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.readerServlet;
 
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.Pagination;

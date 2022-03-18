@@ -1,9 +1,9 @@
 package io.github.vitalikulsha.JavaWebProject.service.impl;
 
 import io.github.vitalikulsha.JavaWebProject.dao.*;
-import io.github.vitalikulsha.JavaWebProject.dto.DtoConverter;
-import io.github.vitalikulsha.JavaWebProject.dto.DtoConverterFactory;
-import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverter;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverterFactory;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Order;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;

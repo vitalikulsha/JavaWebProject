@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet;
 
-import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;

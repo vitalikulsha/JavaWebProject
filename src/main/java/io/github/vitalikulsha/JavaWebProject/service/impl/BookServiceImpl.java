@@ -2,9 +2,9 @@ package io.github.vitalikulsha.JavaWebProject.service.impl;
 
 import io.github.vitalikulsha.JavaWebProject.dao.BookDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
-import io.github.vitalikulsha.JavaWebProject.dto.DtoConverter;
-import io.github.vitalikulsha.JavaWebProject.dto.DtoConverterFactory;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverter;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverterFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 

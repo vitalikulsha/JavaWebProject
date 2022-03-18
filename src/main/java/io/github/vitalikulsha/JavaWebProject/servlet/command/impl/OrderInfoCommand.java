@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.RoutingType;
-import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;

@@ -1,9 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConfigParameter;
-import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;

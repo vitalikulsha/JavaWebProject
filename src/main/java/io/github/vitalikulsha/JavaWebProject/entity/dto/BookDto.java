@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.dto;
+package io.github.vitalikulsha.JavaWebProject.entity.dto;
 
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;

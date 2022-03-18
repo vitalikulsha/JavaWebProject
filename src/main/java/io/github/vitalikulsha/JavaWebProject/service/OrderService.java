@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.service;
 
-import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 
 import java.util.List;

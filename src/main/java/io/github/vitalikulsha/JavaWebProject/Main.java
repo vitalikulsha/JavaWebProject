@@ -1,22 +1,13 @@
 package io.github.vitalikulsha.JavaWebProject;
 
 import io.github.vitalikulsha.JavaWebProject.dao.*;
-import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.BookSqlQuery;
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
-import io.github.vitalikulsha.JavaWebProject.dto.DtoConverterFactory;
-import io.github.vitalikulsha.JavaWebProject.dto.OrderDto;
-import io.github.vitalikulsha.JavaWebProject.dto.UserDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverterFactory;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.*;
-import io.github.vitalikulsha.JavaWebProject.service.BookService;
-import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
-import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {

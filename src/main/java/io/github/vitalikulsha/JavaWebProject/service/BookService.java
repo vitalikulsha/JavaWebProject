@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.service;
 
-import io.github.vitalikulsha.JavaWebProject.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
 
 import java.util.List;
 
