@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 
 @Slf4j
 @WebServlet(urlPatterns = {"/admin", "/admin/book-info", "/admin/reader-info", "/admin/order-info",
@@ -30,6 +31,7 @@ public class LibraryServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.info("Method doGet() starting");
+        log.info("request method: " + request.getMethod());
         processRequest(request, response);
     }
 
@@ -37,6 +39,7 @@ public class LibraryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         log.info("Method doPost() starting");
+        log.info("request method: " + request.getMethod());
         processRequest(request, response);
     }
 

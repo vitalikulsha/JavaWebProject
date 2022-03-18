@@ -11,11 +11,13 @@ import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
+@Slf4j
 public class CatalogCommand implements Command {
 
     @Override
@@ -23,11 +25,12 @@ public class CatalogCommand implements Command {
         BookService bookService = ServiceFactory.instance().bookService();
         Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         List<BookDto> catalog;
+        //todo: оптимизировать, применить switch с перебором всех параметров
+        String url = request.getContextPath() + request.getServletPath() + "?";
         String bookTitle = request.getParameter(Parameter.BOOK_TITLE);
         String authorName = request.getParameter(Parameter.AUTHOR_NAME);
         String categoryName = request.getParameter(Parameter.CATEGORY_NAME);
         String page = request.getParameter(Parameter.PAGE);
-        String url = request.getContextPath() + request.getServletPath() + "?";
         if (bookTitle != null) {
             url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
             catalog = bookService.getBooksByTitle(bookTitle);

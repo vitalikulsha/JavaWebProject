@@ -23,17 +23,16 @@ public class OrderCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        String bookIdParam = request.getParameter(Parameter.BOOK_ID);
-        String reserveStatusParam = request.getParameter(Parameter.RESERVE_STATUS);
-        if (bookIdParam != null) {
+        String method = request.getMethod();
+        if (method.equals("GET")){
             BookService bookService = ServiceFactory.instance().bookService();
-            int bookId = Integer.parseInt(bookIdParam);
+            int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
             BookDto bookDto = bookService.getById(bookId);
             session.setAttribute(Attribute.BOOK, bookDto);
             return new CommandInfo(Page.ORDER, RoutingType.FORWARD);
-        } else if (reserveStatusParam != null) {
+        } else if (method.equals("POST")){
             OrderService orderService = ServiceFactory.instance().orderService();
-            ReserveStatus reserveStatus = ReserveStatus.valueOf(reserveStatusParam);
+            ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
             BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
             UserDto user = (UserDto) session.getAttribute(Attribute.USER);
             orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
