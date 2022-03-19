@@ -15,7 +15,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     private final static BookSqlQuery bookSqlQuery = SqlQueryFactory.instance().bookSqlQuery();
 
     public BookDaoImpl() {
-        super(RowMapperFactory.instance().bookRowMapper(), bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_BY_ID);
+        super(RowMapperFactory.instance().bookRowMapper(),
+                bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_BY_ID, bookSqlQuery.DELETE_BY_ID);
     }
 
     @Override
@@ -31,15 +32,5 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     @Override
     public List<Book> findByCategoryName(String name) {
         return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
-    }
-
-    @Override
-    public int save(Book book) {
-        return 0;
-    }
-
-    @Override
-    public void delete(Book book) {
-
     }
 }

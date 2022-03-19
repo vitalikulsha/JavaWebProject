@@ -62,7 +62,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void delete(BookDto bookDto) {
-
+    public boolean deleteById(int id) {
+        return false;
     }
 }

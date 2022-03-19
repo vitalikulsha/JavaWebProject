@@ -10,6 +10,6 @@ public interface Dao<T> {
 
     int save(T t);
 
-    void delete(T t);
+    int deleteById(int id);
 }
 

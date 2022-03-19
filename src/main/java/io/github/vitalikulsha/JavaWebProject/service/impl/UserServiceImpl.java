@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(UserDto user) {
-
+    public boolean deleteById(int id) {
+        return false;
     }
 
     @Override

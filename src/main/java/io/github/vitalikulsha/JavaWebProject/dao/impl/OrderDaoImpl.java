@@ -13,7 +13,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     public OrderDaoImpl() {
         super(RowMapperFactory.instance().orderRowMapper(),
-                orderSqlQuery.FIND_ALL, orderSqlQuery.FIND_BY_ID);
+                orderSqlQuery.FIND_ALL, orderSqlQuery.FIND_BY_ID, orderSqlQuery.DELETE_BY_ID);
     }
 
     @Override

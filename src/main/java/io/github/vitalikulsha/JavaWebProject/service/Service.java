@@ -7,5 +7,5 @@ public interface Service<T> {
 
     List<T> getAll();
 
-    void delete(T t);
+    boolean deleteById(int id);
 }

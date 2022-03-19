@@ -13,7 +13,8 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
     private final static AuthorSqlQuery authorSqlQuery = SqlQueryFactory.instance().authorSqlQuery();
 
     public AuthorDaoImpl() {
-        super(RowMapperFactory.instance().authorRowMapper(), authorSqlQuery.FIND_ALL, authorSqlQuery.FIND_BY_ID);
+        super(RowMapperFactory.instance().authorRowMapper(),
+                authorSqlQuery.FIND_ALL, authorSqlQuery.FIND_BY_ID, authorSqlQuery.DELETE_BY_ID);
     }
 
     @Override

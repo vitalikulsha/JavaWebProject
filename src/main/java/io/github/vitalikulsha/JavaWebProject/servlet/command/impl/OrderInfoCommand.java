@@ -36,6 +36,9 @@ public class OrderInfoCommand implements Command {
             String action = request.getParameter(Parameter.ACTION);
             if (action.equals(Value.APPROVE)) {
                 orderService.updateApprovalOrder(true, orderDto.getId());
+            } else if (action.equals(Value.CANCEL)) {
+                orderService.deleteById(orderDto.getId());
+                return new CommandInfo(AdminPath.ALL_ORDERS.getPath(), RoutingType.REDIRECT);
             }
             orderDto = orderService.getById(orderDto.getId());
             session.setAttribute(Attribute.ORDER, orderDto);

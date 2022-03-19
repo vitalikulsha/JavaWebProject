@@ -46,19 +46,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus) {
         Order order = new Order(0, bookId, userId, reserveStatus, false);
-        return orderDao.save(order) == 1;
+        return orderDao.save(order) != 0;
     }
 
     @Override
     public boolean updateApprovalOrder(boolean approved, int orderId) {
-        int row = orderDao.updateApproval(approved, orderId);
-        log.info("number rows: " + row);
-        log.info("update order: " + orderDao.findById(orderId));
-        return row == 1;
+        return orderDao.updateApproval(approved, orderId) != 0;
     }
 
     @Override
-    public void delete(OrderDto orderDto) {
-
+    public boolean deleteById(int orderId) {
+        return orderDao.deleteById(orderId) != 0;
     }
 }
