@@ -33,4 +33,9 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     public List<Book> findByCategoryName(String name) {
         return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
     }
+
+    @Override
+    public int updateNumberBooks(int numberBooks, int bookId) {
+        return queryOperator.executeUpdate(bookSqlQuery.UPDATE_NUMBER, numberBooks, bookId);
+    }
 }

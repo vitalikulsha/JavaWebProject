@@ -3,10 +3,11 @@
 
 <html>
 <head>
-    <title>Оформление заказа</title>
+    <title>Список заказов</title>
     <style>
         <%@include file='/WEB-INF/css/reader-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
+
 
 
     </style>
@@ -17,7 +18,7 @@
     <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
     <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
-<h2>Личный кабинет</h2>
+<h2>Список заказов</h2>
 <c:set var="user" scope="request" value="${user}"/>
 
 <table>
@@ -33,6 +34,7 @@
         <th>Название книги</th>
         <th>Статус резерва</th>
         <th>Статус одобрения</th>
+        <th>Управление заказом</th>
     </tr>
     </thead>
     <tbody>
@@ -42,11 +44,25 @@
             <td>${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>
             <td>${order.reserveStatus.title}</td>
-            <td>${order.approved}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${order.approved}"><p style="color: green"><b>ОДОБРЕН</b></p></c:when>
+                    <c:otherwise><p style="color:red"><b>НЕОДОБРЕН</b></p></c:otherwise>
+                </c:choose>
+            </td>
+            <td>
+                <c:if test="${order.approved}">
+                    <form action="${pageContext.request.contextPath}/reader/reader-orders" method="post">
+                        <input type="hidden" name="orderId" value="${order.id}">
+                        <input type="hidden" name="reserveStatus" value="RETURN">
+                        <input type="submit" value="Вернуть книгу">
+                    </form>
+                </c:if>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-<jsp:include page="/WEB-INF/view/template/pagination.jsp" />
+<jsp:include page="/WEB-INF/view/template/pagination.jsp"/>
 </body>
 </html>

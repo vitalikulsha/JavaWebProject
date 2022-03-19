@@ -7,10 +7,12 @@ import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverter;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverterFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class BookServiceImpl implements BookService {
     private final BookDao bookDao;
     private final DtoConverter<BookDto, Book> bookDtoConverter;
@@ -57,12 +59,26 @@ public class BookServiceImpl implements BookService {
                 .collect(Collectors.toList());
     }
 
-    public BookDto save(BookDto bookDto) {
-        return null;
-    }
-
     @Override
     public boolean deleteById(int id) {
         return false;
+    }
+
+    @Override
+    public boolean removeOneBook(int bookId) {
+        Book book = bookDao.findById(bookId);
+        int numberBooks = book.getNumber();
+        if (numberBooks > 0) {
+            return bookDao.updateNumberBooks(numberBooks - 1, bookId) != 0;
+        } else {
+            log.error(book.getTitle() + " нет в наличии, ожидается поступление.");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addOneBook(int bookId) {
+        Book book = bookDao.findById(bookId);
+        return bookDao.updateNumberBooks(book.getNumber() + 1, bookId) != 0;
     }
 }

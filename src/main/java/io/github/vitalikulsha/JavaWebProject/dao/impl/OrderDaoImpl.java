@@ -28,8 +28,13 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     }
 
     @Override
-    public int updateApproval(boolean approved, int orderId){
+    public int updateApproved(boolean approved, int orderId){
         return queryOperator.executeUpdate(orderSqlQuery.UPDATE_APPROVAL, approved, orderId);
+    }
+
+    @Override
+    public int updateReserved(ReserveStatus reserveStatus, int orderId){
+        return queryOperator.executeUpdate(orderSqlQuery.UPDATE_RESERVED, reserveStatus.name(), orderId);
     }
 
 }

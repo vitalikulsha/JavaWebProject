@@ -11,4 +11,8 @@ public interface BookService extends Service<BookDto> {
     List<BookDto> getBooksByAuthorName(String authorName);
 
     List<BookDto> getBooksByCategoryName(String categoryName);
+
+    boolean removeOneBook(int bookId);
+
+    boolean addOneBook(int bookId);
 }

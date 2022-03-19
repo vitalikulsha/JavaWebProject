@@ -25,20 +25,28 @@ public class OrderCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String method = request.getMethod();
-        if (method.equals(Value.GET)){
-            BookService bookService = ServiceFactory.instance().bookService();
-            int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
-            BookDto bookDto = bookService.getById(bookId);
-            session.setAttribute(Attribute.BOOK, bookDto);
-            return new CommandInfo(Page.ORDER, RoutingType.FORWARD);
-        } else if (method.equals(Value.POST)){
-            OrderService orderService = ServiceFactory.instance().orderService();
-            ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
-            BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
-            UserDto user = (UserDto) session.getAttribute(Attribute.USER);
-            orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
-            return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
+        if (method.equals(Value.GET)) {
+            return getCommandInfoGet(request, session);
+        } else if (method.equals(Value.POST)) {
+            return getCommandInfoPost(request, session);
         }
         return null;
+    }
+
+    private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) {
+        BookService bookService = ServiceFactory.instance().bookService();
+        int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
+        BookDto bookDto = bookService.getById(bookId);
+        session.setAttribute(Attribute.BOOK, bookDto);
+        return new CommandInfo(Page.ORDER, RoutingType.FORWARD);
+    }
+
+    private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) {
+        OrderService orderService = ServiceFactory.instance().orderService();
+        ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
+        BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
+        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
+        orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
+        return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
     }
 }

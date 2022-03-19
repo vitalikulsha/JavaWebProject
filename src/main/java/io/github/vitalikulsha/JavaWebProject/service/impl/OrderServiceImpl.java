@@ -50,8 +50,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public boolean updateApprovalOrder(boolean approved, int orderId) {
-        return orderDao.updateApproval(approved, orderId) != 0;
+    public boolean updateOrderApproval(boolean approved, int orderId) {
+        return orderDao.updateApproved(approved, orderId) != 0;
+    }
+
+    @Override
+    public boolean updateOrderReserveStatus(ReserveStatus reserveStatus, int orderId){
+        return orderDao.updateReserved(reserveStatus, orderId) != 0;
     }
 
     @Override

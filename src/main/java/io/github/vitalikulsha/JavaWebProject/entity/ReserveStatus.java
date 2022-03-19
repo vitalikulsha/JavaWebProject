@@ -2,7 +2,8 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 
 public enum ReserveStatus {
     READING_ROOM("Читальный зал"),
-    LOANED("Абонемент");
+    LOANED("Абонемент"),
+    RETURN("Возврат");
 
     private final String title;
 
