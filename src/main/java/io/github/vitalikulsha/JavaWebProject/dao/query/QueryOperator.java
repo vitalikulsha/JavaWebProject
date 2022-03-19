@@ -82,6 +82,7 @@ public class QueryOperator<T> {
     }
 
     public int executeUpdate(String sqlQuery, Object... params) {
+        log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
             setStatementParam(preparedStatement, params);

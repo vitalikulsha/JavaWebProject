@@ -37,7 +37,12 @@
             <td>${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>
             <td>${order.reserveStatus.title}</td>
-            <td>${order.approved}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${order.approved}"> <p style="color: green"><b>ОДОБРЕН</b></p> </c:when>
+                    <c:otherwise> <p style="color:red"><b>НЕОДОБРЕН</b></p> </c:otherwise>
+                </c:choose>
+            </td>
             <td>${order.bookDto.number}</td>
             <td>${order.userDto.id}</td>
         </tr>

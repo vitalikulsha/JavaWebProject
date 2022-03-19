@@ -12,6 +12,7 @@ import io.github.vitalikulsha.JavaWebProject.servlet.command.RoutingType;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Value;
 import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,13 +25,13 @@ public class OrderCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String method = request.getMethod();
-        if (method.equals("GET")){
+        if (method.equals(Value.GET)){
             BookService bookService = ServiceFactory.instance().bookService();
             int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
             BookDto bookDto = bookService.getById(bookId);
             session.setAttribute(Attribute.BOOK, bookDto);
             return new CommandInfo(Page.ORDER, RoutingType.FORWARD);
-        } else if (method.equals("POST")){
+        } else if (method.equals(Value.POST)){
             OrderService orderService = ServiceFactory.instance().orderService();
             ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
             BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);

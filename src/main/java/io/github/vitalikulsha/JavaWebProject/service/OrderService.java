@@ -9,4 +9,6 @@ public interface OrderService extends Service<OrderDto> {
     List<OrderDto> getOrdersByUserId(int userId);
 
     boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus);
+
+    boolean updateApprovalOrder(boolean approved, int orderId);
 }

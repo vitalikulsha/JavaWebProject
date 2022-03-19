@@ -15,6 +15,7 @@ public class Parameter {
     public static final String USER_ID = "userId";
     public static final String RESERVE_STATUS = "reserveStatus";
     public static final String ORDER_ID = "orderId";
+    public static final String ACTION = "action";
 
     private Parameter() {
     }

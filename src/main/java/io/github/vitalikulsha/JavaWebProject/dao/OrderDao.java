@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OrderDao extends Dao<Order> {
     List<Order> findByUserId(int userId);
+
+    int updateApproval(boolean approved, int orderId);
 }

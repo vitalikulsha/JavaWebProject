@@ -8,6 +8,7 @@
         <%@include file='/WEB-INF/css/book-catalog-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
 
+
     </style>
 </head>
 <body class="block">
@@ -25,13 +26,15 @@
     <tr>
         <th>Код книги</th>
         <td>
-            <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${order.bookDto.id}"> ${order.bookDto.id} </a>
+            <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${order.bookDto.id}">
+                ${order.bookDto.id} </a>
         </td>
     </tr>
     <tr>
         <th>Код пользователя</th>
         <td>
-            <a href="${pageContext.request.contextPath}/admin/reader-info?readerId=${order.userDto.id}"> ${order.userDto.id} </a>
+            <a href="${pageContext.request.contextPath}/admin/reader-info?readerId=${order.userDto.id}">
+                ${order.userDto.id} </a>
         </td>
     </tr>
     <tr>
@@ -40,7 +43,28 @@
     </tr>
     <tr>
         <th>Статус одобрения</th>
-        <td>${order.approved}</td>
+        <td>
+            <c:choose>
+                <c:when test="${order.approved}">
+                    <p style="color: green"><b>ОДОБРЕН</b></p>
+                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
+                        <input type="hidden" name="action" value="cancel">
+                        <input type="submit" value="Закрыть">
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <p style="color:red"><b>НЕОДОБРЕН</b></p>
+                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
+                        <input type="hidden" name="action" value="approve">
+                        <input type="submit" value="Одобрить">
+                    </form>
+                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
+                        <input type="hidden" name="action" value="cancel">
+                        <input type="submit" value="Отменить">
+                    </form>
+                </c:otherwise>
+            </c:choose>
+        </td>
     </tr>
 </table>
 </body>
