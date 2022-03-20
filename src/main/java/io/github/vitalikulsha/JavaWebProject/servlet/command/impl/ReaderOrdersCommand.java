@@ -27,13 +27,16 @@ public class ReaderOrdersCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String method = request.getMethod();
-        OrderService orderService = ServiceFactory.instance().orderService();
-        if (method.equals(Value.POST)) {
-            int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
-            orderService.updateOrderReserveStatus(ReserveStatus.RETURN, orderId);
-            orderService.updateOrderApproval(false, orderId);
-            return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
+        if (method.equals(Value.GET)) {
+            return getCommandInfoGet(request, session);
+        } else if(method.equals(Value.POST)){
+            return getCommandInfoPost(request);
         }
+        return null;
+    }
+
+    private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) {
+        OrderService orderService = ServiceFactory.instance().orderService();
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
         List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());
         String page = request.getParameter(Parameter.PAGE);
@@ -46,5 +49,17 @@ public class ReaderOrdersCommand implements Command {
         request.setAttribute(Attribute.PAGES, pages);
         request.setAttribute(Attribute.USER_ORDERS, orders);
         return new CommandInfo(Page.READER_ORDERS, RoutingType.FORWARD);
+    }
+
+    private CommandInfo getCommandInfoPost(HttpServletRequest request) {
+        OrderService orderService = ServiceFactory.instance().orderService();
+        int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
+        String action = request.getParameter(Parameter.ACTION);
+        if (action.equals(Value.REFUND)) {
+            orderService.updateOrderReserveStatus(ReserveStatus.REFUND, orderId);
+        } else if (action.equals(Value.CANCEL)) {
+            orderService.deleteById(orderId);
+        }
+        return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
     }
 }

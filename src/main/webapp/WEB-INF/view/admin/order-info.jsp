@@ -9,10 +9,12 @@
         <%@include file='/WEB-INF/css/style.css' %>
 
 
+
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
+    <a href="${pageContext.request.contextPath}/admin/all-orders">| Список заказов |</a>
     <a href="${pageContext.request.contextPath}/admin">| Личный кабинет |</a>
     <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
@@ -47,10 +49,12 @@
             <c:choose>
                 <c:when test="${order.approved}">
                     <p style="color: green"><b>ОДОБРЕН</b></p>
-                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
-                        <input type="hidden" name="action" value="cancel">
-                        <input type="submit" value="Закрыть">
-                    </form>
+                    <c:if test="${order.reserveStatus eq 'REFUND'}">
+                        <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
+                            <input type="hidden" name="action" value="cancel">
+                            <input type="submit" value="Закрыть">
+                        </form>
+                    </c:if>
                 </c:when>
                 <c:otherwise>
                     <p style="color:red"><b>НЕОДОБРЕН</b></p>

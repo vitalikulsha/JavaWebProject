@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 public enum ReserveStatus {
     READING_ROOM("Читальный зал"),
     LOANED("Абонемент"),
-    RETURN("Возврат");
+    REFUND("Возврат");
 
     private final String title;
 

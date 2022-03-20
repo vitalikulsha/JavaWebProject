@@ -10,6 +10,7 @@
 
 
 
+
     </style>
 </head>
 <body class="block">
@@ -34,7 +35,6 @@
         <th>Название книги</th>
         <th>Статус резерва</th>
         <th>Статус одобрения</th>
-        <th>Управление заказом</th>
     </tr>
     </thead>
     <tbody>
@@ -46,18 +46,27 @@
             <td>${order.reserveStatus.title}</td>
             <td>
                 <c:choose>
-                    <c:when test="${order.approved}"><p style="color: green"><b>ОДОБРЕН</b></p></c:when>
-                    <c:otherwise><p style="color:red"><b>НЕОДОБРЕН</b></p></c:otherwise>
+                    <c:when test="${order.approved}">
+                        <p style="color: green"><b>ОДОБРЕН</b></p>
+                        <c:if test="${order.approved}">
+                            <c:if test="${order.reserveStatus ne 'REFUND'}">
+                                <form action="${pageContext.request.contextPath}/reader/reader-orders" method="post">
+                                    <input type="hidden" name="orderId" value="${order.id}">
+                                    <input type="hidden" name="action" value="refund">
+                                    <input type="submit" value="Вернуть книгу">
+                                </form>
+                            </c:if>
+                        </c:if>
+                    </c:when>
+                    <c:otherwise>
+                        <p style="color:red"><b>НЕОДОБРЕН</b></p>
+                        <form action="${pageContext.request.contextPath}/reader/reader-orders" method="post">
+                            <input type="hidden" name="orderId" value="${order.id}">
+                            <input type="hidden" name="action" value="cancel">
+                            <input type="submit" value="Отменить заказ">
+                        </form>
+                    </c:otherwise>
                 </c:choose>
-            </td>
-            <td>
-                <c:if test="${order.approved}">
-                    <form action="${pageContext.request.contextPath}/reader/reader-orders" method="post">
-                        <input type="hidden" name="orderId" value="${order.id}">
-                        <input type="hidden" name="reserveStatus" value="RETURN">
-                        <input type="submit" value="Вернуть книгу">
-                    </form>
-                </c:if>
             </td>
         </tr>
     </c:forEach>
