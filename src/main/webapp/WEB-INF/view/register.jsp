@@ -8,8 +8,16 @@
     </style>
 </head>
 <body class="block">
+<c:if test="${isExists}">
+    <c:if test="${not empty login}">
+        <h3 class="error">Пользователь с логином '${login}' уже существует.<br>Введите другой логин.</h3>
+    </c:if>
+    <c:if test="${not empty email}">
+        <h3 class="error">Пользователь с e-mail '${email}' уже существует.<br>Введите другой e-mail.</h3>
+    </c:if>
+</c:if>
 <h2>Регистрация нового пользователя</h2>
-<form method="post" action="${pageContext.request.contextPath}/reader">
+<form action="${pageContext.request.contextPath}/register" method="post">
     <table>
         <tr>
             <th>Логин</th>

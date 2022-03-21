@@ -93,10 +93,10 @@ INSERT INTO BOOK_AUTHOR VALUES (82101, 25);
 INSERT INTO BOOK_AUTHOR VALUES (90001, 26);
 INSERT INTO BOOK_AUTHOR VALUES (90002, 27);
 
-INSERT INTO USER VALUES (1, 'Admin', 'admin', 'Ivan Ivanov', 375123456789, 'admin@gmail.com', 'ADMIN');
-INSERT INTO USER VALUES (2, 'Librarian', 'librarian', 'Petr Petrov', 375291234567, 'librarian@gmail.com', 'ADMIN');
-INSERT INTO USER VALUES (3, 'User', 'user', 'Sergey Sergeev', 375441234567, 'user@gmail.com', 'USER');
-INSERT INTO USER VALUES (4, 'Reader', 'reader', 'Oleg Olegov', 375331234567, 'reader@gmail.com', 'USER');
+INSERT INTO USER VALUES (1, 'Admin', 'admin', 'Иван Иванов', 375123456789, 'admin@gmail.com', 'ADMIN');
+INSERT INTO USER VALUES (2, 'Librarian', 'librarian', 'Петр Петров', 375291234567, 'librarian@gmail.com', 'ADMIN');
+INSERT INTO USER VALUES (3, 'User', 'user', 'Сергей Сергеев', 375441234567, 'user@gmail.com', 'USER');
+INSERT INTO USER VALUES (4, 'Reader', 'reader', 'Олег Олегов', 375331234567, 'reader@gmail.com', 'USER');
 
 INSERT INTO ORDER_BOOK VALUES (1, 90002, 3, 'READING_ROOM', TRUE);
 INSERT INTO ORDER_BOOK VALUES (2, 50001, 4, 'LOANED', FALSE);

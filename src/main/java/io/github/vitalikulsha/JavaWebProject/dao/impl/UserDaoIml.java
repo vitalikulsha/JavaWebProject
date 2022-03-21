@@ -24,6 +24,11 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return queryOperator.executeSingleEntityQuery(userSqlQuery.FIND_BY_EMAIL, email);
+    }
+
+    @Override
     public List<User> findByRole(Role role){
         return queryOperator.executeEntityListQueryWithParam(userSqlQuery.FIND_BY_ROLE, role.name());
     }
@@ -35,5 +40,11 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
             return false;
         } else return user.getLogin().equals(login)
                 && user.getPassword().equals(password);
+    }
+
+    @Override
+    public int save(User user){
+        return queryOperator.executeUpdate(userSqlQuery.SAVE, user.getLogin(), user.getPassword(),
+                user.getUserName(), user.getPhoneNumber(), user.getEmail(), user.getRole().name());
     }
 }

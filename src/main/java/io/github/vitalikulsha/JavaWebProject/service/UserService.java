@@ -14,4 +14,9 @@ public interface UserService extends Service<UserDto>{
     boolean isExists(String login, String password);
 
     UserDto getByLogin(String login);
+
+    UserDto getByEmail(String email);
+
+    boolean createUser(String login, String password, String userName, long phoneNumber,
+                       String email);
 }

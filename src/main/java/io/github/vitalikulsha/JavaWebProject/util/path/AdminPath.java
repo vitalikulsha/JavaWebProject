@@ -8,6 +8,7 @@ public enum AdminPath {
     ADMIN("/admin"),
     ALL_ORDERS("/admin/all-orders"),
     ALL_READERS("/admin/all-readers"),
+    ALL_BOOKS("/admin/all-books"),
     BOOK_INFO("/admin/book-info"),
     READER_INFO("/admin/reader-info"),
     ORDER_INFO("/admin/order-info");

@@ -9,6 +9,9 @@ public class OrderDtoConverter implements DtoConverter<OrderDto, Order> {
 
     @Override
     public OrderDto toDto(Order order) {
+        if(order == null){
+            return null;
+        }
         UserDao userDao = DaoFactory.instance().userDao();
         BookDao bookDao = DaoFactory.instance().bookDao();
         DtoConverter<BookDto, Book> bookDtoConverter = DtoConverterFactory.instance().bookDtoConverter();

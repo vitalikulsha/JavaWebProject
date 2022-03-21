@@ -13,6 +13,9 @@ public class BookDtoConverter implements DtoConverter<BookDto, Book> {
 
     @Override
     public BookDto toDto(Book book) {
+        if (book == null) {
+            return null;
+        }
         AuthorDao authorDao = DaoFactory.instance().authorDao();
         CategoryDao categoryDao = DaoFactory.instance().categoryDao();
         List<Author> authors = authorDao.findAuthorsByBookId(book.getId());

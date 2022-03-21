@@ -35,8 +35,9 @@
 </table>
 
 <h3 style="text-align: center;">
-    <a href="${pageContext.request.contextPath}/admin/all-orders">| Список всех заказов |</a>
-    <a href="${pageContext.request.contextPath}/admin/all-readers">| Список всех читателей |</a>
+    <a href="${pageContext.request.contextPath}/admin/all-orders">| Список заказов |</a>
+    <a href="${pageContext.request.contextPath}/admin/all-readers">| Список читателей |</a>
+    <a href="${pageContext.request.contextPath}/admin/all-books">| Список книг |</a>
 </h3>
 
 </body>

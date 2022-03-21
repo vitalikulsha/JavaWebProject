@@ -8,6 +8,8 @@ import java.util.List;
 public interface UserDao extends Dao<User>{
     User findByLogin(String login);
 
+    User findByEmail(String email);
+
     List<User> findByRole(Role role);
 
     boolean isExist(String login, String password);

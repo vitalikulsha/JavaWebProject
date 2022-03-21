@@ -1,19 +1,23 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
-import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
-import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
+import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
+import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.RoutingType;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Value;
 import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+@Slf4j
 public class RegisterCommand implements Command {
 
     @Override
@@ -27,20 +31,29 @@ public class RegisterCommand implements Command {
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request) {
         HttpSession session = request.getSession();
+        UserService userService = ServiceFactory.instance().userService();
         String login = request.getParameter(Parameter.LOGIN);
         String password = request.getParameter(Parameter.PASSWORD);
         String userName = request.getParameter(Parameter.USERNAME);
         long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
         String email = request.getParameter(Parameter.EMAIL);
-        UserDao userDao = DaoFactory.instance().userDao();
-        if (userDao.findByLogin(login) != null) {
-            //придумать отрибут для session, который бы фиксировал существующий login
+        log.info("login: " + login + "; password: " + password + ", userName: "
+                + userName + ", phoneNumber: " + phoneNumber);
+        if (userService.getByLogin(login) != null) {
+            log.info("User with login " + login + " already exists");
+            request.setAttribute(Attribute.IS_EXISTS, true);
+            request.setAttribute(Parameter.LOGIN, login);
+            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+        } else if (userService.getByEmail(email) != null) {
+            log.info("User with email " + email + " already exists");
+            request.setAttribute(Attribute.IS_EXISTS, true);
+            request.setAttribute(Parameter.EMAIL, email);
             return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
         }
-//        int id = userDao.maxId() + 1;
-//        User user = new User(id, login, password, userName, phoneNumber, email, Role.USER);
-//        session.setAttribute(Attribute.USER, user);
-
+        if (userService.createUser(login, password, userName, phoneNumber, email)) {
+            session.setAttribute(Attribute.USER, userService.getByLogin(login));
+            log.info("New user: " + userService.getByLogin(login));
+        }
         return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
     }
 }

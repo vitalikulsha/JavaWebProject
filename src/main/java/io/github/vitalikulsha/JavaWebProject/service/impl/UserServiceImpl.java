@@ -62,7 +62,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getByLogin(String login){
+    public UserDto getByLogin(String login) {
         return userDtoConverter.toDto(userDao.findByLogin(login));
+    }
+
+    @Override
+    public UserDto getByEmail(String email) {
+        return userDtoConverter.toDto(userDao.findByEmail(email));
+    }
+
+    @Override
+    public boolean createUser(String login, String password, String userName, long phoneNumber,
+                              String email) {
+        User user = new User(0, login, password, userName, phoneNumber, email, Role.USER);
+        return userDao.save(user) != 0;
     }
 }
