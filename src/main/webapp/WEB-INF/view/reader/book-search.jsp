@@ -15,6 +15,9 @@
     <a href="${pageContext.request.contextPath}/reader"> Личный кабинет</a>
     <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
+<c:if test="${isExists}">
+    <h3 class="error">Книга с id=${book.id} уже есть в списке заказов.<br>Выберите другую книгу.</h3>
+</c:if>
 <h2>Поиск книг</h2>
 <table>
     <form action="${pageContext.request.contextPath}/reader/order" method="get">

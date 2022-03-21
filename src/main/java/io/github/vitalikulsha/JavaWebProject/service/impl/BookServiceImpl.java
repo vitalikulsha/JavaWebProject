@@ -71,7 +71,7 @@ public class BookServiceImpl implements BookService {
         if (numberBooks > 0) {
             return bookDao.updateNumberBooks(numberBooks - 1, bookId) != 0;
         } else {
-            log.error(book.getTitle() + " нет в наличии, ожидается поступление.");
+            log.error(book.getTitle() + " out of stock, awaiting delivery.");
             return false;
         }
     }

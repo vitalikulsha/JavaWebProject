@@ -14,11 +14,13 @@ import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Value;
 import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@Slf4j
 public class OrderCommand implements Command {
 
     @Override
@@ -43,10 +45,25 @@ public class OrderCommand implements Command {
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) {
         OrderService orderService = ServiceFactory.instance().orderService();
+        BookService bookService = ServiceFactory.instance().bookService();
         ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
         BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
-        orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
+        if (!isBookExists(orderService, bookDto, user)) {
+            orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
+            bookService.removeOneBook(bookDto.getId());
+        } else {
+            log.info("The book id = " + bookDto.getId() + " is already in the list of orders.");
+            request.setAttribute(Attribute.IS_EXISTS, true);
+            return new CommandInfo(Page.BOOK_SEARCH, RoutingType.FORWARD);
+        }
         return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
+    }
+
+    private boolean isBookExists(OrderService orderService, BookDto bookDto, UserDto user) {
+        return orderService.getOrdersByUserId(user.getId())
+                .stream()
+                .map(o -> o.getBookDto().getId())
+                .anyMatch(id -> id == bookDto.getId());
     }
 }

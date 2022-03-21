@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class CatalogCommand implements Command {
@@ -33,15 +34,15 @@ public class CatalogCommand implements Command {
         String page = request.getParameter(Parameter.PAGE);
         if (bookTitle != null) {
             url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
-            catalog = bookService.getBooksByTitle(bookTitle);
+            catalog = removeNumberBooksZero(bookService.getBooksByTitle(bookTitle));
         } else if (authorName != null) {
             url = url + Parameter.AUTHOR_NAME + "=" + authorName;
-            catalog = bookService.getBooksByAuthorName(authorName);
+            catalog = removeNumberBooksZero(bookService.getBooksByAuthorName(authorName));
         } else if (categoryName != null) {
             url = url + Parameter.CATEGORY_NAME + "=" + categoryName;
-            catalog = bookService.getBooksByCategoryName(categoryName);
+            catalog = removeNumberBooksZero(bookService.getBooksByCategoryName(categoryName));
         } else {
-            catalog = bookService.getAll();
+            catalog = removeNumberBooksZero(bookService.getAll());
         }
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = pagination.getPageNumbers(catalog);
@@ -50,5 +51,11 @@ public class CatalogCommand implements Command {
         request.setAttribute(Attribute.PAGES, pages);
         request.setAttribute(Attribute.CATALOG, catalog);
         return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
+    }
+
+    private List<BookDto> removeNumberBooksZero(List<BookDto> books) {
+        return books.stream()
+                .filter(b -> b.getNumber() != 0)
+                .collect(Collectors.toList());
     }
 }
