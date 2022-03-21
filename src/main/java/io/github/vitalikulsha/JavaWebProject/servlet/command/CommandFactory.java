@@ -23,6 +23,8 @@ public class CommandFactory {
         put(UserPath.CATALOG.getPath(), new CatalogCommand());
         put(UserPath.ORDER.getPath(), new OrderCommand());
         put(UserPath.LOGOUT.getPath(), new LogoutCommand());
+        put(UserPath.LOGIN.getPath(), new LoginCommand());
+        put(UserPath.REGISTER.getPath(), new RegisterCommand());
     }};
 
     public CommandFactory() {

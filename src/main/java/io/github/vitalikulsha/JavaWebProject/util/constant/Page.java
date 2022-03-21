@@ -1,6 +1,10 @@
 package io.github.vitalikulsha.JavaWebProject.util.constant;
 
 public class Page {
+    //general
+    public final static String LOGIN = "/WEB-INF/view/login.jsp";
+    public final static String REGISTER = "/WEB-INF/view/register.jsp";
+
     //admin
     public final static String ADMIN = "/WEB-INF/view/admin/admin.jsp";
     public final static String BOOK_INFO = "/WEB-INF/view/admin/book-info.jsp";
