@@ -27,6 +27,7 @@ public class CommandFactory {
         put(UserPath.LOGOUT.getPath(), new LogoutCommand());
         put(UserPath.LOGIN.getPath(), new LoginCommand());
         put(UserPath.REGISTER.getPath(), new RegisterCommand());
+        put(UserPath.EDIT.getPath(), new EditCommand());
     }};
 
     public CommandFactory() {

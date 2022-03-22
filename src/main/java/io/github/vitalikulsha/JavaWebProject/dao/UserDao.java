@@ -13,4 +13,6 @@ public interface UserDao extends Dao<User>{
     List<User> findByRole(Role role);
 
     boolean isExist(String login, String password);
+
+    int update(User user);
 }

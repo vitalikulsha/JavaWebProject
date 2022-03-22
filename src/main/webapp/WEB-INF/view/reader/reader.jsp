@@ -21,6 +21,10 @@
         <td>${user.userName}</td>
     </tr>
     <tr>
+        <th>Код пользователя</th>
+        <td>${user.id}</td>
+    </tr>
+    <tr>
         <th>Номер телефона</th>
         <td>${user.phoneNumber}</td>
     </tr>
@@ -37,6 +41,7 @@
 <h3 style="text-align: center;">
     <a href="${pageContext.request.contextPath}/reader/reader-orders">| Список заказов |</a>
     <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
+    <a href="${pageContext.request.contextPath}/reader/edit">| Редактировать профиль |</a>
 </h3>
 
 </body>

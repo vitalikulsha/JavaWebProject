@@ -21,6 +21,7 @@ public class Page {
     public final static String BOOK_SEARCH = "/WEB-INF/view/reader/book-search.jsp";
     public final static String CATALOG = "/WEB-INF/view/reader/catalog.jsp";
     public final static String ORDER = "/WEB-INF/view/reader/order.jsp";
+    public final static String EDIT = "/WEB-INF/view/reader/edit.jsp";
 
     private Page() {
     }

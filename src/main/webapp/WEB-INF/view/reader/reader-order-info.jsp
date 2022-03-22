@@ -9,8 +9,6 @@
     <style>
         <%@include file='/WEB-INF/css/book-catalog-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
-
-
     </style>
 </head>
 <body class="block">
@@ -23,21 +21,31 @@
 <table style="with: 900px; margin: auto;">
     <tr>
         <th>Код заказа</th>
-        <td>${order.id}</td>
+        <td>[${order.id}]</td>
     </tr>
     <tr>
-        <th>Код книги</th>
+        <th>Название книги</th>
+        <td>[${order.bookDto.id}] - ${order.bookDto.title}</td>
+    </tr>
+    <tr>
+        <th>Авторы</th>
         <td>
-            <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${order.bookDto.id}">
-                ${order.bookDto.id} </a>
+            <c:forEach var="author" items="${order.bookDto.authors}">
+                [${author.id}] - ${author.firstName} ${author.lastName}<br>
+            </c:forEach>
         </td>
     </tr>
     <tr>
-        <th>Код пользователя</th>
-        <td>
-            <a href="${pageContext.request.contextPath}/admin/reader-info?readerId=${order.userDto.id}">
-                ${order.userDto.id} </a>
-        </td>
+        <th>Год издания</th>
+        <td>${order.bookDto.publicationYear} г.</td>
+    </tr>
+    <tr>
+        <th>Количество страниц</th>
+        <td>${order.bookDto.numberPages} стр.</td>
+    </tr>
+    <tr>
+        <th>Категория</th>
+        <td>[${order.bookDto.category.id}] - ${order.bookDto.category.name}</td>
     </tr>
     <tr>
         <th>Статус резерва</th>

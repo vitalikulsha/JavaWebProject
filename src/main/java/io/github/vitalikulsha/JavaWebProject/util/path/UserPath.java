@@ -10,7 +10,8 @@ public enum UserPath {
     CATALOG("/reader/catalog"),
     ORDER("/reader/order"),
     READER_ORDERS("/reader/reader-orders"),
-    READER_ORDER_INFO("/reader/reader-order-info");
+    READER_ORDER_INFO("/reader/reader-order-info"),
+    EDIT("/reader/edit");
 
     private final String path;
 

@@ -29,7 +29,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public List<User> findByRole(Role role){
+    public List<User> findByRole(Role role) {
         return queryOperator.executeEntityListQueryWithParam(userSqlQuery.FIND_BY_ROLE, role.name());
     }
 
@@ -43,8 +43,14 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public int save(User user){
+    public int save(User user) {
         return queryOperator.executeUpdate(userSqlQuery.SAVE, user.getLogin(), user.getPassword(),
                 user.getUserName(), user.getPhoneNumber(), user.getEmail(), user.getRole().name());
+    }
+
+    @Override
+    public int update(User user) {
+        return queryOperator.executeUpdate(userSqlQuery.UPDATE, user.getUserName(), user.getPhoneNumber(),
+                user.getEmail(), user.getId());
     }
 }

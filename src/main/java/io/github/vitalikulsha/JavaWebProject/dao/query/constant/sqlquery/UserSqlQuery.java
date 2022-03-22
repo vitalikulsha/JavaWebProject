@@ -8,6 +8,7 @@ public class UserSqlQuery extends AbstractSqlQuery{
     public final String FIND_BY_ROLE;
     public final String FIND_BY_EMAIL;
     public final String SAVE;
+    public final String UPDATE;
 
     public UserSqlQuery() {
         super(Table.USER.name(), Column.USER_ID.name());
@@ -17,5 +18,7 @@ public class UserSqlQuery extends AbstractSqlQuery{
         SAVE = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s) VALUES ?, ?, ?, ?, ?, ?",
                 Table.USER, Column.LOGIN, Column.PASSWORD, Column.USERNAME, Column.PHONENUMBER,
                 Column.EMAIL, Column.ROLE);
+        UPDATE = String.format("UPDATE %s SET %s=?, %s=?, %s=? WHERE %s=?",
+                Table.USER, Column.USERNAME, Column.PHONENUMBER, Column.EMAIL, Column.USER_ID);
     }
 }
