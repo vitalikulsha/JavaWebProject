@@ -31,15 +31,10 @@ public class ReaderInfoCommand implements Command {
                 + "?" + Parameter.READER_ID + "=" + readerId;
         UserDto reader = userService.getById(readerId);
         List<OrderDto> readerOrders = orderService.getOrdersByUserId(reader.getId());
-        String page = request.getParameter(Parameter.PAGE);
         Pagination<OrderDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
-        List<Integer> pages = pagination.getPageNumbers(readerOrders);
-        int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
-        readerOrders = pagination.getItemsPerPage(readerOrders, pageNumber);
         request.setAttribute(Attribute.URL, url);
-        request.setAttribute(Attribute.PAGES, pages);
-        request.setAttribute(Attribute.READER_ORDERS, readerOrders);
         request.setAttribute(Attribute.READER, reader);
+        pagination.paginate(readerOrders, request, Attribute.READER_ORDERS);
         return new CommandInfo(Page.READER_INFO, RoutingType.FORWARD);
     }
 }

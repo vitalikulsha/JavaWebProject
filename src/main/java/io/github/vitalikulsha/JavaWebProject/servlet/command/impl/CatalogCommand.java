@@ -34,35 +34,30 @@ public class CatalogCommand implements Command {
         String bookTitle = request.getParameter(Parameter.BOOK_TITLE);
         String authorName = request.getParameter(Parameter.AUTHOR_NAME);
         String categoryName = request.getParameter(Parameter.CATEGORY_NAME);
-        String page = request.getParameter(Parameter.PAGE);
         if (bookTitle != null) {
             url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
-            catalog = removeNumberBooksZero(bookService.getBooksByTitle(bookTitle));
+            catalog = removeQuantityBooksZero(bookService.getBooksByTitle(bookTitle));
         } else if (authorName != null) {
             url = url + Parameter.AUTHOR_NAME + "=" + authorName;
-            catalog = removeNumberBooksZero(bookService.getBooksByAuthorName(authorName));
+            catalog = removeQuantityBooksZero(bookService.getBooksByAuthorName(authorName));
         } else if (categoryName != null) {
             url = url + Parameter.CATEGORY_NAME + "=" + categoryName;
-            catalog = removeNumberBooksZero(bookService.getBooksByCategoryName(categoryName));
+            catalog = removeQuantityBooksZero(bookService.getBooksByCategoryName(categoryName));
         } else {
-            catalog = removeNumberBooksZero(bookService.getAll());
+            catalog = removeQuantityBooksZero(bookService.getAll());
         }
-        int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
-        List<Integer> pages = pagination.getPageNumbers(catalog);
-        catalog = pagination.getItemsPerPage(catalog, pageNumber);
         if (catalog.isEmpty()) {
             session.setAttribute(Attribute.BOOK_FOUND, false);
             return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
         } else {
             request.setAttribute(Attribute.URL, url);
-            request.setAttribute(Attribute.PAGES, pages);
-            request.setAttribute(Attribute.CATALOG, catalog);
             session.setAttribute(Attribute.BOOK_FOUND, true);
+            pagination.paginate(catalog, request, Attribute.CATALOG);
             return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
         }
     }
 
-    private List<BookDto> removeNumberBooksZero(List<BookDto> books) {
+    private List<BookDto> removeQuantityBooksZero(List<BookDto> books) {
         return books.stream()
                 .filter(b -> b.getNumber() != 0)
                 .collect(Collectors.toList());

@@ -29,7 +29,7 @@ public class ReaderOrdersCommand implements Command {
         String method = request.getMethod();
         if (method.equals(Value.GET)) {
             return getCommandInfoGet(request, session);
-        } else if(method.equals(Value.POST)){
+        } else if (method.equals(Value.POST)) {
             return getCommandInfoPost(request);
         }
         return null;
@@ -38,16 +38,12 @@ public class ReaderOrdersCommand implements Command {
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) {
         OrderService orderService = ServiceFactory.instance().orderService();
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
-        List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());
-        String page = request.getParameter(Parameter.PAGE);
-        int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         Pagination<OrderDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
-        List<Integer> pages = pagination.getPageNumbers(orders);
-        orders = pagination.getItemsPerPage(orders, pageNumber);
+        List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(Attribute.URL, url);
-        request.setAttribute(Attribute.PAGES, pages);
-        request.setAttribute(Attribute.USER_ORDERS, orders);
+        pagination.paginate(orders, request, Attribute.USER_ORDERS);
+
         return new CommandInfo(Page.READER_ORDERS, RoutingType.FORWARD);
     }
 

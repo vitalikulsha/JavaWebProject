@@ -10,7 +10,6 @@ import io.github.vitalikulsha.JavaWebProject.servlet.command.RoutingType;
 import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
-import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,13 +23,8 @@ public class AllBooksCommand implements Command {
         Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         List<BookDto> catalog = bookService.getAll();
         String url = request.getContextPath() + request.getServletPath() + "?";
-        String page = request.getParameter(Parameter.PAGE);
-        int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
-        List<Integer> pages = pagination.getPageNumbers(catalog);
-        catalog = pagination.getItemsPerPage(catalog, pageNumber);
         request.setAttribute(Attribute.URL, url);
-        request.setAttribute(Attribute.PAGES, pages);
-        request.setAttribute(Attribute.CATALOG, catalog);
+        pagination.paginate(catalog, request, Attribute.CATALOG);
         return new CommandInfo(Page.ALL_BOOKS, RoutingType.FORWARD);
     }
 }

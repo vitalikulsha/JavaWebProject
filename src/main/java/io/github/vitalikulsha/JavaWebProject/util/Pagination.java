@@ -1,5 +1,9 @@
 package io.github.vitalikulsha.JavaWebProject.util;
 
+import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -11,15 +15,24 @@ public class Pagination<T> {
         this.itemPerPage = itemPerPage;
     }
 
-    public List<Integer> getPageNumbers(List<T> allItems) {
+    public void paginate(List<T> allItems, HttpServletRequest request, String attribute) {
+        String page = request.getParameter(Parameter.PAGE);
+        int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
+        List<Integer> pages = getPageNumbers(allItems);
+        List<T> itemsPerPage = getItemsPerPage(allItems, pageNumber);
+        request.setAttribute(attribute, itemsPerPage);
+        request.setAttribute(Attribute.PAGES, pages);
+    }
+
+    private List<Integer> getPageNumbers(List<T> allItems) {
         List<Integer> pages = new ArrayList<>();
-        IntStream.range(1, getNumberPages(allItems) + 1).forEach(pages::add);
+        IntStream.range(1, getQuantityPages(allItems) + 1).forEach(pages::add);
         return pages;
     }
 
-    public List<T> getItemsPerPage(List<T> allItems, int page) {
+    private List<T> getItemsPerPage(List<T> allItems, int pageNumber) {
         int size = allItems.size();
-        int firstIndex = (page - 1) * itemPerPage;
+        int firstIndex = (pageNumber - 1) * itemPerPage;
         int lastIndex = firstIndex + itemPerPage - 1;
         List<T> result = new ArrayList<>();
         if (size < firstIndex) {
@@ -34,7 +47,7 @@ public class Pagination<T> {
         return result;
     }
 
-    private int getNumberPages(List<T> allItems) {
+    private int getQuantityPages(List<T> allItems) {
         int size = allItems.size();
         if (size == 0) {
             return 1;
