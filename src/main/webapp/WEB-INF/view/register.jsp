@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
 <html>
 <head>
     <title>Регистрация</title>
@@ -10,7 +11,7 @@
 </head>
 <body class="block">
 <h2>Регистрация нового пользователя</h2>
-<form action="${pageContext.request.contextPath}/register" method="post">
+<form action="${pageContext.request.contextPath}${UserPath.REGISTER.path}" method="post">
     <table>
         <tr>
             <th>Логин</th>

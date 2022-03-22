@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.AdminPath" %>
 
 <html>
 <head>
@@ -11,8 +12,8 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/admin"> Личный кабинет</a>
-    <a href="${pageContext.request.contextPath}/logout"> Выйти </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| Выйти |</a>
 </h4>
 <h2>Информация о книге</h2>
 <c:set var="book" scope="request" value="${book}"/>

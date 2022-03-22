@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 
 <html>
 <head>
@@ -12,9 +14,9 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
-    <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">| Поиск книг |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
 </h4>
 <h2>Выберите книгу из списка</h2>
 <h3>Для оформления заказа нажмите на код понравившейся книги</h3>
@@ -32,7 +34,7 @@
     <c:forEach var="book" items="${catalog}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}/reader/order?bookId=${book.id}"> ${book.id} </a>
+                <a href="${pageContext.request.contextPath}${UserPath.ORDER.path}?${Parameter.BOOK_ID}=${book.id}"> ${book.id} </a>
             </td>
             <td>${book.title}</td>
             <td>

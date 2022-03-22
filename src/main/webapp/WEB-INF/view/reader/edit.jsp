@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
+
 <html>
 <head>
     <title>Редактировать профиль</title>
@@ -10,7 +12,7 @@
 </head>
 <body class="block">
 <h2>Редактирование профиля пользователя</h2>
-<form action="${pageContext.request.contextPath}/reader/edit" method="post">
+<form action="${pageContext.request.contextPath}${UserPath.EDIT.path}" method="post">
     <table>
         <tr>
             <th>Имя пользователя</th>

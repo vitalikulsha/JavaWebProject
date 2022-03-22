@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.AdminPath" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 
 <html>
 <head>
@@ -12,8 +14,8 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/admin">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| Выйти |</a>
 </h4>
 <h2>Список всех книг в библиотеке</h2>
 <table style="with: 900px; margin: auto;">
@@ -30,7 +32,7 @@
     <c:forEach var="book" items="${catalog}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}/admin/book-info?bookId=${book.id}">
+                <a href="${pageContext.request.contextPath}${AdminPath.BOOK_INFO.path}?${Parameter.BOOK_ID}=${book.id}">
                     ${book.id} </a>
             </td>
             <td>${book.title}</td>

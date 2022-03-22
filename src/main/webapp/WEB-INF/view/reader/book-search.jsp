@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
 
 <html>
 <head>
@@ -13,12 +14,12 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/reader"> Личный кабинет</a>
-    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.READER.path}"> Личный кабинет</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
 </h4>
 <h2>Поиск книг</h2>
 <table>
-    <form action="${pageContext.request.contextPath}/reader/order" method="get">
+    <form action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
         <tr>
             <th>Найти книги по коду:</th>
             <td>
@@ -31,7 +32,7 @@
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}/reader/catalog" method="get">
+    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th>Найти книги по названию:</th>
             <td>
@@ -45,7 +46,7 @@
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}/reader/catalog" method="get">
+    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th>Найти книги по автору:</th>
             <td><input class="entry-field" type="text" name="${Parameter.AUTHOR_NAME}"
@@ -58,7 +59,7 @@
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}/reader/catalog" method="get">
+    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th>Найти книги по категории:</th>
             <td>
@@ -72,7 +73,7 @@
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}/reader/catalog" method="get">
+    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th>Получить весь список книг:</th>
             <td></td>

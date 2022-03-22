@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
 
 <html>
 <head>
@@ -14,13 +15,13 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
-    <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">| Поиск книг |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
 </h4>
 <h2>Оформление заказа</h2>
 <c:set var="book" scope="request" value="${book}"/>
-<form id="order" action="${pageContext.request.contextPath}/reader/order" method="post">
+<form id="order" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="post">
 </form>
 <table>
     <tr>

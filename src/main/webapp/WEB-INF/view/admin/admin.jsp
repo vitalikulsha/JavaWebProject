@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.AdminPath" %>
 
 <html>
 <head>
@@ -12,7 +13,7 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/logout"> Выйти </a></h4>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| Выйти |</a></h4>
 <h2>Личный кабинет</h2>
 <c:set var="user" scope="request" value="${user}"/>
 <table>
@@ -35,9 +36,9 @@
 </table>
 
 <h3 style="text-align: center;">
-    <a href="${pageContext.request.contextPath}/admin/all-orders">| Список заказов |</a>
-    <a href="${pageContext.request.contextPath}/admin/all-readers">| Список читателей |</a>
-    <a href="${pageContext.request.contextPath}/admin/all-books">| Список книг |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">| Список заказов |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}">| Список читателей |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">| Список книг |</a>
 </h3>
 
 </body>

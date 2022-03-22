@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Value" %>
 
 <html>
 <head>
@@ -8,17 +11,13 @@
         <%@include file='/WEB-INF/css/reader-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
 
-
-
-
-
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
-    <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">| Поиск книг |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
 </h4>
 <h2>Список заказов</h2>
 <c:set var="user" scope="request" value="${user}"/>
@@ -42,7 +41,7 @@
     <c:forEach var="order" items="${userOrders}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}/reader/reader-order-info?orderId=${order.id}">
+                <a href="${pageContext.request.contextPath}${UserPath.READER_ORDER_INFO.path}?${Parameter.ORDER_ID}=${order.id}">
                     ${order.id} </a>
             </td>
             <td>${order.bookDto.id}</td>
@@ -54,9 +53,10 @@
                         <p style="color: green"><b>ОДОБРЕН</b></p>
                         <c:if test="${order.approved}">
                             <c:if test="${order.reserveStatus ne 'REFUND'}">
-                                <form action="${pageContext.request.contextPath}/reader/reader-orders" method="post">
-                                    <input type="hidden" name="orderId" value="${order.id}">
-                                    <input type="hidden" name="action" value="refund">
+                                <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}"
+                                      method="post">
+                                    <input type="hidden" name="${Parameter.ORDER_ID}" value="${order.id}">
+                                    <input type="hidden" name="${Parameter.ACTION}" value="${Value.REFUND}">
                                     <input type="submit" value="Вернуть книгу">
                                 </form>
                             </c:if>
@@ -64,9 +64,9 @@
                     </c:when>
                     <c:otherwise>
                         <p style="color:red"><b>НЕОДОБРЕН</b></p>
-                        <form action="${pageContext.request.contextPath}/reader/reader-orders" method="post">
-                            <input type="hidden" name="orderId" value="${order.id}">
-                            <input type="hidden" name="action" value="cancel">
+                        <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}" method="post">
+                            <input type="hidden" name="${Parameter.ORDER_ID}" value="${order.id}">
+                            <input type="hidden" name="${Parameter.ACTION}" value="${Value.CANCEL}">
                             <input type="submit" value="Отменить заказ">
                         </form>
                     </c:otherwise>
