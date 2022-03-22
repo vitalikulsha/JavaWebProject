@@ -10,12 +10,12 @@
         <%@include file='/WEB-INF/css/book-catalog-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
 
+
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}/admin/all-orders">| Список заказов |</a>
-    <a href="${pageContext.request.contextPath}/admin">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}/reader">| Личный кабинет |</a>
     <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
 <c:set var="order" scope="request" value="${order}"/>
@@ -49,27 +49,17 @@
             <c:choose>
                 <c:when test="${order.approved}">
                     <p style="color: green"><b>ОДОБРЕН</b></p>
-                    <c:if test="${order.reserveStatus eq 'REFUND'}">
-                        <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
-                            <input type="hidden" name="action" value="cancel">
-                            <input type="submit" value="Закрыть">
-                        </form>
-                    </c:if>
                 </c:when>
                 <c:otherwise>
                     <p style="color:red"><b>НЕОДОБРЕН</b></p>
-                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
-                        <input type="hidden" name="${Parameter.ACTION}" value="${Value.APPROVE}">
-                        <input type="submit" value="Одобрить">
-                    </form>
-                    <form action="${pageContext.request.contextPath}/admin/order-info" method="post">
-                        <input type="hidden" name="${Parameter.ACTION}" value="${Value.CANCEL}">
-                        <input type="submit" value="Отменить">
-                    </form>
                 </c:otherwise>
             </c:choose>
         </td>
     </tr>
 </table>
+<h3 style="text-align: center;">
+    <a href="${pageContext.request.contextPath}/reader/reader-orders">| Список заказов |</a>
+    <a href="${pageContext.request.contextPath}/reader/book-search">| Поиск книг |</a>
+</h3>
 </body>
 </html>

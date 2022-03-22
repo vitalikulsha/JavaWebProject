@@ -39,8 +39,14 @@ public class OrderCommand implements Command {
         BookService bookService = ServiceFactory.instance().bookService();
         int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
         BookDto bookDto = bookService.getById(bookId);
-        session.setAttribute(Attribute.BOOK, bookDto);
-        return new CommandInfo(Page.ORDER, RoutingType.FORWARD);
+        if (bookDto == null) {
+            session.setAttribute(Attribute.BOOK_FOUND, false);
+            return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
+        } else {
+            session.setAttribute(Attribute.BOOK_FOUND, true);
+            session.setAttribute(Attribute.BOOK, bookDto);
+            return new CommandInfo(Page.ORDER, RoutingType.FORWARD);
+        }
     }
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) {

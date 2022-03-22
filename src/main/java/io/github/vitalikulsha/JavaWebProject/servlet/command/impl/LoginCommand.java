@@ -43,6 +43,7 @@ public class LoginCommand implements Command {
                 return new CommandInfo((AdminPath.ADMIN.getPath()), RoutingType.REDIRECT);
             }
         }
+        request.setAttribute(Attribute.USER_FOUND, false);
         return new CommandInfo(Page.LOGIN, RoutingType.FORWARD);
     }
 }

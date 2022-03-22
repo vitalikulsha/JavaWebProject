@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus" %>
 
 <html>
 <head>
@@ -52,9 +54,9 @@
     <tr>
         <th>Зарезервировать</th>
         <td>
-            <select style="font-size: 15px" name="reserveStatus" form="order">
-                <option value="READING_ROOM">Читальный зал</option>
-                <option value="LOANED"> Абонемент</option>
+            <select style="font-size: 15px" name="${Parameter.RESERVE_STATUS}" form="order">
+                <option value="${ReserveStatus.READING_ROOM}">${ReserveStatus.READING_ROOM.title}</option>
+                <option value="${ReserveStatus.LOANED}">${ReserveStatus.LOANED.title}</option>
             </select>
         </td>
     </tr>

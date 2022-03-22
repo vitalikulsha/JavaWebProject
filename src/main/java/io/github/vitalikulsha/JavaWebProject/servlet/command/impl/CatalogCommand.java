@@ -11,10 +11,12 @@ import io.github.vitalikulsha.JavaWebProject.util.Pagination;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
+import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,7 @@ public class CatalogCommand implements Command {
 
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
         BookService bookService = ServiceFactory.instance().bookService();
         Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         List<BookDto> catalog;
@@ -47,10 +50,16 @@ public class CatalogCommand implements Command {
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = pagination.getPageNumbers(catalog);
         catalog = pagination.getItemsPerPage(catalog, pageNumber);
-        request.setAttribute(Attribute.URL, url);
-        request.setAttribute(Attribute.PAGES, pages);
-        request.setAttribute(Attribute.CATALOG, catalog);
-        return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
+        if (catalog.isEmpty()) {
+            session.setAttribute(Attribute.BOOK_FOUND, false);
+            return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
+        } else {
+            request.setAttribute(Attribute.URL, url);
+            request.setAttribute(Attribute.PAGES, pages);
+            request.setAttribute(Attribute.CATALOG, catalog);
+            session.setAttribute(Attribute.BOOK_FOUND, true);
+            return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
+        }
     }
 
     private List<BookDto> removeNumberBooksZero(List<BookDto> books) {

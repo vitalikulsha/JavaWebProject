@@ -17,6 +17,7 @@ public class Page {
     //user
     public final static String READER = "/WEB-INF/view/reader/reader.jsp";
     public final static String READER_ORDERS = "/WEB-INF/view/reader/reader-orders.jsp";
+    public final static String READER_ORDER_INFO = "/WEB-INF/view/reader/reader-order-info.jsp";
     public final static String BOOK_SEARCH = "/WEB-INF/view/reader/book-search.jsp";
     public final static String CATALOG = "/WEB-INF/view/reader/catalog.jsp";
     public final static String ORDER = "/WEB-INF/view/reader/order.jsp";

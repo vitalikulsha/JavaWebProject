@@ -13,6 +13,8 @@ public class Attribute {
     public static final String READER_ORDERS = "readerOrders";
     public static final String ALL_READERS = "allReaders";
     public static final String IS_EXISTS = "isExists";
+    public static final String USER_FOUND = "userFound";
+    public static final String BOOK_FOUND = "bookFound";
 
     private Attribute() {
     }

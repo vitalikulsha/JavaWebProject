@@ -11,6 +11,7 @@
 
 
 
+
     </style>
 </head>
 <body class="block">
@@ -40,7 +41,10 @@
     <tbody>
     <c:forEach var="order" items="${userOrders}">
         <tr>
-            <td>${order.id}</td>
+            <td>
+                <a href="${pageContext.request.contextPath}/reader/reader-order-info?orderId=${order.id}">
+                    ${order.id} </a>
+            </td>
             <td>${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>
             <td>${order.reserveStatus.title}</td>

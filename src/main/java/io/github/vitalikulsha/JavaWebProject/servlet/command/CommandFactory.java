@@ -20,6 +20,7 @@ public class CommandFactory {
         put(AdminPath.ALL_BOOKS.getPath(), new AllBooksCommand());
         put(UserPath.READER.getPath(), new ReaderCommand());
         put(UserPath.READER_ORDERS.getPath(), new ReaderOrdersCommand());
+        put(UserPath.READER_ORDER_INFO.getPath(), new ReaderOrderInfoCommand());
         put(UserPath.BOOK_SEARCH.getPath(), new BookSearchCommand());
         put(UserPath.CATALOG.getPath(), new CatalogCommand());
         put(UserPath.ORDER.getPath(), new OrderCommand());

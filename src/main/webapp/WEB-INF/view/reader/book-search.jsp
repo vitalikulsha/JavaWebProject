@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 
 <html>
 <head>
@@ -15,16 +16,13 @@
     <a href="${pageContext.request.contextPath}/reader"> Личный кабинет</a>
     <a href="${pageContext.request.contextPath}/logout">| Выйти |</a>
 </h4>
-<c:if test="${isExists}">
-    <h3 class="error">Книга с id=${book.id} уже есть в списке заказов.<br>Выберите другую книгу.</h3>
-</c:if>
 <h2>Поиск книг</h2>
 <table>
     <form action="${pageContext.request.contextPath}/reader/order" method="get">
         <tr>
             <th>Найти книги по коду:</th>
             <td>
-                <input class="entry-field" type="text" name="bookId"
+                <input class="entry-field" type="number" name="${Parameter.BOOK_ID}"
                        placeholder="Введите код книги" required>
             </td>
             <td>
@@ -37,11 +35,11 @@
         <tr>
             <th>Найти книги по названию:</th>
             <td>
-                <input class="entry-field" type="text" name="bookTitle"
+                <input class="entry-field" type="text" name="${Parameter.BOOK_TITLE}"
                        placeholder="Введите название книги поностью или частично" required>
             </td>
             <td>
-                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="${Parameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="Найти">
             </td>
         </tr>
@@ -50,11 +48,11 @@
     <form action="${pageContext.request.contextPath}/reader/catalog" method="get">
         <tr>
             <th>Найти книги по автору:</th>
-            <td><input class="entry-field" type="text" name="authorName"
+            <td><input class="entry-field" type="text" name="${Parameter.AUTHOR_NAME}"
                        placeholder="Введите фамилию автора полностью или частично" required>
             </td>
             <td>
-                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="${Parameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="Найти">
             </td>
         </tr>
@@ -64,11 +62,11 @@
         <tr>
             <th>Найти книги по категории:</th>
             <td>
-                <input class="entry-field" type="text" name="categoryName"
+                <input class="entry-field" type="text" name="${Parameter.CATEGORY_NAME}"
                        placeholder="Введиет название категории полностью или частично" required>
             </td>
             <td>
-                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="${Parameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="Найти">
             </td>
         </tr>
@@ -79,11 +77,19 @@
             <th>Получить весь список книг:</th>
             <td></td>
             <td>
-                <input type="hidden" name="page" value="1">
+                <input type="hidden" name="${Parameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="Получить">
             </td>
         </tr>
     </form>
 </table>
+<c:if test="${isExists}">
+    <h3 class="error">Книга с id=${book.id} уже есть в списке заказов. Выберите другую книгу.</h3>
+</c:if>
+<c:if test="${not empty bookFound}">
+    <c:if test="${!bookFound}">
+        <h3 class="error">Ничего не найдено. Повторите попытку</h3>
+    </c:if>
+</c:if>
 </body>
 </html>

@@ -16,6 +16,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = {"/admin", "/admin/book-info", "/admin/reader-info", "/admin/order-info",
         "/admin/all-orders", "/admin/all-readers", "/admin/all-books",
         "/reader", "/reader/reader-orders", "/reader/book-search", "/reader/catalog", "/reader/order",
+        "reader-order-info",
         "/logout", "/login", "/register"})
 public class LibraryServlet extends HttpServlet {
     private CommandFactory commandFactory;

@@ -8,10 +8,6 @@
         <%@include file='/WEB-INF/css/order-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
 
-
-
-
-
     </style>
 </head>
 <body class="block">
