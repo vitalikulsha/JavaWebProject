@@ -1,9 +1,12 @@
-package io.github.vitalikulsha.JavaWebProject.entity.dto;
+package io.github.vitalikulsha.JavaWebProject.entity.converter;
 
 import io.github.vitalikulsha.JavaWebProject.dao.*;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Order;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.OrderDto;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 
 public class OrderDtoConverter implements DtoConverter<OrderDto, Order> {
 

@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.entity.dto;
+package io.github.vitalikulsha.JavaWebProject.entity.converter;
 
 public interface DtoConverter<T, E>{
 

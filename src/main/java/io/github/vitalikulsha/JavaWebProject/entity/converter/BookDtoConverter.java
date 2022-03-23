@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.entity.dto;
+package io.github.vitalikulsha.JavaWebProject.entity.converter;
 
 import io.github.vitalikulsha.JavaWebProject.dao.AuthorDao;
 import io.github.vitalikulsha.JavaWebProject.dao.CategoryDao;
@@ -6,6 +6,7 @@ import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
 
 import java.util.List;
 

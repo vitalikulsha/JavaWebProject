@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.entity.dto;
+package io.github.vitalikulsha.JavaWebProject.entity.converter;
 
 public class DtoConverterFactory {
     private final static DtoConverterFactory instance = new DtoConverterFactory();

@@ -2,12 +2,12 @@ package io.github.vitalikulsha.JavaWebProject.service.impl;
 
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
-import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverter;
-import io.github.vitalikulsha.JavaWebProject.entity.dto.DtoConverterFactory;
+import io.github.vitalikulsha.JavaWebProject.entity.converter.DtoConverter;
+import io.github.vitalikulsha.JavaWebProject.entity.converter.DtoConverterFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
-import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDtoConverter;
+import io.github.vitalikulsha.JavaWebProject.entity.converter.UserDtoConverter;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
 

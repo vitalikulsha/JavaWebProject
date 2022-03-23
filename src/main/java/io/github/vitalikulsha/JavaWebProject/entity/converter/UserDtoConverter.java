@@ -1,7 +1,7 @@
-package io.github.vitalikulsha.JavaWebProject.entity.dto;
+package io.github.vitalikulsha.JavaWebProject.entity.converter;
 
 import io.github.vitalikulsha.JavaWebProject.entity.User;
-import lombok.NonNull;
+import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 
 public class UserDtoConverter implements DtoConverter<UserDto, User> {
 
