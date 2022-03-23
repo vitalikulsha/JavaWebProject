@@ -69,18 +69,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean createUser(String login, String password, String userName, long phoneNumber,
-                              String email) {
-        User user = new User(0, login, DigestUtils.sha256Hex(password), userName, phoneNumber, email, Role.USER);
+    public boolean createUser(String login, String password, String firstName, String lastName,
+                              long phoneNumber, String email) {
+        User user = new User(0, login, DigestUtils.sha256Hex(password), firstName, lastName, phoneNumber, email, Role.USER);
         return userDao.save(user) != 0;
     }
 
     @Override
-    public UserDto updateUser(String userName, long phoneNumber, String email, int userId) {
+    public UserDto updateUser(String firstName, String lastName, long phoneNumber, String email, int userId) {
         UserDtoConverter userDtoConverter = DtoConverterFactory.instance().userDtoConverter();
         User user = userDao.findById(userId);
         User newUser = new User(userId, user.getLogin(), user.getPassword(),
-                userName, phoneNumber, email, user.getRole());
+                firstName, lastName, phoneNumber, email, user.getRole());
         return userDao.update(newUser) != 0 ? userDtoConverter.toDto(newUser) : null;
     }
 }

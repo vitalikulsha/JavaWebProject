@@ -17,7 +17,11 @@
 <table>
     <tr>
         <th>Имя пользователя</th>
-        <td>${user.userName}</td>
+        <td>${user.firstName}</td>
+    </tr>
+    <tr>
+        <th>Фамилия пользователя</th>
+        <td>${user.lastName}</td>
     </tr>
     <tr>
         <th>Код пользователя</th>

@@ -23,7 +23,11 @@
         </tr>
         <tr>
             <th>Имя пользователя</th>
-            <td><input type="text" placeholder="Введите имя пользователя" required name="${Parameter.USERNAME}"></td>
+            <td><input type="text" placeholder="Введите имя пользователя" required name="${Parameter.FIRST_NAME}"></td>
+        </tr>
+        <tr>
+            <th>Фамилия пользователя</th>
+            <td><input type="text" placeholder="Введите имя пользователя" required name="${Parameter.LAST_NAME}"></td>
         </tr>
         <tr>
             <th>Номер телефона</th>

@@ -26,7 +26,11 @@
     </tr>
     <tr>
         <th>Имя читателя</th>
-        <td>${user.userName}</td>
+        <td>${user.firstName}</td>
+    </tr>
+    <tr>
+        <th>Фамилия читателя</th>
+        <td>${user.lastName}</td>
     </tr>
     <tr>
         <th>Номер телефона</th>

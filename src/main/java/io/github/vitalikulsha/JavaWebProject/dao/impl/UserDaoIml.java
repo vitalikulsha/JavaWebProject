@@ -44,13 +44,13 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     @Override
     public int save(User user) {
-        return queryOperator.executeUpdate(userSqlQuery.SAVE, user.getLogin(), user.getPassword(),
-                user.getUserName(), user.getPhoneNumber(), user.getEmail(), user.getRole().name());
+        return queryOperator.executeUpdate(userSqlQuery.SAVE, user.getLogin(), user.getPassword(), user.getFirstName(),
+                user.getLastName(), user.getPhoneNumber(), user.getEmail(), user.getRole().name());
     }
 
     @Override
     public int update(User user) {
-        return queryOperator.executeUpdate(userSqlQuery.UPDATE, user.getUserName(), user.getPhoneNumber(),
-                user.getEmail(), user.getId());
+        return queryOperator.executeUpdate(userSqlQuery.UPDATE, user.getFirstName(), user.getLastName(),
+                user.getPhoneNumber(), user.getEmail(), user.getId());
     }
 }

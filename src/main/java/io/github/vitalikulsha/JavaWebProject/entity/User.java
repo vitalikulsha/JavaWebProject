@@ -8,16 +8,18 @@ public class User implements Serializable {
     private int id;
     private String login;
     private String password;
-    private String userName;
+    private String firstName;
+    private String lastName;
     private long phoneNumber;
     private String email;
     private Role role;
 
-    public User(int id, String login, String password, String userName, long phoneNumber, String email, Role role) {
+    public User(int id, String login, String password, String firstName,  String lastName, long phoneNumber, String email, Role role) {
         this.id = id;
         this.login = login;
         this.password = password;
-        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.role = role;
@@ -35,8 +37,12 @@ public class User implements Serializable {
         return password;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public long getPhoneNumber() {
@@ -57,7 +63,8 @@ public class User implements Serializable {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
-                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", phone_number=" + phoneNumber +
                 ", email='" + email + '\'' +
                 ", role=" + role +

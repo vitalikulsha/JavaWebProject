@@ -8,7 +8,8 @@ public class UserDto implements Serializable {
     private final static long serialVersionUID = 1L;
 
     private int id;
-    private String userName;
+    private String firstName;
+    private String lastName;
     private long phoneNumber;
     private String email;
     private Role role;
@@ -16,9 +17,10 @@ public class UserDto implements Serializable {
     public UserDto() {
     }
 
-    public UserDto(int id, String userName, long phoneNumber, String email, Role role) {
+    public UserDto(int id, String firstName, String lastName, long phoneNumber, String email, Role role) {
         this.id = id;
-        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.role = role;
@@ -32,12 +34,20 @@ public class UserDto implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public long getPhoneNumber() {
@@ -68,7 +78,8 @@ public class UserDto implements Serializable {
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
                 ", role=" + role +
@@ -87,8 +98,13 @@ public class UserDto implements Serializable {
             return this;
         }
 
-        public Builder fixUserName(String userName) {
-            userDto.userName = userName;
+        public Builder fixFirstName(String firstName) {
+            userDto.firstName = firstName;
+            return this;
+        }
+
+        public Builder fixLastName(String lastName) {
+            userDto.lastName = lastName;
             return this;
         }
 

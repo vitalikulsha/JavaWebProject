@@ -35,11 +35,11 @@ public class LoginCommand implements Command {
         String password = request.getParameter(Parameter.PASSWORD);
         UserService userService = ServiceFactory.instance().userService();
         if (userService.isExists(login, password)) {
-            UserDto user = userService.getByLogin(login);
-            session.setAttribute(Attribute.USER, user);
-            if (user.getRole() == Role.USER) {
+            UserDto userDto = userService.getByLogin(login);
+            session.setAttribute(Attribute.USER, userDto);
+            if (userDto.getRole() == Role.USER) {
                 return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
-            } else if (user.getRole() == Role.ADMIN) {
+            } else if (userDto.getRole() == Role.ADMIN) {
                 return new CommandInfo((AdminPath.ADMIN.getPath()), RoutingType.REDIRECT);
             }
         }

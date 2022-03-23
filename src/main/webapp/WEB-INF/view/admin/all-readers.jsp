@@ -24,6 +24,7 @@
     <tr>
         <th>Код читателя</th>
         <th>Имя читателя</th>
+        <th>Фамилия читателя</th>
     </tr>
     </thead>
     <tbody>
@@ -33,7 +34,8 @@
                 <a href="${pageContext.request.contextPath}${AdminPath.READER_INFO.path}?${Parameter.READER_ID}=${reader.id}">
                     ${reader.id} </a>
             </td>
-            <td>${reader.userName}</td>
+            <td>${reader.firstName}</td>
+            <td>${reader.lastName}</td>
         </tr>
     </c:forEach>
     </tbody>

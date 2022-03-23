@@ -12,7 +12,8 @@ public class UserDtoConverter implements DtoConverter<UserDto, User> {
         }
         return new UserDto.Builder()
                 .fixId(user.getId())
-                .fixUserName(user.getUserName())
+                .fixFirstName(user.getFirstName())
+                .fixLastName(user.getLastName())
                 .fixPhoneNumber(user.getPhoneNumber())
                 .fixEmail(user.getEmail())
                 .fixRole(user.getRole())

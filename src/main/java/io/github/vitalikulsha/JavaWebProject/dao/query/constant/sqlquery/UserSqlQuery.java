@@ -3,7 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery;
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Column;
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.Table;
 
-public class UserSqlQuery extends AbstractSqlQuery{
+public class UserSqlQuery extends AbstractSqlQuery {
     public final String FIND_BY_LOGIN;
     public final String FIND_BY_ROLE;
     public final String FIND_BY_EMAIL;
@@ -15,10 +15,10 @@ public class UserSqlQuery extends AbstractSqlQuery{
         FIND_BY_LOGIN = String.format("SELECT * FROM %s WHERE %s=?", Table.USER, Column.LOGIN);
         FIND_BY_ROLE = String.format("SELECT * FROM %s WHERE %s=?", Table.USER, Column.ROLE);
         FIND_BY_EMAIL = String.format("SELECT * FROM %s WHERE %s=?", Table.USER, Column.EMAIL);
-        SAVE = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s) VALUES ?, ?, ?, ?, ?, ?",
-                Table.USER, Column.LOGIN, Column.PASSWORD, Column.USERNAME, Column.PHONENUMBER,
-                Column.EMAIL, Column.ROLE);
-        UPDATE = String.format("UPDATE %s SET %s=?, %s=?, %s=? WHERE %s=?",
-                Table.USER, Column.USERNAME, Column.PHONENUMBER, Column.EMAIL, Column.USER_ID);
+        SAVE = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s, %s) VALUES ?, ?, ?, ?, ?, ?, ?",
+                Table.USER, Column.LOGIN, Column.PASSWORD, Column.FIRSTNAME, Column.LASTNAME,
+                Column.PHONENUMBER, Column.EMAIL, Column.ROLE);
+        UPDATE = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
+                Table.USER, Column.FIRSTNAME, Column.LASTNAME, Column.PHONENUMBER, Column.EMAIL, Column.USER_ID);
     }
 }

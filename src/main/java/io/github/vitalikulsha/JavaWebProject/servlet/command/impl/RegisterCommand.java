@@ -34,11 +34,13 @@ public class RegisterCommand implements Command {
         UserService userService = ServiceFactory.instance().userService();
         String login = request.getParameter(Parameter.LOGIN);
         String password = request.getParameter(Parameter.PASSWORD);
-        String userName = request.getParameter(Parameter.USERNAME);
+        String firstName = request.getParameter(Parameter.FIRST_NAME);
+        String lastName = request.getParameter(Parameter.LAST_NAME);
         long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
         String email = request.getParameter(Parameter.EMAIL);
-        log.info("login: " + login + "; password: " + password + ", userName: "
-                + userName + ", phoneNumber: " + phoneNumber);
+        log.info("login: " + login + "; password: " + password
+                + ", firstName: " + firstName + ", lastName: " + lastName
+                + ", phoneNumber: " + phoneNumber);
         if (userService.getByLogin(login) != null) {
             log.info("User with login " + login + " already exists");
             request.setAttribute(Attribute.IS_EXISTS, true);
@@ -50,7 +52,7 @@ public class RegisterCommand implements Command {
             request.setAttribute(Parameter.EMAIL, email);
             return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
         }
-        if (userService.createUser(login, password, userName, phoneNumber, email)) {
+        if (userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
             session.setAttribute(Attribute.USER, userService.getByLogin(login));
             log.info("New user: " + userService.getByLogin(login));
         }

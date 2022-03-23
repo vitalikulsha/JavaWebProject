@@ -6,7 +6,7 @@ import io.github.vitalikulsha.JavaWebProject.entity.User;
 
 import java.util.List;
 
-public interface UserService extends Service<UserDto>{
+public interface UserService extends Service<UserDto> {
     List<UserDto> getUsersByRole(Role role);
 
     boolean isExists(String login, String password);
@@ -15,8 +15,8 @@ public interface UserService extends Service<UserDto>{
 
     UserDto getByEmail(String email);
 
-    boolean createUser(String login, String password, String userName, long phoneNumber,
-                       String email);
+    boolean createUser(String login, String password, String firstName, String lastName,
+                       long phoneNumber, String email);
 
-    UserDto updateUser(String userName, long phoneNumber, String email, int userId);
+    UserDto updateUser(String firstName, String lastName, long phoneNumber, String email, int userId);
 }

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
-public class EditCommand implements Command {
+public class EditReaderCommand implements Command {
 
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
@@ -33,11 +33,13 @@ public class EditCommand implements Command {
         HttpSession session = request.getSession();
         UserDto userDto = (UserDto) session.getAttribute(Attribute.USER);
         UserService userService = ServiceFactory.instance().userService();
-        String userName = request.getParameter(Parameter.USERNAME);
+        String firstName = request.getParameter(Parameter.FIRST_NAME);
+        String lastName = request.getParameter(Parameter.LAST_NAME);
         long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
         String email = request.getParameter(Parameter.EMAIL);
-        log.info("userName: " + userName + ", phoneNumber: " + phoneNumber + ", email: " + email);
-        UserDto newUserDto = userService.updateUser(userName, phoneNumber, email, userDto.getId());
+        log.info("firstName: " + firstName + ", lastName: " + lastName
+                + ", phoneNumber: " + phoneNumber + ", email: " + email);
+        UserDto newUserDto = userService.updateUser(firstName, lastName, phoneNumber, email, userDto.getId());
         session.setAttribute(Attribute.USER, newUserDto);
         return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
     }

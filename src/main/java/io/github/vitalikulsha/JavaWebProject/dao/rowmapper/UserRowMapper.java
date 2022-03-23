@@ -14,11 +14,12 @@ public class UserRowMapper implements RowMapper<User> {
             int id = resultSet.getInt(Column.USER_ID.name());
             String login = resultSet.getString(Column.LOGIN.name());
             String password = resultSet.getString(Column.PASSWORD.name());
-            String userName = resultSet.getString(Column.USERNAME.name());
+            String firstName = resultSet.getString(Column.FIRSTNAME.name());
+            String lastName = resultSet.getString(Column.LASTNAME.name());
             long phoneNumber = resultSet.getLong(Column.PHONENUMBER.name());
             String email = resultSet.getString(Column.EMAIL.name());
             Role role = Role.valueOf(resultSet.getString(Column.ROLE.name()));
-            return new User(id, login, password, userName, phoneNumber, email, role);
+            return new User(id, login, password, firstName, lastName, phoneNumber, email, role);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
