@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.filter;
+package io.github.vitalikulsha.JavaWebProject.servlet.filter;
 
 import lombok.extern.slf4j.Slf4j;
 

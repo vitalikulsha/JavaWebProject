@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.JavaWebProject.filter;
+package io.github.vitalikulsha.JavaWebProject.servlet.filter;
 
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;

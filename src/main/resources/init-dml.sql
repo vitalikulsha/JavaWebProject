@@ -93,10 +93,10 @@ INSERT INTO BOOK_AUTHOR VALUES (82101, 25);
 INSERT INTO BOOK_AUTHOR VALUES (90001, 26);
 INSERT INTO BOOK_AUTHOR VALUES (90002, 27);
 
-INSERT INTO USER VALUES (1, 'Admin', 'admin', 'Иван Иванов', 375123456789, 'admin@gmail.com', 'ADMIN');
-INSERT INTO USER VALUES (2, 'Librarian', 'librarian', 'Петр Петров', 375291234567, 'librarian@gmail.com', 'ADMIN');
-INSERT INTO USER VALUES (3, 'User', 'user', 'Сергей Сергеев', 375441234567, 'user@gmail.com', 'USER');
-INSERT INTO USER VALUES (4, 'Reader', 'reader', 'Олег Олегов', 375331234567, 'reader@gmail.com', 'USER');
+INSERT INTO USER VALUES (1, 'Admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Иван Иванов', 375123456789, 'admin@gmail.com', 'ADMIN');
+INSERT INTO USER VALUES (2, 'Librarian', '2c445e1c04df4e247c2089245b68fc811f728f7d30ff14a6d64a4faac58e6270', 'Петр Петров', 375291234567, 'librarian@gmail.com', 'ADMIN');
+INSERT INTO USER VALUES (3, 'User', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb', 'Сергей Сергеев', 375441234567, 'user@gmail.com', 'USER');
+INSERT INTO USER VALUES (4, 'Reader', '3d0941964aa3ebdcb00ccef58b1bb399f9f898465e9886d5aec7f31090a0fb30', 'Олег Олегов', 375331234567, 'reader@gmail.com', 'USER');
 
 INSERT INTO ORDER_BOOK VALUES (1, 90002, 3, 'READING_ROOM', TRUE);
 INSERT INTO ORDER_BOOK VALUES (2, 50001, 4, 'LOANED', FALSE);

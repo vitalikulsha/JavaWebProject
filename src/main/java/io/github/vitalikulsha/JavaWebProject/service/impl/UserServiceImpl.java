@@ -9,6 +9,7 @@ import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDtoConverter;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             return false;
         } else return user.getLogin().equals(login)
-                && user.getPassword().equals(password);
+                && user.getPassword().equals(DigestUtils.sha256Hex(password));//encoder
     }
 
     @Override
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean createUser(String login, String password, String userName, long phoneNumber,
                               String email) {
-        User user = new User(0, login, password, userName, phoneNumber, email, Role.USER);
+        User user = new User(0, login, DigestUtils.sha256Hex(password), userName, phoneNumber, email, Role.USER);
         return userDao.save(user) != 0;
     }
 
