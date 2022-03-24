@@ -10,6 +10,9 @@
     </style>
 </head>
 <body class="block">
+<h4 style="text-align: right;">
+    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">| Вход в систему |</a>
+</h4>
 <h2>Регистрация нового читателя</h2>
 <form action="${pageContext.request.contextPath}${UserPath.REGISTER.path}" method="post">
     <table>
@@ -45,6 +48,7 @@
         </tr>
     </table>
     <input class="button" type="submit" value="Зарегистрировать">
+    <input class="button" style="margin-left: 100px" type="reset" value="Очистить поля">
 </form>
 <c:if test="${userExists}">
     <c:if test="${not empty login}">
