@@ -37,7 +37,7 @@ public class LoginCommand implements Command {
         if (userService.isExists(login, password)) {
             UserDto userDto = userService.getByLogin(login);
             session.setAttribute(Attribute.USER, userDto);
-            if (userDto.getRole() == Role.USER) {
+            if (userDto.getRole() == Role.READER) {
                 return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
             } else if (userDto.getRole() == Role.ADMIN) {
                 return new CommandInfo((AdminPath.ADMIN.getPath()), RoutingType.REDIRECT);

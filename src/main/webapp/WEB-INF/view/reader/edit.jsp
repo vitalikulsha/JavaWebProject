@@ -8,8 +8,6 @@
     <title>Редактировать профиль</title>
     <style>
         <%@include file='/WEB-INF/css/style.css' %>
-
-
     </style>
 </head>
 <body class="block">
@@ -30,8 +28,7 @@
         </tr>
         <tr>
             <th>Фамилия пользователя</th>
-            <td><input
-                    title="Фамилия должна содержать только латинские или кириллические буквы. Первая буква заглавная, остальные строчные. Не более 30 символов."
+            <td><input title="Фамилия должна содержать только латинские или кириллические буквы. Первая буква заглавная, остальные строчные. Не более 30 символов."
                     type="text" placeholder="Введите фамилию пользователя" required value="${user.lastName}"
                     name="${Parameter.LAST_NAME}"></td>
         </tr>
@@ -50,10 +47,15 @@
     </table>
     <input class="button" type="submit" value="Сохранить">
 </form>
-<c:if test="${not empty fieldValid}">
-    <c:if test="${!fieldValid}">
-        <h3 class="error">Поля заполнены не корректно.<br>Попробуйте еще раз.</h3>
-    </c:if>
+<c:if test="${not empty invalidField}">
+    <h3 style="color:red"> Некорректно заполненные поля: <br>
+        <c:forEach var="field" items="${invalidField}">
+            <c:if test="${field eq 'firstName'}">- имя пользователя;<br></c:if>
+            <c:if test="${field eq 'lastName'}">- фамилия пользователя;<br></c:if>
+            <c:if test="${field eq 'phoneNumber'}">- номер телефона;<br></c:if>
+            <c:if test="${field eq 'email'}">- e-mail;<br></c:if>
+        </c:forEach>
+    </h3>
 </c:if>
 </body>
 </html>

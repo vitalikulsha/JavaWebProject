@@ -12,10 +12,10 @@ public class Attribute {
     public static final String ORDER = "order";
     public static final String READER_ORDERS = "readerOrders";
     public static final String ALL_READERS = "allReaders";
-    public static final String IS_EXISTS = "isExists";
+    public static final String USER_EXISTS = "userExists";
     public static final String USER_FOUND = "userFound";
     public static final String BOOK_FOUND = "bookFound";
-    public static final String FIELD_VALID = "fieldValid";
+    public static final String INVALID_FIELD = "invalidField";
 
     private Attribute() {
     }

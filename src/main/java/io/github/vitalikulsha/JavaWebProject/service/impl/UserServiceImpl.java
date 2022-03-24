@@ -7,10 +7,9 @@ import io.github.vitalikulsha.JavaWebProject.entity.converter.DtoConverterFactor
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
-import io.github.vitalikulsha.JavaWebProject.entity.converter.UserDtoConverter;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.service.validator.EntityValidator;
-import io.github.vitalikulsha.JavaWebProject.service.validator.UserValidator;
+import io.github.vitalikulsha.JavaWebProject.service.validator.ValidationPattern;
 import io.github.vitalikulsha.JavaWebProject.service.validator.ValidatorFactory;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -76,9 +75,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean createUser(String login, String password, String firstName, String lastName,
                               long phoneNumber, String email) {
+        if (password == null || !password.matches(ValidationPattern.PASSWORD_PATTERN)
+                || login == null || !login.matches(ValidationPattern.LOGIN_PATTERN)) {
+            return false;
+        }
         User user = new User(0, login, DigestUtils.sha256Hex(password),
-                firstName, lastName, phoneNumber, email, Role.USER);
-        return userDao.save(user) == 1;
+                firstName, lastName, phoneNumber, email, Role.READER);
+        return userValidator.validate(user) && userDao.save(user) == 1;
     }
 
     @Override
@@ -88,9 +91,6 @@ public class UserServiceImpl implements UserService {
         user.setLastName(lastName);
         user.setPhoneNumber(phoneNumber);
         user.setEmail(email);
-        if (!userValidator.validate(user)) {
-            return false;
-        }
-        return userDao.update(user) == 1;
+        return userValidator.validate(user) && userDao.update(user) == 1;
     }
 }

@@ -28,7 +28,7 @@ public class AccessFilter implements Filter {
         List<String> userPages = Arrays.stream(UserPath.values())
                 .map(UserPath::getPath)
                 .collect(Collectors.toList());
-        rolePages.put(Role.USER, userPages);
+        rolePages.put(Role.READER, userPages);
 
         List<String> adminPath = Arrays.stream(AdminPath.values())
                 .map(AdminPath::getPath)
@@ -63,7 +63,7 @@ public class AccessFilter implements Filter {
                 log.debug("Is user == null");
                 chain.doFilter(servletRequest, servletResponse);
                 log.debug("The AccessFilter has worked");
-            } else if (user.getRole() == Role.USER) {
+            } else if (user.getRole() == Role.READER) {
                 response.sendRedirect("/library/reader");
             } else if (user.getRole() == Role.ADMIN) {
                 response.sendRedirect("/library/login");
@@ -90,7 +90,7 @@ public class AccessFilter implements Filter {
     }
 
     private boolean isUserPage(String servletPath) {
-        return rolePages.get(Role.USER).contains(servletPath);
+        return rolePages.get(Role.READER).contains(servletPath);
     }
 
     private boolean isGuestPage(String servletPath) {
@@ -99,7 +99,7 @@ public class AccessFilter implements Filter {
 
     private boolean isAuthorized(String servletPath, UserDto user) {
         return (isAdminPage(servletPath) && user.getRole() == Role.ADMIN)
-                || (isUserPage(servletPath) && user.getRole() == Role.USER);
+                || (isUserPage(servletPath) && user.getRole() == Role.READER);
     }
 
 

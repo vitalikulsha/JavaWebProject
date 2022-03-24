@@ -23,7 +23,7 @@ public class AllReadersCommand implements Command {
         UserService userService = ServiceFactory.instance().userService();
         Pagination<UserDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         String url = request.getContextPath() + AdminPath.ALL_READERS.getPath() + "?";
-        List<UserDto> allReaders = userService.getUsersByRole(Role.USER);
+        List<UserDto> allReaders = userService.getUsersByRole(Role.READER);
         request.setAttribute(Attribute.URL, url);
         pagination.paginate(allReaders, request, Attribute.ALL_READERS);
         return new CommandInfo(Page.ALL_READERS, RoutingType.FORWARD);
