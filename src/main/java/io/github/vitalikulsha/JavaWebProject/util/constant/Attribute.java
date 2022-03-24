@@ -15,6 +15,7 @@ public class Attribute {
     public static final String IS_EXISTS = "isExists";
     public static final String USER_FOUND = "userFound";
     public static final String BOOK_FOUND = "bookFound";
+    public static final String FIELD_VALID = "fieldValid";
 
     private Attribute() {
     }

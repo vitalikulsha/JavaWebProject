@@ -9,6 +9,9 @@ import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.entity.converter.UserDtoConverter;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
+import io.github.vitalikulsha.JavaWebProject.service.validator.EntityValidator;
+import io.github.vitalikulsha.JavaWebProject.service.validator.UserValidator;
+import io.github.vitalikulsha.JavaWebProject.service.validator.ValidatorFactory;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
@@ -17,10 +20,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final DtoConverter<UserDto, User> userDtoConverter;
+    private final EntityValidator<User> userValidator;
 
     public UserServiceImpl() {
         userDao = DaoFactory.instance().userDao();
         userDtoConverter = DtoConverterFactory.instance().userDtoConverter();
+        userValidator = ValidatorFactory.instance().userValidator();
     }
 
     @Override
@@ -71,16 +76,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean createUser(String login, String password, String firstName, String lastName,
                               long phoneNumber, String email) {
-        User user = new User(0, login, DigestUtils.sha256Hex(password), firstName, lastName, phoneNumber, email, Role.USER);
-        return userDao.save(user) != 0;
+        User user = new User(0, login, DigestUtils.sha256Hex(password),
+                firstName, lastName, phoneNumber, email, Role.USER);
+        return userDao.save(user) == 1;
     }
 
     @Override
-    public UserDto updateUser(String firstName, String lastName, long phoneNumber, String email, int userId) {
-        UserDtoConverter userDtoConverter = DtoConverterFactory.instance().userDtoConverter();
+    public boolean editUser(String firstName, String lastName, long phoneNumber, String email, int userId) {
         User user = userDao.findById(userId);
-        User newUser = new User(userId, user.getLogin(), user.getPassword(),
-                firstName, lastName, phoneNumber, email, user.getRole());
-        return userDao.update(newUser) != 0 ? userDtoConverter.toDto(newUser) : null;
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setPhoneNumber(phoneNumber);
+        user.setEmail(email);
+        if (!userValidator.validate(user)) {
+            return false;
+        }
+        return userDao.update(user) == 1;
     }
 }

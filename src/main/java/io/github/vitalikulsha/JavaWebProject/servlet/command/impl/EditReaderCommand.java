@@ -39,7 +39,12 @@ public class EditReaderCommand implements Command {
         String email = request.getParameter(Parameter.EMAIL);
         log.info("firstName: " + firstName + ", lastName: " + lastName
                 + ", phoneNumber: " + phoneNumber + ", email: " + email);
-        UserDto newUserDto = userService.updateUser(firstName, lastName, phoneNumber, email, userDto.getId());
+        if (!userService.editUser(firstName, lastName, phoneNumber, email, userDto.getId())) {
+            log.info("Failed to update user data. Try again.");
+            request.setAttribute(Attribute.FIELD_VALID, false);
+            return new CommandInfo(Page.EDIT, RoutingType.FORWARD);
+        }
+        UserDto newUserDto = userService.getById(userDto.getId());
         session.setAttribute(Attribute.USER, newUserDto);
         return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
     }

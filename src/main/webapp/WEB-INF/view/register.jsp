@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <th>Фамилия пользователя</th>
-            <td><input type="text" placeholder="Введите имя пользователя" required name="${Parameter.LAST_NAME}"></td>
+            <td><input type="text" placeholder="Введите фамилию пользователя" required name="${Parameter.LAST_NAME}"></td>
         </tr>
         <tr>
             <th>Номер телефона</th>

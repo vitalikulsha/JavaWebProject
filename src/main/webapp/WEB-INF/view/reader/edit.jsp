@@ -8,34 +8,52 @@
     <title>Редактировать профиль</title>
     <style>
         <%@include file='/WEB-INF/css/style.css' %>
+
+
     </style>
 </head>
 <body class="block">
+<h4 style="text-align: right;">
+    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">| Личный кабинет |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
+</h4>
 <h2>Редактирование профиля пользователя</h2>
 <form action="${pageContext.request.contextPath}${UserPath.EDIT.path}" method="post">
     <table>
         <tr>
             <th>Имя пользователя</th>
-            <td><input type="text" placeholder="Введите имя пользователя" required value="${user.firstName}"
-                       name="${Parameter.FIRST_NAME}"></td>
+            <td>
+                <input title="Имя должно содержать только латинские или кириллические буквы. Первая буква заглавная, остальные строчные. Не более 30 символов."
+                       type="text" placeholder="Введите имя пользователя" required value="${user.firstName}"
+                       name="${Parameter.FIRST_NAME}">
+            </td>
         </tr>
         <tr>
             <th>Фамилия пользователя</th>
-            <td><input type="text" placeholder="Введите имя пользователя" required value="${user.lastName}"
-                       name="${Parameter.LAST_NAME}"></td>
+            <td><input
+                    title="Фамилия должна содержать только латинские или кириллические буквы. Первая буква заглавная, остальные строчные. Не более 30 символов."
+                    type="text" placeholder="Введите фамилию пользователя" required value="${user.lastName}"
+                    name="${Parameter.LAST_NAME}"></td>
         </tr>
         <tr>
             <th>Номер телефона</th>
-            <td><input type="number" placeholder="Введите номер телефона" required value="${user.phoneNumber}"
+            <td><input title="Номер телефона в формате 375......... (+9 цифр)"
+                       type="number" placeholder="Введите номер телефона" required value="${user.phoneNumber}"
                        name="${Parameter.PHONE_NUMBER}"></td>
         </tr>
         <tr>
             <th>E-mail</th>
-            <td><input type="email" placeholder="Введите e-mail" required value="${user.email}"
+            <td><input title="E-mail в формате ...@...[.]..."
+                       type="email" placeholder="Введите e-mail" required value="${user.email}"
                        name="${Parameter.EMAIL}"></td>
         </tr>
     </table>
     <input class="button" type="submit" value="Сохранить">
 </form>
+<c:if test="${not empty fieldValid}">
+    <c:if test="${!fieldValid}">
+        <h3 class="error">Поля заполнены не корректно.<br>Попробуйте еще раз.</h3>
+    </c:if>
+</c:if>
 </body>
 </html>

@@ -2,7 +2,6 @@ package io.github.vitalikulsha.JavaWebProject.service;
 
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
-import io.github.vitalikulsha.JavaWebProject.entity.User;
 
 import java.util.List;
 
@@ -18,5 +17,5 @@ public interface UserService extends Service<UserDto> {
     boolean createUser(String login, String password, String firstName, String lastName,
                        long phoneNumber, String email);
 
-    UserDto updateUser(String firstName, String lastName, long phoneNumber, String email, int userId);
+    boolean editUser(String firstName, String lastName, long phoneNumber, String email, int userId);
 }
