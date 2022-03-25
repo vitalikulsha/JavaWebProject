@@ -2,6 +2,8 @@ package io.github.vitalikulsha.JavaWebProject.dao.query;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConnectionSource;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapper;
+import io.github.vitalikulsha.JavaWebProject.exception.ConnectionException;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.*;
@@ -17,7 +19,8 @@ public class QueryOperator<T> {
         this.mapper = mapper;
     }
 
-    public List<T> executeEntityListQueryWithoutParam(String sqlQuery) {
+    public List<T> executeEntityListQueryWithoutParam(String sqlQuery) throws DaoException {
+        log.info("SQL query: " + sqlQuery);
         List<T> result = new ArrayList<>();
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
@@ -26,18 +29,23 @@ public class QueryOperator<T> {
                 result.add(mapper.getEntity(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            log.error("Unable to execute select query.", e);
+            throw new DaoException("SQLException while executing a select query.", e);
+        } catch (ConnectionException e) {
+            log.error("Unable to get connection.", e);
+            throw new DaoException("Unable to get connection", e);
         }
         return result;
     }
 
-    public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) {
+    public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) throws DaoException {
+        log.info("SQL query: " + sqlQuery);
         String query = String.format(sqlQuery, param);
         return executeEntityListQueryWithoutParam(query);
     }
 
-    public List<T> executeEntityListQueryWithParam(String sqlQuery, Object param) {
+    public List<T> executeEntityListQueryWithParam(String sqlQuery, Object param) throws DaoException {
+        log.info("SQL query: " + sqlQuery);
         List<T> result = new ArrayList<>();
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -48,49 +56,48 @@ public class QueryOperator<T> {
                 result.add(entity);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+            log.error("Unable to execute select query.", e);
+            throw new DaoException("SQLException while executing a select query.", e);
+        } catch (ConnectionException e) {
+            log.error("Unable to get connection.", e);
+            throw new DaoException("Unable to get connection", e);
         }
         return result;
     }
 
-    public T executeSingleEntityQuery(String sqlQuery, Object param) {
+    public T executeSingleEntityQuery(String sqlQuery, Object param) throws DaoException {
+        log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setObject(1, param);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return mapper.getEntity(resultSet);
+            } else {
+                return null;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Unable to execute select query.", e);
+            throw new DaoException("SQLException while executing a select query.", e);
+        } catch (ConnectionException e) {
+            log.error("Unable to get connection.", e);
+            throw new DaoException("Unable to get connection", e);
         }
-        return null;
     }
 
-    public int executeSimpleQuery(String sqlQuery) {
-        try (Connection connection = connectionSource.createConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            if (resultSet.next()) {
-                return resultSet.getInt(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-
-    public int executeUpdate(String sqlQuery, Object... params) {
+    public int executeUpdate(String sqlQuery, Object... params) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
             setStatementParam(preparedStatement, params);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Unable to execute update query.", e);
+            throw new DaoException("SQLException while executing an update query.", e);
+        } catch (ConnectionException e) {
+            log.error("Unable to get connection.", e);
+            throw new DaoException("Unable to get connection", e);
         }
-        return 0;
     }
 
     private void setStatementParam(PreparedStatement preparedStatement, Object... params) throws SQLException {

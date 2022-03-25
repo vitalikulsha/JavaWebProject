@@ -6,6 +6,7 @@ import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.AuthorS
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
     }
 
     @Override
-    public List<Author> findAuthorsByBookId(int bookId) {
+    public List<Author> findAuthorsByBookId(int bookId) throws DaoException {
         return queryOperator.executeEntityListQueryWithParam(authorSqlQuery.FIND_BY_BOOK_ID, bookId);
     }
 }

@@ -2,6 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
 import io.github.vitalikulsha.JavaWebProject.config.ConfigParameter;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,15 +38,35 @@ public class CatalogCommand implements Command {
         String categoryName = request.getParameter(Parameter.CATEGORY_NAME);
         if (bookTitle != null) {
             url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
-            catalog = removeQuantityBooksZero(bookService.getBooksByTitle(bookTitle));
+            try {
+                catalog = removeQuantityBooksZero(bookService.getBooksByTitle(bookTitle));
+            } catch (ServiceException e) {
+                log.error("Unable to get books by title.", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         } else if (authorName != null) {
             url = url + Parameter.AUTHOR_NAME + "=" + authorName;
-            catalog = removeQuantityBooksZero(bookService.getBooksByAuthorName(authorName));
+            try {
+                catalog = removeQuantityBooksZero(bookService.getBooksByAuthorName(authorName));
+            } catch (ServiceException e) {
+                log.error("Unable to get books by author name.", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         } else if (categoryName != null) {
             url = url + Parameter.CATEGORY_NAME + "=" + categoryName;
-            catalog = removeQuantityBooksZero(bookService.getBooksByCategoryName(categoryName));
+            try {
+                catalog = removeQuantityBooksZero(bookService.getBooksByCategoryName(categoryName));
+            } catch (ServiceException e) {
+                log.error("Unable to get books by category name.", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         } else {
-            catalog = removeQuantityBooksZero(bookService.getAll());
+            try {
+                catalog = removeQuantityBooksZero(bookService.getAll());
+            } catch (ServiceException e) {
+                log.error("Unable to get all books.");
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         }
         if (catalog.isEmpty()) {
             session.setAttribute(Attribute.BOOK_FOUND, false);

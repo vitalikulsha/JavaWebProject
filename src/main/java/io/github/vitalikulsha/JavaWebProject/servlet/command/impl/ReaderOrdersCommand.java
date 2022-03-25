@@ -4,6 +4,7 @@ import io.github.vitalikulsha.JavaWebProject.config.ConfigParameter;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
@@ -15,12 +16,14 @@ import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Parameter;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Value;
 import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+@Slf4j
 public class ReaderOrdersCommand implements Command {
 
     @Override
@@ -28,26 +31,35 @@ public class ReaderOrdersCommand implements Command {
         HttpSession session = request.getSession();
         String method = request.getMethod();
         if (method.equals(Value.GET)) {
-            return getCommandInfoGet(request, session);
+            try {
+                return getCommandInfoGet(request, session);
+            } catch (ServiceException e) {
+                log.error("Unable to get orders by user id", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         } else if (method.equals(Value.POST)) {
-            return getCommandInfoPost(request);
+            try {
+                return getCommandInfoPost(request);
+            } catch (ServiceException e) {
+                log.error("Unable to update user.", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         }
-        return null;
+        return new CommandInfo(Page.ERROR_403, RoutingType.FORWARD);
     }
 
-    private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) {
+    private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
-        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
         Pagination<OrderDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
-        List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());
+        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(Attribute.URL, url);
+        List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());
         pagination.paginate(orders, request, Attribute.USER_ORDERS);
-
         return new CommandInfo(Page.READER_ORDERS, RoutingType.FORWARD);
     }
 
-    private CommandInfo getCommandInfoPost(HttpServletRequest request) {
+    private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
         int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
         String action = request.getParameter(Parameter.ACTION);

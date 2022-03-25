@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.config;
 
+import io.github.vitalikulsha.JavaWebProject.exception.ConnectionException;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -9,6 +12,7 @@ import java.sql.Statement;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class ConnectionSource {
 
     // JDBC driver name and database URL
@@ -25,15 +29,18 @@ public class ConnectionSource {
         return instance;
     }
 
-    public Connection createConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL, USER, PASS);
+    public Connection createConnection() throws ConnectionException {
+        try {
+            return DriverManager.getConnection(DB_URL, USER, PASS);
+        } catch (SQLException e) {
+            log.error("Unable to get connection.", e);
+            throw new ConnectionException("SQLException in createConnection() method.", e);
+        }
     }
 
     private ConnectionSource() {
-
         try {
             DriverManager.registerDriver(new org.hsqldb.jdbc.JDBCDriver());
-
             try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
                 try (Statement statement = conn.createStatement()) {
                     statement.execute(getSql("init-ddl.sql"));
@@ -43,7 +50,8 @@ public class ConnectionSource {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            log.error("Failed to initialize connection", e);
+            throw new RuntimeException();
         }
     }
 

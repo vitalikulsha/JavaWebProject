@@ -6,6 +6,8 @@ import io.github.vitalikulsha.JavaWebProject.entity.converter.DtoConverterFactor
 import io.github.vitalikulsha.JavaWebProject.entity.dto.OrderDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Order;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,44 +25,72 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getById(int id) {
-        return orderDtoConverter.toDto(orderDao.findById(id));
+    public OrderDto getById(int id) throws ServiceException {
+        try {
+            return orderDtoConverter.toDto(orderDao.findById(id));
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when getting order from DB by id", e);
+        }
     }
 
     @Override
-    public List<OrderDto> getAll() {
-        return orderDao.findAll()
-                .stream()
-                .map(orderDtoConverter::toDto)
-                .collect(Collectors.toList());
+    public List<OrderDto> getAll() throws ServiceException {
+        try {
+            return orderDao.findAll()
+                    .stream()
+                    .map(orderDtoConverter::toDto)
+                    .collect(Collectors.toList());
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when getting all orders from DB", e);
+        }
     }
 
     @Override
-    public List<OrderDto> getOrdersByUserId(int userId) {
-        return orderDao.findByUserId(userId)
-                .stream()
-                .map(orderDtoConverter::toDto)
-                .collect(Collectors.toList());
+    public List<OrderDto> getOrdersByUserId(int userId) throws ServiceException {
+        try {
+            return orderDao.findByUserId(userId)
+                    .stream()
+                    .map(orderDtoConverter::toDto)
+                    .collect(Collectors.toList());
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when getting orders from DB by user id", e);
+        }
     }
 
     @Override
-    public boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus) {
+    public boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus) throws ServiceException {
         Order order = new Order(0, bookId, userId, reserveStatus, false);
-        return orderDao.save(order) != 0;
+        try {
+            return orderDao.save(order) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when creating a new order", e);
+        }
     }
 
     @Override
-    public boolean updateOrderApproval(boolean approved, int orderId) {
-        return orderDao.updateApproved(approved, orderId) != 0;
+    public boolean updateOrderApproval(boolean approved, int orderId) throws ServiceException {
+        try {
+            return orderDao.updateApproved(approved, orderId) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when updating order approval status", e);
+        }
     }
 
     @Override
-    public boolean updateOrderReserveStatus(ReserveStatus reserveStatus, int orderId){
-        return orderDao.updateReserved(reserveStatus, orderId) != 0;
+    public boolean updateOrderReserveStatus(ReserveStatus reserveStatus, int orderId) throws ServiceException {
+        try {
+            return orderDao.updateReserved(reserveStatus, orderId) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when updating order reserve status", e);
+        }
     }
 
     @Override
-    public boolean deleteById(int orderId) {
-        return orderDao.deleteById(orderId) != 0;
+    public boolean deleteById(int orderId) throws ServiceException {
+        try {
+            return orderDao.deleteById(orderId) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when deleting a order", e);
+        }
     }
 }

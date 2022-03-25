@@ -7,15 +7,19 @@ import io.github.vitalikulsha.JavaWebProject.entity.converter.DtoConverterFactor
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.service.validator.EntityValidator;
 import io.github.vitalikulsha.JavaWebProject.service.validator.ValidationPattern;
 import io.github.vitalikulsha.JavaWebProject.service.validator.ValidatorFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
     private final DtoConverter<UserDto, User> userDtoConverter;
@@ -28,24 +32,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(int id) {
-        return userDtoConverter.toDto(userDao.findById(id));
+    public UserDto getById(int id) throws ServiceException {
+        try {
+            return userDtoConverter.toDto(userDao.findById(id));
+        } catch (DaoException e) {
+            log.error("Unable to get user by id.");
+            throw new ServiceException("Exception when getting user from DB by id.", e);
+        }
     }
 
     @Override
-    public List<UserDto> getAll() {
-        return userDao.findAll()
-                .stream()
-                .map(userDtoConverter::toDto)
-                .collect(Collectors.toList());
+    public List<UserDto> getAll() throws ServiceException {
+        try {
+            return userDao.findAll()
+                    .stream()
+                    .map(userDtoConverter::toDto)
+                    .collect(Collectors.toList());
+        } catch (DaoException e) {
+            log.error("Unable to get all users.");
+            throw new ServiceException("Exception when getting all users from DB.", e);
+        }
     }
 
     @Override
-    public List<UserDto> getUsersByRole(Role role) {
-        return userDao.findByRole(role)
-                .stream()
-                .map(userDtoConverter::toDto)
-                .collect(Collectors.toList());
+    public List<UserDto> getUsersByRole(Role role) throws ServiceException {
+        try {
+            return userDao.findByRole(role)
+                    .stream()
+                    .map(userDtoConverter::toDto)
+                    .collect(Collectors.toList());
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when getting users from DB by role.", e);
+        }
     }
 
     @Override
@@ -54,43 +72,73 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isExists(String login, String password) {
-        User user = userDao.findByLogin(login);
-        if (user == null) {
-            return false;
-        } else return user.getLogin().equals(login)
-                && user.getPassword().equals(DigestUtils.sha256Hex(password));//encoder
+    public boolean isExists(String login, String password) throws ServiceException {
+        try {
+            User user = userDao.findByLogin(login);
+            if (user == null) {
+                return false;
+            } else return user.getLogin().equals(login)
+                    && user.getPassword().equals(DigestUtils.sha256Hex(password));
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when comparing user by login and password.", e);
+        }
     }
 
     @Override
-    public UserDto getByLogin(String login) {
-        return userDtoConverter.toDto(userDao.findByLogin(login));
+    public UserDto getByLogin(String login) throws ServiceException {
+        try {
+            return userDtoConverter.toDto(userDao.findByLogin(login));
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when getting user from DB by login.", e);
+        }
     }
 
     @Override
-    public UserDto getByEmail(String email) {
-        return userDtoConverter.toDto(userDao.findByEmail(email));
+    public UserDto getByEmail(String email) throws ServiceException {
+        try {
+            return userDtoConverter.toDto(userDao.findByEmail(email));
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when getting user from DB by email.", e);
+        }
     }
 
     @Override
     public boolean createUser(String login, String password, String firstName, String lastName,
-                              long phoneNumber, String email) {
+                              long phoneNumber, String email) throws ServiceException {
         if (password == null || !password.matches(ValidationPattern.PASSWORD_PATTERN)
                 || login == null || !login.matches(ValidationPattern.LOGIN_PATTERN)) {
+            log.error("Password or login is invalid.");
             return false;
         }
         User user = new User(0, login, DigestUtils.sha256Hex(password),
                 firstName, lastName, phoneNumber, email, Role.READER);
-        return userValidator.validate(user) && userDao.save(user) == 1;
+        if (!userValidator.validate(user)) {
+            log.error("User is invalid.");
+            return false;
+        }
+        try {
+            return userDao.save(user) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when creating new user.", e);
+        }
     }
 
     @Override
-    public boolean editUser(String firstName, String lastName, long phoneNumber, String email, int userId) {
-        User user = userDao.findById(userId);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setPhoneNumber(phoneNumber);
-        user.setEmail(email);
-        return userValidator.validate(user) && userDao.update(user) == 1;
+    public boolean editUser(String firstName, String lastName, long phoneNumber,
+                            String email, int userId) throws ServiceException {
+        try {
+            User user = userDao.findById(userId);
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setPhoneNumber(phoneNumber);
+            user.setEmail(email);
+            if (userValidator.validate(user)) {
+                log.error("User is invalid.");
+                return false;
+            }
+            return userDao.update(user) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when updating user.", e);
+        }
     }
 }

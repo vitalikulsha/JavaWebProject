@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.service.validator.ValidationPattern;
@@ -27,12 +28,17 @@ public class EditReaderCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         String method = request.getMethod();
         if (method.equals(Value.POST)) {
-            return getCommandInfoPost(request);
+            try {
+                return getCommandInfoPost(request);
+            } catch (ServiceException e) {
+                log.error("Unable to update user.", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         }
         return new CommandInfo(Page.EDIT, RoutingType.FORWARD);
     }
 
-    private CommandInfo getCommandInfoPost(HttpServletRequest request) {
+    private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
         UserDto userDto = (UserDto) session.getAttribute(Attribute.USER);
         UserService userService = ServiceFactory.instance().userService();

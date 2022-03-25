@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.BookService;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandInfo;
@@ -26,14 +27,24 @@ public class OrderInfoCommand implements Command {
         HttpSession session = request.getSession();
         String method = request.getMethod();
         if (method.equals(Value.GET)) {
-            return getCommandInfoGet(request, session);
+            try {
+                return getCommandInfoGet(request, session);
+            } catch (ServiceException e) {
+                log.error("Unable to get order by id", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         } else if (method.equals(Value.POST)) {
-            return getCommandInfoPost(request, session);
+            try {
+                return getCommandInfoPost(request, session);
+            } catch (ServiceException e) {
+                log.error("Unable to update or delete order", e);
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         }
-        return null;
+        return new CommandInfo(Page.ERROR_403, RoutingType.FORWARD);
     }
 
-    private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) {
+    private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
         int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
         OrderDto orderDto = orderService.getById(orderId);
@@ -41,7 +52,7 @@ public class OrderInfoCommand implements Command {
         return new CommandInfo(Page.ORDER_INFO, RoutingType.FORWARD);
     }
 
-    private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) {
+    private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         OrderService orderService = ServiceFactory.instance().orderService();
         OrderDto orderDto = (OrderDto) session.getAttribute(Attribute.ORDER);

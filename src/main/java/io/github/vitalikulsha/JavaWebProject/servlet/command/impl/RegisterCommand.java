@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.command.impl;
 
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import io.github.vitalikulsha.JavaWebProject.service.ServiceFactory;
 import io.github.vitalikulsha.JavaWebProject.service.UserService;
 import io.github.vitalikulsha.JavaWebProject.service.validator.ValidationPattern;
@@ -44,26 +45,31 @@ public class RegisterCommand implements Command {
         log.info("login: " + login + "; password: " + password
                 + ", firstName: " + firstName + ", lastName: " + lastName
                 + ", phoneNumber: " + phoneNumber);
-        if (userService.getByLogin(login) != null) {
-            log.info("User with login " + login + " already exists");
-            request.setAttribute(Attribute.USER_EXISTS, true);
-            request.setAttribute(Parameter.LOGIN, login);
-            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
-        } else if (userService.getByEmail(email) != null) {
-            log.info("User with email " + email + " already exists");
-            request.setAttribute(Attribute.USER_EXISTS, true);
-            request.setAttribute(Parameter.EMAIL, email);
-            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+        try {
+            if (userService.getByLogin(login) != null) {
+                log.info("User with login " + login + " already exists");
+                request.setAttribute(Attribute.USER_EXISTS, true);
+                request.setAttribute(Parameter.LOGIN, login);
+                return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+            } else if (userService.getByEmail(email) != null) {
+                log.info("User with email " + email + " already exists");
+                request.setAttribute(Attribute.USER_EXISTS, true);
+                request.setAttribute(Parameter.EMAIL, email);
+                return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+            }
+            if (!userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
+                log.info("Failed to update user data.");
+                List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
+                request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
+                return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+            }
+            session.setAttribute(Attribute.USER, userService.getByLogin(login));
+            log.info("New user: " + userService.getByLogin(login));
+            return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
+        } catch (ServiceException e) {
+           log.error("Unable to register new user", e);
         }
-        if (!userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
-            log.info("Failed to update user data.");
-            List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
-            request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
-            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
-        }
-        log.info("New user: " + userService.getByLogin(login));
-        session.setAttribute(Attribute.USER, userService.getByLogin(login));
-        return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
+        return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }
 
     private List<String> getInvalidFields(String login, String password, String firstName, String lastName,

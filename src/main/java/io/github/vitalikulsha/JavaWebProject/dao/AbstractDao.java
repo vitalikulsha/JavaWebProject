@@ -2,6 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.dao;
 
 import io.github.vitalikulsha.JavaWebProject.dao.query.QueryOperator;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapper;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
 
 import java.util.List;
 
@@ -22,22 +23,22 @@ public abstract class AbstractDao<T> implements Dao<T>{
     }
 
     @Override
-    public T findById(int id) {
+    public T findById(int id) throws DaoException {
         return queryOperator.executeSingleEntityQuery(FIND_BY_ID_QUERY, id);
     }
 
     @Override
-    public List<T> findAll() {
+    public List<T> findAll() throws DaoException {
         return queryOperator.executeEntityListQueryWithoutParam(FIND_ALL_QUERY);
     }
 
     @Override
-    public int save(T t) {
+    public int save(T t) throws DaoException {
         return 0;
     }
 
     @Override
-    public int deleteById(int id) {
+    public int deleteById(int id) throws DaoException {
         return queryOperator.executeUpdate(DELETE_BY_ID, id);
     }
 }

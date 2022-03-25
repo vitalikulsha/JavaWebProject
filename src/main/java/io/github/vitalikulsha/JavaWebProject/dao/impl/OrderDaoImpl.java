@@ -5,6 +5,7 @@ import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.OrderSq
 import io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.JavaWebProject.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.*;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
 
 import java.util.List;
 
@@ -17,23 +18,23 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     }
 
     @Override
-    public List<Order> findByUserId(int userId) {
+    public List<Order> findByUserId(int userId) throws DaoException {
         return queryOperator.executeEntityListQueryWithParam(orderSqlQuery.FIND_BY_USER_ID, userId);
     }
 
     @Override
-    public int save(Order order) {
+    public int save(Order order) throws DaoException {
         return queryOperator.executeUpdate(orderSqlQuery.SAVE,
                 order.getBookId(), order.getUserId(), order.getReserveStatus().name(), order.getApproved());
     }
 
     @Override
-    public int updateApproved(boolean approved, int orderId){
+    public int updateApproved(boolean approved, int orderId) throws DaoException {
         return queryOperator.executeUpdate(orderSqlQuery.UPDATE_APPROVAL, approved, orderId);
     }
 
     @Override
-    public int updateReserved(ReserveStatus reserveStatus, int orderId){
+    public int updateReserved(ReserveStatus reserveStatus, int orderId) throws DaoException {
         return queryOperator.executeUpdate(orderSqlQuery.UPDATE_RESERVED, reserveStatus.name(), orderId);
     }
 

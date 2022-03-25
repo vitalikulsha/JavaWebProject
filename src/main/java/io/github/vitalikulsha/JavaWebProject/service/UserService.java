@@ -2,20 +2,21 @@ package io.github.vitalikulsha.JavaWebProject.service;
 
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
+import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 
 import java.util.List;
 
 public interface UserService extends Service<UserDto> {
-    List<UserDto> getUsersByRole(Role role);
+    List<UserDto> getUsersByRole(Role role) throws ServiceException;
 
-    boolean isExists(String login, String password);
+    boolean isExists(String login, String password) throws ServiceException;
 
-    UserDto getByLogin(String login);
+    UserDto getByLogin(String login) throws ServiceException;
 
-    UserDto getByEmail(String email);
+    UserDto getByEmail(String email) throws ServiceException;
 
     boolean createUser(String login, String password, String firstName, String lastName,
-                       long phoneNumber, String email);
+                       long phoneNumber, String email) throws ServiceException;
 
-    boolean editUser(String firstName, String lastName, long phoneNumber, String email, int userId);
+    boolean editUser(String firstName, String lastName, long phoneNumber, String email, int userId) throws ServiceException;
 }

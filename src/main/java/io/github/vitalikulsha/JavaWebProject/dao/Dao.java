@@ -1,15 +1,17 @@
 package io.github.vitalikulsha.JavaWebProject.dao;
 
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
+
 import java.util.List;
 
 public interface Dao<T> {
 
-    T findById(int id);
+    T findById(int id) throws DaoException;
 
-    List<T> findAll();
+    List<T> findAll() throws DaoException;
 
-    int save(T t);
+    int save(T t) throws DaoException;
 
-    int deleteById(int id);
+    int deleteById(int id) throws DaoException;
 }
 

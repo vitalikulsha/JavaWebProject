@@ -7,9 +7,12 @@ import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.entity.Book;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.BookDto;
+import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+@Slf4j
 public class BookDtoConverter implements DtoConverter<BookDto, Book> {
 
     @Override
@@ -19,8 +22,15 @@ public class BookDtoConverter implements DtoConverter<BookDto, Book> {
         }
         AuthorDao authorDao = DaoFactory.instance().authorDao();
         CategoryDao categoryDao = DaoFactory.instance().categoryDao();
-        List<Author> authors = authorDao.findAuthorsByBookId(book.getId());
-        Category category = categoryDao.findById(book.getCategoryId());
+        List<Author> authors;
+        Category category;
+        try {
+            category = categoryDao.findById(book.getCategoryId());
+            authors = authorDao.findAuthorsByBookId(book.getId());
+        } catch (DaoException e) {
+            log.error("DaoException: category or/and authors is null");
+            return null;
+        }
         return new BookDto.Builder()
                 .fixId(book.getId())
                 .fixTitle(book.getTitle())

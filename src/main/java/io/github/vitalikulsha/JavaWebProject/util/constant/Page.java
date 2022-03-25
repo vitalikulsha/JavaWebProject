@@ -5,6 +5,11 @@ public class Page {
     public final static String LOGIN = "/WEB-INF/view/login.jsp";
     public final static String REGISTER = "/WEB-INF/view/register.jsp";
 
+    //error
+    public final static String ERROR_403 = "/WEB-INF/view/error/403.jsp";
+    public final static String ERROR_404 = "/WEB-INF/view/error/404.jsp";
+    public final static String ERROR_500 = "/WEB-INF/view/error/500.jsp";
+
     //admin
     public final static String ADMIN = "/WEB-INF/view/admin/admin.jsp";
     public final static String BOOK_INFO = "/WEB-INF/view/admin/book-info.jsp";
