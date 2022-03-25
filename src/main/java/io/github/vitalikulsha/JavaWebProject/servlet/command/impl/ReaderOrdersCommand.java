@@ -34,14 +34,14 @@ public class ReaderOrdersCommand implements Command {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
-                log.error("Unable to get orders by user id", e);
+                log.error("Unable to get orders by user id: "  + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         } else if (method.equals(Value.POST)) {
             try {
                 return getCommandInfoPost(request);
             } catch (ServiceException e) {
-                log.error("Unable to update user.", e);
+                log.error("Unable to update user: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         }

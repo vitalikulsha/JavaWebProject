@@ -28,12 +28,17 @@ public class RegisterCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         String method = request.getMethod();
         if (method.equals(Value.POST)) {
-            return getCommandInfoPost(request);
+            try {
+                return getCommandInfoPost(request);
+            } catch (ServiceException e) {
+                log.error("Unable to register new user: " + e.getMessage());
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
         }
         return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
     }
 
-    private CommandInfo getCommandInfoPost(HttpServletRequest request) {
+    private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
         UserService userService = ServiceFactory.instance().userService();
         String login = request.getParameter(Parameter.LOGIN);
@@ -42,34 +47,28 @@ public class RegisterCommand implements Command {
         String lastName = request.getParameter(Parameter.LAST_NAME);
         long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
         String email = request.getParameter(Parameter.EMAIL);
-        log.info("login: " + login + "; password: " + password
-                + ", firstName: " + firstName + ", lastName: " + lastName
-                + ", phoneNumber: " + phoneNumber);
-        try {
-            if (userService.getByLogin(login) != null) {
-                log.info("User with login " + login + " already exists");
-                request.setAttribute(Attribute.USER_EXISTS, true);
-                request.setAttribute(Parameter.LOGIN, login);
-                return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
-            } else if (userService.getByEmail(email) != null) {
-                log.info("User with email " + email + " already exists");
-                request.setAttribute(Attribute.USER_EXISTS, true);
-                request.setAttribute(Parameter.EMAIL, email);
-                return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
-            }
-            if (!userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
-                log.info("Failed to update user data.");
-                List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
-                request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
-                return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
-            }
-            session.setAttribute(Attribute.USER, userService.getByLogin(login));
-            log.info("New user: " + userService.getByLogin(login));
-            return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
-        } catch (ServiceException e) {
-           log.error("Unable to register new user", e);
+        log.info("login: " + login + "; password: " + password + ", firstName: " + firstName
+                + ", lastName: " + lastName + ", phoneNumber: " + phoneNumber);
+        if (userService.getByLogin(login) != null) {
+            log.info("User with login " + login + " already exists");
+            request.setAttribute(Attribute.USER_EXISTS, true);
+            request.setAttribute(Parameter.LOGIN, login);
+            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+        } else if (userService.getByEmail(email) != null) {
+            log.info("User with email " + email + " already exists");
+            request.setAttribute(Attribute.USER_EXISTS, true);
+            request.setAttribute(Parameter.EMAIL, email);
+            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
         }
-        return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+        if (!userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
+            log.info("Failed to update user data.");
+            List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
+            request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
+            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+        }
+        session.setAttribute(Attribute.USER, userService.getByLogin(login));
+        log.info("New user: " + userService.getByLogin(login));
+        return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
     }
 
     private List<String> getInvalidFields(String login, String password, String firstName, String lastName,

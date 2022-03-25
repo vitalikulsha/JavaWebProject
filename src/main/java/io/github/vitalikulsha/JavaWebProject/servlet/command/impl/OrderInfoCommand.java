@@ -30,14 +30,14 @@ public class OrderInfoCommand implements Command {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
-                log.error("Unable to get order by id", e);
+                log.error("Unable to get order by id: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         } else if (method.equals(Value.POST)) {
             try {
                 return getCommandInfoPost(request, session);
             } catch (ServiceException e) {
-                log.error("Unable to update or delete order", e);
+                log.error("Unable to update or delete order: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         }

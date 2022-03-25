@@ -32,7 +32,7 @@ public class AllOrdersCommand implements Command {
             pagination.paginate(allOrders, request, Attribute.ALL_ORDERS);
             return new CommandInfo(Page.ALL_ORDERS, RoutingType.FORWARD);
         } catch (ServiceException e) {
-            log.error("Unable to get all orders", e);
+            log.error("Unable to get all orders: " + e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }

@@ -61,6 +61,8 @@
 <c:if test="${not empty invalidField}">
     <h3 style="color:red"> Некорректно заполненные поля: <br>
         <c:forEach var="field" items="${invalidField}">
+            <c:if test="${field eq 'login'}">- логин;<br></c:if>
+            <c:if test="${field eq 'password'}">- пароль;<br></c:if>
             <c:if test="${field eq 'firstName'}">- имя пользователя;<br></c:if>
             <c:if test="${field eq 'lastName'}">- фамилия пользователя;<br></c:if>
             <c:if test="${field eq 'phoneNumber'}">- номер телефона;<br></c:if>

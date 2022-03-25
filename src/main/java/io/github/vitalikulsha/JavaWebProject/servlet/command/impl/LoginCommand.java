@@ -30,7 +30,7 @@ public class LoginCommand implements Command {
             try {
                 return getCommandInfoPost(request);
             } catch (ServiceException e) {
-                log.error("Unable compare user by login and password.", e);
+                log.error("Unable compare user by login and password: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         }

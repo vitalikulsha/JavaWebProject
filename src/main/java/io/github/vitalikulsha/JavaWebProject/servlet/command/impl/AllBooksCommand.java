@@ -31,7 +31,7 @@ public class AllBooksCommand implements Command {
             pagination.paginate(catalog, request, Attribute.CATALOG);
             return new CommandInfo(Page.ALL_BOOKS, RoutingType.FORWARD);
         } catch (ServiceException e) {
-            log.error("Unable to get all books.", e);
+            log.error("Unable to get all books: " + e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }

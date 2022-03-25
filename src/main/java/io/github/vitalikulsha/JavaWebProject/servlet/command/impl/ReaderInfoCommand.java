@@ -41,7 +41,7 @@ public class ReaderInfoCommand implements Command {
             pagination.paginate(readerOrders, request, Attribute.READER_ORDERS);
             return new CommandInfo(Page.READER_INFO, RoutingType.FORWARD);
         } catch (ServiceException e) {
-            log.error("Unable to get user information", e);
+            log.error("Unable to get user information: " +  e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }

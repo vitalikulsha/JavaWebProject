@@ -32,14 +32,14 @@ public class OrderCommand implements Command {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
-                log.error("Unable to get book by id.", e);
+                log.error("Unable to get book by id: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         } else if (method.equals(Value.POST)) {
             try {
                 return getCommandInfoPost(request, session);
             } catch (ServiceException e) {
-                log.error("Unable to create new order.", e);
+                log.error("Unable to create new order." + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         }

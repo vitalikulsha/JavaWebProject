@@ -3,6 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.Command;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandFactory;
 import io.github.vitalikulsha.JavaWebProject.servlet.command.CommandInfo;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Page;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -30,28 +31,28 @@ public class LibraryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.info("Method doGet() starting");
-        log.info("request method: " + request.getMethod());
+        log.debug("Method doGet() starting");
+        log.info("Request method: " + request.getMethod());
         processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.info("Method doPost() starting");
-        log.info("request method: " + request.getMethod());
+        log.debug("Method doPost() starting");
+        log.info("Request method: " + request.getMethod());
         processRequest(request, response);
     }
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
-        log.debug("processRequest starting");
+        log.debug("processRequest() starting");
         String servletPath = request.getServletPath();
-        log.info("servletPath: " + servletPath);
+        log.info("ServletPath: " + servletPath);
         Command command = commandFactory.getCommand(servletPath);
         CommandInfo commandInfo = command.execute(request, response);
         String resource = commandInfo.getResource();
-        log.info("Resource path: " + resource);
+        log.info("Resource: " + resource);
         switch (commandInfo.getRoutingType()) {
             case FORWARD:
                 log.info("Routing type is FORWARD");
@@ -61,6 +62,8 @@ public class LibraryServlet extends HttpServlet {
                 log.info("Routing type is REDIRECT");
                 response.sendRedirect(request.getContextPath() + resource);
                 break;
+            default:
+                getServletContext().getRequestDispatcher(Page.ERROR_404).forward(request, response);
         }
     }
 }

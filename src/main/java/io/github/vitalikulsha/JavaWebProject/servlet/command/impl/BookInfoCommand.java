@@ -27,7 +27,7 @@ public class BookInfoCommand implements Command {
             request.setAttribute(Attribute.BOOK, bookDto);
             return new CommandInfo(Page.BOOK_INFO, RoutingType.FORWARD);
         } catch (ServiceException e) {
-            log.error("Unable to get book by id.", e);
+            log.error("Unable to get book by id: "  + e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }

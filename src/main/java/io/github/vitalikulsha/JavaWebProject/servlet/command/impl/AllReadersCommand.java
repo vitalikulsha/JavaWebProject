@@ -32,7 +32,7 @@ public class AllReadersCommand implements Command {
             pagination.paginate(allReaders, request, Attribute.ALL_READERS);
             return new CommandInfo(Page.ALL_READERS, RoutingType.FORWARD);
         } catch (ServiceException e) {
-            log.error("Unable to get users by role.", e);
+            log.error("Unable to get users by role: " + e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }

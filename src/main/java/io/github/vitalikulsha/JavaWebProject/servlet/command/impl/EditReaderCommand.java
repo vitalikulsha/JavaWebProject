@@ -31,7 +31,7 @@ public class EditReaderCommand implements Command {
             try {
                 return getCommandInfoPost(request);
             } catch (ServiceException e) {
-                log.error("Unable to update user.", e);
+                log.error("Unable to update user: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         }
