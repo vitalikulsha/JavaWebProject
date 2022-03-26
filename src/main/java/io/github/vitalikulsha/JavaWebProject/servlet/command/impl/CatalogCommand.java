@@ -48,22 +48,24 @@ public class CatalogCommand implements Command {
     }
 
     private String getUrl(HttpServletRequest request) {
-        String url = request.getContextPath() + request.getServletPath() + "?";
+        StringBuilder url = new StringBuilder(request.getContextPath() + request.getServletPath() + "?");
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         params.remove(Parameter.PAGE);
         if (!params.isEmpty()) {
             for (Map.Entry<String, String[]> entry : params.entrySet()) {
-                url = url + entry.getKey() + "=" + entry.getValue()[0];
+                url.append(entry.getKey())
+                        .append("=")
+                        .append(entry.getValue()[0]);
             }
         }
-        return url;
+        return url.toString();
     }
 
     private List<BookDto> getCatalog(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         params.remove(Parameter.PAGE);
-        if(!params.isEmpty()){
+        if (!params.isEmpty()) {
             for (Map.Entry<String, String[]> entry : params.entrySet()) {
                 String param = entry.getKey();
                 log.info("param: " + param);
