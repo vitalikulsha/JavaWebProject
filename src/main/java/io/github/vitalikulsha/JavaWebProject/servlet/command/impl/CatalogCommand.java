@@ -27,95 +27,57 @@ public class CatalogCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        BookService bookService = ServiceFactory.instance().bookService();
         Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
-        List<BookDto> catalog;
-        String url = request.getContextPath() + request.getServletPath() + "?";
-        String bookTitle = request.getParameter(Parameter.BOOK_TITLE);
-        String authorName = request.getParameter(Parameter.AUTHOR_NAME);
-        String categoryName = request.getParameter(Parameter.CATEGORY_NAME);
-// todo: вывести URL в отдельный метод и доработать getCatalog()
-
-        if (bookTitle != null) {
-            url = url + Parameter.BOOK_TITLE + "=" + bookTitle;
-            try {
-                catalog = removeQuantityBooksZero(bookService.getBooksByTitle(bookTitle));
-            } catch (ServiceException e) {
-                log.error("Unable to get books by title: " + e.getMessage());
-                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
-            }
-        } else if (authorName != null) {
-            url = url + Parameter.AUTHOR_NAME + "=" + authorName;
-            try {
-                catalog = removeQuantityBooksZero(bookService.getBooksByAuthorName(authorName));
-            } catch (ServiceException e) {
-                log.error("Unable to get books by author name: " + e.getMessage());
-                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
-            }
-        } else if (categoryName != null) {
-            url = url + Parameter.CATEGORY_NAME + "=" + categoryName;
-            try {
-                catalog = removeQuantityBooksZero(bookService.getBooksByCategoryName(categoryName));
-            } catch (ServiceException e) {
-                log.error("Unable to get books by category name: " + e.getMessage());
-                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
-            }
-        } else {
-            try {
-                catalog = removeQuantityBooksZero(bookService.getAll());
-            } catch (ServiceException e) {
-                log.error("Unable to get all books: " + e.getMessage());
-                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
-            }
-        }
-
+        String url = getUrl(request);
+        try {
+            List<BookDto> catalog = getCatalog(request);
+            log.info("url: " + url + ", catalog size: " + catalog.size());
             if (catalog.isEmpty()) {
                 session.setAttribute(Attribute.BOOK_FOUND, false);
                 return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
             } else {
-                log.info("url: " + url);
                 request.setAttribute(Attribute.URL, url);
                 session.setAttribute(Attribute.BOOK_FOUND, true);
                 pagination.paginate(catalog, request, Attribute.CATALOG);
                 return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
             }
-
+        } catch (ServiceException e) {
+            log.error("Unable to get book catalog: " + e.getMessage());
+        }
+        return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }
 
-    private List<BookDto> getCatalog(HttpServletRequest request, String url) throws ServiceException {
+    private String getUrl(HttpServletRequest request) {
+        String url = request.getContextPath() + request.getServletPath() + "?";
+        Map<String, String[]> params = new HashMap<>(request.getParameterMap());
+        params.remove(Parameter.PAGE);
+        if (!params.isEmpty()) {
+            for (Map.Entry<String, String[]> entry : params.entrySet()) {
+                url = url + entry.getKey() + "=" + entry.getValue()[0];
+            }
+        }
+        return url;
+    }
+
+    private List<BookDto> getCatalog(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         params.remove(Parameter.PAGE);
-        List<BookDto> catalog = new ArrayList<>();
-        if (params.isEmpty()) {
-            catalog = removeQuantityBooksZero(bookService.getAll());
-        } else {
+        if(!params.isEmpty()){
             for (Map.Entry<String, String[]> entry : params.entrySet()) {
                 String param = entry.getKey();
-                String value = entry.getValue()[0];
-                url = url + param + "=" + entry.getValue()[0];
-                log.info("url: " + url);
+                log.info("param: " + param);
                 switch (param) {
                     case (Parameter.BOOK_TITLE):
-                        log.info("param: " + param);
-                        catalog = removeQuantityBooksZero(bookService.getBooksByTitle(value));
-                        break;
+                        return removeQuantityBooksZero(bookService.getBooksByTitle(entry.getValue()[0]));
                     case (Parameter.AUTHOR_NAME):
-                        log.info("param: " + param);
-                        catalog = removeQuantityBooksZero(bookService.getBooksByAuthorName(value));
-                        break;
+                        return removeQuantityBooksZero(bookService.getBooksByAuthorName(entry.getValue()[0]));
                     case (Parameter.CATEGORY_NAME):
-                        log.info("param: " + param);
-                        catalog = removeQuantityBooksZero((bookService.getBooksByCategoryName(value)));
-                        break;
-                    default:
-                        log.info("param: " + param);
-                        catalog = removeQuantityBooksZero(bookService.getAll());
+                        return removeQuantityBooksZero(bookService.getBooksByCategoryName(entry.getValue()[0]));
                 }
             }
         }
-        log.info("catalog size: " + catalog.size());
-        return catalog;
+        return removeQuantityBooksZero(bookService.getAll());
     }
 
     private List<BookDto> removeQuantityBooksZero(List<BookDto> books) {

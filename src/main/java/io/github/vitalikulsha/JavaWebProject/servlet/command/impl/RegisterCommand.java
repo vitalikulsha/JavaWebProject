@@ -50,25 +50,37 @@ public class RegisterCommand implements Command {
         log.info("login: " + login + "; password: " + password + ", firstName: " + firstName
                 + ", lastName: " + lastName + ", phoneNumber: " + phoneNumber);
         if (userService.getByLogin(login) != null) {
-            log.info("User with login " + login + " already exists");
-            request.setAttribute(Attribute.USER_EXISTS, true);
-            request.setAttribute(Parameter.LOGIN, login);
-            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+            return getCommandInfoByLogin(request, login);
         } else if (userService.getByEmail(email) != null) {
-            log.info("User with email " + email + " already exists");
-            request.setAttribute(Attribute.USER_EXISTS, true);
-            request.setAttribute(Parameter.EMAIL, email);
-            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+            return getCommandInfoByEmail(request, email);
         }
         if (!userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
-            log.info("Failed to update user data.");
-            List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
-            request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
-            return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+            return getCommandInfoByUser(request, login, password, firstName, lastName, phoneNumber, email);
         }
         session.setAttribute(Attribute.USER, userService.getByLogin(login));
         log.info("New user: " + userService.getByLogin(login));
         return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
+    }
+
+    private CommandInfo getCommandInfoByUser(HttpServletRequest request, String login, String password, String firstName, String lastName, long phoneNumber, String email) {
+        log.info("Unable to update user data.");
+        List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
+        request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
+        return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+    }
+
+    private CommandInfo getCommandInfoByEmail(HttpServletRequest request, String email) {
+        log.info("User with email " + email + " already exists");
+        request.setAttribute(Attribute.USER_EXISTS, true);
+        request.setAttribute(Parameter.EMAIL, email);
+        return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
+    }
+
+    private CommandInfo getCommandInfoByLogin(HttpServletRequest request, String login) {
+        log.info("User with login " + login + " already exists");
+        request.setAttribute(Attribute.USER_EXISTS, true);
+        request.setAttribute(Parameter.LOGIN, login);
+        return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
     }
 
     private List<String> getInvalidFields(String login, String password, String firstName, String lastName,
