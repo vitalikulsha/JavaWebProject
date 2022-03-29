@@ -11,7 +11,7 @@ public enum GuestPath {
         this.path = path;
     }
 
-    public String getPage() {
+    public String getPath() {
         return path;
     }
 }

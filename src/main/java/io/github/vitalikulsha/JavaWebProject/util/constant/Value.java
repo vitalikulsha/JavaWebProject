@@ -8,6 +8,9 @@ public class Value {
     public final static String APPROVE = "approve";
     public final static String CANCEL = "cancel";
     public final static String REFUND = "refund";
+    //locale
+    public final static String EN = "en";
+    public final static String RU = "ru";
 
     private Value() {
     }

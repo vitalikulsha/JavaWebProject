@@ -17,15 +17,7 @@
 <body class="block">
 <h4 style="text-align: right;">
     <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">| <fmt:message key="header.login" /> |</a>
-    <c:if test="${empty sessionScope.locale}">
-        <a href="${pageContext.request.contextPath}${UserPath.LOCALE.path}?${Parameter.LOCALE}=ru">| RU |</a>
-    </c:if>
-    <c:if test="${sessionScope.locale eq 'en'}">
-        <a href="${pageContext.request.contextPath}${UserPath.LOCALE.path}?${Parameter.LOCALE}=ru">| RU |</a>
-    </c:if>
-    <c:if test="${sessionScope.locale eq 'ru'}">
-        <a href="${pageContext.request.contextPath}${UserPath.LOCALE.path}?${Parameter.LOCALE}=en">| EN |</a>
-    </c:if>
+    <jsp:include page="/WEB-INF/view/template/locale.jsp" />
 </h4>
 <h2>Регистрация нового читателя</h2>
 <form action="${pageContext.request.contextPath}${UserPath.REGISTER.path}" method="post">

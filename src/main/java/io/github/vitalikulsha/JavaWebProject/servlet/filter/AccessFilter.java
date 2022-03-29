@@ -3,6 +3,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet.filter;
 import io.github.vitalikulsha.JavaWebProject.entity.dto.UserDto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.util.constant.Attribute;
+import io.github.vitalikulsha.JavaWebProject.util.constant.Value;
 import io.github.vitalikulsha.JavaWebProject.util.path.AdminPath;
 import io.github.vitalikulsha.JavaWebProject.util.path.GuestPath;
 import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
@@ -36,7 +37,7 @@ public class AccessFilter implements Filter {
         rolePages.put(Role.ADMIN, adminPath);
 
         List<String> guestPath = Arrays.stream(GuestPath.values())
-                .map(GuestPath::getPage)
+                .map(GuestPath::getPath)
                 .collect(Collectors.toList());
         rolePages.put(Role.GUEST, guestPath);
     }
@@ -48,8 +49,10 @@ public class AccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
+        session.setAttribute(Attribute.LOCALE, getLocale(session));
         String servletPath = request.getServletPath();
-        log.debug("Servlet path = " + servletPath);
+        String contextPath = request.getContextPath();
+        log.debug("Context path:" + contextPath + "; servlet path = " + servletPath);
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
         if (servletPath.equals(UserPath.LOGOUT.getPath())) {
             chain.doFilter(servletRequest, servletResponse);
@@ -64,11 +67,11 @@ public class AccessFilter implements Filter {
                 chain.doFilter(servletRequest, servletResponse);
                 log.debug("The AccessFilter has worked");
             } else if (user.getRole() == Role.READER) {
-                response.sendRedirect("/library/reader");
+                response.sendRedirect(contextPath + UserPath.READER.getPath());
             } else if (user.getRole() == Role.ADMIN) {
-                response.sendRedirect("/library/login");
+                response.sendRedirect(contextPath + AdminPath.ADMIN.getPath());
             } else {
-                response.sendRedirect("/library/login");
+                response.sendRedirect(contextPath + GuestPath.LOGIN.getPath());
             }
             return;
         } else if (user != null && isAuthorized(servletPath, user)) {
@@ -77,12 +80,18 @@ public class AccessFilter implements Filter {
             return;
         }
         log.debug("No rights: redirecting login");
-        response.sendRedirect("/library/login");
+        response.sendRedirect(contextPath + GuestPath.LOGIN.getPath());
     }
 
     @Override
     public void destroy() {
         log.debug("AccessFilter destruction");
+    }
+
+    private String getLocale(HttpSession session) {
+        String locale = (String) session.getAttribute(Attribute.LOCALE);
+        log.info("Locale: " + locale);
+        return locale == null ? Value.EN : locale;
     }
 
     private boolean isAdminPage(String servletPath) {
