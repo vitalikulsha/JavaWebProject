@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.filter;
 
+import io.github.vitalikulsha.JavaWebProject.config.ConfigParameter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
@@ -18,8 +19,8 @@ public class EncodingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding(ConfigParameter.ENCODING);
+        response.setContentType(ConfigParameter.CONTENT_TYPE);
         chain.doFilter(request, response);
         log.debug("The EncodingFilter has worked");
     }
