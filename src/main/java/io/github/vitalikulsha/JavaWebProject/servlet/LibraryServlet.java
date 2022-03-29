@@ -18,7 +18,7 @@ import java.io.IOException;
         "/admin/all-orders", "/admin/all-readers", "/admin/all-books",
         "/reader", "/reader/reader-orders", "/reader/book-search", "/reader/catalog", "/reader/order",
         "/reader/reader-order-info", "/reader/edit",
-        "/logout", "/login", "/register"})
+        "/logout", "/login", "/register", "/locale"})
 public class LibraryServlet extends HttpServlet {
     private CommandFactory commandFactory;
 

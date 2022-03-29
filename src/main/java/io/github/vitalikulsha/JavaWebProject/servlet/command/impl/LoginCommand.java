@@ -26,6 +26,8 @@ public class LoginCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         String method = request.getMethod();
+        HttpSession session = request.getSession();
+        session.setAttribute(Attribute.URL, request.getServletPath());
         if (method.equals(Value.POST)) {
             try {
                 return getCommandInfoPost(request);

@@ -1,17 +1,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
+
+<fmt:setLocale value="${sessionScope.locale != null ? sessionScope.locale : 'en'}"/>
+<fmt:setBundle basename="locale"/>
+
 <html>
 <head>
-    <title>Регистрация</title>
+    <title> <fmt:message key="header.registration" /> </title>
     <style>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">| Вход в систему |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">| <fmt:message key="header.login" /> |</a>
+    <c:if test="${empty sessionScope.locale}">
+        <a href="${pageContext.request.contextPath}${UserPath.LOCALE.path}?${Parameter.LOCALE}=ru">| RU |</a>
+    </c:if>
+    <c:if test="${sessionScope.locale eq 'en'}">
+        <a href="${pageContext.request.contextPath}${UserPath.LOCALE.path}?${Parameter.LOCALE}=ru">| RU |</a>
+    </c:if>
+    <c:if test="${sessionScope.locale eq 'ru'}">
+        <a href="${pageContext.request.contextPath}${UserPath.LOCALE.path}?${Parameter.LOCALE}=en">| EN |</a>
+    </c:if>
 </h4>
 <h2>Регистрация нового читателя</h2>
 <form action="${pageContext.request.contextPath}${UserPath.REGISTER.path}" method="post">
@@ -23,27 +37,27 @@
         </tr>
         <tr>
             <th>Пароль</th>
-            <td><input title="Пароль должен содержать хотя бы одну букву латинского алфовита в нижнем и верхнем регистре, цифру и иметь длину от 8 до 30 символов."
+            <td><input title="Пароль должен содержать от 8 до 30 символов, одну букву латинского алфавита в нижнем и верхнем регистре, одну цифру."
                     type="password" placeholder="Введите пароль" required name="${Parameter.PASSWORD}"></td>
         </tr>
         <tr>
             <th>Имя пользователя</th>
-            <td><input title="Имя должно содержать только латинские или кириллические буквы. Первая буква заглавная, остальные строчные. Не более 30 символов."
+            <td><input title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
                     type="text" placeholder="Введите имя пользователя" required name="${Parameter.FIRST_NAME}"></td>
         </tr>
         <tr>
             <th>Фамилия пользователя</th>
-            <td><input title="Фамилия должна содержать только латинские или кириллические буквы. Первая буква заглавная, остальные строчные. Не более 30 символов."
+            <td><input title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
                     type="text" placeholder="Введите фамилию пользователя" required name="${Parameter.LAST_NAME}"></td>
         </tr>
         <tr>
             <th>Номер телефона</th>
-            <td><input title="Номер телефона в формате 375......... (+9 цифр)"
+            <td><input title="Номер телефона должен быть в формате 375********* (+9 цифр)"
                     type="number" placeholder="Введите номер телефона" required name="${Parameter.PHONE_NUMBER}"></td>
         </tr>
         <tr>
             <th>E-mail</th>
-            <td><input title="E-mail в формате ...@...[.]..."
+            <td><input title="E-mail должен быть в формате ***@***.***"
                     type="email" placeholder="Введите e-mail" required name="${Parameter.EMAIL}"></td>
         </tr>
     </table>

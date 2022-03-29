@@ -27,6 +27,10 @@ public class RegisterCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         String method = request.getMethod();
+        HttpSession session = request.getSession();
+        String url = request.getServletPath();
+        log.info("current URL: " + url);
+        session.setAttribute(Attribute.URL, url);
         if (method.equals(Value.POST)) {
             try {
                 return getCommandInfoPost(request);

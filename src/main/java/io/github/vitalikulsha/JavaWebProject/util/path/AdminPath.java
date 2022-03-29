@@ -1,17 +1,18 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
 public enum AdminPath {
-    LOGIN("/login"),
-    LOGOUT("/logout"),
-    REGISTER("/register"),
-    NOT_FOUND("/not-found"),
     ADMIN("/admin"),
+    ALL_BOOKS("/admin/all-books"),
     ALL_ORDERS("/admin/all-orders"),
     ALL_READERS("/admin/all-readers"),
-    ALL_BOOKS("/admin/all-books"),
     BOOK_INFO("/admin/book-info"),
+    LOCALE("/locale"),
+    LOGIN("/login"),
+    LOGOUT("/logout"),
+    ORDER_INFO("/admin/order-info"),
     READER_INFO("/admin/reader-info"),
-    ORDER_INFO("/admin/order-info");
+    REGISTER("/register");
+
 
     private final String path;
 

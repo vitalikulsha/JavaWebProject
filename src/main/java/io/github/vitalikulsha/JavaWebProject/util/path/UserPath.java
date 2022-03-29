@@ -1,17 +1,17 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
 public enum UserPath {
-    LOGIN("/login"),
-    LOGOUT("/logout"),
-    REGISTER("/register"),
-    NOT_FOUND("/not-found"),
-    READER("/reader"),
     BOOK_SEARCH("/reader/book-search"),
     CATALOG("/reader/catalog"),
+    EDIT("/reader/edit"),
+    LOCALE("/locale"),
+    LOGIN("/login"),
+    LOGOUT("/logout"),
     ORDER("/reader/order"),
+    READER("/reader"),
     READER_ORDERS("/reader/reader-orders"),
     READER_ORDER_INFO("/reader/reader-order-info"),
-    EDIT("/reader/edit");
+    REGISTER("/register");
 
     private final String path;
 
