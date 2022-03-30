@@ -9,8 +9,9 @@
     </style>
 </head>
 <body class="block">
-<img src="/WEB-INF/img/404-error.png" alt="404" align="center">
-<h2>404</h2>
+<p style="text-align: center">
+    <img src="${pageContext.request.contextPath}/img/404-error.png" alt="404" width="250px"/>
+</p>
 <h3>Not found</h3>
 <h4>The requested url was not found on server</h4>
 </body>

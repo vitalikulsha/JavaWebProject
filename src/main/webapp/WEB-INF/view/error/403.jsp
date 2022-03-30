@@ -9,8 +9,9 @@
     </style>
 </head>
 <body class="block">
-<img src="/WEB-INF/img/403-error.png" alt="403" align="center">
-<h2>403</h2>
+<p style="text-align: center">
+    <img src="${pageContext.request.contextPath}/img/403-error.png" alt="403" width="250px"/>
+</p>
 <h3>Forbidden</h3>
 <h4>Not enough rights to access the requested resource. The server understood the request, but will not fulfill it</h4>
 </body>

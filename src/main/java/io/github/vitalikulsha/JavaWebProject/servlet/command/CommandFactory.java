@@ -2,6 +2,7 @@ package io.github.vitalikulsha.JavaWebProject.servlet.command;
 
 import io.github.vitalikulsha.JavaWebProject.servlet.command.impl.*;
 import io.github.vitalikulsha.JavaWebProject.util.path.AdminPath;
+import io.github.vitalikulsha.JavaWebProject.util.path.GuestPath;
 import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class CommandFactory {
     private final static CommandFactory instance = new CommandFactory();
 
     private final static Map<String, Command> commands = new HashMap<>() {{
-        //adminPath
+        //admin path
         put(AdminPath.ADMIN.getPath(), new AdminCommand());
         put(AdminPath.ALL_BOOKS.getPath(), new AllBooksCommand());
         put(AdminPath.ALL_ORDERS.getPath(), new AllOrdersCommand());
@@ -19,18 +20,22 @@ public class CommandFactory {
         put(AdminPath.BOOK_INFO.getPath(), new BookInfoCommand());
         put(AdminPath.ORDER_INFO.getPath(), new OrderInfoCommand());
         put(AdminPath.READER_INFO.getPath(), new ReaderInfoCommand());
-        //userPath adn generalPath
+        //user path
         put(UserPath.BOOK_SEARCH.getPath(), new BookSearchCommand());
         put(UserPath.CATALOG.getPath(), new CatalogCommand());
         put(UserPath.EDIT.getPath(), new EditReaderCommand());
-        put(UserPath.LOCALE.getPath(), new LocaleCommand());
-        put(UserPath.LOGOUT.getPath(), new LogoutCommand());
-        put(UserPath.LOGIN.getPath(), new LoginCommand());
         put(UserPath.ORDER.getPath(), new OrderCommand());
         put(UserPath.READER.getPath(), new ReaderCommand());
         put(UserPath.READER_ORDERS.getPath(), new ReaderOrdersCommand());
         put(UserPath.READER_ORDER_INFO.getPath(), new ReaderOrderInfoCommand());
-        put(UserPath.REGISTER.getPath(), new RegisterCommand());
+        //general path
+        put(GuestPath.ERROR_403.getPath(), new Error403Command());
+        put(GuestPath.ERROR_404.getPath(), new Error404Command());
+        put(GuestPath.ERROR_500.getPath(), new Error500Command());
+        put(GuestPath.LOGIN.getPath(), new LoginCommand());
+        put(UserPath.LOGOUT.getPath(), new LogoutCommand());
+        put(GuestPath.LOCALE.getPath(), new LocaleCommand());
+        put(GuestPath.REGISTER.getPath(), new RegisterCommand());
     }};
 
     public CommandFactory() {

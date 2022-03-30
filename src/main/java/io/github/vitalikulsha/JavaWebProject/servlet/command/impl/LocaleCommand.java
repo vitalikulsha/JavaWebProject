@@ -19,7 +19,7 @@ public class LocaleCommand implements Command {
         HttpSession session = request.getSession();
         String url = (String) session.getAttribute(Attribute.URL);
         String locale = request.getParameter(Parameter.LOCALE);
-        log.info("url: " + url + ", locale: " + locale);
+        log.info("Locale url: " + url + ", locale: " + locale);
         session.setAttribute(Attribute.LOCALE, locale);
         return new CommandInfo(url, RoutingType.REDIRECT);
     }

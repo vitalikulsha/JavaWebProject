@@ -51,36 +51,26 @@ public class AccessFilter implements Filter {
         HttpSession session = request.getSession();
         session.setAttribute(Attribute.LOCALE, getLocale(session));
         String servletPath = request.getServletPath();
-        String contextPath = request.getContextPath();
-        log.debug("Context path:" + contextPath + "; servlet path = " + servletPath);
         UserDto user = (UserDto) session.getAttribute(Attribute.USER);
-        if (servletPath.equals(UserPath.LOGOUT.getPath())) {
-            chain.doFilter(servletRequest, servletResponse);
+        Role role = (user == null) ? Role.GUEST : user.getRole();
+        log.info("User role = " + role);
+        if (servletPath == null) {
+            log.error("Servlet path is empty");
+            response.sendRedirect(request.getContextPath() + GuestPath.ERROR_404.getPath());
             return;
         }
-        log.info("Session attribute user = " + session.getAttribute(Attribute.USER));
-        log.debug("isAdminPage = " + isAdminPage(servletPath) + "; isUserPage = " + isUserPage(servletPath));
-        if (isAdminPage(servletPath) && isUserPage(servletPath) && isGuestPage(servletPath)) {
-            log.debug("Is method isAdminPage && isUserPage");
-            if (user == null) {
-                log.debug("Is user == null");
-                chain.doFilter(servletRequest, servletResponse);
-                log.debug("The AccessFilter has worked");
-            } else if (user.getRole() == Role.READER) {
-                response.sendRedirect(contextPath + UserPath.READER.getPath());
-            } else if (user.getRole() == Role.ADMIN) {
-                response.sendRedirect(contextPath + AdminPath.ADMIN.getPath());
-            } else {
-                response.sendRedirect(contextPath + GuestPath.LOGIN.getPath());
+        if(isRolePage(servletPath)){
+            if (!rolePages.get(role).contains(servletPath)) {
+                log.error("No access rights to " + servletPath);
+                response.sendRedirect(request.getContextPath() + GuestPath.ERROR_403.getPath());
+                return;
             }
-            return;
-        } else if (user != null && isAuthorized(servletPath, user)) {
-            log.debug("User not null and isAuthorized");
+            log.info(servletPath + " available");
             chain.doFilter(servletRequest, servletResponse);
-            return;
+        } else {
+            log.error("Not found: " + servletPath);
+            response.sendRedirect(request.getContextPath() + GuestPath.ERROR_404.getPath());
         }
-        log.debug("No rights: redirecting login");
-        response.sendRedirect(contextPath + GuestPath.LOGIN.getPath());
     }
 
     @Override
@@ -94,22 +84,7 @@ public class AccessFilter implements Filter {
         return locale == null ? Value.EN : locale;
     }
 
-    private boolean isAdminPage(String servletPath) {
-        return rolePages.get(Role.ADMIN).contains(servletPath);
+    private boolean isRolePage(String servletPath) {
+        return rolePages.get(Role.READER).contains(servletPath) || rolePages.get(Role.ADMIN).contains(servletPath);
     }
-
-    private boolean isUserPage(String servletPath) {
-        return rolePages.get(Role.READER).contains(servletPath);
-    }
-
-    private boolean isGuestPage(String servletPath) {
-        return rolePages.get(Role.GUEST).contains(servletPath);
-    }
-
-    private boolean isAuthorized(String servletPath, UserDto user) {
-        return (isAdminPage(servletPath) && user.getRole() == Role.ADMIN)
-                || (isUserPage(servletPath) && user.getRole() == Role.READER);
-    }
-
-
 }

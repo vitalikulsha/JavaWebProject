@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
 
 <html>
 <head>
@@ -11,7 +15,10 @@
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;"><a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a></h4>
+<h4 style="text-align: right;">
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
+    <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
+</h4>
 <h2>Личный кабинет</h2>
 <c:set var="user" scope="request" value="${user}"/>
 <table>
