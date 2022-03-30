@@ -9,48 +9,57 @@
 
 <html>
 <head>
-    <title> <fmt:message key="header.registration" /> </title>
+    <title> <fmt:message key="register.title"/> </title>
     <style>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">| <fmt:message key="header.login" /> |</a>
-    <jsp:include page="/WEB-INF/view/template/locale.jsp" />
+    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">
+        | <fmt:message key="register.link-login"/> |</a>
+    <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
 </h4>
-<h2>Регистрация нового читателя</h2>
+<h2><fmt:message key="register.header"/></h2>
 <form action="${pageContext.request.contextPath}${UserPath.REGISTER.path}" method="post">
     <table>
         <tr>
-            <th>Логин</th>
-            <td><input title="Логин может состоять из букв латинского алфовита, цифр, точки, тире, нижнего подчеркивания и иметь длину от 3 до 20 символов"
-                    type="text" placeholder="Введите логин" required name="${Parameter.LOGIN}"></td>
+            <th><fmt:message key="register.login"/></th>
+            <td>
+                <input title="<fmt:message key="validation.login"/>"
+                    type="text" placeholder="<fmt:message key="register.login-placeholder"/>" required name="${Parameter.LOGIN}">
+            </td>
         </tr>
         <tr>
             <th>Пароль</th>
-            <td><input title="Пароль должен содержать от 8 до 30 символов, одну букву латинского алфавита в нижнем и верхнем регистре, одну цифру."
-                    type="password" placeholder="Введите пароль" required name="${Parameter.PASSWORD}"></td>
+            <td>
+                <input title="Пароль должен содержать от 8 до 30 символов, как минимум одну букву латинского алфавита в нижнем и верхнем регистре, одну цифру."
+                    type="password" placeholder="Введите пароль" required name="${Parameter.PASSWORD}">
+            </td>
         </tr>
         <tr>
             <th>Имя пользователя</th>
-            <td><input title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
-                    type="text" placeholder="Введите имя пользователя" required name="${Parameter.FIRST_NAME}"></td>
+            <td>
+                <input title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
+                    type="text" placeholder="Введите имя пользователя" required name="${Parameter.FIRST_NAME}">
+            </td>
         </tr>
         <tr>
             <th>Фамилия пользователя</th>
-            <td><input title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
+            <td><input
+                    title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
                     type="text" placeholder="Введите фамилию пользователя" required name="${Parameter.LAST_NAME}"></td>
         </tr>
         <tr>
             <th>Номер телефона</th>
             <td><input title="Номер телефона должен быть в формате 375********* (+9 цифр)"
-                    type="number" placeholder="Введите номер телефона" required name="${Parameter.PHONE_NUMBER}"></td>
+                       type="number" placeholder="Введите номер телефона" required name="${Parameter.PHONE_NUMBER}">
+            </td>
         </tr>
         <tr>
             <th>E-mail</th>
             <td><input title="E-mail должен быть в формате ***@***.***"
-                    type="email" placeholder="Введите e-mail" required name="${Parameter.EMAIL}"></td>
+                       type="email" placeholder="Введите e-mail" required name="${Parameter.EMAIL}"></td>
         </tr>
     </table>
     <input class="button" type="submit" value="Зарегистрировать">
@@ -58,10 +67,10 @@
 </form>
 <c:if test="${userExists}">
     <c:if test="${not empty login}">
-        <h3 class="error">Пользователь с логином '${login}' уже существует.<br>Введите другой логин.</h3>
+        <h3 class="error">Пользователь с таким логином уже существует.<br>Введите другой логин.</h3>
     </c:if>
     <c:if test="${not empty email}">
-        <h3 class="error">Пользователь с e-mail '${email}' уже существует.<br>Введите другой e-mail.</h3>
+        <h3 class="error">Пользователь с таким e-mail уже существует.<br>Введите другой e-mail.</h3>
     </c:if>
 </c:if>
 <c:if test="${not empty invalidField}">
