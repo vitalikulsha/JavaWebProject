@@ -1,30 +1,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.AdminPath" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
 <html>
 <head>
-    <title>Список читателей</title>
+    <title><fmt:message key="admin.title-readers"/></title>
     <style>
         <%@include file='/WEB-INF/css/book-catalog-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
-
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| <fmt:message key="admin.link-account"/> |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| <fmt:message key="admin.link-exit"/> |</a>
 </h4>
-<h2>Список всех читателей</h2>
+<h2><fmt:message key="admin.header-readers"/></h2>
 <c:set var="user" scope="request" value="${user}"/>
 <table style="with: 900px; margin: auto;">
     <thead>
     <tr>
-        <th>Код читателя</th>
-        <th>Имя читателя</th>
-        <th>Фамилия читателя</th>
+        <th><fmt:message key="admin.reader-id"/></th>
+        <th><fmt:message key="admin.reader-first-name"/></th>
+        <th><fmt:message key="admin.reader-last-name"/></th>
     </tr>
     </thead>
     <tbody>
