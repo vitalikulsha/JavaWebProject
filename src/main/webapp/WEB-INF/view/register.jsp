@@ -26,62 +26,66 @@
         <tr>
             <th><fmt:message key="register.login"/></th>
             <td>
-                <input title="<fmt:message key="validation.login"/>"
-                    type="text" placeholder="<fmt:message key="register.login-placeholder"/>" required name="${Parameter.LOGIN}">
+                <input title="<fmt:message key="validation.login"/>" type="text"
+                placeholder="<fmt:message key="register.login-placeholder"/>" required name="${Parameter.LOGIN}">
             </td>
         </tr>
         <tr>
-            <th>Пароль</th>
+            <th><fmt:message key="register.password"/></th>
             <td>
-                <input title="Пароль должен содержать от 8 до 30 символов, как минимум одну букву латинского алфавита в нижнем и верхнем регистре, одну цифру."
-                    type="password" placeholder="Введите пароль" required name="${Parameter.PASSWORD}">
+                <input title="<fmt:message key="validation.password"/>" type="password"
+                placeholder="<fmt:message key="register.password-placeholder"/>" required name="${Parameter.PASSWORD}">
             </td>
         </tr>
         <tr>
-            <th>Имя пользователя</th>
+            <th><fmt:message key="register.first-name"/></th>
             <td>
-                <input title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
-                    type="text" placeholder="Введите имя пользователя" required name="${Parameter.FIRST_NAME}">
+                <input title="<fmt:message key="validation.name"/>" type="text"
+                placeholder="<fmt:message key="register.first-name-placeholder"/>" required name="${Parameter.FIRST_NAME}">
             </td>
         </tr>
         <tr>
-            <th>Фамилия пользователя</th>
-            <td><input
-                    title="Имя или фамилия должны начинаться с заглавной буквы, остальные строчные не более 30 символов латинкого или кириллического алфавита"
-                    type="text" placeholder="Введите фамилию пользователя" required name="${Parameter.LAST_NAME}"></td>
-        </tr>
-        <tr>
-            <th>Номер телефона</th>
-            <td><input title="Номер телефона должен быть в формате 375********* (+9 цифр)"
-                       type="number" placeholder="Введите номер телефона" required name="${Parameter.PHONE_NUMBER}">
+            <th><fmt:message key="register.last-name"/></th>
+            <td>
+                <input title="<fmt:message key="validation.name"/>" type="text"
+                placeholder="<fmt:message key="register.last-name-placeholder"/>" required name="${Parameter.LAST_NAME}">
             </td>
         </tr>
         <tr>
-            <th>E-mail</th>
-            <td><input title="E-mail должен быть в формате ***@***.***"
-                       type="email" placeholder="Введите e-mail" required name="${Parameter.EMAIL}"></td>
+            <th><fmt:message key="register.phone-number"/></th>
+            <td>
+                <input title="<fmt:message key="validation.phone-number"/>" type="number"
+                placeholder="<fmt:message key="register.phone-number-placeholder"/>" required name="${Parameter.PHONE_NUMBER}">
+            </td>
+        </tr>
+        <tr>
+            <th><fmt:message key="register.email"/></th>
+            <td>
+                <input title="<fmt:message key="validation.email"/>" type="email"
+                placeholder="<fmt:message key="register.email-placeholder"/>" required name="${Parameter.EMAIL}">
+            </td>
         </tr>
     </table>
-    <input class="button" type="submit" value="Зарегистрировать">
-    <input class="button" style="margin-left: 100px" type="reset" value="Очистить поля">
+    <input class="button" type="submit" value="<fmt:message key="register.button-register"/>">
+    <input class="button" style="margin-left: 100px" type="reset" value="<fmt:message key="register.button-reset"/>">
 </form>
 <c:if test="${userExists}">
     <c:if test="${not empty login}">
-        <h3 class="error">Пользователь с таким логином уже существует.<br>Введите другой логин.</h3>
+        <h3 class="error"><fmt:message key="register.exists-login"/><br><fmt:message key="register.enter-login"/></h3>
     </c:if>
     <c:if test="${not empty email}">
-        <h3 class="error">Пользователь с таким e-mail уже существует.<br>Введите другой e-mail.</h3>
+        <h3 class="error"><fmt:message key="register.exists-email"/><br><fmt:message key="register.enter-email"/></h3>
     </c:if>
 </c:if>
 <c:if test="${not empty invalidField}">
-    <h3 style="color:red"> Некорректно заполненные поля: <br>
+    <h3 style="color:red"><fmt:message key="register.invalid-header"/><br>
         <c:forEach var="field" items="${invalidField}">
-            <c:if test="${field eq 'login'}">- логин;<br></c:if>
-            <c:if test="${field eq 'password'}">- пароль;<br></c:if>
-            <c:if test="${field eq 'firstName'}">- имя пользователя;<br></c:if>
-            <c:if test="${field eq 'lastName'}">- фамилия пользователя;<br></c:if>
-            <c:if test="${field eq 'phoneNumber'}">- номер телефона;<br></c:if>
-            <c:if test="${field eq 'email'}">- e-mail;<br></c:if>
+            <c:if test="${field eq 'login'}">- <fmt:message key="register.login"/>;<br></c:if>
+            <c:if test="${field eq 'password'}">- <fmt:message key="register.password"/>;<br></c:if>
+            <c:if test="${field eq 'firstName'}">- <fmt:message key="register.first-name"/>;<br></c:if>
+            <c:if test="${field eq 'lastName'}">- <fmt:message key="register.last-name"/>;<br></c:if>
+            <c:if test="${field eq 'phoneNumber'}">- <fmt:message key="register.phone-number"/>;<br></c:if>
+            <c:if test="${field eq 'email'}">- <fmt:message key="register.email"/>;<br></c:if>
         </c:forEach>
     </h3>
 </c:if>
