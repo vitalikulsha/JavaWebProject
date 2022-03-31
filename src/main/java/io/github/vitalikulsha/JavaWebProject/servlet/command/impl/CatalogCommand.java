@@ -28,6 +28,7 @@ public class CatalogCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        session.removeAttribute(Attribute.BOOK_EXISTS);
         String url = getUrl(request);
         try {
             List<BookDto> catalog = getCatalog(request);

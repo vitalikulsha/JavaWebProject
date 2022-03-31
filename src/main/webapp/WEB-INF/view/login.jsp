@@ -41,10 +41,8 @@
     </table>
     <input class="button" type="submit" value="<fmt:message key="login.button-enter"/>">
 </form>
-<c:if test="${not empty userFound}">
-    <c:if test="${!userFound}">
-        <h3 class="error"><fmt:message key="login.invalid"/><br><fmt:message key="login.try-again"/></h3>
-    </c:if>
+<c:if test="${not empty userFound && !userFound}">
+    <h3 class="error"><fmt:message key="login.invalid"/><br><fmt:message key="login.try-again"/></h3>
 </c:if>
 </body>
 </html>

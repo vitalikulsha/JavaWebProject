@@ -71,8 +71,8 @@ public class OrderCommand implements Command {
             bookService.removeOneBook(bookDto.getId());
         } else {
             log.info("The book id = " + bookDto.getId() + " is already in the list of orders.");
-            request.setAttribute(Attribute.USER_EXISTS, true);
-            return new CommandInfo(Page.BOOK_SEARCH, RoutingType.FORWARD);
+            session.setAttribute(Attribute.BOOK_EXISTS, true);
+            return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
         }
         return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
     }
