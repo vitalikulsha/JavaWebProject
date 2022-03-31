@@ -15,9 +15,9 @@ public class Attribute {
     public static final String READER_ORDERS = "readerOrders";
     public final static String URL = "url";
     public static final String USER = "user";
-    public static final String USER_EXISTS = "userExists";
     public static final String USER_FOUND = "userFound";
     public static final String USER_ORDERS = "userOrders";
+    public static final String USER_EXISTS = "userExists";
 
     private Attribute() {
     }

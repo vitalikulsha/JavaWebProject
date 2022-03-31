@@ -67,8 +67,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteById(int id) {
-        return false;
+    public boolean deleteById(int id) throws ServiceException {
+        try {
+            return userDao.deleteById(id) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when deleting a user", e);
+        }
     }
 
     @Override

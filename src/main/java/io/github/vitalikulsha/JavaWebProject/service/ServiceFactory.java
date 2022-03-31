@@ -4,6 +4,9 @@ import io.github.vitalikulsha.JavaWebProject.service.impl.BookServiceImpl;
 import io.github.vitalikulsha.JavaWebProject.service.impl.OrderServiceImpl;
 import io.github.vitalikulsha.JavaWebProject.service.impl.UserServiceImpl;
 
+/**
+ * Factory, that provides services.
+ */
 public class ServiceFactory {
     private final static ServiceFactory instance = new ServiceFactory();
 
@@ -14,6 +17,11 @@ public class ServiceFactory {
     private ServiceFactory() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return instance of ServiceFactory
+     */
     public static ServiceFactory instance(){
         return instance;
     }

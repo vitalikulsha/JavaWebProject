@@ -6,7 +6,17 @@ import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 
 import java.util.List;
 
+/**
+ * User service interface
+ */
 public interface UserService extends Service<UserDto> {
+    /**
+     * Gets a list of users DTO by role.
+     *
+     * @param role  user role
+     * @return list of users DTO
+     * @throws ServiceException thrown when DAO exception occurs
+     */
     List<UserDto> getUsersByRole(Role role) throws ServiceException;
 
     boolean isExists(String login, String password) throws ServiceException;

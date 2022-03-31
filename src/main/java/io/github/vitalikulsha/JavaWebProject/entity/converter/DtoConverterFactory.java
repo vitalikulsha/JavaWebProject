@@ -10,6 +10,11 @@ public class DtoConverterFactory {
     private final OrderDtoConverter orderDtoConverter = new OrderDtoConverter();
     private final UserDtoConverter userDtoConverter = new UserDtoConverter();
 
+    /**
+     * Gets instance.
+     *
+     * @return instance of DtoConverterFactory
+     */
     public static DtoConverterFactory instance() {
         return instance;
     }

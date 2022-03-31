@@ -83,7 +83,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean deleteById(int id) throws ServiceException {
-        return false;
+        try {
+            return bookDao.deleteById(id) == 1;
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when deleting a book", e);
+        }
     }
 
     @Override
