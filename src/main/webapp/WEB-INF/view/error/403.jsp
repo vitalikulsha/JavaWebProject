@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
 
 <html>
 <head>
@@ -12,7 +16,7 @@
 <p style="text-align: center">
     <img src="${pageContext.request.contextPath}/img/403-error.png" alt="403" width="250px"/>
 </p>
-<h3>Forbidden</h3>
-<h4>Not enough rights to access the requested resource. The server understood the request, but will not fulfill it</h4>
+<h3><fmt:message key="403.error"/></h3>
+<h4><fmt:message key="403.message"/></h4>
 </body>
 </html>
