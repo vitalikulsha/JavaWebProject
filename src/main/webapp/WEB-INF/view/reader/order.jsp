@@ -1,39 +1,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.UserPath" %>
 
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
 <html>
 <head>
-    <title>Оформление заказа</title>
+    <title><fmt:message key="reader.title-place-order"/></title>
     <style>
         <%@include file='/WEB-INF/css/order-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
-
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">| Поиск книг |</a>
-    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
+        | <fmt:message key="reader.link-book-search"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
+        | <fmt:message key="reader.link-account"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+        | <fmt:message key="reader.link-exit"/> |
+    </a>
 </h4>
-<h2>Оформление заказа</h2>
+<h2><fmt:message key="reader.header-place-order"/></h2>
 <c:set var="book" scope="request" value="${book}"/>
 <form id="order" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="post">
 </form>
 <table>
     <tr>
-        <th>Код книги</th>
+        <th><fmt:message key="book.id"/></th>
         <td>${book.id}</td>
     </tr>
     <tr>
-        <th>Название книги</th>
+        <th><fmt:message key="book.title"/></th>
         <td>${book.title}</td>
     </tr>
     <tr>
-        <th>Авторы</th>
+        <th><fmt:message key="book.authors"/></th>
         <td>
             <c:forEach var="author" items="${book.authors}">
                 ${author.firstName} ${author.lastName}<br>
@@ -41,19 +50,19 @@
         </td>
     </tr>
     <tr>
-        <th>Год издания</th>
+        <th><fmt:message key="book.publication-year"/></th>
         <td>${book.publicationYear}</td>
     </tr>
     <tr>
-        <th>Количество страниц</th>
+        <th><fmt:message key="book.number-pages"/></th>
         <td>${book.numberPages}</td>
     </tr>
     <tr>
-        <th>Категория</th>
+        <th><fmt:message key="book.category"/></th>
         <td>${book.category.name}</td>
     </tr>
     <tr>
-        <th>Зарезервировать</th>
+        <th><fmt:message key="order.reserve"/></th>
         <td>
             <select style="font-size: 15px" name="${Parameter.RESERVE_STATUS}" form="order">
                 <option value="${ReserveStatus.READING_ROOM}">${ReserveStatus.READING_ROOM.title}</option>
@@ -62,6 +71,6 @@
         </td>
     </tr>
 </table>
-<input type="submit" form="order" value="Оформить заказ">
+<input type="submit" form="order" value="<fmt:message key="reader.button-reserve"/>">
 </body>
 </html>

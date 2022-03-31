@@ -30,15 +30,15 @@
 <c:set var="book" scope="request" value="${book}"/>
 <table>
     <tr>
-        <th><fmt:message key="admin.book-id"/></th>
+        <th><fmt:message key="book.id"/></th>
         <td>${book.id}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-title"/></th>
+        <th><fmt:message key="book.title"/></th>
         <td>${book.title}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-authors"/></th>
+        <th><fmt:message key="book.authors"/></th>
         <td>
             <c:forEach var="author" items="${book.authors}">
                 [${author.id}] - ${author.firstName} ${author.lastName}<br>
@@ -46,19 +46,19 @@
         </td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-publication-year"/></th>
+        <th><fmt:message key="book.publication-year"/></th>
         <td>${book.publicationYear}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-number-pages"/></th>
+        <th><fmt:message key="book.number-pages"/></th>
         <td>${book.numberPages}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-category"/></th>
+        <th><fmt:message key="book.category"/></th>
         <td>[${book.category.id}] - ${book.category.name}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-quantity"/></th>
+        <th><fmt:message key="book.quantity"/></th>
         <td>${book.number}</td>
     </tr>
 </table>

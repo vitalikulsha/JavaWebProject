@@ -32,11 +32,11 @@
 <h2><fmt:message key="admin.header-order"/></h2>
 <table style="with: 900px; margin: auto;">
     <tr>
-        <th><fmt:message key="admin.order-id"/></th>
+        <th><fmt:message key="order.id"/></th>
         <td>${order.id}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.book-id"/></th>
+        <th><fmt:message key="book.id"/></th>
         <td>
             <a href="${pageContext.request.contextPath}${AdminPath.BOOK_INFO.path}?${Parameter.BOOK_ID}=${order.bookDto.id}">
                 ${order.bookDto.id} </a>
@@ -50,15 +50,15 @@
         </td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.order-reserve"/></th>
+        <th><fmt:message key="order.reserve"/></th>
         <td>${order.reserveStatus.title}</td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.order-approval"/></th>
+        <th><fmt:message key="order.approval"/></th>
         <td>
             <c:choose>
                 <c:when test="${order.approved}">
-                    <p style="color: green"><b><fmt:message key="admin.order-approved"/></b></p>
+                    <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
                     <c:if test="${order.reserveStatus eq 'REFUND'}">
                         <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                             <input type="hidden" name="${Parameter.ACTION}" value="${Value.CANCEL}">
@@ -67,7 +67,7 @@
                     </c:if>
                 </c:when>
                 <c:otherwise>
-                    <p style="color:red"><b><fmt:message key="admin.order-not-approved"/></b></p>
+                    <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                         <input type="hidden" name="${Parameter.ACTION}" value="${Value.APPROVE}">
                         <input type="submit" value="<fmt:message key="admin.order-button-approve"/>">

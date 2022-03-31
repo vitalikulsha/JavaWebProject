@@ -16,7 +16,9 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| <fmt:message key="admin.link-exit"/> |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        | <fmt:message key="admin.link-exit"/> |
+    </a>
     <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
 </h4>
 <h2><fmt:message key="admin.header"/></h2>

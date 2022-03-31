@@ -32,11 +32,11 @@
 <table style="with: 900px; margin: auto;">
     <thead>
     <tr>
-        <th><fmt:message key="admin.book-id"/></th>
-        <th><fmt:message key="admin.book-title"/></th>
-        <th><fmt:message key="admin.book-authors"/></th>
-        <th><fmt:message key="admin.book-category"/></th>
-        <th><fmt:message key="admin.book-quantity"/></th>
+        <th><fmt:message key="book.id"/></th>
+        <th><fmt:message key="book.title"/></th>
+        <th><fmt:message key="book.authors"/></th>
+        <th><fmt:message key="book.category"/></th>
+        <th><fmt:message key="book.quantity"/></th>
     </tr>
     </thead>
     <tbody>

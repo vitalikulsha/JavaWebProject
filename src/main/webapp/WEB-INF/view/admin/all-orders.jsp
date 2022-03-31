@@ -32,12 +32,12 @@
 <table style="with: 900px; margin: auto;">
     <thead>
     <tr>
-        <th><fmt:message key="admin.order-id"/></th>
-        <th><fmt:message key="admin.book-id"/></th>
-        <th><fmt:message key="admin.book-title"/></th>
-        <th><fmt:message key="admin.order-reserve"/></th>
-        <th><fmt:message key="admin.order-approval"/></th>
-        <th><fmt:message key="admin.book-quantity"/></th>
+        <th><fmt:message key="order.id"/></th>
+        <th><fmt:message key="book.id"/></th>
+        <th><fmt:message key="book.title"/></th>
+        <th><fmt:message key="order.reserve"/></th>
+        <th><fmt:message key="order.approval"/></th>
+        <th><fmt:message key="book.quantity"/></th>
         <th><fmt:message key="admin.reader-id"/></th>
     </tr>
     </thead>
@@ -53,10 +53,10 @@
             <td>
                 <c:choose>
                     <c:when test="${order.approved}">
-                        <p style="color: green"><b><fmt:message key="admin.order-approved"/></b></p>
+                        <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
                     </c:when>
                     <c:otherwise>
-                        <p style="color:red"><b><fmt:message key="admin.order-not-approved"/></b></p>
+                        <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                     </c:otherwise>
                 </c:choose>
             </td>
