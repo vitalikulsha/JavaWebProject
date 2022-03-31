@@ -39,7 +39,7 @@ public interface Dao<T> {
      * Saves an entity to the database.
      *
      * @param t entity to save
-     * @return result of database query
+     * @return database query result
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     int save(T t) throws DaoException;
@@ -48,7 +48,7 @@ public interface Dao<T> {
      * Deletes an entity by id.
      *
      * @param id entity id to delete
-     * @return result of database query
+     * @return database query result
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     int deleteById(int id) throws DaoException;

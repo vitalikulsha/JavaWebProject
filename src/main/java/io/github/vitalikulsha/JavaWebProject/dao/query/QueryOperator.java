@@ -10,6 +10,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Query operator interface. Provides methods to execute various types of database queries.
+ *
+ * @param <T> entity type in this query operator
+ */
 @Slf4j
 public class QueryOperator<T> {
     private final ConnectionSource connectionSource = ConnectionSource.instance();
@@ -19,6 +24,13 @@ public class QueryOperator<T> {
         this.mapper = mapper;
     }
 
+    /**
+     * Executes a select query with no additional PreparedStatement parameters.
+     *
+     * @param sqlQuery SQL query
+     * @return list of entities
+     * @throws DaoException thrown when an SQL exception occurs
+     */
     public List<T> executeEntityListQueryWithoutParam(String sqlQuery) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         List<T> result = new ArrayList<>();
@@ -38,12 +50,14 @@ public class QueryOperator<T> {
         return result;
     }
 
-    public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) throws DaoException {
-        log.info("SQL query: " + sqlQuery);
-        String query = String.format(sqlQuery, param);
-        return executeEntityListQueryWithoutParam(query);
-    }
-
+    /**
+     * Executes a select query with additional PreparedStatement parameter.
+     *
+     * @param sqlQuery SQL query
+     * @param param    PreparedStatement parameter SQL query
+     * @return list of entities
+     * @throws DaoException thrown when an SQL exception occurs
+     */
     public List<T> executeEntityListQueryWithParam(String sqlQuery, Object param) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         List<T> result = new ArrayList<>();
@@ -65,6 +79,28 @@ public class QueryOperator<T> {
         return result;
     }
 
+    /**
+     * Executes a select query with a LIKE parameter.
+     *
+     * @param sqlQuery SQL query
+     * @param param    LIKE parameter SQL query
+     * @return list of entities
+     * @throws DaoException thrown when an SQL exception occurs
+     */
+    public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) throws DaoException {
+        log.info("SQL query: " + sqlQuery);
+        String query = String.format(sqlQuery, param);
+        return executeEntityListQueryWithoutParam(query);
+    }
+
+    /**
+     * Executes single entity select query with additional PreparedStatement parameter.
+     *
+     * @param sqlQuery SQL query
+     * @param param    PreparedStatement parameter SQL query
+     * @return entity type
+     * @throws DaoException thrown when an SQL exception occurs
+     */
     public T executeSingleEntityQuery(String sqlQuery, Object param) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();
@@ -85,6 +121,14 @@ public class QueryOperator<T> {
         }
     }
 
+    /**
+     * Executes update query with additional PreparedStatement parameters.
+     *
+     * @param sqlQuery SQL query
+     * @param params   PreparedStatement parameters SQL query
+     * @return database query result
+     * @throws DaoException thrown when an SQL exception occurs
+     */
     public int executeUpdate(String sqlQuery, Object... params) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();

@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.dao.query.constant.sqlquery;
 
+/**
+ * Factory, that provides SQL query
+ */
 public class SqlQueryFactory {
     private final static SqlQueryFactory instance = new SqlQueryFactory();
 
@@ -12,6 +15,11 @@ public class SqlQueryFactory {
     private SqlQueryFactory() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return instance of SqlQueryFactory
+     */
     public static SqlQueryFactory instance() {
         return instance;
     }

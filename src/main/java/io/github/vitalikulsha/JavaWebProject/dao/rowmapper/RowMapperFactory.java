@@ -1,6 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.dao.rowmapper;
 
-
+/**
+ * Factory, that provides row mappers.
+ */
 public class RowMapperFactory {
     private final static RowMapperFactory instance = new RowMapperFactory();
 
@@ -13,6 +15,11 @@ public class RowMapperFactory {
     private RowMapperFactory() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return instance of RowMapperFactory
+     */
     public static RowMapperFactory instance() {
         return instance;
     }

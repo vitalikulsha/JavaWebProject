@@ -35,15 +35,6 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public boolean isExist(String login, String password) throws DaoException {
-        User user = findByLogin(login);
-        if (user == null) {
-            return false;
-        } else return user.getLogin().equals(login)
-                && user.getPassword().equals(password);
-    }
-
-    @Override
     public int save(User user) throws DaoException {
         return queryOperator.executeUpdate(userSqlQuery.SAVE, user.getLogin(), user.getPassword(), user.getFirstName(),
                 user.getLastName(), user.getPhoneNumber(), user.getEmail(), user.getRole().name());

@@ -8,9 +8,10 @@ import java.util.List;
 
 /**
  * Abstract DAO class
- * @param <T> entity
+ *
+ * @param <T> element/entity type in this AbstractDAO
  */
-public abstract class AbstractDao<T> implements Dao<T>{
+public abstract class AbstractDao<T> implements Dao<T> {
     protected final String FIND_ALL_QUERY;
     protected final String FIND_BY_ID_QUERY;
     protected final String DELETE_BY_ID;
