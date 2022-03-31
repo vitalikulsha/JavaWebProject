@@ -19,7 +19,6 @@ public class ServiceFactory {
 
     /**
      * Gets instance.
-     *
      * @return instance of ServiceFactory
      */
     public static ServiceFactory instance(){

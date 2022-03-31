@@ -6,7 +6,9 @@ import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import java.util.List;
 
 /**
- * Book service interface
+ * Book DTO service interface
+ * See also:
+ * {@link Service}
  */
 public interface BookService extends Service<BookDto> {
     /**
@@ -46,7 +48,7 @@ public interface BookService extends Service<BookDto> {
     boolean removeOneBook(int bookId) throws ServiceException;
 
     /**
-     * Increases the number of books with the given ID by one.
+     * Increases the number of books with the given id by one.
      *
      * @param bookId book id
      * @return true if the book was successfully added

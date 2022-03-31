@@ -7,7 +7,9 @@ import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import java.util.List;
 
 /**
- * Order service interface
+ * Order DTO service interface
+ * See also:
+ * {@link Service}
  */
 public interface OrderService extends Service<OrderDto> {
     /**
@@ -36,17 +38,17 @@ public interface OrderService extends Service<OrderDto> {
      * @param approved order approval status
      * @param orderId  order id
      * @return true if order approval status was successfully updated
-     * @throws ServiceException
+     * @throws ServiceException thrown when DAO exception occurs
      */
     boolean updateOrderApproval(boolean approved, int orderId) throws ServiceException;
 
     /**
-     * Updates the status of an order reservation
+     * Updates the status of an order reservation.
      *
      * @param reserveStatus order reserve status
      * @param orderId       order id
      * @return true if order approval status was successfully updated
-     * @throws ServiceException
+     * @throws ServiceException thrown when DAO exception occurs
      */
     boolean updateOrderReserveStatus(ReserveStatus reserveStatus, int orderId) throws ServiceException;
 }

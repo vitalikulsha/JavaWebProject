@@ -7,7 +7,9 @@ import io.github.vitalikulsha.JavaWebProject.exception.ServiceException;
 import java.util.List;
 
 /**
- * User service interface
+ * User DTO service interface
+ * See also:
+ * {@link Service}
  */
 public interface UserService extends Service<UserDto> {
     /**
@@ -39,7 +41,7 @@ public interface UserService extends Service<UserDto> {
     UserDto getByLogin(String login) throws ServiceException;
 
     /**
-     * Gets user DTO by user e-mail
+     * Gets user DTO by user e-mail.
      *
      * @param email user e-mail
      * @return user DTO

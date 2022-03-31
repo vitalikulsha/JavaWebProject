@@ -2,6 +2,9 @@ package io.github.vitalikulsha.JavaWebProject.dao;
 
 import io.github.vitalikulsha.JavaWebProject.dao.impl.*;
 
+/**
+ * Factory, that provides DAO.
+ */
 public class DaoFactory {
     private final static DaoFactory instance = new DaoFactory();
 
@@ -14,6 +17,11 @@ public class DaoFactory {
     private DaoFactory() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return instance of DaoFactory
+     */
     public static DaoFactory instance() {
         return instance;
     }

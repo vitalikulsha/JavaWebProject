@@ -3,16 +3,16 @@ package io.github.vitalikulsha.JavaWebProject.entity.converter;
 /**
  * DTO converter interface
  *
- * @param <T> DTO type
- * @param <E> entity type
+ * @param <T> the type of the entity DTO being cast to
+ * @param <E> the type of entity being converted
  */
 
 public interface DtoConverter<T, E> {
     /**
-     * Convert entity to DTO object
+     * Convert entity to DTO object.
      *
-     * @param entity entity
-     * @return DTO object
+     * @param entity the type of entity being converted
+     * @return converted entity DTO
      */
     T toDto(E entity);
 }

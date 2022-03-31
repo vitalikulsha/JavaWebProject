@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+/**
+ * Pagination class
+ *
+ * @param <T> element/entity type for this pagination
+ */
 public class Pagination<T> {
     private final int itemPerPage;
 
@@ -15,6 +20,13 @@ public class Pagination<T> {
         this.itemPerPage = itemPerPage;
     }
 
+    /**
+     * Paginates the given list of entities and puts the resulting list into the request with the given attribute.
+     *
+     * @param allItems  list of entities
+     * @param request   HTTP servlet request
+     * @param attribute request attribute
+     */
     public void paginate(List<T> allItems, HttpServletRequest request, String attribute) {
         String page = request.getParameter(Parameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
@@ -55,5 +67,4 @@ public class Pagination<T> {
             return (size / itemPerPage) + (size % itemPerPage == 0 ? 0 : 1);
         }
     }
-
 }

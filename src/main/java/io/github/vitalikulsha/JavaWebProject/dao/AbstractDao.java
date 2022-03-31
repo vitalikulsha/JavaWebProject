@@ -6,6 +6,10 @@ import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
 
 import java.util.List;
 
+/**
+ * Abstract DAO class
+ * @param <T> entity
+ */
 public abstract class AbstractDao<T> implements Dao<T>{
     protected final String FIND_ALL_QUERY;
     protected final String FIND_BY_ID_QUERY;

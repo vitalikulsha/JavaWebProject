@@ -19,7 +19,6 @@ public enum AdminPath {
     READER_INFO("/admin/reader-info"),
     REGISTER("/register");
 
-
     private final String path;
 
     AdminPath(String path) {
