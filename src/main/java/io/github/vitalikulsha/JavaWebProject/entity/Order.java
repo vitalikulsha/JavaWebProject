@@ -1,7 +1,11 @@
 package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+/**
+ * Order bean class
+ */
 public class Order implements Serializable {
     private final static long serialVersionUID = 1L;
 
@@ -10,6 +14,9 @@ public class Order implements Serializable {
     private int userId;
     private ReserveStatus reserveStatus;
     private boolean approved;
+
+    public Order() {
+    }
 
     public Order(int id, int bookId, int userId, ReserveStatus reserveStatus, boolean approved) {
         this.id = id;
@@ -60,6 +67,19 @@ public class Order implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return id == order.id && bookId == order.bookId && userId == order.userId && approved == order.approved && reserveStatus == order.reserveStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, bookId, userId, reserveStatus, approved);
+    }
+
+    @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
@@ -69,5 +89,4 @@ public class Order implements Serializable {
                 ", isApproved=" + approved +
                 '}';
     }
-
 }

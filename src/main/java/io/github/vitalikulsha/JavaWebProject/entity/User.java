@@ -3,6 +3,9 @@ package io.github.vitalikulsha.JavaWebProject.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * User bean class
+ */
 public class User implements Serializable {
     private final static long serialVersionUID = 1L;
 
@@ -14,6 +17,9 @@ public class User implements Serializable {
     private long phoneNumber;
     private String email;
     private Role role;
+
+    public User() {
+    }
 
     public User(int id, String login, String password, String firstName, String lastName,
                 long phoneNumber, String email, Role role) {

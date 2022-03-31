@@ -3,7 +3,11 @@ package io.github.vitalikulsha.JavaWebProject.entity.dto;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+/**
+ * User DTO bean class
+ */
 public class UserDto implements Serializable {
     private final static long serialVersionUID = 1L;
 
@@ -75,6 +79,19 @@ public class UserDto implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserDto userDto = (UserDto) o;
+        return id == userDto.id && phoneNumber == userDto.phoneNumber && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email) && role == userDto.role;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, phoneNumber, email, role);
+    }
+
+    @Override
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
@@ -86,6 +103,9 @@ public class UserDto implements Serializable {
                 '}';
     }
 
+    /**
+     * User DTO builder
+     */
     public static class Builder {
         private UserDto userDto;
 

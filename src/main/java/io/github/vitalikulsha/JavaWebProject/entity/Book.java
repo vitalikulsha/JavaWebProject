@@ -1,7 +1,11 @@
 package io.github.vitalikulsha.JavaWebProject.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+/**
+ * Book bean class
+ */
 public class Book implements Serializable {
     private final static long serialVersionUID = 1L;
 
@@ -11,6 +15,9 @@ public class Book implements Serializable {
     private int numberPages;
     private int categoryId;
     private int number;
+
+    public Book() {
+    }
 
     public Book(int id, String title, int publicationYear, int numberPages, int categoryId, int number) {
         this.id = id;
@@ -67,6 +74,19 @@ public class Book implements Serializable {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id && publicationYear == book.publicationYear && numberPages == book.numberPages && categoryId == book.categoryId && number == book.number && Objects.equals(title, book.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, publicationYear, numberPages, categoryId, number);
     }
 
     @Override

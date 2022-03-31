@@ -3,7 +3,11 @@ package io.github.vitalikulsha.JavaWebProject.entity.dto;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+/**
+ * Order DTO bean class
+ */
 public class OrderDto implements Serializable {
     private final static long serialVersionUID = 1L;
 
@@ -65,6 +69,19 @@ public class OrderDto implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDto orderDto = (OrderDto) o;
+        return id == orderDto.id && approved == orderDto.approved && Objects.equals(bookDto, orderDto.bookDto) && Objects.equals(userDto, orderDto.userDto) && reserveStatus == orderDto.reserveStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, bookDto, userDto, reserveStatus, approved);
+    }
+
+    @Override
     public String toString() {
         return "OrderDto{" +
                 "id=" + id +
@@ -75,6 +92,9 @@ public class OrderDto implements Serializable {
                 '}';
     }
 
+    /**
+     * Order DTO builder
+     */
     public static class Builder {
         private OrderDto orderDto;
 

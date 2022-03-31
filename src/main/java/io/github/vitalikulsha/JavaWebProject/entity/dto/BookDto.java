@@ -5,7 +5,11 @@ import io.github.vitalikulsha.JavaWebProject.entity.Category;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Book DTO bean class
+ */
 public class BookDto implements Serializable {
     private final static long serialVersionUID = 1L;
 
@@ -77,6 +81,19 @@ public class BookDto implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookDto bookDto = (BookDto) o;
+        return id == bookDto.id && publicationYear == bookDto.publicationYear && numberPages == bookDto.numberPages && number == bookDto.number && Objects.equals(title, bookDto.title) && Objects.equals(authors, bookDto.authors) && Objects.equals(category, bookDto.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, authors, publicationYear, numberPages, category, number);
+    }
+
+    @Override
     public String toString() {
         return "BookDto{" +
                 "id=" + id +
@@ -89,6 +106,9 @@ public class BookDto implements Serializable {
                 '}';
     }
 
+    /**
+     * Book DTO builder
+     */
     public static class Builder {
         private BookDto bookDto;
 

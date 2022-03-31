@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.entity;
 
+/**
+ * Reserve status enum
+ */
 public enum ReserveStatus {
     READING_ROOM("Читальный зал"),
     LOANED("Абонемент"),
