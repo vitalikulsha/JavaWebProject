@@ -2,6 +2,9 @@ package io.github.vitalikulsha.JavaWebProject.service.validator;
 
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 
+/**
+ * Factory, that provides validator.
+ */
 public class ValidatorFactory {
     private final static ValidatorFactory instance = new ValidatorFactory();
 
@@ -10,6 +13,11 @@ public class ValidatorFactory {
     private ValidatorFactory() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return instance of ValidatorFactory
+     */
     public static ValidatorFactory instance() {
         return instance;
     }
