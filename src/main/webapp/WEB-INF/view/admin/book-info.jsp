@@ -1,10 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.AdminPath" %>
 
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
 <html>
 <head>
-    <title>Информация о книге</title>
+    <title><fmt:message key="admin.title-book"/></title>
     <style>
         <%@include file='/WEB-INF/css/order-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
@@ -12,22 +16,29 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">
+        | <fmt:message key="admin.link-book-list"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+        | <fmt:message key="admin.link-account"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        | <fmt:message key="admin.link-exit"/> |
+    </a>
 </h4>
-<h2>Информация о книге</h2>
+<h2><fmt:message key="admin.header-book"/></h2>
 <c:set var="book" scope="request" value="${book}"/>
 <table>
     <tr>
-        <th>Код книги</th>
+        <th><fmt:message key="admin.book-id"/></th>
         <td>${book.id}</td>
     </tr>
     <tr>
-        <th>Название книги</th>
+        <th><fmt:message key="admin.book-title"/></th>
         <td>${book.title}</td>
     </tr>
     <tr>
-        <th>Авторы</th>
+        <th><fmt:message key="admin.book-authors"/></th>
         <td>
             <c:forEach var="author" items="${book.authors}">
                 [${author.id}] - ${author.firstName} ${author.lastName}<br>
@@ -35,19 +46,19 @@
         </td>
     </tr>
     <tr>
-        <th>Год издания</th>
+        <th><fmt:message key="admin.book-publication-year"/></th>
         <td>${book.publicationYear}</td>
     </tr>
     <tr>
-        <th>Количество страниц</th>
+        <th><fmt:message key="admin.book-number-pages"/></th>
         <td>${book.numberPages}</td>
     </tr>
     <tr>
-        <th>Категория</th>
+        <th><fmt:message key="admin.book-category"/></th>
         <td>[${book.category.id}] - ${book.category.name}</td>
     </tr>
     <tr>
-        <th>Количество книг</th>
+        <th><fmt:message key="admin.book-quantity"/></th>
         <td>${book.number}</td>
     </tr>
 </table>

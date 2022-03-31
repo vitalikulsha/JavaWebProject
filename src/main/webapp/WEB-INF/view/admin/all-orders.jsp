@@ -1,33 +1,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.path.AdminPath" %>
 <%@ page import="io.github.vitalikulsha.JavaWebProject.util.constant.Parameter" %>
 
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale"/>
+
 <html>
 <head>
-    <title>Список заказов</title>
+    <title><fmt:message key="admin.title-orders"/></title>
     <style>
         <%@include file='/WEB-INF/css/book-catalog-style.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
-
     </style>
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| Личный кабинет |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| Выйти |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+        | <fmt:message key="admin.link-account"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        | <fmt:message key="admin.link-exit"/> |
+    </a>
 </h4>
-<h2>Список всех заказов читателей</h2>
+<h2><fmt:message key="admin.header-readers"/></h2>
+<c:if test="${empty allOrders}">
+    <h4 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h4>
+</c:if>
+<c:if test="${not empty allOrders}">
 <table style="with: 900px; margin: auto;">
     <thead>
     <tr>
-        <th>Код заказа</th>
-        <th>Код книги</th>
-        <th>Название книги</th>
-        <th>Статус резерва</th>
-        <th>Статус одобрения</th>
-        <th>Количество книг в библиотеке</th>
-        <th>Код пользователя</th>
+        <th><fmt:message key="admin.order-id"/></th>
+        <th><fmt:message key="admin.book-id"/></th>
+        <th><fmt:message key="admin.book-title"/></th>
+        <th><fmt:message key="admin.order-reserve"/></th>
+        <th><fmt:message key="admin.order-approval"/></th>
+        <th><fmt:message key="admin.book-quantity"/></th>
+        <th><fmt:message key="admin.reader-id"/></th>
     </tr>
     </thead>
     <tbody>
@@ -41,8 +52,12 @@
             <td>${order.reserveStatus.title}</td>
             <td>
                 <c:choose>
-                    <c:when test="${order.approved}"> <p style="color: green"><b>ОДОБРЕН</b></p> </c:when>
-                    <c:otherwise> <p style="color:red"><b>НЕОДОБРЕН</b></p> </c:otherwise>
+                    <c:when test="${order.approved}">
+                        <p style="color: green"><b><fmt:message key="admin.order-approved"/></b></p>
+                    </c:when>
+                    <c:otherwise>
+                        <p style="color:red"><b><fmt:message key="admin.order-not-approved"/></b></p>
+                    </c:otherwise>
                 </c:choose>
             </td>
             <td>${order.bookDto.number}</td>
@@ -51,8 +66,7 @@
     </c:forEach>
     </tbody>
 </table>
-
 <jsp:include page="/WEB-INF/view/template/pagination.jsp" />
-
+</c:if>
 </body>
 </html>

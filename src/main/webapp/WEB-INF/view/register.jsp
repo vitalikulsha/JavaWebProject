@@ -16,7 +16,9 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">| <fmt:message key="register.link-login"/> |</a>
+    <a href="${pageContext.request.contextPath}${UserPath.LOGIN.path}">
+        | <fmt:message key="register.link-login"/> |
+    </a>
     <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
 </h4>
 <h2><fmt:message key="register.header"/></h2>

@@ -17,8 +17,15 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| <fmt:message key="admin.link-account"/> |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| <fmt:message key="admin.link-exit"/> |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}">
+        | <fmt:message key="admin.link-reader-list"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+        | <fmt:message key="admin.link-account"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        | <fmt:message key="admin.link-exit"/> |
+    </a>
 </h4>
 <h2><fmt:message key="admin.header-reader"/></h2>
 <c:set var="user" scope="request" value="${reader}"/>
@@ -48,36 +55,40 @@
         <td>${user.role}</td>
     </tr>
 </table>
-<h3 style="text-align: center;">Список заказов</h3>
+<h3 style="text-align: center;"><fmt:message key="admin.reader-order-list"/></h3>
+<c:if test="${empty readerOrders}">
+    <h4 style="text-align: center;"><fmt:message key="admin.reader-order-list-empty"/></h4>
+</c:if>
+<c:if test="${not empty readerOrders}">
 <table>
     <tr>
-        <th>Код заказа</th>
-        <th>Название книги</th>
-        <th>Статус резерва</th>
-        <th>Статус одобрения</th>
+        <th><fmt:message key="admin.order-id"/></th>
+        <th><fmt:message key="admin.book-title"/></th>
+        <th><fmt:message key="admin.order-reserve"/></th>
+        <th><fmt:message key="admin.order-approval"/></th>
     </tr>
     <c:forEach var="order" items="${readerOrders}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}?${Parameter.ORDER_ID}=${order.id}"> ${order.id} </a>
+                <a href="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}?${Parameter.ORDER_ID}=${order.id}">
+                    ${order.id} </a>
             </td>
             <td>${order.bookDto.title}</td>
             <td>${order.reserveStatus.title}</td>
             <td>
                 <c:choose>
                     <c:when test="${order.approved}">
-                        <p style="color: green"><b>ОДОБРЕН</b></p>
+                        <p style="color: green"><b><fmt:message key="admin.order-approved"/></b></p>
                     </c:when>
                     <c:otherwise>
-                        <p style="color:red"><b>НЕОДОБРЕН</b></p>
+                        <p style="color:red"><b><fmt:message key="admin.order-not-approved"/></b></p>
                     </c:otherwise>
                 </c:choose>
             </td>
         </tr>
     </c:forEach>
 </table>
-
-<jsp:include page="/WEB-INF/view/template/pagination.jsp" />
-
+    <jsp:include page="/WEB-INF/view/template/pagination.jsp" />
+</c:if>
 </body>
 </html>

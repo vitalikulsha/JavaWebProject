@@ -45,9 +45,15 @@
 </table>
 
 <h3 style="text-align: center;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">| <fmt:message key="admin.link-order-list"/> |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}">| <fmt:message key="admin.link-reader-list"/> |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">| <fmt:message key="admin.link-book-list"/> |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">
+        | <fmt:message key="admin.link-order-list"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}">
+        | <fmt:message key="admin.link-reader-list"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">
+        | <fmt:message key="admin.link-book-list"/> |
+    </a>
 </h3>
 
 </body>

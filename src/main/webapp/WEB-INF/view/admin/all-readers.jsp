@@ -17,10 +17,18 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">| <fmt:message key="admin.link-account"/> |</a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">| <fmt:message key="admin.link-exit"/> |</a>
+    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+        | <fmt:message key="admin.link-account"/> |
+    </a>
+    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        | <fmt:message key="admin.link-exit"/> |
+    </a>
 </h4>
 <h2><fmt:message key="admin.header-readers"/></h2>
+<c:if test="${empty allReaders}">
+    <h4 style="text-align: center;"><fmt:message key="admin.readers-empty"/></h4>
+</c:if>
+<c:if test="${not empty allReaders}">
 <c:set var="user" scope="request" value="${user}"/>
 <table style="with: 900px; margin: auto;">
     <thead>
@@ -43,8 +51,7 @@
     </c:forEach>
     </tbody>
 </table>
-
 <jsp:include page="/WEB-INF/view/template/pagination.jsp" />
-
+</c:if>
 </body>
 </html>
