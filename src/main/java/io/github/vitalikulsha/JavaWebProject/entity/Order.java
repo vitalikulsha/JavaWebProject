@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Order bean class
+ * Order bean class  (table "order_book" in database)
  */
 public class Order implements Serializable {
     private final static long serialVersionUID = 1L;

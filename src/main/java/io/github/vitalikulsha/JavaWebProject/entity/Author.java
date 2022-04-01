@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Author bean class
+ * Author bean class (table "author" in database)
  */
 public class Author implements Serializable {
     private final static long serialVersionUID = 1L;

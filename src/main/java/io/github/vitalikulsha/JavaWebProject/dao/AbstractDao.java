@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * Abstract DAO class
+ * See also:
+ * {@link Dao}
  *
  * @param <T> element/entity type in this AbstractDAO
  */

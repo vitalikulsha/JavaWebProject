@@ -12,6 +12,9 @@ import java.sql.Statement;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Class for connecting to a database
+ */
 @Slf4j
 public class ConnectionSource {
 

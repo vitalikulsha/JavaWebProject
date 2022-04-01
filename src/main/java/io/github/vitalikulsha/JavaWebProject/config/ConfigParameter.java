@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.config;
 
+/**
+ * Application configuration parameters
+ */
 public class ConfigParameter {
     public final static int ITEM_PER_PAGE = 5;
     public final static String ENCODING = "UTF-8";
