@@ -1,11 +1,19 @@
+-- -----------------------------------------------------
 -- DDL
+-- -----------------------------------------------------
 
+-- -----------------------------------------------------
+-- Table category
+-- -----------------------------------------------------
 CREATE TABLE CATEGORY
 (
     CATEGORY_ID  INT NOT NULL PRIMARY KEY,
     NAME         VARCHAR(50) NOT NULL
 );
 
+-- -----------------------------------------------------
+-- Table book
+-- -----------------------------------------------------
 CREATE TABLE BOOK
 (
     BOOK_ID           INT NOT NULL PRIMARY KEY,
@@ -17,6 +25,9 @@ CREATE TABLE BOOK
     CONSTRAINT FK_Category FOREIGN KEY (CATEGORY) REFERENCES CATEGORY (CATEGORY_ID)
 );
 
+-- -----------------------------------------------------
+-- Table author
+-- -----------------------------------------------------
 CREATE TABLE AUTHOR
 (
     AUTHOR_ID  INT NOT NULL PRIMARY KEY,
@@ -24,6 +35,9 @@ CREATE TABLE AUTHOR
     LASTNAME   VARCHAR(20)
 );
 
+-- -----------------------------------------------------
+-- Table book_author
+-- -----------------------------------------------------
 CREATE TABLE BOOK_AUTHOR
 (
     BOOK_ID    INT NOT NULL,
@@ -33,14 +47,9 @@ CREATE TABLE BOOK_AUTHOR
     FOREIGN KEY (AUTHOR_ID) REFERENCES AUTHOR
 );
 
-CREATE TABLE RECORD_BOOK
-(
-    BOOK_ID  INT NOT NULL,
-    NUMBER   INT,
-    PRIMARY KEY (BOOK_ID),
-    FOREIGN KEY (BOOK_ID) REFERENCES BOOK
-);
-
+-- -----------------------------------------------------
+-- Table user
+-- -----------------------------------------------------
 CREATE TABLE USER
 (
     USER_ID      INT IDENTITY NOT NULL PRIMARY KEY,
@@ -53,6 +62,9 @@ CREATE TABLE USER
     ROLE         VARCHAR(10) NOT NULL
 );
 
+-- -----------------------------------------------------
+-- Table order_book
+-- -----------------------------------------------------
 CREATE TABLE ORDER_BOOK
 (
     ORDER_ID  INT IDENTITY NOT NULL PRIMARY KEY,

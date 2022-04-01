@@ -1,5 +1,8 @@
+-- -----------------------------------------------------
 -- DML
+-- -----------------------------------------------------
 
+-- category
 INSERT INTO CATEGORY VALUES (10, 'Энциклопедии');
 INSERT INTO CATEGORY VALUES (20, 'Естественные науки');
 INSERT INTO CATEGORY VALUES (30, 'Техника. Технические науки');
@@ -10,6 +13,7 @@ INSERT INTO CATEGORY VALUES (70, 'Культура. Наука. Просвеще
 INSERT INTO CATEGORY VALUES (80, 'Филологические науки. Художественная литература');
 INSERT INTO CATEGORY VALUES (90, 'Литература универсального содержания');
 
+-- book
 INSERT INTO BOOK VALUES (10100, 'Энциклопедия относительного и абсолютного знания', 2014, 288, 10, 5);
 INSERT INTO BOOK VALUES (11200, 'Толкиен и его мир', 2005, 496, 10, 6);
 INSERT INTO BOOK VALUES (12300, 'Гномы', 2005, 496, 10, 3);
@@ -36,6 +40,7 @@ INSERT INTO BOOK VALUES (82101, 'Знак беды', 1989, 542, 80, 3);
 INSERT INTO BOOK VALUES (90001, 'Великие цитаты и афоризмы', 2021, 319, 90, 1);
 INSERT INTO BOOK VALUES (90002, 'Афоризмы для умных мужчин', 2021, 192, 90, 0);
 
+-- author
 INSERT INTO AUTHOR VALUES (1, 'Бернар', 'Вербер');
 INSERT INTO AUTHOR VALUES (2, 'Кирилл', 'Королёв');
 INSERT INTO AUTHOR VALUES (3, 'Тим', 'Аппензеллер');
@@ -64,6 +69,7 @@ INSERT INTO AUTHOR VALUES (25, 'Василь', 'Быков');
 INSERT INTO AUTHOR VALUES (26, 'Омар', 'Хайам');
 INSERT INTO AUTHOR VALUES (27, 'Марк', 'Фалкирк');
 
+-- book_authors
 INSERT INTO BOOK_AUTHOR VALUES (10100, 1);
 INSERT INTO BOOK_AUTHOR VALUES (11200, 2);
 INSERT INTO BOOK_AUTHOR VALUES (12300, 3);
@@ -93,11 +99,13 @@ INSERT INTO BOOK_AUTHOR VALUES (82101, 25);
 INSERT INTO BOOK_AUTHOR VALUES (90001, 26);
 INSERT INTO BOOK_AUTHOR VALUES (90002, 27);
 
+-- user
 INSERT INTO USER VALUES (1, 'Admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'Иван', 'Иванов', 375123456789, 'admin@gmail.com', 'ADMIN');
 INSERT INTO USER VALUES (2, 'Librarian', '2c445e1c04df4e247c2089245b68fc811f728f7d30ff14a6d64a4faac58e6270', 'Петр', 'Петров', 375291234567, 'librarian@gmail.com', 'ADMIN');
 INSERT INTO USER VALUES (3, 'User', '04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb', 'Сергей', 'Сергеев', 375441234567, 'user@gmail.com', 'READER');
 INSERT INTO USER VALUES (4, 'Reader', '3d0941964aa3ebdcb00ccef58b1bb399f9f898465e9886d5aec7f31090a0fb30', 'Олег', 'Олегов', 375331234567, 'reader@gmail.com', 'READER');
 
+-- order_book
 INSERT INTO ORDER_BOOK VALUES (1, 90002, 3, 'READING_ROOM', TRUE);
 INSERT INTO ORDER_BOOK VALUES (2, 50001, 4, 'LOANED', FALSE);
 INSERT INTO ORDER_BOOK VALUES (3, 82001, 3, 'LOANED', TRUE);

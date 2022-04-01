@@ -1,10 +1,13 @@
 package io.github.vitalikulsha.JavaWebProject.dao.query.constant;
 
+/**
+ * Name of tables from the database.
+ */
 public enum Table {
-    BOOK,
     AUTHOR,
-    CATEGORY,
+    BOOK,
     BOOK_AUTHOR,
-    USER,
-    ORDER_BOOK
+    CATEGORY,
+    ORDER_BOOK,
+    USER
 }
