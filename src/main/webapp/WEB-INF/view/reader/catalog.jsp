@@ -53,7 +53,7 @@
                 </c:forEach>
             </td>
             <td>${book.category.name}</td>
-            <td id="column">${book.number}</td>
+            <td id="column">${book.quantity}</td>
         </tr>
     </c:forEach>
     </tbody>

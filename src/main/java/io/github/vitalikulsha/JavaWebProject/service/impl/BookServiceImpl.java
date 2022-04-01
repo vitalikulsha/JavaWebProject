@@ -94,7 +94,7 @@ public class BookServiceImpl implements BookService {
     public boolean removeOneBook(int bookId) throws ServiceException {
         try {
             Book book = bookDao.findById(bookId);
-            int quantityBooks = book.getNumber();
+            int quantityBooks = book.getQuantity();
             if (quantityBooks > 0) {
                 return bookDao.updateQuantityBooks(quantityBooks - 1, bookId) == 1;
             } else {
@@ -110,7 +110,7 @@ public class BookServiceImpl implements BookService {
     public boolean addOneBook(int bookId) throws ServiceException {
         try {
             Book book = bookDao.findById(bookId);
-            return bookDao.updateQuantityBooks(book.getNumber() + 1, bookId) == 1;
+            return bookDao.updateQuantityBooks(book.getQuantity() + 1, bookId) == 1;
         } catch (DaoException e) {
             throw new ServiceException("Exception when adding one book", e);
         }

@@ -22,6 +22,6 @@ public class BookSqlQuery extends AbstractSqlQuery {
                 Table.AUTHOR, Table.BOOK_AUTHOR, Column.AUTHOR_ID, Table.AUTHOR, Column.AUTHOR_ID,
                 Column.LASTNAME, PATTERN);
         UPDATE_QUANTITY = String.format("UPDATE %s SET %s=? WHERE %s=?",
-                Table.BOOK, Column.NUMBER, Column.BOOK_ID);
+                Table.BOOK, Column.QUANTITY, Column.BOOK_ID);
     }
 }

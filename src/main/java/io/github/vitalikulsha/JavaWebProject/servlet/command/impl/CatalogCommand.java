@@ -85,7 +85,7 @@ public class CatalogCommand implements Command {
 
     private List<BookDto> removeQuantityBooksZero(List<BookDto> books) {
         return books.stream()
-                .filter(b -> b.getNumber() != 0)
+                .filter(b -> b.getQuantity() != 0)
                 .collect(Collectors.toList());
     }
 }

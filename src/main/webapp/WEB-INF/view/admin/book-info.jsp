@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <th><fmt:message key="book.quantity"/></th>
-        <td>${book.number}</td>
+        <td>${book.quantity}</td>
     </tr>
 </table>
 </body>

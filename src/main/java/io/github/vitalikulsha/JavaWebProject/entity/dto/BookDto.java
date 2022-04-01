@@ -19,7 +19,7 @@ public class BookDto implements Serializable {
     private int publicationYear;
     private int numberPages;
     private Category category;
-    private int number;
+    private int quantity;
 
     public BookDto() {
     }
@@ -72,12 +72,12 @@ public class BookDto implements Serializable {
         this.category = category;
     }
 
-    public int getNumber() {
-        return number;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -85,12 +85,12 @@ public class BookDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookDto bookDto = (BookDto) o;
-        return id == bookDto.id && publicationYear == bookDto.publicationYear && numberPages == bookDto.numberPages && number == bookDto.number && Objects.equals(title, bookDto.title) && Objects.equals(authors, bookDto.authors) && Objects.equals(category, bookDto.category);
+        return id == bookDto.id && publicationYear == bookDto.publicationYear && numberPages == bookDto.numberPages && quantity == bookDto.quantity && Objects.equals(title, bookDto.title) && Objects.equals(authors, bookDto.authors) && Objects.equals(category, bookDto.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, authors, publicationYear, numberPages, category, number);
+        return Objects.hash(id, title, authors, publicationYear, numberPages, category, quantity);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class BookDto implements Serializable {
                 ", publicationYear=" + publicationYear +
                 ", numberPages=" + numberPages +
                 ", category=" + category +
-                ", number=" + number +
+                ", quantity=" + quantity +
                 '}';
     }
 
@@ -146,8 +146,8 @@ public class BookDto implements Serializable {
             return this;
         }
 
-        public Builder fixNumber(int number) {
-            bookDto.number = number;
+        public Builder fixQuantity(int quantity) {
+            bookDto.quantity = quantity;
             return this;
         }
 

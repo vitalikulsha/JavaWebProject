@@ -16,8 +16,8 @@ public class BookRowMapper implements RowMapper<Book> {
             int publicationYear = resultSet.getInt(Column.PUBLICATIONYEAR.name());
             int numberPages = resultSet.getInt(Column.NUMBERPAGES.name());
             int categoryId = resultSet.getInt(Column.CATEGORY.name());
-            int number = resultSet.getInt(Column.NUMBER.name());
-            return new Book(id, title, publicationYear, numberPages, categoryId, number);
+            int quantity = resultSet.getInt(Column.QUANTITY.name());
+            return new Book(id, title, publicationYear, numberPages, categoryId, quantity);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

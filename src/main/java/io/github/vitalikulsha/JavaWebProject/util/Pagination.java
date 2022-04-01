@@ -14,6 +14,9 @@ import java.util.stream.IntStream;
  * @param <T> element/entity type for this pagination
  */
 public class Pagination<T> {
+    /**
+     * Number of entries per page.
+     */
     private final int itemPerPage;
 
     public Pagination(int itemPerPage) {

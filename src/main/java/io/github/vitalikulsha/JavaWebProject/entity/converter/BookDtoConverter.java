@@ -38,7 +38,7 @@ public class BookDtoConverter implements DtoConverter<BookDto, Book> {
                 .fixPublicationYear(book.getPublicationYear())
                 .fixNumberPages(book.getNumberPages())
                 .fixCategory(category)
-                .fixNumber(book.getNumber())
+                .fixQuantity(book.getQuantity())
                 .build();
     }
 }

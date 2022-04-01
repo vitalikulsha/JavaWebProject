@@ -14,18 +14,18 @@ public class Book implements Serializable {
     private int publicationYear;
     private int numberPages;
     private int categoryId;
-    private int number;
+    private int quantity;
 
     public Book() {
     }
 
-    public Book(int id, String title, int publicationYear, int numberPages, int categoryId, int number) {
+    public Book(int id, String title, int publicationYear, int numberPages, int categoryId, int quantity) {
         this.id = id;
         this.title = title;
         this.publicationYear = publicationYear;
         this.numberPages = numberPages;
         this.categoryId = categoryId;
-        this.number = number;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -68,12 +68,12 @@ public class Book implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public int getNumber() {
-        return number;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class Book implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id && publicationYear == book.publicationYear && numberPages == book.numberPages && categoryId == book.categoryId && number == book.number && Objects.equals(title, book.title);
+        return id == book.id && publicationYear == book.publicationYear && numberPages == book.numberPages && categoryId == book.categoryId && quantity == book.quantity && Objects.equals(title, book.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, publicationYear, numberPages, categoryId, number);
+        return Objects.hash(id, title, publicationYear, numberPages, categoryId, quantity);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class Book implements Serializable {
                 ", publicationYear=" + publicationYear +
                 ", numberPages=" + numberPages +
                 ", categoryId=" + categoryId +
-                ", number=" + number +
+                ", quantity=" + quantity +
                 '}';
     }
 }

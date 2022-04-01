@@ -60,7 +60,7 @@
                     </c:otherwise>
                 </c:choose>
             </td>
-            <td>${order.bookDto.number}</td>
+            <td>${order.bookDto.quantity}</td>
             <td>${order.userDto.id}</td>
         </tr>
     </c:forEach>
