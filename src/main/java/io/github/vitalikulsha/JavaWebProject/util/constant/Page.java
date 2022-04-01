@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.constant;
 
+/**
+ * List of paths to JSP pages.
+ */
 public class Page {
     //general
     public final static String LOGIN = "/WEB-INF/view/login.jsp";

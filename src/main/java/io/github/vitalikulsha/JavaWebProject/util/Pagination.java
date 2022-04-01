@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 /**
- * Pagination class
+ * Pagination class.
  *
  * @param <T> element/entity type for this pagination
  */

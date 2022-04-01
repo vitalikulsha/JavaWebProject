@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.service.validator;
 
+/**
+ * Patterns for validating entity fields.
+ */
 public class ValidationPattern {
     public final static String EMAIL_PATTERN = "^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$";
     public final static String NAME_PATTERN = "^([А-Я][а-яё]{1,30}|[A-Z][a-z]{1,30})$";

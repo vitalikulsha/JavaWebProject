@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.constant;
 
+/**
+ * List of attributes.
+ */
 public class Attribute {
     public static final String ALL_ORDERS = "allOrders";
     public static final String ALL_READERS = "allReaders";

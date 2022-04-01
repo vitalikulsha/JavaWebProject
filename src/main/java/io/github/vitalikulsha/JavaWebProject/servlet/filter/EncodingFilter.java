@@ -7,6 +7,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
+/**
+ * Filter, that sets request and response encoding
+ */
 @Slf4j
 @WebFilter("/*")
 public class EncodingFilter implements Filter {

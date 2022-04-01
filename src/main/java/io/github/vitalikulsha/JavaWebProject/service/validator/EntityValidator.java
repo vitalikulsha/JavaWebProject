@@ -1,15 +1,16 @@
 package io.github.vitalikulsha.JavaWebProject.service.validator;
 
 /**
- * Entity validator class
- * @param <T> entity type
+ * Entity validator class.
+ *
+ * @param <T> entity type in this validator
  */
 public interface EntityValidator<T> {
     /**
-     * Validates the entity
+     * Validates an entity for pattern matching.
      *
      * @param entity entity
-     * @return true if the entity validated
+     * @return true if the entity matches the pattern
      */
     boolean validate(T entity);
 }

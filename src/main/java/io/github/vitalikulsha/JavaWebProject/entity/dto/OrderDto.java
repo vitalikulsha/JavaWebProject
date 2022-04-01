@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Order DTO bean class
+ * Order DTO bean class from order class
  */
 public class OrderDto implements Serializable {
     private final static long serialVersionUID = 1L;
@@ -93,7 +93,7 @@ public class OrderDto implements Serializable {
     }
 
     /**
-     * Order DTO builder
+     * Order DTO builder from order class
      */
     public static class Builder {
         private OrderDto orderDto;

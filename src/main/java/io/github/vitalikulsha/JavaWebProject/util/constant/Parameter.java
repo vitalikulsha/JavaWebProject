@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.constant;
 
+/**
+ * List of parameters.
+ */
 public class Parameter {
     public static final String ACTION = "action";
     public static final String AUTHOR_NAME = "authorName";

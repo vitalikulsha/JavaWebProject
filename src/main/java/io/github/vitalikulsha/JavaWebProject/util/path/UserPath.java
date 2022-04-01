@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
+/**
+ * Servlet path for user with user role.
+ */
 public enum UserPath {
     BOOK_SEARCH("/reader/book-search"),
     CATALOG("/reader/catalog"),

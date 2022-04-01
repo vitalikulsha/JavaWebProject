@@ -10,6 +10,11 @@ import java.util.List;
  * Abstract DAO class
  * See also:
  * {@link Dao}
+ * {@link AuthorDao}
+ * {@link BookDao}
+ * {@link CategoryDao}
+ * {@link OrderDao}
+ * {@link UserDao}
  *
  * @param <T> element/entity type in this AbstractDAO
  */

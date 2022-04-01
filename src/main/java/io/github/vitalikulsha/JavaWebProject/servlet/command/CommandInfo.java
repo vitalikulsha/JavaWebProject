@@ -1,5 +1,11 @@
 package io.github.vitalikulsha.JavaWebProject.servlet.command;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Info of {@link Command#execute(HttpServletRequest, HttpServletResponse)} containing page path and routing type.
+ */
 public class CommandInfo {
     private String resource;
     private RoutingType routingType;
@@ -13,15 +19,7 @@ public class CommandInfo {
         return resource;
     }
 
-    public void setResource(String resource) {
-        this.resource = resource;
-    }
-
     public RoutingType getRoutingType() {
         return routingType;
-    }
-
-    public void setRoutingType(RoutingType routingType) {
-        this.routingType = routingType;
     }
 }

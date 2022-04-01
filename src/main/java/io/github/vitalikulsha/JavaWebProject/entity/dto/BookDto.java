@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Book DTO bean class
+ * Book DTO bean class from book class
  */
 public class BookDto implements Serializable {
     private final static long serialVersionUID = 1L;
@@ -107,7 +107,7 @@ public class BookDto implements Serializable {
     }
 
     /**
-     * Book DTO builder
+     * Book DTO builder from book class
      */
     public static class Builder {
         private BookDto bookDto;

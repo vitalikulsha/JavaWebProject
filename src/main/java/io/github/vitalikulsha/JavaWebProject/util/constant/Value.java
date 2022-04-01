@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.constant;
 
+/**
+ * List of parameter and attribute values.
+ */
 public class Value {
     //methods
     public final static String GET = "GET";

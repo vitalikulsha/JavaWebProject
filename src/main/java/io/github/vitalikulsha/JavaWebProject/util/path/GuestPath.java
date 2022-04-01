@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
+/**
+ * Servlet path for user with guest role.
+ */
 public enum GuestPath {
     ERROR_403("/error-403"),
     ERROR_403_IMG("/img/403-error.png"),

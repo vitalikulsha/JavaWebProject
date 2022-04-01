@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.JavaWebProject.util.path;
 
+/**
+ * Servlet path for user with admin role.
+ */
 public enum AdminPath {
     ADMIN("/admin"),
     ALL_BOOKS("/admin/all-books"),

@@ -8,6 +8,9 @@ import io.github.vitalikulsha.JavaWebProject.util.path.UserPath;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that provides command with given servlet path.
+ */
 public class CommandFactory {
     private final static CommandFactory instance = new CommandFactory();
 
@@ -38,13 +41,24 @@ public class CommandFactory {
         put(GuestPath.REGISTER.getPath(), new RegisterCommand());
     }};
 
-    public CommandFactory() {
+    private CommandFactory() {
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance of CommandFactory
+     */
     public static CommandFactory instance() {
         return instance;
     }
 
+    /**
+     * Gets command.
+     *
+     * @param path servlet path
+     * @return the command to the corresponding servlet path
+     */
     public Command getCommand(String path) {
         return commands.get(path);
     }

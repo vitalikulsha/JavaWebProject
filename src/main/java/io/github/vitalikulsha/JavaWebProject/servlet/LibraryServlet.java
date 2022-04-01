@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Library servlet.
+ */
 @Slf4j
 @WebServlet(urlPatterns = {"/admin", "/admin/book-info", "/admin/reader-info", "/admin/order-info",
         "/admin/all-orders", "/admin/all-readers", "/admin/all-books",
@@ -44,6 +47,14 @@ public class LibraryServlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    /**
+     * Executes a request based on the servlet path and type method (GET or POST) and forwards request or sends redirect.
+     *
+     * @param request  HTTP request
+     * @param response HTTP response
+     * @throws IOException      is thrown when forward exception occurs
+     * @throws ServletException is thrown when redirect exception occurs
+     */
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         log.debug("processRequest() starting");

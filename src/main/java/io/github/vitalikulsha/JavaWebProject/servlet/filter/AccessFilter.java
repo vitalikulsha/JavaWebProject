@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Filter, that controls access of users with different roles to commands of the system.
+ */
 @Slf4j
 @WebFilter("/*")
 public class AccessFilter implements Filter {
@@ -59,7 +62,7 @@ public class AccessFilter implements Filter {
             response.sendRedirect(request.getContextPath() + GuestPath.ERROR_404.getPath());
             return;
         }
-        if(isRolePage(servletPath)){
+        if (isRolePage(servletPath)) {
             if (!rolePages.get(role).contains(servletPath)) {
                 log.error("No access rights to " + servletPath);
                 response.sendRedirect(request.getContextPath() + GuestPath.ERROR_403.getPath());

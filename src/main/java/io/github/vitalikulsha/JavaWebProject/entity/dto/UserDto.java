@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * User DTO bean class
+ * User DTO bean class from user class
  */
 public class UserDto implements Serializable {
     private final static long serialVersionUID = 1L;
@@ -104,7 +104,7 @@ public class UserDto implements Serializable {
     }
 
     /**
-     * User DTO builder
+     * User DTO builder from user class
      */
     public static class Builder {
         private UserDto userDto;
