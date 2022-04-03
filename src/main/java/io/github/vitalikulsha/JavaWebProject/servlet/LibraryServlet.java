@@ -67,14 +67,14 @@ public class LibraryServlet extends HttpServlet {
         switch (commandInfo.getRoutingType()) {
             case FORWARD:
                 log.info("Routing type is FORWARD");
-                getServletContext().getRequestDispatcher(resource).forward(request, response);
+                request.getRequestDispatcher(resource).forward(request, response);
                 break;
             case REDIRECT:
                 log.info("Routing type is REDIRECT");
                 response.sendRedirect(request.getContextPath() + resource);
                 break;
             default:
-                getServletContext().getRequestDispatcher(Page.ERROR_404).forward(request, response);
+                request.getRequestDispatcher(Page.ERROR_404).forward(request, response);
         }
     }
 }
