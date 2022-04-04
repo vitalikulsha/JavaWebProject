@@ -4,7 +4,6 @@ import io.github.vitalikulsha.JavaWebProject.dao.CategoryDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Category;
 import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,15 +12,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class CategoryDaoImplTest {
-    private CategoryDao categoryDao;
-
-    @Before
-    public void init() {
-        categoryDao = DaoFactory.instance().categoryDao();
-    }
 
     @Test
     public void findById() throws DaoException {
+        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
         Category expected = new Category(10, "Энциклопедии");
         assertEquals(expected, categoryDao.findById(10));
         assertNotEquals(expected, categoryDao.findById(20));
@@ -31,13 +25,15 @@ public class CategoryDaoImplTest {
 
     @Test
     public void findAll() throws DaoException {
+        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
         assertEquals(getAllCategories(), categoryDao.findAll());
     }
 
     @Test
     public void deleteById() throws DaoException {
+        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
         assertEquals(0, categoryDao.deleteById(1));
-        assertThrows(DaoException.class, () -> categoryDao.deleteById(10));
+        assertEquals(1, categoryDao.deleteById(10));
     }
 
     private List<Category> getAllCategories() {

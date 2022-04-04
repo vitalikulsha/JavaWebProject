@@ -4,7 +4,6 @@ import io.github.vitalikulsha.JavaWebProject.dao.AuthorDao;
 import io.github.vitalikulsha.JavaWebProject.dao.DaoFactory;
 import io.github.vitalikulsha.JavaWebProject.entity.Author;
 import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -13,15 +12,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class AuthorDaoImplTest {
-    private AuthorDao authorDao;
-
-    @Before
-    public void init() {
-        authorDao = DaoFactory.instance().authorDao();
-    }
 
     @Test
     public void findAuthorsByBookId() throws DaoException {
+        AuthorDao authorDao = DaoFactory.instance().authorDao();
         List<Author> expected = new ArrayList<>() {{
             this.add(new Author(1, "Бернар", "Вербер"));
         }};
@@ -33,6 +27,7 @@ public class AuthorDaoImplTest {
 
     @Test
     public void findById() throws DaoException {
+        AuthorDao authorDao = DaoFactory.instance().authorDao();
         Author expected = new Author(1, "Бернар", "Вербер");
         assertEquals(expected, authorDao.findById(1));
         assertNotEquals(expected, authorDao.findById(2));
@@ -42,13 +37,15 @@ public class AuthorDaoImplTest {
 
     @Test
     public void findAll() throws DaoException {
+        AuthorDao authorDao = DaoFactory.instance().authorDao();
         assertEquals(getAllAuthors(), authorDao.findAll());
     }
 
     @Test
     public void deleteById() throws DaoException {
+        AuthorDao authorDao = DaoFactory.instance().authorDao();
         assertEquals(0, authorDao.deleteById(30));
-        assertThrows(DaoException.class, () -> authorDao.deleteById(1));
+        assertEquals(1, authorDao.deleteById(10));
     }
 
     private List<Author> getAllAuthors() {

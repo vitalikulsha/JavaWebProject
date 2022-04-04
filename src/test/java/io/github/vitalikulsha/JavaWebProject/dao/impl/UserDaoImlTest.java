@@ -5,7 +5,6 @@ import io.github.vitalikulsha.JavaWebProject.dao.UserDao;
 import io.github.vitalikulsha.JavaWebProject.entity.Role;
 import io.github.vitalikulsha.JavaWebProject.entity.User;
 import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,15 +14,10 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.*;
 
 public class UserDaoImlTest {
-    private UserDao userDao;
-
-    @Before
-    public void init() {
-        userDao = DaoFactory.instance().userDao();
-    }
 
     @Test
     public void findByLogin() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         User expected = getAllUsers().stream()
                 .filter(u -> u.getLogin().equals("Admin"))
                 .findFirst()
@@ -36,6 +30,7 @@ public class UserDaoImlTest {
 
     @Test
     public void findByEmail() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         User expected = getAllUsers().stream()
                 .filter(u -> u.getEmail().equals("admin@gmail.com"))
                 .findFirst()
@@ -48,6 +43,7 @@ public class UserDaoImlTest {
 
     @Test
     public void findByRole() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         List<User> expected = getAllUsers().stream()
                 .filter(u -> u.getRole() == Role.ADMIN)
                 .collect(Collectors.toList());
@@ -58,6 +54,7 @@ public class UserDaoImlTest {
 
     @Test
     public void updateAndSave() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         User saveUser = new User(5, "Test", "test", "Test", "Test",
                 375123456789L, "test@test.by", Role.GUEST);
         User updateUser = new User(3, "User", "04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb",
@@ -71,11 +68,13 @@ public class UserDaoImlTest {
 
     @Test
     public void findAll() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         assertEquals(getAllUsers(), userDao.findAll());
     }
 
     @Test
     public void findById() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         User expected = getAllUsers().stream()
                 .filter(u -> u.getId() == 1)
                 .findFirst()
@@ -88,6 +87,7 @@ public class UserDaoImlTest {
 
     @Test
     public void deleteById() throws DaoException {
+        UserDao userDao = DaoFactory.instance().userDao();
         assertEquals(1, userDao.deleteById(1));
         assertNull(userDao.findById(1));
         assertEquals(0, userDao.deleteById(10));

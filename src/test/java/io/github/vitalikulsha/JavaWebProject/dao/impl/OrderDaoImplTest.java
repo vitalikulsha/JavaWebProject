@@ -5,7 +5,6 @@ import io.github.vitalikulsha.JavaWebProject.dao.OrderDao;
 import io.github.vitalikulsha.JavaWebProject.entity.Order;
 import io.github.vitalikulsha.JavaWebProject.entity.ReserveStatus;
 import io.github.vitalikulsha.JavaWebProject.exception.DaoException;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -15,15 +14,10 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.*;
 
 public class OrderDaoImplTest {
-    private OrderDao orderDao;
-
-    @Before
-    public void init() {
-        orderDao = DaoFactory.instance().orderDao();
-    }
 
     @Test
     public void findByUserId() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         List<Order> expected = getAllOrders().stream()
                 .filter(o -> o.getUserId() == 3)
                 .collect(Collectors.toList());
@@ -34,6 +28,7 @@ public class OrderDaoImplTest {
 
     @Test
     public void save() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         Order saveOrder = new Order(5, 71001, 4, ReserveStatus.READING_ROOM, false);
         assertEquals(1, orderDao.save(saveOrder));
         assertEquals(saveOrder, orderDao.findById(5));
@@ -41,6 +36,7 @@ public class OrderDaoImplTest {
 
     @Test
     public void updateApproved() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         assertEquals(1, orderDao.updateApproved(true, 4));
         assertTrue(orderDao.findById(4).getApproved());
         assertEquals(0, orderDao.updateApproved(false, 10));
@@ -48,6 +44,7 @@ public class OrderDaoImplTest {
 
     @Test
     public void updateReserved() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         assertEquals(1, orderDao.updateReserved(ReserveStatus.REFUND, 2));
         assertSame(orderDao.findById(2).getReserveStatus(), ReserveStatus.REFUND);
         assertEquals(0, orderDao.updateReserved(ReserveStatus.LOANED, 10));
@@ -55,6 +52,7 @@ public class OrderDaoImplTest {
 
     @Test
     public void findById() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         Order expected = getAllOrders().stream()
                 .filter(o -> o.getId() == 1)
                 .findFirst()
@@ -67,11 +65,13 @@ public class OrderDaoImplTest {
 
     @Test
     public void findAll() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         assertEquals(getAllOrders(), orderDao.findAll());
     }
 
     @Test
     public void deleteById() throws DaoException {
+        OrderDao orderDao = DaoFactory.instance().orderDao();
         assertEquals(1, orderDao.deleteById(1));
         assertNull(orderDao.findById(1));
         assertEquals(0, orderDao.deleteById(10));
