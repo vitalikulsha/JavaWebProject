@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.javawebproject.dao.impl;
 
-import io.github.vitalikulsha.javawebproject.dao.CategoryDao;
-import io.github.vitalikulsha.javawebproject.dao.DaoFactory;
-import io.github.vitalikulsha.javawebproject.entity.Category;
+import io.github.vitalikulsha.javawebproject.category.dao.CategoryDao;
+import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
+import io.github.vitalikulsha.javawebproject.category.entity.Category;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import org.junit.Test;
 

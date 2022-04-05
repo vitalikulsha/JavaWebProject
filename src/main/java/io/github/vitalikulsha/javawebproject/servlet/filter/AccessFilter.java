@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.servlet.filter;
 
-import io.github.vitalikulsha.javawebproject.entity.dto.UserDto;
-import io.github.vitalikulsha.javawebproject.entity.Role;
+import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;

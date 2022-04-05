@@ -1,9 +1,9 @@
 package io.github.vitalikulsha.javawebproject.dao.impl;
 
-import io.github.vitalikulsha.javawebproject.dao.DaoFactory;
-import io.github.vitalikulsha.javawebproject.dao.OrderDao;
-import io.github.vitalikulsha.javawebproject.entity.Order;
-import io.github.vitalikulsha.javawebproject.entity.ReserveStatus;
+import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
+import io.github.vitalikulsha.javawebproject.order.dao.OrderDao;
+import io.github.vitalikulsha.javawebproject.order.entity.Order;
+import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import org.junit.Test;
 

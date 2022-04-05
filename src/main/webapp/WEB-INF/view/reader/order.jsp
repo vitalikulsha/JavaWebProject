@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.entity.ReserveStatus" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>

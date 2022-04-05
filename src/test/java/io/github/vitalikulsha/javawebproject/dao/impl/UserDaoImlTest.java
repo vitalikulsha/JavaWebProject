@@ -1,9 +1,9 @@
 package io.github.vitalikulsha.javawebproject.dao.impl;
 
-import io.github.vitalikulsha.javawebproject.dao.DaoFactory;
-import io.github.vitalikulsha.javawebproject.dao.UserDao;
-import io.github.vitalikulsha.javawebproject.entity.Role;
-import io.github.vitalikulsha.javawebproject.entity.User;
+import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
+import io.github.vitalikulsha.javawebproject.user.dao.UserDao;
+import io.github.vitalikulsha.javawebproject.user.entity.Role;
+import io.github.vitalikulsha.javawebproject.user.entity.User;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import org.junit.Test;
 

@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.javawebproject.dao.impl;
 
-import io.github.vitalikulsha.javawebproject.dao.BookDao;
-import io.github.vitalikulsha.javawebproject.dao.DaoFactory;
-import io.github.vitalikulsha.javawebproject.entity.Book;
+import io.github.vitalikulsha.javawebproject.book.dao.BookDao;
+import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
+import io.github.vitalikulsha.javawebproject.book.entity.Book;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import org.junit.Test;
 

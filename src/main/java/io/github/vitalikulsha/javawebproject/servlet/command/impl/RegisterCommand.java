@@ -1,9 +1,9 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
-import io.github.vitalikulsha.javawebproject.service.ServiceFactory;
-import io.github.vitalikulsha.javawebproject.service.UserService;
-import io.github.vitalikulsha.javawebproject.service.validator.ValidationPattern;
+import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
+import io.github.vitalikulsha.javawebproject.user.service.UserService;
+import io.github.vitalikulsha.javawebproject.util.service.validator.ValidationPattern;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
