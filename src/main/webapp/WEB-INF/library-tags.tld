@@ -11,7 +11,7 @@
 
     <tag>
         <name>err-msg</name>
-        <tag-class>io.github.vitalikulsha.JavaWebProject.util.tags.ErrorMessageTag</tag-class>
+        <tag-class>io.github.vitalikulsha.javawebproject.util.tags.ErrorMessageTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>error</name>
