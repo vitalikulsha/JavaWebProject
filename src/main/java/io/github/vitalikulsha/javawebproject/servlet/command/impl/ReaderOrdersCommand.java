@@ -2,8 +2,8 @@ package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -50,11 +50,11 @@ public class ReaderOrdersCommand implements Command {
 
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
-        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
+        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        UserDTO user = (UserDTO) session.getAttribute(Attribute.USER);
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(Attribute.URL, url);
-        List<OrderDto> orders = orderService.getOrdersByUserId(user.getId());
+        List<OrderDTO> orders = orderService.getOrdersByUserId(user.getId());
         pagination.paginate(orders, request, Attribute.USER_ORDERS);
         return new CommandInfo(Page.READER_ORDERS, RoutingType.FORWARD);
     }

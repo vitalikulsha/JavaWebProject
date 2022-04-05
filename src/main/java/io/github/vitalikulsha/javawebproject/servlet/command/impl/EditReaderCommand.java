@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.user.service.UserService;
@@ -40,7 +40,7 @@ public class EditReaderCommand implements Command {
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
-        UserDto userDto = (UserDto) session.getAttribute(Attribute.USER);
+        UserDTO userDto = (UserDTO) session.getAttribute(Attribute.USER);
         UserService userService = ServiceFactory.instance().userService();
         String firstName = request.getParameter(Parameter.FIRST_NAME);
         String lastName = request.getParameter(Parameter.LAST_NAME);
@@ -54,7 +54,7 @@ public class EditReaderCommand implements Command {
             request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
             return new CommandInfo(Page.EDIT, RoutingType.FORWARD);
         }
-        UserDto newUserDto = userService.getById(userDto.getId());
+        UserDTO newUserDto = userService.getById(userDto.getId());
         session.setAttribute(Attribute.USER, newUserDto);
         return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
     }

@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.javawebproject.order.service;
 
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.util.service.Service;
@@ -12,7 +12,7 @@ import java.util.List;
  * See also:
  * {@link Service}
  */
-public interface OrderService extends Service<OrderDto> {
+public interface OrderService extends Service<OrderDTO> {
     /**
      * Gets a list of orders DTO for the user with the given id.
      *
@@ -20,7 +20,7 @@ public interface OrderService extends Service<OrderDto> {
      * @return list of order DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<OrderDto> getOrdersByUserId(int userId) throws ServiceException;
+    List<OrderDTO> getOrdersByUserId(int userId) throws ServiceException;
 
     /**
      * Creates a new order.

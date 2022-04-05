@@ -2,7 +2,7 @@ package io.github.vitalikulsha.javawebproject.book.service;
 
 import io.github.vitalikulsha.javawebproject.book.dao.BookDao;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDto;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverterFactory;
 import io.github.vitalikulsha.javawebproject.book.entity.Book;
@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class BookServiceImpl implements BookService {
     private final BookDao bookDao;
-    private final DtoConverter<BookDto, Book> bookDtoConverter;
+    private final DtoConverter<BookDTO, Book> bookDtoConverter;
 
     public BookServiceImpl() {
         bookDao = DaoFactory.instance().bookDao();
@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public BookDto getById(int id) throws ServiceException {
+    public BookDTO getById(int id) throws ServiceException {
         try {
             return bookDtoConverter.toDto(bookDao.findById(id));
         } catch (DaoException e) {
@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getAll() throws ServiceException {
+    public List<BookDTO> getAll() throws ServiceException {
         try {
             return bookDao.findAll()
                     .stream()
@@ -45,7 +45,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getBooksByTitle(String title) throws ServiceException {
+    public List<BookDTO> getBooksByTitle(String title) throws ServiceException {
         try {
             return bookDao.findByBookTitle(title)
                     .stream()
@@ -57,7 +57,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getBooksByAuthorName(String authorName) throws ServiceException {
+    public List<BookDTO> getBooksByAuthorName(String authorName) throws ServiceException {
         try {
             return bookDao.findByAuthorName(authorName)
                     .stream()
@@ -69,7 +69,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDto> getBooksByCategoryName(String categoryName) throws ServiceException {
+    public List<BookDTO> getBooksByCategoryName(String categoryName) throws ServiceException {
         try {
             return bookDao.findByCategoryName(categoryName)
                     .stream()

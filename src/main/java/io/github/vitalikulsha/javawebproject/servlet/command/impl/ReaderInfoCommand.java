@@ -5,8 +5,8 @@ import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.user.service.UserService;
@@ -28,15 +28,15 @@ public class ReaderInfoCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         UserService userService = ServiceFactory.instance().userService();
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         int readerId = Integer.parseInt(request.getParameter(Parameter.READER_ID));
         String url = request.getServletContext().getContextPath()
                 + AdminPath.READER_INFO.getPath()
                 + "?" + Parameter.READER_ID + "=" + readerId;
         request.setAttribute(Attribute.URL, url);
         try {
-            UserDto reader = userService.getById(readerId);
-            List<OrderDto> readerOrders = orderService.getOrdersByUserId(reader.getId());
+            UserDTO reader = userService.getById(readerId);
+            List<OrderDTO> readerOrders = orderService.getOrdersByUserId(reader.getId());
             request.setAttribute(Attribute.READER, reader);
             pagination.paginate(readerOrders, request, Attribute.READER_ORDERS);
             return new CommandInfo(Page.READER_INFO, RoutingType.FORWARD);

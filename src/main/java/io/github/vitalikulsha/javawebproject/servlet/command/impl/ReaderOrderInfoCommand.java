@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -23,7 +23,7 @@ public class ReaderOrderInfoCommand implements Command {
         OrderService orderService = ServiceFactory.instance().orderService();
         int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
         try {
-            OrderDto order = orderService.getById(orderId);
+            OrderDTO order = orderService.getById(orderId);
             request.setAttribute(Attribute.ORDER, order);
             return new CommandInfo(Page.READER_ORDER_INFO, RoutingType.FORWARD);
         } catch (ServiceException e) {

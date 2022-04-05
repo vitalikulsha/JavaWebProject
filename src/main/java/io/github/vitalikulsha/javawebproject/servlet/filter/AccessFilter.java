@@ -1,6 +1,6 @@
 package io.github.vitalikulsha.javawebproject.servlet.filter;
 
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Value;
@@ -54,7 +54,7 @@ public class AccessFilter implements Filter {
         HttpSession session = request.getSession();
         session.setAttribute(Attribute.LOCALE, getLocale(session));
         String servletPath = request.getServletPath();
-        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
+        UserDTO user = (UserDTO) session.getAttribute(Attribute.USER);
         Role role = (user == null) ? Role.GUEST : user.getRole();
         log.info("User role = " + role);
         if (servletPath == null) {

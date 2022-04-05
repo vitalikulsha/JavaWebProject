@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDto;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
@@ -49,7 +49,7 @@ public class OrderCommand implements Command {
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         int bookId = Integer.parseInt(request.getParameter(Parameter.BOOK_ID));
-        BookDto bookDto = bookService.getById(bookId);
+        BookDTO bookDto = bookService.getById(bookId);
         if (bookDto == null) {
             session.setAttribute(Attribute.BOOK_FOUND, false);
             return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
@@ -64,8 +64,8 @@ public class OrderCommand implements Command {
         OrderService orderService = ServiceFactory.instance().orderService();
         BookService bookService = ServiceFactory.instance().bookService();
         ReserveStatus reserveStatus = ReserveStatus.valueOf(request.getParameter(Parameter.RESERVE_STATUS));
-        BookDto bookDto = (BookDto) session.getAttribute(Attribute.BOOK);
-        UserDto user = (UserDto) session.getAttribute(Attribute.USER);
+        BookDTO bookDto = (BookDTO) session.getAttribute(Attribute.BOOK);
+        UserDTO user = (UserDTO) session.getAttribute(Attribute.USER);
         if (!isBookExists(orderService, bookDto, user)) {
             orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
             bookService.removeOneBook(bookDto.getId());
@@ -77,7 +77,7 @@ public class OrderCommand implements Command {
         return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
     }
 
-    private boolean isBookExists(OrderService orderService, BookDto bookDto, UserDto user) throws ServiceException {
+    private boolean isBookExists(OrderService orderService, BookDTO bookDto, UserDTO user) throws ServiceException {
         return orderService.getOrdersByUserId(user.getId())
                 .stream()
                 .map(o -> o.getBookDto().getId())

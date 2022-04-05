@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.user.service;
 
 import io.github.vitalikulsha.javawebproject.util.service.Service;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 
@@ -12,7 +12,7 @@ import java.util.List;
  * See also:
  * {@link Service}
  */
-public interface UserService extends Service<UserDto> {
+public interface UserService extends Service<UserDTO> {
     /**
      * Gets a list of users DTO by role.
      *
@@ -20,7 +20,7 @@ public interface UserService extends Service<UserDto> {
      * @return list of users DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<UserDto> getUsersByRole(Role role) throws ServiceException;
+    List<UserDTO> getUsersByRole(Role role) throws ServiceException;
 
     /**
      * Checks if a user exists with the given password and login.
@@ -39,7 +39,7 @@ public interface UserService extends Service<UserDto> {
      * @return user DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    UserDto getByLogin(String login) throws ServiceException;
+    UserDTO getByLogin(String login) throws ServiceException;
 
     /**
      * Gets user DTO by user e-mail.
@@ -48,7 +48,7 @@ public interface UserService extends Service<UserDto> {
      * @return user DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    UserDto getByEmail(String email) throws ServiceException;
+    UserDTO getByEmail(String email) throws ServiceException;
 
     /**
      * Registers a new user.

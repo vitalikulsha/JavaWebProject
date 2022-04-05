@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.javawebproject.util.dtoconverter;
 
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDtoConverter;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDtoConverter;
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDtoConverter;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTOConverter;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTOConverter;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTOConverter;
 
 /**
  * Factory, that provides DTO converters.
@@ -10,9 +10,9 @@ import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDtoConverter;
 public class DtoConverterFactory {
     private final static DtoConverterFactory instance = new DtoConverterFactory();
 
-    private final BookDtoConverter bookDtoConverter = new BookDtoConverter();
-    private final OrderDtoConverter orderDtoConverter = new OrderDtoConverter();
-    private final UserDtoConverter userDtoConverter = new UserDtoConverter();
+    private final BookDTOConverter bookDtoConverter = new BookDTOConverter();
+    private final OrderDTOConverter orderDtoConverter = new OrderDTOConverter();
+    private final UserDTOConverter userDtoConverter = new UserDTOConverter();
 
     /**
      * Gets instance.
@@ -23,15 +23,15 @@ public class DtoConverterFactory {
         return instance;
     }
 
-    public BookDtoConverter bookDtoConverter() {
+    public BookDTOConverter bookDtoConverter() {
         return bookDtoConverter;
     }
 
-    public OrderDtoConverter orderDtoConverter() {
+    public OrderDTOConverter orderDtoConverter() {
         return orderDtoConverter;
     }
 
-    public UserDtoConverter userDtoConverter() {
+    public UserDTOConverter userDtoConverter() {
         return userDtoConverter;
     }
 }

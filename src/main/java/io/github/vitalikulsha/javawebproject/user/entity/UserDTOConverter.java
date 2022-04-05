@@ -1,16 +1,15 @@
-package io.github.vitalikulsha.javawebproject.user.entity.dto;
+package io.github.vitalikulsha.javawebproject.user.entity;
 
-import io.github.vitalikulsha.javawebproject.user.entity.User;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
 
-public class UserDtoConverter implements DtoConverter<UserDto, User> {
+public class UserDTOConverter implements DtoConverter<UserDTO, User> {
 
     @Override
-    public UserDto toDto(User user) {
+    public UserDTO toDto(User user) {
         if (user == null) {
             return null;
         }
-        return new UserDto.Builder()
+        return new UserDTO.Builder()
                 .fixId(user.getId())
                 .fixFirstName(user.getFirstName())
                 .fixLastName(user.getLastName())

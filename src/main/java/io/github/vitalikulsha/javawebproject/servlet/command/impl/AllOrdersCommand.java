@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -24,11 +24,11 @@ public class AllOrdersCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         String url = request.getServletContext().getContextPath() + AdminPath.ALL_ORDERS.getPath() + "?";
         request.setAttribute(Attribute.URL, url);
         try {
-            List<OrderDto> allOrders = orderService.getAll();
+            List<OrderDTO> allOrders = orderService.getAll();
             pagination.paginate(allOrders, request, Attribute.ALL_ORDERS);
             return new CommandInfo(Page.ALL_ORDERS, RoutingType.FORWARD);
         } catch (ServiceException e) {

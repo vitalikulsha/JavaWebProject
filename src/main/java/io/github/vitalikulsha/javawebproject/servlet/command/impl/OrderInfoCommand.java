@@ -5,7 +5,7 @@ import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
@@ -47,7 +47,7 @@ public class OrderInfoCommand implements Command {
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
         int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
-        OrderDto orderDto = orderService.getById(orderId);
+        OrderDTO orderDto = orderService.getById(orderId);
         session.setAttribute(Attribute.ORDER, orderDto);
         return new CommandInfo(Page.ORDER_INFO, RoutingType.FORWARD);
     }
@@ -55,7 +55,7 @@ public class OrderInfoCommand implements Command {
     private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         OrderService orderService = ServiceFactory.instance().orderService();
-        OrderDto orderDto = (OrderDto) session.getAttribute(Attribute.ORDER);
+        OrderDTO orderDto = (OrderDTO) session.getAttribute(Attribute.ORDER);
         log.info("Order from session: " + orderDto);
         String action = request.getParameter(Parameter.ACTION);
         if (action.equals(Value.APPROVE)) {

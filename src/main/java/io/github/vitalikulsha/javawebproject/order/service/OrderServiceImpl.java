@@ -4,7 +4,7 @@ import io.github.vitalikulsha.javawebproject.order.dao.OrderDao;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverterFactory;
-import io.github.vitalikulsha.javawebproject.order.entity.dto.OrderDto;
+import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.order.entity.Order;
 import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class OrderServiceImpl implements OrderService {
     private final OrderDao orderDao;
-    private final DtoConverter<OrderDto, Order> orderDtoConverter;
+    private final DtoConverter<OrderDTO, Order> orderDtoConverter;
 
     public OrderServiceImpl() {
         orderDao = DaoFactory.instance().orderDao();
@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDto getById(int id) throws ServiceException {
+    public OrderDTO getById(int id) throws ServiceException {
         try {
             return orderDtoConverter.toDto(orderDao.findById(id));
         } catch (DaoException e) {
@@ -34,7 +34,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getAll() throws ServiceException {
+    public List<OrderDTO> getAll() throws ServiceException {
         try {
             return orderDao.findAll()
                     .stream()
@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDto> getOrdersByUserId(int userId) throws ServiceException {
+    public List<OrderDTO> getOrdersByUserId(int userId) throws ServiceException {
         try {
             return orderDao.findByUserId(userId)
                     .stream()

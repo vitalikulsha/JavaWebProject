@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.user.service.UserService;
@@ -45,7 +45,7 @@ public class LoginCommand implements Command {
         String password = request.getParameter(Parameter.PASSWORD);
         UserService userService = ServiceFactory.instance().userService();
         if (userService.isExists(login, password)) {
-            UserDto userDto = userService.getByLogin(login);
+            UserDTO userDto = userService.getByLogin(login);
             session.setAttribute(Attribute.USER, userDto);
             if (userDto.getRole() == Role.READER) {
                 return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);

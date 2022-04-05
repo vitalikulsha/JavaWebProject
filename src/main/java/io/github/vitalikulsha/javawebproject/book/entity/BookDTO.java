@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.javawebproject.book.entity.dto;
+package io.github.vitalikulsha.javawebproject.book.entity;
 
 import io.github.vitalikulsha.javawebproject.author.entity.Author;
 import io.github.vitalikulsha.javawebproject.category.entity.Category;
@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Book DTO bean class from book class
  */
-public class BookDto implements Serializable {
+public class BookDTO implements Serializable {
     private final static long serialVersionUID = 1L;
 
     private int id;
@@ -21,7 +21,7 @@ public class BookDto implements Serializable {
     private Category category;
     private int quantity;
 
-    public BookDto() {
+    public BookDTO() {
     }
 
     public int getId() {
@@ -84,7 +84,7 @@ public class BookDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        BookDto bookDto = (BookDto) o;
+        BookDTO bookDto = (BookDTO) o;
         return id == bookDto.id && publicationYear == bookDto.publicationYear && numberPages == bookDto.numberPages && quantity == bookDto.quantity && Objects.equals(title, bookDto.title) && Objects.equals(authors, bookDto.authors) && Objects.equals(category, bookDto.category);
     }
 
@@ -110,10 +110,10 @@ public class BookDto implements Serializable {
      * Book DTO builder from book class
      */
     public static class Builder {
-        private BookDto bookDto;
+        private BookDTO bookDto;
 
         public Builder() {
-            bookDto = new BookDto();
+            bookDto = new BookDTO();
         }
 
         public Builder fixId(int id) {
@@ -151,7 +151,7 @@ public class BookDto implements Serializable {
             return this;
         }
 
-        public BookDto build() {
+        public BookDTO build() {
             return bookDto;
         }
 

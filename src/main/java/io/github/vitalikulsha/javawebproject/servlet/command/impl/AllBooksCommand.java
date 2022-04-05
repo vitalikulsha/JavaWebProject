@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDto;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -23,11 +23,11 @@ public class AllBooksCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         BookService bookService = ServiceFactory.instance().bookService();
-        Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<BookDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(Attribute.URL, url);
         try {
-            List<BookDto> catalog = bookService.getAll();
+            List<BookDTO> catalog = bookService.getAll();
             pagination.paginate(catalog, request, Attribute.CATALOG);
             return new CommandInfo(Page.ALL_BOOKS, RoutingType.FORWARD);
         } catch (ServiceException e) {

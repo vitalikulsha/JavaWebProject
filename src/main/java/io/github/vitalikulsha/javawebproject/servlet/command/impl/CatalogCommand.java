@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDto;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -27,11 +27,11 @@ public class CatalogCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        Pagination<BookDto> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<BookDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
         session.removeAttribute(Attribute.BOOK_EXISTS);
         String url = getUrl(request);
         try {
-            List<BookDto> catalog = getCatalog(request);
+            List<BookDTO> catalog = getCatalog(request);
             log.info("url: " + url + ", catalog size: " + catalog.size());
             if (catalog.isEmpty()) {
                 session.setAttribute(Attribute.BOOK_FOUND, false);
@@ -62,7 +62,7 @@ public class CatalogCommand implements Command {
         return url.toString();
     }
 
-    private List<BookDto> getCatalog(HttpServletRequest request) throws ServiceException {
+    private List<BookDTO> getCatalog(HttpServletRequest request) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         params.remove(Parameter.PAGE);
@@ -83,7 +83,7 @@ public class CatalogCommand implements Command {
         return removeQuantityBooksZero(bookService.getAll());
     }
 
-    private List<BookDto> removeQuantityBooksZero(List<BookDto> books) {
+    private List<BookDTO> removeQuantityBooksZero(List<BookDTO> books) {
         return books.stream()
                 .filter(b -> b.getQuantity() != 0)
                 .collect(Collectors.toList());

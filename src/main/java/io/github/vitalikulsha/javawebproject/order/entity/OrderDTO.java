@@ -1,8 +1,7 @@
-package io.github.vitalikulsha.javawebproject.order.entity.dto;
+package io.github.vitalikulsha.javawebproject.order.entity;
 
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDto;
-import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -10,19 +9,19 @@ import java.util.Objects;
 /**
  * Order DTO bean class from order class
  */
-public class OrderDto implements Serializable {
+public class OrderDTO implements Serializable {
     private final static long serialVersionUID = 1L;
 
     private int id;
-    private BookDto bookDto;
-    private UserDto userDto;
+    private BookDTO bookDto;
+    private UserDTO userDto;
     private ReserveStatus reserveStatus;
     private boolean approved;
 
-    private OrderDto() {
+    private OrderDTO() {
     }
 
-    public OrderDto(int id, BookDto bookDto, UserDto userDto, ReserveStatus reserveStatus, boolean approved) {
+    public OrderDTO(int id, BookDTO bookDto, UserDTO userDto, ReserveStatus reserveStatus, boolean approved) {
         this.id = id;
         this.bookDto = bookDto;
         this.userDto = userDto;
@@ -38,19 +37,19 @@ public class OrderDto implements Serializable {
         this.id = id;
     }
 
-    public BookDto getBookDto() {
+    public BookDTO getBookDto() {
         return bookDto;
     }
 
-    public void setBookDto(BookDto bookDto) {
+    public void setBookDto(BookDTO bookDto) {
         this.bookDto = bookDto;
     }
 
-    public UserDto getUserDto() {
+    public UserDTO getUserDto() {
         return userDto;
     }
 
-    public void setUserDto(UserDto userDto) {
+    public void setUserDto(UserDTO userDto) {
         this.userDto = userDto;
     }
 
@@ -74,7 +73,7 @@ public class OrderDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderDto orderDto = (OrderDto) o;
+        OrderDTO orderDto = (OrderDTO) o;
         return id == orderDto.id && approved == orderDto.approved && Objects.equals(bookDto, orderDto.bookDto) && Objects.equals(userDto, orderDto.userDto) && reserveStatus == orderDto.reserveStatus;
     }
 
@@ -98,10 +97,10 @@ public class OrderDto implements Serializable {
      * Order DTO builder from order class
      */
     public static class Builder {
-        private OrderDto orderDto;
+        private OrderDTO orderDto;
 
         public Builder() {
-            orderDto = new OrderDto();
+            orderDto = new OrderDTO();
         }
 
         public Builder fixId(int id) {
@@ -109,12 +108,12 @@ public class OrderDto implements Serializable {
             return this;
         }
 
-        public Builder fixBookDto(BookDto bookDto) {
+        public Builder fixBookDto(BookDTO bookDto) {
             orderDto.bookDto = bookDto;
             return this;
         }
 
-        public Builder fixUser(UserDto userDto) {
+        public Builder fixUser(UserDTO userDto) {
             orderDto.userDto = userDto;
             return this;
         }
@@ -129,7 +128,7 @@ public class OrderDto implements Serializable {
             return this;
         }
 
-        public OrderDto build() {
+        public OrderDTO build() {
             return orderDto;
         }
     }

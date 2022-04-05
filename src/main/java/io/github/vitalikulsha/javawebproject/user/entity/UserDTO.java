@@ -1,6 +1,4 @@
-package io.github.vitalikulsha.javawebproject.user.entity.dto;
-
-import io.github.vitalikulsha.javawebproject.user.entity.Role;
+package io.github.vitalikulsha.javawebproject.user.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,7 +6,7 @@ import java.util.Objects;
 /**
  * User DTO bean class from user class
  */
-public class UserDto implements Serializable {
+public class UserDTO implements Serializable {
     private final static long serialVersionUID = 1L;
 
     private int id;
@@ -18,10 +16,10 @@ public class UserDto implements Serializable {
     private String email;
     private Role role;
 
-    public UserDto() {
+    public UserDTO() {
     }
 
-    public UserDto(int id, String firstName, String lastName, long phoneNumber, String email, Role role) {
+    public UserDTO(int id, String firstName, String lastName, long phoneNumber, String email, Role role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -82,7 +80,7 @@ public class UserDto implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserDto userDto = (UserDto) o;
+        UserDTO userDto = (UserDTO) o;
         return id == userDto.id && phoneNumber == userDto.phoneNumber && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email) && role == userDto.role;
     }
 
@@ -107,10 +105,10 @@ public class UserDto implements Serializable {
      * User DTO builder from user class
      */
     public static class Builder {
-        private UserDto userDto;
+        private UserDTO userDto;
 
         public Builder() {
-            userDto = new UserDto();
+            userDto = new UserDTO();
         }
 
         public Builder fixId(int id) {
@@ -143,7 +141,7 @@ public class UserDto implements Serializable {
             return this;
         }
 
-        public UserDto build() {
+        public UserDTO build() {
             return userDto;
         }
     }

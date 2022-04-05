@@ -1,7 +1,6 @@
-package io.github.vitalikulsha.javawebproject.book.entity.dto;
+package io.github.vitalikulsha.javawebproject.book.entity;
 
 import io.github.vitalikulsha.javawebproject.author.dao.AuthorDao;
-import io.github.vitalikulsha.javawebproject.book.entity.Book;
 import io.github.vitalikulsha.javawebproject.category.dao.CategoryDao;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.author.entity.Author;
@@ -13,10 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 
 @Slf4j
-public class BookDtoConverter implements DtoConverter<BookDto, Book> {
+public class BookDTOConverter implements DtoConverter<BookDTO, Book> {
 
     @Override
-    public BookDto toDto(Book book) {
+    public BookDTO toDto(Book book) {
         if (book == null) {
             return null;
         }
@@ -31,7 +30,7 @@ public class BookDtoConverter implements DtoConverter<BookDto, Book> {
             log.error("DaoException: category or/and authors is null");
             return null;
         }
-        return new BookDto.Builder()
+        return new BookDTO.Builder()
                 .fixId(book.getId())
                 .fixTitle(book.getTitle())
                 .fixAuthors(authors)

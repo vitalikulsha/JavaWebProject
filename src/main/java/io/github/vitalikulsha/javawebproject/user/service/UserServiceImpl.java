@@ -4,7 +4,7 @@ import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.user.dao.UserDao;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverterFactory;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.user.entity.User;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final DtoConverter<UserDto, User> userDtoConverter;
+    private final DtoConverter<UserDTO, User> userDtoConverter;
     private final EntityValidator<User> userValidator;
 
     public UserServiceImpl() {
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getById(int id) throws ServiceException {
+    public UserDTO getById(int id) throws ServiceException {
         try {
             return userDtoConverter.toDto(userDao.findById(id));
         } catch (DaoException e) {
@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getAll() throws ServiceException {
+    public List<UserDTO> getAll() throws ServiceException {
         try {
             return userDao.findAll()
                     .stream()
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> getUsersByRole(Role role) throws ServiceException {
+    public List<UserDTO> getUsersByRole(Role role) throws ServiceException {
         try {
             return userDao.findByRole(role)
                     .stream()
@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getByLogin(String login) throws ServiceException {
+    public UserDTO getByLogin(String login) throws ServiceException {
         try {
             return userDtoConverter.toDto(userDao.findByLogin(login));
         } catch (DaoException e) {
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getByEmail(String email) throws ServiceException {
+    public UserDTO getByEmail(String email) throws ServiceException {
         try {
             return userDtoConverter.toDto(userDao.findByEmail(email));
         } catch (DaoException e) {

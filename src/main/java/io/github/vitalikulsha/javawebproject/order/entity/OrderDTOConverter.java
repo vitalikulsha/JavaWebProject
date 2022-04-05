@@ -1,32 +1,31 @@
-package io.github.vitalikulsha.javawebproject.order.entity.dto;
+package io.github.vitalikulsha.javawebproject.order.entity;
 
 import io.github.vitalikulsha.javawebproject.book.dao.BookDao;
 import io.github.vitalikulsha.javawebproject.book.entity.Book;
-import io.github.vitalikulsha.javawebproject.order.entity.Order;
 import io.github.vitalikulsha.javawebproject.user.dao.UserDao;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverterFactory;
 import io.github.vitalikulsha.javawebproject.user.entity.User;
-import io.github.vitalikulsha.javawebproject.book.entity.dto.BookDto;
-import io.github.vitalikulsha.javawebproject.user.entity.dto.UserDto;
+import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
+import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class OrderDtoConverter implements DtoConverter<OrderDto, Order> {
+public class OrderDTOConverter implements DtoConverter<OrderDTO, Order> {
 
     @Override
-    public OrderDto toDto(Order order) {
+    public OrderDTO toDto(Order order) {
         if (order == null) {
             return null;
         }
         UserDao userDao = DaoFactory.instance().userDao();
         BookDao bookDao = DaoFactory.instance().bookDao();
-        DtoConverter<BookDto, Book> bookDtoConverter = DtoConverterFactory.instance().bookDtoConverter();
-        DtoConverter<UserDto, User> userDtoConverter = DtoConverterFactory.instance().userDtoConverter();
-        BookDto bookDto;
-        UserDto userDto;
+        DtoConverter<BookDTO, Book> bookDtoConverter = DtoConverterFactory.instance().bookDtoConverter();
+        DtoConverter<UserDTO, User> userDtoConverter = DtoConverterFactory.instance().userDtoConverter();
+        BookDTO bookDto;
+        UserDTO userDto;
         try {
             Book book = bookDao.findById(order.getBookId());
             bookDto = bookDtoConverter.toDto(book);
@@ -36,7 +35,7 @@ public class OrderDtoConverter implements DtoConverter<OrderDto, Order> {
             log.error("DaoException: user or/and book is null");
             return null;
         }
-        return new OrderDto.Builder()
+        return new OrderDTO.Builder()
                 .fixId(order.getId())
                 .fixBookDto(bookDto)
                 .fixUser(userDto)
