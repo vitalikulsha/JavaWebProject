@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="libraryTags" prefix="lt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -16,7 +17,6 @@
 <p style="text-align: center">
     <img src="${pageContext.request.contextPath}/img/404-error.png" alt="404" width="250px"/>
 </p>
-<h3><fmt:message key="404.error"/></h3>
-<h4><fmt:message key="404.message"/></h4>
+<lt:err-msg error="404"  locale="${locale}"/>
 </body>
 </html>

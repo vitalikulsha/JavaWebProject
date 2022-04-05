@@ -21,4 +21,9 @@
         <location>/WEB-INF/view/error/500.jsp</location>
     </error-page>
 
+    <taglib>
+        <taglib-uri>libraryTags</taglib-uri>
+        <taglib-location>/WEB-INF/library-tags.tld</taglib-location>
+    </taglib>
+
 </web-app>
