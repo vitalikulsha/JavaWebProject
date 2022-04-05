@@ -4,12 +4,15 @@ import io.github.vitalikulsha.javawebproject.exception.ConnectionException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -17,14 +20,11 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class ConnectionSource {
+    private static final String PATH_TO_PROPERTY = "src/main/resources/application.properties";
 
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "org.hsqldb.jdbc.JDBCDriver";
-    private static final String DB_URL = "jdbc:hsqldb:mem:libraryDb";
-
-    //  Database credentials
-    private static final String USER = "sa";
-    private static final String PASS = "sa";
+    private static String DB_URL;
+    private static String USER;
+    private static String PASS;
 
     private static final ConnectionSource instance = new ConnectionSource();
 
@@ -43,6 +43,7 @@ public class ConnectionSource {
 
     private ConnectionSource() {
         try {
+            init();
             DriverManager.registerDriver(new org.hsqldb.jdbc.JDBCDriver());
             try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS)) {
                 try (Statement statement = conn.createStatement()) {
@@ -65,5 +66,18 @@ public class ConnectionSource {
                                 ConnectionSource.class.getClassLoader().getResourceAsStream(resourceName))))
                 .lines()
                 .collect(Collectors.joining("\n"));
+    }
+
+    private static void init() {
+        Properties properties = new Properties();
+        try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTY)) {
+            properties.load(fileInputStream);
+            DB_URL = properties.getProperty("DB.url");
+            USER = properties.getProperty("DB.user");
+            PASS = properties.getProperty("DB.password");
+        } catch (IOException e) {
+            log.error("Failed to connect to " + PATH_TO_PROPERTY, e);
+            throw new RuntimeException();
+        }
     }
 }
