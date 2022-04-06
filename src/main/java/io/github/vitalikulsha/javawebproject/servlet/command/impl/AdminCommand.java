@@ -3,7 +3,7 @@ package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
+import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +18,9 @@ public class AdminCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        session.setAttribute(Attribute.URL, AdminPath.ADMIN.getPath());
+        session.setAttribute(SessionAttribute.URL, AdminPath.ADMIN.getPath());
         log.info("Admin URL: " + request.getServletPath());
-        log.info("Admin locale: " + session.getAttribute(Attribute.LOCALE));
+        log.info("Admin locale: " + session.getAttribute(SessionAttribute.LOCALE));
         return new CommandInfo(Page.ADMIN, RoutingType.FORWARD);
     }
 }

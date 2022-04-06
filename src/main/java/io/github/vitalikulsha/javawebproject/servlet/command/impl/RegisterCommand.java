@@ -1,15 +1,15 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
+import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
+import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.user.service.UserService;
 import io.github.vitalikulsha.javawebproject.util.service.validator.ValidationPattern;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.constant.Parameter;
 import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class RegisterCommand implements Command {
         HttpSession session = request.getSession();
         String url = request.getServletPath();
         log.info("current URL: " + url);
-        session.setAttribute(Attribute.URL, url);
+        session.setAttribute(SessionAttribute.URL, url);
         if (method.equals(Value.POST)) {
             try {
                 return getCommandInfoPost(request);
@@ -45,12 +45,12 @@ public class RegisterCommand implements Command {
     private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         HttpSession session = request.getSession();
         UserService userService = ServiceFactory.instance().userService();
-        String login = request.getParameter(Parameter.LOGIN);
-        String password = request.getParameter(Parameter.PASSWORD);
-        String firstName = request.getParameter(Parameter.FIRST_NAME);
-        String lastName = request.getParameter(Parameter.LAST_NAME);
-        long phoneNumber = Long.parseLong(request.getParameter(Parameter.PHONE_NUMBER));
-        String email = request.getParameter(Parameter.EMAIL);
+        String login = request.getParameter(RequestParameter.LOGIN);
+        String password = request.getParameter(RequestParameter.PASSWORD);
+        String firstName = request.getParameter(RequestParameter.FIRST_NAME);
+        String lastName = request.getParameter(RequestParameter.LAST_NAME);
+        long phoneNumber = Long.parseLong(request.getParameter(RequestParameter.PHONE_NUMBER));
+        String email = request.getParameter(RequestParameter.EMAIL);
         log.info("login: " + login + "; password: " + password + ", firstName: " + firstName
                 + ", lastName: " + lastName + ", phoneNumber: " + phoneNumber);
         if (userService.getByLogin(login) != null) {
@@ -61,7 +61,7 @@ public class RegisterCommand implements Command {
         if (!userService.createUser(login, password, firstName, lastName, phoneNumber, email)) {
             return getCommandInfoByUser(request, login, password, firstName, lastName, phoneNumber, email);
         }
-        session.setAttribute(Attribute.USER, userService.getByLogin(login));
+        session.setAttribute(SessionAttribute.USER, userService.getByLogin(login));
         log.info("New user: " + userService.getByLogin(login));
         return new CommandInfo(UserPath.READER.getPath(), RoutingType.REDIRECT);
     }
@@ -69,21 +69,21 @@ public class RegisterCommand implements Command {
     private CommandInfo getCommandInfoByUser(HttpServletRequest request, String login, String password, String firstName, String lastName, long phoneNumber, String email) {
         log.info("Unable to update user data.");
         List<String> invalidFields = getInvalidFields(login, password, firstName, lastName, phoneNumber, email);
-        request.setAttribute(Attribute.INVALID_FIELD, invalidFields);
+        request.setAttribute(SessionAttribute.INVALID_FIELD, invalidFields);
         return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
     }
 
     private CommandInfo getCommandInfoByEmail(HttpServletRequest request, String email) {
         log.info("User with email " + email + " already exists");
-        request.setAttribute(Attribute.USER_EXISTS, true);
-        request.setAttribute(Parameter.EMAIL, email);
+        request.setAttribute(SessionAttribute.USER_EXISTS, true);
+        request.setAttribute(RequestParameter.EMAIL, email);
         return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
     }
 
     private CommandInfo getCommandInfoByLogin(HttpServletRequest request, String login) {
         log.info("User with login " + login + " already exists");
-        request.setAttribute(Attribute.USER_EXISTS, true);
-        request.setAttribute(Parameter.LOGIN, login);
+        request.setAttribute(SessionAttribute.USER_EXISTS, true);
+        request.setAttribute(RequestParameter.LOGIN, login);
         return new CommandInfo(Page.REGISTER, RoutingType.FORWARD);
     }
 
@@ -91,22 +91,22 @@ public class RegisterCommand implements Command {
                                           long phoneNumber, String email) {
         List<String> invalidFields = new ArrayList<>();
         if (!login.matches(ValidationPattern.LOGIN_PATTERN)) {
-            invalidFields.add(Parameter.LOGIN);
+            invalidFields.add(RequestParameter.LOGIN);
         }
         if (!password.matches(ValidationPattern.PASSWORD_PATTERN)) {
-            invalidFields.add(Parameter.PASSWORD);
+            invalidFields.add(RequestParameter.PASSWORD);
         }
         if (!firstName.matches(ValidationPattern.NAME_PATTERN)) {
-            invalidFields.add(Parameter.FIRST_NAME);
+            invalidFields.add(RequestParameter.FIRST_NAME);
         }
         if (!lastName.matches(ValidationPattern.NAME_PATTERN)) {
-            invalidFields.add(Parameter.LAST_NAME);
+            invalidFields.add(RequestParameter.LAST_NAME);
         }
         if (!String.valueOf(phoneNumber).matches(ValidationPattern.PHONE_PATTERN)) {
-            invalidFields.add(Parameter.PHONE_NUMBER);
+            invalidFields.add(RequestParameter.PHONE_NUMBER);
         }
         if (!email.matches(ValidationPattern.EMAIL_PATTERN)) {
-            invalidFields.add(Parameter.EMAIL);
+            invalidFields.add(RequestParameter.EMAIL);
         }
         return invalidFields;
     }

@@ -7,14 +7,14 @@ import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
+import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
+import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
 import io.github.vitalikulsha.javawebproject.util.Pagination;
-import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.constant.Parameter;
 import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
@@ -52,20 +52,20 @@ public class ReaderOrdersCommand implements Command {
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
         Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
-        UserDTO user = (UserDTO) session.getAttribute(Attribute.USER);
+        UserDTO user = (UserDTO) session.getAttribute(SessionAttribute.USER);
         String url = request.getContextPath() + request.getServletPath() + "?";
-        request.setAttribute(Attribute.URL, url);
+        request.setAttribute(SessionAttribute.URL, url);
         List<OrderDTO> orders = orderService.getOrdersByUserId(user.getId());
-        pagination.paginate(orders, request, Attribute.USER_ORDERS);
+        pagination.paginate(orders, request, SessionAttribute.USER_ORDERS);
         return new CommandInfo(Page.READER_ORDERS, RoutingType.FORWARD);
     }
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
         BookService bookService = ServiceFactory.instance().bookService();
-        int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
+        int orderId = Integer.parseInt(request.getParameter(RequestParameter.ORDER_ID));
         OrderDTO orderDto = orderService.getById(orderId);
-        String action = request.getParameter(Parameter.ACTION);
+        String action = request.getParameter(RequestParameter.ACTION);
         if (action.equals(Value.REFUND)) {
             orderService.updateOrderReserveStatus(ReserveStatus.REFUND, orderId);
         } else if (action.equals(Value.CANCEL)) {

@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.AdminPath" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
@@ -42,7 +42,7 @@
     <c:forEach var="reader" items="${allReaders}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}${AdminPath.READER_INFO.path}?${Parameter.READER_ID}=${reader.id}">
+                <a href="${pageContext.request.contextPath}${AdminPath.READER_INFO.path}?${RequestParameter.READER_ID}=${reader.id}">
                     ${reader.id} </a>
             </td>
             <td>${reader.firstName}</td>

@@ -3,7 +3,7 @@ package io.github.vitalikulsha.javawebproject.util.constant;
 /**
  * List of attributes.
  */
-public class Attribute {
+public class SessionAttribute {
     public static final String ALL_ORDERS = "allOrders";
     public static final String ALL_READERS = "allReaders";
     public static final String BOOK = "book";
@@ -22,6 +22,6 @@ public class Attribute {
     public static final String USER_ORDERS = "userOrders";
     public static final String USER_EXISTS = "userExists";
 
-    private Attribute() {
+    private SessionAttribute() {
     }
 }

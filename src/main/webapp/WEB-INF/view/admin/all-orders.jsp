@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.AdminPath" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
@@ -45,7 +45,7 @@
     <c:forEach var="order" items="${allOrders}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}?${Parameter.ORDER_ID}=${order.id}"> ${order.id} </a>
+                <a href="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}?${RequestParameter.ORDER_ID}=${order.id}"> ${order.id} </a>
             </td>
             <td>${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>

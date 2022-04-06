@@ -7,10 +7,10 @@ import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
 import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
+import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
+import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
-import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.constant.Parameter;
 import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
 import lombok.extern.slf4j.Slf4j;
@@ -46,18 +46,18 @@ public class OrderInfoCommand implements Command {
 
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
-        int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
+        int orderId = Integer.parseInt(request.getParameter(RequestParameter.ORDER_ID));
         OrderDTO orderDto = orderService.getById(orderId);
-        session.setAttribute(Attribute.ORDER, orderDto);
+        session.setAttribute(SessionAttribute.ORDER, orderDto);
         return new CommandInfo(Page.ORDER_INFO, RoutingType.FORWARD);
     }
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request, HttpSession session) throws ServiceException {
         BookService bookService = ServiceFactory.instance().bookService();
         OrderService orderService = ServiceFactory.instance().orderService();
-        OrderDTO orderDto = (OrderDTO) session.getAttribute(Attribute.ORDER);
+        OrderDTO orderDto = (OrderDTO) session.getAttribute(SessionAttribute.ORDER);
         log.info("Order from session: " + orderDto);
-        String action = request.getParameter(Parameter.ACTION);
+        String action = request.getParameter(RequestParameter.ACTION);
         if (action.equals(Value.APPROVE)) {
             orderService.updateOrderApproval(true, orderDto.getId());
             bookService.decrementQuantityBook(orderDto.getBookDto().getId());
@@ -67,8 +67,8 @@ public class OrderInfoCommand implements Command {
             return new CommandInfo(AdminPath.ALL_ORDERS.getPath(), RoutingType.REDIRECT);
         }
         orderDto = orderService.getById(orderDto.getId());
-        session.setAttribute(Attribute.ORDER, orderDto);
-        request.setAttribute(Parameter.ORDER_ID, orderDto.getId());
+        session.setAttribute(SessionAttribute.ORDER, orderDto);
+        request.setAttribute(RequestParameter.ORDER_ID, orderDto.getId());
         return new CommandInfo(Page.ORDER_INFO, RoutingType.FORWARD);
     }
 }

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Value" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.AdminPath" %>
 
@@ -38,14 +38,14 @@
     <tr>
         <th><fmt:message key="book.id"/></th>
         <td>
-            <a href="${pageContext.request.contextPath}${AdminPath.BOOK_INFO.path}?${Parameter.BOOK_ID}=${order.bookDto.id}">
+            <a href="${pageContext.request.contextPath}${AdminPath.BOOK_INFO.path}?${RequestParameter.BOOK_ID}=${order.bookDto.id}">
                 ${order.bookDto.id} </a>
         </td>
     </tr>
     <tr>
         <th><fmt:message key="admin.reader-id"/></th>
         <td>
-            <a href="${pageContext.request.contextPath}${AdminPath.READER_INFO.path}?${Parameter.READER_ID}=${order.userDto.id}">
+            <a href="${pageContext.request.contextPath}${AdminPath.READER_INFO.path}?${RequestParameter.READER_ID}=${order.userDto.id}">
                 ${order.userDto.id} </a>
         </td>
     </tr>
@@ -61,7 +61,7 @@
                     <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
                     <c:if test="${order.reserveStatus eq 'REFUND'}">
                         <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
-                            <input type="hidden" name="${Parameter.ACTION}" value="${Value.CANCEL}">
+                            <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.CANCEL}">
                             <input type="submit" value="<fmt:message key="admin.order-button-close"/>">
                         </form>
                     </c:if>
@@ -69,11 +69,11 @@
                 <c:otherwise>
                     <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
-                        <input type="hidden" name="${Parameter.ACTION}" value="${Value.APPROVE}">
+                        <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.APPROVE}">
                         <input type="submit" value="<fmt:message key="admin.order-button-approve"/>">
                     </form>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
-                        <input type="hidden" name="${Parameter.ACTION}" value="${Value.CANCEL}">
+                        <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.CANCEL}">
                         <input type="submit" value="<fmt:message key="admin.order-button-cancel"/>">
                     </form>
                 </c:otherwise>

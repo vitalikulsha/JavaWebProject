@@ -3,7 +3,7 @@ package io.github.vitalikulsha.javawebproject.util.constant;
 /**
  * List of parameters.
  */
-public class Parameter {
+public class RequestParameter {
     public static final String ACTION = "action";
     public static final String AUTHOR_NAME = "authorName";
     public final static String BOOK_ID = "bookId";
@@ -22,6 +22,6 @@ public class Parameter {
     public static final String RESERVE_STATUS = "reserveStatus";
     public static final String USER_ID = "userId";
 
-    private Parameter() {
+    private RequestParameter() {
     }
 }

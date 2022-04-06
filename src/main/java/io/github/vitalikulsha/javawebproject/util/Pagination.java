@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.util;
 
-import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
-import io.github.vitalikulsha.javawebproject.util.constant.Parameter;
+import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
+import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ public class Pagination<T> {
      * @param attribute request attribute
      */
     public void paginate(List<T> allItems, HttpServletRequest request, String attribute) {
-        String page = request.getParameter(Parameter.PAGE);
+        String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         List<Integer> pages = getPageNumbers(allItems);
         List<T> itemsPerPage = getItemsPerPage(allItems, pageNumber);
         request.setAttribute(attribute, itemsPerPage);
-        request.setAttribute(Attribute.PAGES, pages);
+        request.setAttribute(SessionAttribute.PAGES, pages);
     }
 
     private List<Integer> getPageNumbers(List<T> allItems) {

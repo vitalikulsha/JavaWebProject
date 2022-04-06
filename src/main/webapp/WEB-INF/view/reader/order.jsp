@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
 
@@ -64,7 +64,7 @@
     <tr>
         <th><fmt:message key="order.reserve"/></th>
         <td>
-            <select style="font-size: 15px" name="${Parameter.RESERVE_STATUS}" form="order">
+            <select style="font-size: 15px" name="${RequestParameter.RESERVE_STATUS}" form="order">
                 <option value="${ReserveStatus.READING_ROOM}">${ReserveStatus.READING_ROOM.title}</option>
                 <option value="${ReserveStatus.LOANED}">${ReserveStatus.LOANED.title}</option>
             </select>

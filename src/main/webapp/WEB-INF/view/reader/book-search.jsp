@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -31,7 +31,7 @@
         <tr>
             <th><fmt:message key="reader.search-by-id"/></th>
             <td>
-                <input class="entry-field" type="number" name="${Parameter.BOOK_ID}"
+                <input class="entry-field" type="number" name="${RequestParameter.BOOK_ID}"
                        placeholder="<fmt:message key="reader.search-by-id-placeholder"/>" required>
             </td>
             <td>
@@ -44,11 +44,11 @@
         <tr>
             <th><fmt:message key="reader.search-by-title"/></th>
             <td>
-                <input class="entry-field" type="text" name="${Parameter.BOOK_TITLE}"
+                <input class="entry-field" type="text" name="${RequestParameter.BOOK_TITLE}"
                        placeholder="<fmt:message key="reader.search-by-title-placeholder"/>" required>
             </td>
             <td>
-                <input type="hidden" name="${Parameter.PAGE}" value="1">
+                <input type="hidden" name="${RequestParameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
@@ -57,11 +57,11 @@
     <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-authors"/></th>
-            <td><input class="entry-field" type="text" name="${Parameter.AUTHOR_NAME}"
+            <td><input class="entry-field" type="text" name="${RequestParameter.AUTHOR_NAME}"
                        placeholder="<fmt:message key="reader.search-by-authors-placeholder"/>" required>
             </td>
             <td>
-                <input type="hidden" name="${Parameter.PAGE}" value="1">
+                <input type="hidden" name="${RequestParameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
@@ -71,11 +71,11 @@
         <tr>
             <th><fmt:message key="reader.search-by-category"/></th>
             <td>
-                <input class="entry-field" type="text" name="${Parameter.CATEGORY_NAME}"
+                <input class="entry-field" type="text" name="${RequestParameter.CATEGORY_NAME}"
                        placeholder="<fmt:message key="reader.search-by-category-placeholder"/>" required>
             </td>
             <td>
-                <input type="hidden" name="${Parameter.PAGE}" value="1">
+                <input type="hidden" name="${RequestParameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
@@ -86,7 +86,7 @@
             <th><fmt:message key="reader.get-all"/></th>
             <td></td>
             <td>
-                <input type="hidden" name="${Parameter.PAGE}" value="1">
+                <input type="hidden" name="${RequestParameter.PAGE}" value="1">
                 <input class="submit" type="submit" value="<fmt:message key="reader.button-get"/>">
             </td>
         </tr>

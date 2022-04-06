@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -28,14 +28,14 @@
             <th><fmt:message key="register.login"/></th>
             <td>
                 <input title="<fmt:message key="validation.login"/>" type="text"
-                placeholder="<fmt:message key="register.login-placeholder"/>" required name="${Parameter.LOGIN}">
+                placeholder="<fmt:message key="register.login-placeholder"/>" required name="${RequestParameter.LOGIN}">
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.password"/></th>
             <td>
                 <input title="<fmt:message key="validation.password"/>" type="password"
-                placeholder="<fmt:message key="register.password-placeholder"/>" required name="${Parameter.PASSWORD}">
+                placeholder="<fmt:message key="register.password-placeholder"/>" required name="${RequestParameter.PASSWORD}">
             </td>
         </tr>
     </table>

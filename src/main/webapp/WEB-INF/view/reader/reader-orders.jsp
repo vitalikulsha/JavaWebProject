@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Value" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -48,7 +48,7 @@
     <c:forEach var="order" items="${userOrders}">
         <tr>
             <td>
-                <a href="${pageContext.request.contextPath}${UserPath.READER_ORDER_INFO.path}?${Parameter.ORDER_ID}=${order.id}">
+                <a href="${pageContext.request.contextPath}${UserPath.READER_ORDER_INFO.path}?${RequestParameter.ORDER_ID}=${order.id}">
                     ${order.id} </a>
             </td>
             <td>${order.bookDto.id}</td>
@@ -62,8 +62,8 @@
                             <c:if test="${order.reserveStatus ne 'REFUND'}">
                                 <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}"
                                       method="post">
-                                    <input type="hidden" name="${Parameter.ORDER_ID}" value="${order.id}">
-                                    <input type="hidden" name="${Parameter.ACTION}" value="${Value.REFUND}">
+                                    <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
+                                    <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.REFUND}">
                                     <input type="submit" value="<fmt:message key="reader.button-return-book"/>">
                                 </form>
                             </c:if>
@@ -72,8 +72,8 @@
                     <c:otherwise>
                         <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                         <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}" method="post">
-                            <input type="hidden" name="${Parameter.ORDER_ID}" value="${order.id}">
-                            <input type="hidden" name="${Parameter.ACTION}" value="${Value.CANCEL}">
+                            <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
+                            <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.CANCEL}">
                             <input type="submit" value="<fmt:message key="reader.button-cancel-order"/>">
                         </form>
                     </c:otherwise>

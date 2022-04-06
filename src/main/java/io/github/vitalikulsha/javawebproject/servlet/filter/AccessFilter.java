@@ -2,7 +2,7 @@ package io.github.vitalikulsha.javawebproject.servlet.filter;
 
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
-import io.github.vitalikulsha.javawebproject.util.constant.Attribute;
+import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
 import io.github.vitalikulsha.javawebproject.util.path.GuestPath;
@@ -52,9 +52,9 @@ public class AccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        session.setAttribute(Attribute.LOCALE, getLocale(session));
+        session.setAttribute(SessionAttribute.LOCALE, getLocale(session));
         String servletPath = request.getServletPath();
-        UserDTO user = (UserDTO) session.getAttribute(Attribute.USER);
+        UserDTO user = (UserDTO) session.getAttribute(SessionAttribute.USER);
         Role role = (user == null) ? Role.GUEST : user.getRole();
         log.info("User role = " + role);
         if (servletPath == null) {
@@ -82,7 +82,7 @@ public class AccessFilter implements Filter {
     }
 
     private String getLocale(HttpSession session) {
-        String locale = (String) session.getAttribute(Attribute.LOCALE);
+        String locale = (String) session.getAttribute(SessionAttribute.LOCALE);
         log.info("Locale: " + locale);
         return locale == null ? Value.EN : locale;
     }

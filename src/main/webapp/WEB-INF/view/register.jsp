@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Parameter" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -28,42 +28,42 @@
             <th><fmt:message key="register.login"/></th>
             <td>
                 <input title="<fmt:message key="validation.login"/>" type="text"
-                placeholder="<fmt:message key="register.login-placeholder"/>" required name="${Parameter.LOGIN}">
+                placeholder="<fmt:message key="register.login-placeholder"/>" required name="${RequestParameter.LOGIN}">
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.password"/></th>
             <td>
                 <input title="<fmt:message key="validation.password"/>" type="password"
-                placeholder="<fmt:message key="register.password-placeholder"/>" required name="${Parameter.PASSWORD}">
+                placeholder="<fmt:message key="register.password-placeholder"/>" required name="${RequestParameter.PASSWORD}">
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.first-name"/></th>
             <td>
                 <input title="<fmt:message key="validation.name"/>" type="text"
-                placeholder="<fmt:message key="register.first-name-placeholder"/>" required name="${Parameter.FIRST_NAME}">
+                placeholder="<fmt:message key="register.first-name-placeholder"/>" required name="${RequestParameter.FIRST_NAME}">
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.last-name"/></th>
             <td>
                 <input title="<fmt:message key="validation.name"/>" type="text"
-                placeholder="<fmt:message key="register.last-name-placeholder"/>" required name="${Parameter.LAST_NAME}">
+                placeholder="<fmt:message key="register.last-name-placeholder"/>" required name="${RequestParameter.LAST_NAME}">
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.phone-number"/></th>
             <td>
                 <input title="<fmt:message key="validation.phone-number"/>" type="number"
-                placeholder="<fmt:message key="register.phone-number-placeholder"/>" required name="${Parameter.PHONE_NUMBER}">
+                placeholder="<fmt:message key="register.phone-number-placeholder"/>" required name="${RequestParameter.PHONE_NUMBER}">
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.email"/></th>
             <td>
                 <input title="<fmt:message key="validation.email"/>" type="email"
-                placeholder="<fmt:message key="register.email-placeholder"/>" required name="${Parameter.EMAIL}">
+                placeholder="<fmt:message key="register.email-placeholder"/>" required name="${RequestParameter.EMAIL}">
             </td>
         </tr>
     </table>
