@@ -35,22 +35,6 @@ public class OrderDaoImplTest {
     }
 
     @Test
-    public void updateApproved() throws DaoException {
-        OrderDao orderDao = DaoFactory.instance().orderDao();
-        assertEquals(1, orderDao.updateApproved(true, 4));
-        assertTrue(orderDao.findById(4).getApproved());
-        assertEquals(0, orderDao.updateApproved(false, 10));
-    }
-
-    @Test
-    public void updateReserved() throws DaoException {
-        OrderDao orderDao = DaoFactory.instance().orderDao();
-        assertEquals(1, orderDao.updateReserved(ReserveStatus.REFUND, 2));
-        assertSame(orderDao.findById(2).getReserveStatus(), ReserveStatus.REFUND);
-        assertEquals(0, orderDao.updateReserved(ReserveStatus.LOANED, 10));
-    }
-
-    @Test
     public void findById() throws DaoException {
         OrderDao orderDao = DaoFactory.instance().orderDao();
         Order expected = getAllOrders().stream()
