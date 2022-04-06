@@ -60,10 +60,10 @@ public class OrderInfoCommand implements Command {
         String action = request.getParameter(Parameter.ACTION);
         if (action.equals(Value.APPROVE)) {
             orderService.updateOrderApproval(true, orderDto.getId());
-            bookService.removeOneBook(orderDto.getBookDto().getId());
+            bookService.decrementQuantityBook(orderDto.getBookDto().getId());
         } else if (action.equals(Value.CANCEL)) {
             orderService.deleteById(orderDto.getId());
-            bookService.addOneBook(orderDto.getBookDto().getId());
+            bookService.incrementQuantityBook(orderDto.getBookDto().getId());
             return new CommandInfo(AdminPath.ALL_ORDERS.getPath(), RoutingType.REDIRECT);
         }
         orderDto = orderService.getById(orderDto.getId());

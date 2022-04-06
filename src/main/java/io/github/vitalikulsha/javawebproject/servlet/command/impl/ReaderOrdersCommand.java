@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
+import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.order.entity.ReserveStatus;
 import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
@@ -34,7 +35,7 @@ public class ReaderOrdersCommand implements Command {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
-                log.error("Unable to get orders by user id: "  + e.getMessage());
+                log.error("Unable to get orders by user id: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
         } else if (method.equals(Value.POST)) {
@@ -61,12 +62,15 @@ public class ReaderOrdersCommand implements Command {
 
     private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
+        BookService bookService = ServiceFactory.instance().bookService();
         int orderId = Integer.parseInt(request.getParameter(Parameter.ORDER_ID));
+        OrderDTO orderDto = orderService.getById(orderId);
         String action = request.getParameter(Parameter.ACTION);
         if (action.equals(Value.REFUND)) {
             orderService.updateOrderReserveStatus(ReserveStatus.REFUND, orderId);
         } else if (action.equals(Value.CANCEL)) {
             orderService.deleteById(orderId);
+            bookService.incrementQuantityBook(orderDto.getBookDto().getId());
         }
         return new CommandInfo(UserPath.READER_ORDERS.getPath(), RoutingType.REDIRECT);
     }

@@ -7,7 +7,7 @@ package io.github.vitalikulsha.javawebproject.util.dtoconverter;
  * @param <E> the type of entity being converted
  */
 
-public interface DtoConverter<T, E> {
+public interface DTOConverter<T, E> {
     /**
      * Convert entity to DTO object.
      *

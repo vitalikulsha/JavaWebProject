@@ -2,8 +2,8 @@ package io.github.vitalikulsha.javawebproject.user.service;
 
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.user.dao.UserDao;
-import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
-import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverterFactory;
+import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverter;
+import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverterFactory;
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.user.entity.User;
@@ -21,19 +21,19 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final DtoConverter<UserDTO, User> userDtoConverter;
+    private final DTOConverter<UserDTO, User> userDTOConverter;
     private final EntityValidator<User> userValidator;
 
     public UserServiceImpl() {
         userDao = DaoFactory.instance().userDao();
-        userDtoConverter = DtoConverterFactory.instance().userDtoConverter();
+        userDTOConverter = DTOConverterFactory.instance().userDtoConverter();
         userValidator = ValidatorFactory.instance().userValidator();
     }
 
     @Override
     public UserDTO getById(int id) throws ServiceException {
         try {
-            return userDtoConverter.toDto(userDao.findById(id));
+            return userDTOConverter.toDto(userDao.findById(id));
         } catch (DaoException e) {
             log.error("Unable to get user by id.");
             throw new ServiceException("Exception when getting user from DB by id.", e);
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findAll()
                     .stream()
-                    .map(userDtoConverter::toDto)
+                    .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
             log.error("Unable to get all users.");
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.findByRole(role)
                     .stream()
-                    .map(userDtoConverter::toDto)
+                    .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
             throw new ServiceException("Exception when getting users from DB by role.", e);
@@ -66,9 +66,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteById(int id) throws ServiceException {
+    public void deleteById(int id) throws ServiceException {
         try {
-            return userDao.deleteById(id) == 1;
+            userDao.deleteById(id);
         } catch (DaoException e) {
             throw new ServiceException("Exception when deleting a user", e);
         }
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getByLogin(String login) throws ServiceException {
         try {
-            return userDtoConverter.toDto(userDao.findByLogin(login));
+            return userDTOConverter.toDto(userDao.findByLogin(login));
         } catch (DaoException e) {
             throw new ServiceException("Exception when getting user from DB by login.", e);
         }
@@ -99,7 +99,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getByEmail(String email) throws ServiceException {
         try {
-            return userDtoConverter.toDto(userDao.findByEmail(email));
+            return userDTOConverter.toDto(userDao.findByEmail(email));
         } catch (DaoException e) {
             throw new ServiceException("Exception when getting user from DB by email.", e);
         }

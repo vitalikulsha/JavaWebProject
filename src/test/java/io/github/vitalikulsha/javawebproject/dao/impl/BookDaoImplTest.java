@@ -60,14 +60,6 @@ public class BookDaoImplTest {
     }
 
     @Test
-    public void updateQuantityBooks() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-//        assertEquals(1, bookDao.updateQuantityBooks(4, 10100));
-//        assertEquals(4, bookDao.findById(10100).getQuantity());
-        assertEquals(0, bookDao.updateQuantityBooks(10, 10000));
-    }
-
-    @Test
     public void findById() throws DaoException {
         BookDao bookDao = DaoFactory.instance().bookDao();
         Book expected = getAllBooks().stream()

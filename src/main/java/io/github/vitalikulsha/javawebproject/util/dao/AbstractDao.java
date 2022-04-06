@@ -58,4 +58,9 @@ public abstract class AbstractDao<T> implements Dao<T> {
     public int deleteById(int id) throws DaoException {
         return queryOperator.executeUpdate(DELETE_BY_ID, id);
     }
+
+    @Override
+    public int update(T t) throws DaoException {
+        return 0;
+    }
 }

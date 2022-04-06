@@ -5,14 +5,14 @@ import io.github.vitalikulsha.javawebproject.category.dao.CategoryDao;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.author.entity.Author;
 import io.github.vitalikulsha.javawebproject.category.entity.Category;
-import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
+import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverter;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
 @Slf4j
-public class BookDTOConverter implements DtoConverter<BookDTO, Book> {
+public class BookDTOConverter implements DTOConverter<BookDTO, Book> {
 
     @Override
     public BookDTO toDto(Book book) {

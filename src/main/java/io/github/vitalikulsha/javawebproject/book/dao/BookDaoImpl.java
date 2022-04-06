@@ -34,7 +34,8 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
-    public int updateQuantityBooks(int quantityBooks, int bookId) throws DaoException {
-        return queryOperator.executeUpdate(bookSqlQuery.UPDATE_QUANTITY, quantityBooks, bookId);
+    public int update(Book book) throws DaoException {
+        return queryOperator.executeUpdate(bookSqlQuery.UPDATE, book.getTitle(), book.getPublicationYear(),
+                book.getNumberPages(), book.getCategoryId(), book.getQuantity(), book.getId());
     }
 }

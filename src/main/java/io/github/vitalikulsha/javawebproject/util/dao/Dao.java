@@ -11,13 +11,13 @@ import java.util.List;
 
 /**
  * DAO interface
- *  See also:
- *  {@link AbstractDao}
- *  {@link BookDao}
- *  {@link AuthorDao}
- *  {@link CategoryDao}
- *  {@link OrderDao}
- *  {@link UserDao}
+ * See also:
+ * {@link AbstractDao}
+ * {@link BookDao}
+ * {@link AuthorDao}
+ * {@link CategoryDao}
+ * {@link OrderDao}
+ * {@link UserDao}
  *
  * @param <T> element/entity type in this DAO
  */
@@ -57,5 +57,14 @@ public interface Dao<T> {
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     int deleteById(int id) throws DaoException;
+
+    /**
+     * Updates an entity to the database.
+     *
+     * @param t entity to update
+     * @return database query result
+     * @throws DaoException thrown when DAO exception occurs while executing a query
+     */
+    int update(T t) throws DaoException;
 }
 

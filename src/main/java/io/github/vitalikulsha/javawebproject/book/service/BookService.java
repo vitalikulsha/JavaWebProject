@@ -43,17 +43,15 @@ public interface BookService extends Service<BookDTO> {
      * Decreases the number of books with the given id by one.
      *
      * @param bookId book id
-     * @return true if the book was successfully deleted
      * @throws ServiceException thrown when DAO exception occurs
      */
-    boolean removeOneBook(int bookId) throws ServiceException;
+    void decrementQuantityBook(int bookId) throws ServiceException;
 
     /**
      * Increases the number of books with the given id by one.
      *
      * @param bookId book id
-     * @return true if the book was successfully added
      * @throws ServiceException thrown when DAO exception occurs
      */
-    boolean addOneBook(int bookId) throws ServiceException;
+    void incrementQuantityBook(int bookId) throws ServiceException;
 }

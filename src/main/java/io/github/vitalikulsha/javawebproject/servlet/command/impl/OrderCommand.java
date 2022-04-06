@@ -68,7 +68,7 @@ public class OrderCommand implements Command {
         UserDTO user = (UserDTO) session.getAttribute(Attribute.USER);
         if (!isBookExists(orderService, bookDto, user)) {
             orderService.createOrder(bookDto.getId(), user.getId(), reserveStatus);
-            bookService.removeOneBook(bookDto.getId());
+            bookService.decrementQuantityBook(bookDto.getId());
         } else {
             log.info("The book id = " + bookDto.getId() + " is already in the list of orders.");
             session.setAttribute(Attribute.BOOK_EXISTS, true);

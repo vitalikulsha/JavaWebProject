@@ -1,8 +1,8 @@
 package io.github.vitalikulsha.javawebproject.user.entity;
 
-import io.github.vitalikulsha.javawebproject.util.dtoconverter.DtoConverter;
+import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverter;
 
-public class UserDTOConverter implements DtoConverter<UserDTO, User> {
+public class UserDTOConverter implements DTOConverter<UserDTO, User> {
 
     @Override
     public UserDTO toDto(User user) {

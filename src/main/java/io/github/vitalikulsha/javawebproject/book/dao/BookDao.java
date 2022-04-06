@@ -40,14 +40,4 @@ public interface BookDao extends Dao<Book> {
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     List<Book> findByCategoryName(String name) throws DaoException;
-
-    /**
-     * Updates the quantity of books in the library
-     *
-     * @param quantityBooks new value for the quantity of books in the library
-     * @param bookId        id of the book whose quantity needs to be updated
-     * @return database query result
-     * @throws DaoException thrown when DAO exception occurs while executing a query
-     */
-    int updateQuantityBooks(int quantityBooks, int bookId) throws DaoException;
 }

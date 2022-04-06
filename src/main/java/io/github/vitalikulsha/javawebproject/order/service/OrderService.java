@@ -28,28 +28,25 @@ public interface OrderService extends Service<OrderDTO> {
      * @param bookId        book id
      * @param userId        user id
      * @param reserveStatus order reserve status
-     * @return true if order was successfully created
      * @throws ServiceException thrown when DAO exception occurs
      */
-    boolean createOrder(int bookId, int userId, ReserveStatus reserveStatus) throws ServiceException;
+    void createOrder(int bookId, int userId, ReserveStatus reserveStatus) throws ServiceException;
 
     /**
      * Updates the approval status of an order.
      *
      * @param approved order approval status
      * @param orderId  order id
-     * @return true if order approval status was successfully updated
      * @throws ServiceException thrown when DAO exception occurs
      */
-    boolean updateOrderApproval(boolean approved, int orderId) throws ServiceException;
+    void updateOrderApproval(boolean approved, int orderId) throws ServiceException;
 
     /**
      * Updates the status of an order reservation.
      *
      * @param reserveStatus order reserve status
      * @param orderId       order id
-     * @return true if order approval status was successfully updated
      * @throws ServiceException thrown when DAO exception occurs
      */
-    boolean updateOrderReserveStatus(ReserveStatus reserveStatus, int orderId) throws ServiceException;
+    void updateOrderReserveStatus(ReserveStatus reserveStatus, int orderId) throws ServiceException;
 }

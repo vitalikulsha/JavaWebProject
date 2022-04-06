@@ -8,7 +8,7 @@ public class BookSqlQuery extends AbstractSqlQuery {
     public final String FIND_BY_TITLE;
     public final String FIND_BY_CATEGORY_NAME;
     public final String FIND_BY_AUTHOR_NAME;
-    public final String UPDATE_QUANTITY;
+    public final String UPDATE;
 
     public BookSqlQuery() {
         super(Table.BOOK.name(), Column.BOOK_ID.name());
@@ -22,7 +22,8 @@ public class BookSqlQuery extends AbstractSqlQuery {
                 Table.BOOK, Table.BOOK_AUTHOR, Table.BOOK, Column.BOOK_ID, Table.BOOK_AUTHOR, Column.BOOK_ID,
                 Table.AUTHOR, Table.BOOK_AUTHOR, Column.AUTHOR_ID, Table.AUTHOR, Column.AUTHOR_ID,
                 Column.LASTNAME, PATTERN);
-        UPDATE_QUANTITY = String.format("UPDATE %s SET %s=? WHERE %s=?",
-                Table.BOOK, Column.QUANTITY, Column.BOOK_ID);
+        UPDATE = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=? WHERE %s=?",
+                Table.BOOK, Column.TITLE, Column.PUBLICATIONYEAR, Column.NUMBERPAGES,
+                Column.CATEGORY, Column.QUANTITY, Column.BOOK_ID);
     }
 }

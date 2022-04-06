@@ -38,8 +38,7 @@ public interface Service<T> {
      * Permanently deleting an entity.
      *
      * @param id id of the entity to be deleted
-     * @return true if entity was successfully deleted
      * @throws ServiceException thrown when DAO exception occurs
      */
-    boolean deleteById(int id) throws ServiceException;
+    void deleteById(int id) throws ServiceException;
 }
