@@ -3,7 +3,7 @@ package io.github.vitalikulsha.javawebproject.util.constant;
 /**
  * List of parameter and attribute values.
  */
-public class Value {
+public class JspValue {
     //methods
     public final static String GET = "GET";
     public final static String POST = "POST";
@@ -17,6 +17,6 @@ public class Value {
     public final static String EN = "en";
     public final static String RU = "ru";
 
-    private Value() {
+    private JspValue() {
     }
 }

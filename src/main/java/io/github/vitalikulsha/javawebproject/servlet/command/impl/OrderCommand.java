@@ -6,6 +6,7 @@ import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
+import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
@@ -13,7 +14,6 @@ import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,14 +28,14 @@ public class OrderCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String method = request.getMethod();
-        if (method.equals(Value.GET)) {
+        if (method.equals(JspValue.GET)) {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
                 log.error("Unable to get book by id: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
-        } else if (method.equals(Value.POST)) {
+        } else if (method.equals(JspValue.POST)) {
             try {
                 return getCommandInfoPost(request, session);
             } catch (ServiceException e) {

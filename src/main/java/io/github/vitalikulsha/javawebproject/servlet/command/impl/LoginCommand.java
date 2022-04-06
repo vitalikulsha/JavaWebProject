@@ -11,7 +11,7 @@ import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
-import io.github.vitalikulsha.javawebproject.util.constant.Value;
+import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
 import io.github.vitalikulsha.javawebproject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class LoginCommand implements Command {
         String method = request.getMethod();
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.URL, request.getServletPath());
-        if (method.equals(Value.POST)) {
+        if (method.equals(JspValue.POST)) {
             try {
                 return getCommandInfoPost(request);
             } catch (ServiceException e) {

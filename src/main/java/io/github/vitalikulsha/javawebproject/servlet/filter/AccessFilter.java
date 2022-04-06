@@ -2,8 +2,8 @@ package io.github.vitalikulsha.javawebproject.servlet.filter;
 
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
+import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
-import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
 import io.github.vitalikulsha.javawebproject.util.path.GuestPath;
 import io.github.vitalikulsha.javawebproject.util.path.UserPath;
@@ -84,7 +84,7 @@ public class AccessFilter implements Filter {
     private String getLocale(HttpSession session) {
         String locale = (String) session.getAttribute(SessionAttribute.LOCALE);
         log.info("Locale: " + locale);
-        return locale == null ? Value.EN : locale;
+        return locale == null ? JspValue.EN : locale;
     }
 
     private boolean isRolePage(String servletPath) {

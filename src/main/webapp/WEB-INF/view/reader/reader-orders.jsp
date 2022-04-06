@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Value" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.JspValue" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
@@ -63,7 +63,7 @@
                                 <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}"
                                       method="post">
                                     <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
-                                    <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.REFUND}">
+                                    <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.REFUND}">
                                     <input type="submit" value="<fmt:message key="reader.button-return-book"/>">
                                 </form>
                             </c:if>
@@ -73,7 +73,7 @@
                         <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                         <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}" method="post">
                             <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
-                            <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.CANCEL}">
+                            <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
                             <input type="submit" value="<fmt:message key="reader.button-cancel-order"/>">
                         </form>
                     </c:otherwise>

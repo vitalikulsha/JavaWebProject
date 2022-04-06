@@ -7,11 +7,11 @@ import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
 import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
+import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,14 +26,14 @@ public class OrderInfoCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String method = request.getMethod();
-        if (method.equals(Value.GET)) {
+        if (method.equals(JspValue.GET)) {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
                 log.error("Unable to get order by id: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
-        } else if (method.equals(Value.POST)) {
+        } else if (method.equals(JspValue.POST)) {
             try {
                 return getCommandInfoPost(request, session);
             } catch (ServiceException e) {
@@ -58,10 +58,10 @@ public class OrderInfoCommand implements Command {
         OrderDTO orderDto = (OrderDTO) session.getAttribute(SessionAttribute.ORDER);
         log.info("Order from session: " + orderDto);
         String action = request.getParameter(RequestParameter.ACTION);
-        if (action.equals(Value.APPROVE)) {
+        if (action.equals(JspValue.APPROVE)) {
             orderService.updateOrderApproval(true, orderDto.getId());
             bookService.decrementQuantityBook(orderDto.getBookDto().getId());
-        } else if (action.equals(Value.CANCEL)) {
+        } else if (action.equals(JspValue.CANCEL)) {
             orderService.deleteById(orderDto.getId());
             bookService.incrementQuantityBook(orderDto.getBookDto().getId());
             return new CommandInfo(AdminPath.ALL_ORDERS.getPath(), RoutingType.REDIRECT);

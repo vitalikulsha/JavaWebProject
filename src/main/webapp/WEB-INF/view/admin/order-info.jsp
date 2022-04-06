@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.Value" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.JspValue" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.AdminPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -61,7 +61,7 @@
                     <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
                     <c:if test="${order.reserveStatus eq 'REFUND'}">
                         <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
-                            <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.CANCEL}">
+                            <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
                             <input type="submit" value="<fmt:message key="admin.order-button-close"/>">
                         </form>
                     </c:if>
@@ -69,11 +69,11 @@
                 <c:otherwise>
                     <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
-                        <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.APPROVE}">
+                        <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.APPROVE}">
                         <input type="submit" value="<fmt:message key="admin.order-button-approve"/>">
                     </form>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
-                        <input type="hidden" name="${RequestParameter.ACTION}" value="${Value.CANCEL}">
+                        <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
                         <input type="submit" value="<fmt:message key="admin.order-button-cancel"/>">
                     </form>
                 </c:otherwise>

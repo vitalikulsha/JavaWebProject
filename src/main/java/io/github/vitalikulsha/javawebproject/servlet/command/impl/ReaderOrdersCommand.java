@@ -7,6 +7,7 @@ import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
+import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -15,7 +16,6 @@ import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
 import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.constant.Value;
 import io.github.vitalikulsha.javawebproject.util.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,14 +31,14 @@ public class ReaderOrdersCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String method = request.getMethod();
-        if (method.equals(Value.GET)) {
+        if (method.equals(JspValue.GET)) {
             try {
                 return getCommandInfoGet(request, session);
             } catch (ServiceException e) {
                 log.error("Unable to get orders by user id: " + e.getMessage());
                 return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
             }
-        } else if (method.equals(Value.POST)) {
+        } else if (method.equals(JspValue.POST)) {
             try {
                 return getCommandInfoPost(request);
             } catch (ServiceException e) {
@@ -66,9 +66,9 @@ public class ReaderOrdersCommand implements Command {
         int orderId = Integer.parseInt(request.getParameter(RequestParameter.ORDER_ID));
         OrderDTO orderDto = orderService.getById(orderId);
         String action = request.getParameter(RequestParameter.ACTION);
-        if (action.equals(Value.REFUND)) {
+        if (action.equals(JspValue.REFUND)) {
             orderService.updateOrderReserveStatus(ReserveStatus.REFUND, orderId);
-        } else if (action.equals(Value.CANCEL)) {
+        } else if (action.equals(JspValue.CANCEL)) {
             orderService.deleteById(orderId);
             bookService.incrementQuantityBook(orderDto.getBookDto().getId());
         }
