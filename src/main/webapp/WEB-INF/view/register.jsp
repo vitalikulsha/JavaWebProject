@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.service.validator.ValidationPattern" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
@@ -12,6 +13,10 @@
     <title> <fmt:message key="register.title"/> </title>
     <style>
         <%@include file='/WEB-INF/css/style.css' %>
+        table {
+            width: 600px;
+            margin: auto;
+        }
     </style>
 </head>
 <body class="block">
@@ -28,47 +33,77 @@
             <th><fmt:message key="register.login"/></th>
             <td>
                 <input title="<fmt:message key="validation.login"/>" type="text"
-                placeholder="<fmt:message key="register.login-placeholder"/>" required name="${RequestParameter.LOGIN}">
+                pattern="${ValidationPattern.LOGIN_PATTERN}"
+                placeholder="<fmt:message key="register.login-placeholder"/>"
+                required name="${RequestParameter.LOGIN}">
+            </td>
+            <td>
+                <h6 style="color: red;"><fmt:message key="validation.login"/></h6>
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.password"/></th>
             <td>
                 <input title="<fmt:message key="validation.password"/>" type="password"
-                placeholder="<fmt:message key="register.password-placeholder"/>" required name="${RequestParameter.PASSWORD}">
+                pattern="${ValidationPattern.PASSWORD_PATTERN}"
+                placeholder="<fmt:message key="register.password-placeholder"/>"
+                required name="${RequestParameter.PASSWORD}">
+            </td>
+            <td>
+                <h6 style="color: red;"><fmt:message key="validation.password"/></h6>
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.first-name"/></th>
             <td>
                 <input title="<fmt:message key="validation.name"/>" type="text"
-                placeholder="<fmt:message key="register.first-name-placeholder"/>" required name="${RequestParameter.FIRST_NAME}">
+                pattern="${ValidationPattern.NAME_PATTERN}"
+                placeholder="<fmt:message key="register.first-name-placeholder"/>"
+                required name="${RequestParameter.FIRST_NAME}">
+            </td>
+            <td>
+                <h6 style="color: red;"><fmt:message key="validation.name"/></h6>
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.last-name"/></th>
             <td>
                 <input title="<fmt:message key="validation.name"/>" type="text"
-                placeholder="<fmt:message key="register.last-name-placeholder"/>" required name="${RequestParameter.LAST_NAME}">
+                pattern="${ValidationPattern.NAME_PATTERN}"
+                placeholder="<fmt:message key="register.last-name-placeholder"/>"
+                required name="${RequestParameter.LAST_NAME}">
+            </td>
+            <td>
+                <h6 style="color: red;"><fmt:message key="validation.name"/></h6>
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.phone-number"/></th>
             <td>
                 <input title="<fmt:message key="validation.phone-number"/>" type="number"
-                placeholder="<fmt:message key="register.phone-number-placeholder"/>" required name="${RequestParameter.PHONE_NUMBER}">
+                pattern="${ValidationPattern.PHONE_PATTERN}"
+                placeholder="<fmt:message key="register.phone-number-placeholder"/>"
+                required name="${RequestParameter.PHONE_NUMBER}">
+            </td>
+            <td>
+                <h6 style="color: red;"><fmt:message key="validation.phone-number"/></h6>
             </td>
         </tr>
         <tr>
             <th><fmt:message key="register.email"/></th>
             <td>
                 <input title="<fmt:message key="validation.email"/>" type="email"
-                placeholder="<fmt:message key="register.email-placeholder"/>" required name="${RequestParameter.EMAIL}">
+                pattern="${ValidationPattern.EMAIL_PATTERN}"
+                placeholder="<fmt:message key="register.email-placeholder"/>"
+                required name="${RequestParameter.EMAIL}">
+            </td>
+            <td>
+                <h6 style="color: red;"><fmt:message key="validation.email"/></h6>
             </td>
         </tr>
     </table>
     <input class="button" type="submit" value="<fmt:message key="register.button-register"/>">
-    <input class="button" style="margin-left: 100px" type="reset" value="<fmt:message key="register.button-reset"/>">
+    <input class="button" style="margin-left: 500px" type="reset" value="<fmt:message key="register.button-reset"/>">
 </form>
 <c:if test="${userExists}">
     <c:if test="${not empty login}">
