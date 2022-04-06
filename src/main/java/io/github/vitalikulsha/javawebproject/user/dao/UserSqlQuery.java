@@ -19,7 +19,8 @@ public class UserSqlQuery extends AbstractSqlQuery {
         SAVE = String.format("INSERT INTO %s ( %s, %s, %s, %s, %s, %s, %s) VALUES ?, ?, ?, ?, ?, ?, ?",
                 Table.USER, Column.LOGIN, Column.PASSWORD, Column.FIRSTNAME, Column.LASTNAME,
                 Column.PHONENUMBER, Column.EMAIL, Column.ROLE);
-        UPDATE = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
-                Table.USER, Column.FIRSTNAME, Column.LASTNAME, Column.PHONENUMBER, Column.EMAIL, Column.USER_ID);
+        UPDATE = String.format("UPDATE %s SET %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? WHERE %s=?",
+                Table.USER, Column.LOGIN, Column.PASSWORD, Column.FIRSTNAME, Column.LASTNAME,
+                Column.PHONENUMBER, Column.EMAIL, Column.ROLE, Column.USER_ID);
     }
 }

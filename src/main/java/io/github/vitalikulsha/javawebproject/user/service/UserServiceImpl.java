@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
             user.setLastName(lastName);
             user.setPhoneNumber(phoneNumber);
             user.setEmail(email);
-            if (userValidator.validate(user)) {
+            if (!userValidator.validate(user)) {
                 log.error("User is invalid.");
                 return false;
             }
