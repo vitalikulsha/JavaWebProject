@@ -20,17 +20,20 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
 
     @Override
     public List<Book> findByBookTitle(String title) throws DaoException {
-        return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_TITLE, title);
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_TITLE, title);
+        return queryOperator.executeEntityListQueryWithoutParam(sqlQuery);
     }
 
     @Override
     public List<Book> findByAuthorName(String name) throws DaoException {
-        return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_AUTHOR_NAME, name);
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_AUTHOR_NAME, name);
+        return queryOperator.executeEntityListQueryWithoutParam(sqlQuery);
     }
 
     @Override
     public List<Book> findByCategoryName(String name) throws DaoException {
-        return queryOperator.executeEntityListQueryWithLikeParam(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
+        return queryOperator.executeEntityListQueryWithoutParam(sqlQuery);
     }
 
     @Override

@@ -80,20 +80,6 @@ public class QueryOperator<T> {
     }
 
     /**
-     * Executes a select query with a LIKE parameter.
-     *
-     * @param sqlQuery SQL query
-     * @param param    LIKE parameter SQL query
-     * @return list of entities
-     * @throws DaoException thrown when an SQL exception occurs
-     */
-    public List<T> executeEntityListQueryWithLikeParam(String sqlQuery, String param) throws DaoException {
-        log.info("SQL query: " + sqlQuery);
-        String query = String.format(sqlQuery, param);
-        return executeEntityListQueryWithoutParam(query);
-    }
-
-    /**
      * Executes single entity select query with additional PreparedStatement parameter.
      *
      * @param sqlQuery SQL query
@@ -107,11 +93,7 @@ public class QueryOperator<T> {
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             preparedStatement.setObject(1, param);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return mapper.getEntity(resultSet);
-            } else {
-                return null;
-            }
+            return resultSet.next() ? mapper.getEntity(resultSet) : null;
         } catch (SQLException e) {
             log.error("Unable to execute select query.", e);
             throw new DaoException("SQLException while executing a select query.", e);
