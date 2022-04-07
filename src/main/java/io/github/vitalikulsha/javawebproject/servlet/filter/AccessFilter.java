@@ -4,9 +4,9 @@ import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
-import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
-import io.github.vitalikulsha.javawebproject.util.path.GuestPath;
-import io.github.vitalikulsha.javawebproject.util.path.UserPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.AdminPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.GuestPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.*;
@@ -27,22 +27,24 @@ public class AccessFilter implements Filter {
     private final Map<Role, List<String>> rolePages = new EnumMap<>(Role.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         log.debug("AccessFilter initialization");
+        List<String> guestPages = Arrays.stream(GuestPath.values())
+                .map(GuestPath::getPath)
+                .collect(Collectors.toList());
+        rolePages.put(Role.GUEST, guestPages);
+
         List<String> userPages = Arrays.stream(UserPath.values())
                 .map(UserPath::getPath)
                 .collect(Collectors.toList());
+        userPages.addAll(guestPages);
         rolePages.put(Role.READER, userPages);
 
-        List<String> adminPath = Arrays.stream(AdminPath.values())
+        List<String> adminPages = Arrays.stream(AdminPath.values())
                 .map(AdminPath::getPath)
                 .collect(Collectors.toList());
-        rolePages.put(Role.ADMIN, adminPath);
-
-        List<String> guestPath = Arrays.stream(GuestPath.values())
-                .map(GuestPath::getPath)
-                .collect(Collectors.toList());
-        rolePages.put(Role.GUEST, guestPath);
+        adminPages.addAll(guestPages);
+        rolePages.put(Role.ADMIN, adminPages);
     }
 
     @Override

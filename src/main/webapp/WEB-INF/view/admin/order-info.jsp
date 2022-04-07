@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.JspValue" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.path.AdminPath" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.servlet.path.AdminPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>

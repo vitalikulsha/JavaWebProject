@@ -1,4 +1,4 @@
-package io.github.vitalikulsha.javawebproject.util.path;
+package io.github.vitalikulsha.javawebproject.servlet.path;
 
 /**
  * Servlet path for user with guest role.

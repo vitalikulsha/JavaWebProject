@@ -1,9 +1,9 @@
 package io.github.vitalikulsha.javawebproject.servlet.command;
 
 import io.github.vitalikulsha.javawebproject.servlet.command.impl.*;
-import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
-import io.github.vitalikulsha.javawebproject.util.path.GuestPath;
-import io.github.vitalikulsha.javawebproject.util.path.UserPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.AdminPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.GuestPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.UserPath;
 
 import java.util.HashMap;
 import java.util.Map;

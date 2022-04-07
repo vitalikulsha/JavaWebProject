@@ -3,7 +3,7 @@ package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.util.path.UserPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.GuestPath;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +19,6 @@ public class LogoutCommand implements Command {
         while (attributes.hasMoreElements()) {
             session.removeAttribute(attributes.nextElement());
         }
-        return new CommandInfo(UserPath.LOGIN.getPath(), RoutingType.REDIRECT);
+        return new CommandInfo(GuestPath.LOGIN.getPath(), RoutingType.REDIRECT);
     }
 }

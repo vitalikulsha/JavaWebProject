@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
-<%@ page import="io.github.vitalikulsha.javawebproject.util.path.UserPath" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.servlet.path.GuestPath" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
@@ -16,13 +16,13 @@
 </head>
 <body class="block">
 <h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.REGISTER.path}">
+    <a href="${pageContext.request.contextPath}${GuestPath.REGISTER.path}">
         | <fmt:message key="login.link-registration"/> |
     </a>
     <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
 </h4>
 <h2><fmt:message key="login.header"/></h2>
-<form method="post" action="${pageContext.request.contextPath}${UserPath.LOGIN.path}">
+<form method="post" action="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
     <table>
         <tr>
             <th><fmt:message key="register.login"/></th>

@@ -14,7 +14,7 @@ import io.github.vitalikulsha.javawebproject.user.service.UserService;
 import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
-import io.github.vitalikulsha.javawebproject.util.path.AdminPath;
+import io.github.vitalikulsha.javawebproject.servlet.path.AdminPath;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
