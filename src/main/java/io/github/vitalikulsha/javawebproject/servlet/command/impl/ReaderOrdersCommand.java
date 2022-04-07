@@ -51,7 +51,7 @@ public class ReaderOrdersCommand implements Command {
 
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         UserDTO user = (UserDTO) session.getAttribute(SessionAttribute.USER);
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(SessionAttribute.URL, url);

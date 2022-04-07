@@ -46,7 +46,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public List<T> findAll() throws DaoException {
-        return queryOperator.executeEntityListQueryWithoutParam(FIND_ALL_QUERY);
+        return queryOperator.executeEntityListQuery(FIND_ALL_QUERY);
     }
 
     @Override

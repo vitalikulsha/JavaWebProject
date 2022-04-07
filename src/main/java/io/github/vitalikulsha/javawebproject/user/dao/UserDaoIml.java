@@ -29,7 +29,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     @Override
     public List<User> findByRole(Role role) throws DaoException {
-        return queryOperator.executeEntityListQueryWithParam(userSqlQuery.FIND_BY_ROLE, role.name());
+        return queryOperator.executeEntityListQuery(userSqlQuery.FIND_BY_ROLE, role.name());
     }
 
     @Override

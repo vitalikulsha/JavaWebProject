@@ -18,7 +18,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     @Override
     public List<Order> findByUserId(int userId) throws DaoException {
-        return queryOperator.executeEntityListQueryWithParam(orderSqlQuery.FIND_BY_USER_ID, userId);
+        return queryOperator.executeEntityListQuery(orderSqlQuery.FIND_BY_USER_ID, userId);
     }
 
     @Override

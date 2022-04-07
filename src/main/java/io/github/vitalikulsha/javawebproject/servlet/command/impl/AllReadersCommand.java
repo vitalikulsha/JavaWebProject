@@ -24,7 +24,7 @@ public class AllReadersCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         UserService userService = ServiceFactory.instance().userService();
-        Pagination<UserDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<UserDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         String url = request.getContextPath() + AdminPath.ALL_READERS.getPath() + "?";
         try {
             List<UserDTO> allReaders = userService.getUsersByRole(Role.READER);

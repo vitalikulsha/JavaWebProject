@@ -4,6 +4,7 @@ import io.github.vitalikulsha.javawebproject.book.entity.Book;
 import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
 import io.github.vitalikulsha.javawebproject.util.dao.Dao;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 
 import java.util.List;
 
@@ -40,4 +41,8 @@ public interface BookDao extends Dao<Book> {
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     List<Book> findByCategoryName(String name) throws DaoException;
+
+    List<Book> findAllPagination(int firstLow, int lastLow) throws DaoException;
+
+    int countBySearchParam(String searchParam, Column column) throws DaoException;
 }

@@ -24,7 +24,7 @@ public class AllOrdersCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         String url = request.getServletContext().getContextPath() + AdminPath.ALL_ORDERS.getPath() + "?";
         request.setAttribute(SessionAttribute.URL, url);
         try {

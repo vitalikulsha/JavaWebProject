@@ -28,7 +28,7 @@ public class ReaderInfoCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         UserService userService = ServiceFactory.instance().userService();
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         int readerId = Integer.parseInt(request.getParameter(RequestParameter.READER_ID));
         String url = request.getServletContext().getContextPath()
                 + AdminPath.READER_INFO.getPath()

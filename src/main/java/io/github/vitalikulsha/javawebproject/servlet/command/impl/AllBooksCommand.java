@@ -23,7 +23,7 @@ public class AllBooksCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         BookService bookService = ServiceFactory.instance().bookService();
-        Pagination<BookDTO> pagination = new Pagination<>(ConfigParameter.ITEM_PER_PAGE);
+        Pagination<BookDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(SessionAttribute.URL, url);
         try {

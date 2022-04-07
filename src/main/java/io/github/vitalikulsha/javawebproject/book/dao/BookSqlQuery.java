@@ -10,6 +10,7 @@ public class BookSqlQuery extends AbstractSqlQuery {
     public final String FIND_BY_AUTHOR_NAME;
     public final String UPDATE;
     public final String FIND_ALL_PAGE;
+    public final String COUNT;
 
     public BookSqlQuery() {
         super(Table.BOOK.name(), Column.BOOK_ID.name());
@@ -28,5 +29,6 @@ public class BookSqlQuery extends AbstractSqlQuery {
                 Column.CATEGORY, Column.QUANTITY, Column.BOOK_ID);
         FIND_ALL_PAGE = String.format("SELECT * FROM %s ORDER BY %s LIMIT ?, ?",
                 Table.BOOK, Column.BOOK_ID);
+        COUNT = String.format("SELECT COUNT(*) FROM %s WHERE %s", Table.BOOK, PATTERN);
     }
 }
