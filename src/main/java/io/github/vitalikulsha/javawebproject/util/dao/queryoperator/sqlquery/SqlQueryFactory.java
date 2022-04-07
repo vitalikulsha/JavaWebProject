@@ -10,13 +10,13 @@ import io.github.vitalikulsha.javawebproject.user.dao.UserSqlQuery;
  * Factory, that provides SQL query
  */
 public class SqlQueryFactory {
-    private final static SqlQueryFactory instance = new SqlQueryFactory();
+    private static final SqlQueryFactory instance = new SqlQueryFactory();
 
-    private final static AuthorSqlQuery authorSqlQuery = new AuthorSqlQuery();
-    private final static CategorySqlQuery categorySqlQuery = new CategorySqlQuery();
-    private final static BookSqlQuery bookSqlQuery = new BookSqlQuery();
-    private final static OrderSqlQuery orderSqlQuery = new OrderSqlQuery();
-    private final static UserSqlQuery userSqlQuery = new UserSqlQuery();
+    private static final AuthorSqlQuery authorSqlQuery = new AuthorSqlQuery();
+    private static final CategorySqlQuery categorySqlQuery = new CategorySqlQuery();
+    private static final BookSqlQuery bookSqlQuery = new BookSqlQuery();
+    private static final OrderSqlQuery orderSqlQuery = new OrderSqlQuery();
+    private static final UserSqlQuery userSqlQuery = new UserSqlQuery();
 
     private SqlQueryFactory() {
     }

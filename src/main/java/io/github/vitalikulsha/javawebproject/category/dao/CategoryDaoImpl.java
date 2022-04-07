@@ -6,7 +6,7 @@ import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory
 import io.github.vitalikulsha.javawebproject.category.entity.Category;
 
 public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDao {
-    private final static CategorySqlQuery categorySqlQuery = SqlQueryFactory.instance().categorySqlQuery();
+    private static final CategorySqlQuery categorySqlQuery = SqlQueryFactory.instance().categorySqlQuery();
 
     public CategoryDaoImpl() {
         super(RowMapperFactory.instance().categoryRowMapper(),

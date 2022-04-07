@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
-    private final static BookSqlQuery bookSqlQuery = SqlQueryFactory.instance().bookSqlQuery();
+    private static final BookSqlQuery bookSqlQuery = SqlQueryFactory.instance().bookSqlQuery();
 
     public BookDaoImpl() {
         super(RowMapperFactory.instance().bookRowMapper(),

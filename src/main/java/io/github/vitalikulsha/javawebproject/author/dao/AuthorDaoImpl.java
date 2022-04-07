@@ -9,7 +9,7 @@ import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import java.util.List;
 
 public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
-    private final static AuthorSqlQuery authorSqlQuery = SqlQueryFactory.instance().authorSqlQuery();
+    private static final AuthorSqlQuery authorSqlQuery = SqlQueryFactory.instance().authorSqlQuery();
 
     public AuthorDaoImpl() {
         super(RowMapperFactory.instance().authorRowMapper(),

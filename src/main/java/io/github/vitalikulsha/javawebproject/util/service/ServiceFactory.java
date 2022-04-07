@@ -11,11 +11,11 @@ import io.github.vitalikulsha.javawebproject.user.service.UserServiceImpl;
  * Factory, that provides services.
  */
 public class ServiceFactory {
-    private final static ServiceFactory instance = new ServiceFactory();
+    private static final ServiceFactory instance = new ServiceFactory();
 
-    private final static BookService bookService = new BookServiceImpl();
-    private final static OrderService orderService = new OrderServiceImpl();
-    private final static UserService userService = new UserServiceImpl();
+    private static final BookService bookService = new BookServiceImpl();
+    private static final OrderService orderService = new OrderServiceImpl();
+    private static final UserService userService = new UserServiceImpl();
 
     private ServiceFactory() {
     }

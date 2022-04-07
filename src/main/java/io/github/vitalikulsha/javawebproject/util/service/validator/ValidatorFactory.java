@@ -6,9 +6,9 @@ import io.github.vitalikulsha.javawebproject.user.entity.User;
  * Factory, that provides validator.
  */
 public class ValidatorFactory {
-    private final static ValidatorFactory instance = new ValidatorFactory();
+    private static final ValidatorFactory instance = new ValidatorFactory();
 
-    private final static EntityValidator<User> userValidator = new UserValidator();
+    private static final EntityValidator<User> userValidator = new UserValidator();
 
     private ValidatorFactory() {
     }

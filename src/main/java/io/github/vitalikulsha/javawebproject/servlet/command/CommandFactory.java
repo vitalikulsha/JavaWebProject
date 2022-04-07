@@ -12,9 +12,9 @@ import java.util.Map;
  * Class that provides command with given servlet path.
  */
 public class CommandFactory {
-    private final static CommandFactory instance = new CommandFactory();
+    private static final CommandFactory instance = new CommandFactory();
 
-    private final static Map<String, Command> commands = new HashMap<>() {{
+    private static final Map<String, Command> commands = new HashMap<>() {{
         //admin path
         put(AdminPath.ADMIN.getPath(), new AdminCommand());
         put(AdminPath.ALL_BOOKS.getPath(), new AllBooksCommand());

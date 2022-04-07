@@ -10,13 +10,13 @@ import io.github.vitalikulsha.javawebproject.user.dao.UserRowMapper;
  * Factory, that provides row mappers.
  */
 public class RowMapperFactory {
-    private final static RowMapperFactory instance = new RowMapperFactory();
+    private static final RowMapperFactory instance = new RowMapperFactory();
 
-    private final static OrderRowMapper orderRowMapper = new OrderRowMapper();
-    private final static UserRowMapper userRowMapper = new UserRowMapper();
-    private final static BookRowMapper bookRowMapper = new BookRowMapper();
-    private final static CategoryRowMapper categoryRowMapper = new CategoryRowMapper();
-    private final static AuthorRowMapper authorRowMapper = new AuthorRowMapper();
+    private static final OrderRowMapper orderRowMapper = new OrderRowMapper();
+    private static final UserRowMapper userRowMapper = new UserRowMapper();
+    private static final BookRowMapper bookRowMapper = new BookRowMapper();
+    private static final CategoryRowMapper categoryRowMapper = new CategoryRowMapper();
+    private static final AuthorRowMapper authorRowMapper = new AuthorRowMapper();
 
     private RowMapperFactory() {
     }

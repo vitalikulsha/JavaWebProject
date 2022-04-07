@@ -8,11 +8,11 @@ import io.github.vitalikulsha.javawebproject.order.entity.OrderDTOConverter;
  * Factory, that provides DTO converters.
  */
 public class DTOConverterFactory {
-    private final static DTOConverterFactory instance = new DTOConverterFactory();
+    private static final DTOConverterFactory instance = new DTOConverterFactory();
 
-    private final BookDTOConverter bookDtoConverter = new BookDTOConverter();
-    private final OrderDTOConverter orderDtoConverter = new OrderDTOConverter();
-    private final UserDTOConverter userDtoConverter = new UserDTOConverter();
+    private static final BookDTOConverter bookDtoConverter = new BookDTOConverter();
+    private static final OrderDTOConverter orderDtoConverter = new OrderDTOConverter();
+    private static final UserDTOConverter userDtoConverter = new UserDTOConverter();
 
     /**
      * Gets instance.

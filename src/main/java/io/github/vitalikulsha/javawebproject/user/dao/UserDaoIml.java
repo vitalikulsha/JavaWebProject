@@ -10,7 +10,7 @@ import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import java.util.List;
 
 public class UserDaoIml extends AbstractDao<User> implements UserDao {
-    private final static UserSqlQuery userSqlQuery = SqlQueryFactory.instance().userSqlQuery();
+    private static final UserSqlQuery userSqlQuery = SqlQueryFactory.instance().userSqlQuery();
 
     public UserDaoIml() {
         super(RowMapperFactory.instance().userRowMapper(),

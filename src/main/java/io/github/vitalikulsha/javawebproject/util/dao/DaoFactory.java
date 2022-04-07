@@ -15,13 +15,13 @@ import io.github.vitalikulsha.javawebproject.user.dao.UserDaoIml;
  * Factory, that provides DAO.
  */
 public class DaoFactory {
-    private final static DaoFactory instance = new DaoFactory();
+    private static final DaoFactory instance = new DaoFactory();
 
-    private final static BookDao bookDao = new BookDaoImpl();
-    private final static UserDao userDao = new UserDaoIml();
-    private final static OrderDao orderDao = new OrderDaoImpl();
-    private final static CategoryDao categoryDao = new CategoryDaoImpl();
-    private final static AuthorDao authorDao = new AuthorDaoImpl();
+    private static final BookDao bookDao = new BookDaoImpl();
+    private static final UserDao userDao = new UserDaoIml();
+    private static final OrderDao orderDao = new OrderDaoImpl();
+    private static final CategoryDao categoryDao = new CategoryDaoImpl();
+    private static final AuthorDao authorDao = new AuthorDaoImpl();
 
     private DaoFactory() {
     }

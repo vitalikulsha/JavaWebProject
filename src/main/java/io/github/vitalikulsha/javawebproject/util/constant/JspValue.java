@@ -5,17 +5,17 @@ package io.github.vitalikulsha.javawebproject.util.constant;
  */
 public class JspValue {
     //methods
-    public final static String GET = "GET";
-    public final static String POST = "POST";
+    public static final String GET = "GET";
+    public static final String POST = "POST";
 
     //actions
-    public final static String APPROVE = "approve";
-    public final static String CANCEL = "cancel";
-    public final static String REFUND = "refund";
+    public static final String APPROVE = "approve";
+    public static final String CANCEL = "cancel";
+    public static final String REFUND = "refund";
 
     //locale
-    public final static String EN = "en";
-    public final static String RU = "ru";
+    public static final String EN = "en";
+    public static final String RU = "ru";
 
     private JspValue() {
     }

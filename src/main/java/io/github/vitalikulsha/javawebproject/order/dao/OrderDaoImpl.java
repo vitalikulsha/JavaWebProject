@@ -9,7 +9,7 @@ import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
 import java.util.List;
 
 public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
-    private final static OrderSqlQuery orderSqlQuery = SqlQueryFactory.instance().orderSqlQuery();
+    private static final OrderSqlQuery orderSqlQuery = SqlQueryFactory.instance().orderSqlQuery();
 
     public OrderDaoImpl() {
         super(RowMapperFactory.instance().orderRowMapper(),
