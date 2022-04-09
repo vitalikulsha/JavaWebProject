@@ -20,7 +20,6 @@ public class RequestParameter {
     public static final String PHONE_NUMBER = "phoneNumber";
     public static final String READER_ID = "readerId";
     public static final String RESERVE_STATUS = "reserveStatus";
-    public static final String USER_ID = "userId";
 
     private RequestParameter() {
     }

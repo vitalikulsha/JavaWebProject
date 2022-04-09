@@ -47,7 +47,6 @@ public class QueryOperator<T> {
             log.error("Unable to execute select query.", e);
             throw new DaoException("SQLException while executing a select query.", e);
         } catch (ConnectionException e) {
-            log.error("Unable to get connection.", e);
             throw new DaoException("Unable to get connection", e);
         }
         return result;
@@ -72,7 +71,6 @@ public class QueryOperator<T> {
             log.error("Unable to execute select query.", e);
             throw new DaoException("SQLException while executing a select query.", e);
         } catch (ConnectionException e) {
-            log.error("Unable to get connection.", e);
             throw new DaoException("Unable to get connection", e);
         }
     }
@@ -95,15 +93,15 @@ public class QueryOperator<T> {
             log.error("Unable to execute update query.", e);
             throw new DaoException("SQLException while executing an update query.", e);
         } catch (ConnectionException e) {
-            log.error("Unable to get connection.", e);
             throw new DaoException("Unable to get connection", e);
         }
     }
 
     /**
-     * Executes a query to count the number of records.
+     * Executes a query to count the number of records with additional PreparedStatement parameters.
      *
-     * @param sqlQuery  SQL query
+     * @param sqlQuery SQL query
+     * @param params   PreparedStatement parameters SQL query
      * @return number of records found
      * @throws DaoException thrown when an SQL exception occurs
      */
@@ -118,7 +116,6 @@ public class QueryOperator<T> {
             log.error("Unable to execute select query.", e);
             throw new DaoException("SQLException while executing a select query.", e);
         } catch (ConnectionException e) {
-            log.error("Unable to get connection.", e);
             throw new DaoException("Unable to get connection", e);
         }
     }

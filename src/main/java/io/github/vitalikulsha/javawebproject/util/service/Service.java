@@ -29,7 +29,7 @@ public interface Service<T> {
     /**
      * Gets all entities with pagination.
      *
-     * @return the resulting list of objects
+     * @return the resulting list of entities
      * @throws ServiceException thrown when DAO exception occurs
      */
     List<T> getAll(int page, int itemsOnPage) throws ServiceException;
