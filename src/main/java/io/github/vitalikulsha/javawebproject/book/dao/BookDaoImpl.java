@@ -16,25 +16,27 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
 
     public BookDaoImpl() {
         super(RowMapperFactory.instance().bookRowMapper(),
-                bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_BY_ID, bookSqlQuery.DELETE_BY_ID);
+                bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_BY_ID,
+                bookSqlQuery.DELETE_BY_ID, bookSqlQuery.COUNT_ALL);
     }
 
     @Override
-    public List<Book> findByBookTitle(String title) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.FIND_BY_TITLE, title);
-        return queryOperator.executeEntityListQuery(sqlQuery);
+    public List<Book> findByBookTitle(int firstIndex, int itemsOnPage, String title) throws DaoException {
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_TITLE_PAGE, title);
+        return queryOperator.executeEntityListQuery(sqlQuery, firstIndex, itemsOnPage);
     }
 
     @Override
-    public List<Book> findByAuthorName(String name) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.FIND_BY_AUTHOR_NAME, name);
-        return queryOperator.executeEntityListQuery(sqlQuery);
+    public List<Book> findByAuthorName(int firstIndex, int itemsOnPage, String name) throws DaoException {
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_AUTHOR_NAME_PAGE, name);
+        return queryOperator.executeEntityListQuery(sqlQuery, firstIndex, itemsOnPage);
     }
 
+
     @Override
-    public List<Book> findByCategoryName(String name) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
-        return queryOperator.executeEntityListQuery(sqlQuery);
+    public List<Book> findByCategoryName(int firstIndex, int itemsOnPage, String name) throws DaoException {
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_CATEGORY_NAME_PAGE, name);
+        return queryOperator.executeEntityListQuery(sqlQuery, firstIndex, itemsOnPage);
     }
 
     @Override
@@ -44,13 +46,13 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     }
 
     @Override
-    public List<Book> findAllPagination(int page, int itemsOnPage) throws DaoException {
-        return queryOperator.executeEntityListQuery(bookSqlQuery.FIND_ALL_PAGE, page, itemsOnPage);
+    public List<Book> findAll(int firstIndex, int itemsOnPage) throws DaoException {
+        return queryOperator.executeEntityListQuery(bookSqlQuery.FIND_ALL_PAGE, firstIndex, itemsOnPage);
     }
 
     @Override
-    public int countBySearchParam(String searchParam, Column column) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.COUNT, column);
-        return queryOperator.executeCountyQuery(sqlQuery, searchParam);
+    public int countBySearchParam(Column column, String searchParam) throws DaoException {
+        String sqlQuery = String.format(bookSqlQuery.COUNT_BY_PARAM, column, searchParam);
+        return queryOperator.executeCountQuery(sqlQuery);
     }
 }

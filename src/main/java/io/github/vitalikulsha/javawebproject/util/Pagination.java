@@ -6,6 +6,7 @@ import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
@@ -39,13 +40,13 @@ public class Pagination<T> {
         request.setAttribute(SessionAttribute.PAGES, pages);
     }
 
-    private List<Integer> getPageNumbers(List<T> allItems) {
-        List<Integer> pages = new ArrayList<>();
-        IntStream.range(1, getQuantityPages(allItems) + 1).forEach(pages::add);
-        return pages;
+    public List<Integer> getPageNumbers(List<T> allItems) {
+        return IntStream.range(1, getQuantityPages(allItems) + 1)
+                .boxed()
+                .collect(Collectors.toList());
     }
 
-    private List<T> getItemsPerPage(List<T> allItems, int pageNumber) {
+    public List<T> getItemsPerPage(List<T> allItems, int pageNumber) {
         int size = allItems.size();
         int firstIndex = (pageNumber - 1) * itemPerPage;
         int lastIndex = firstIndex + itemPerPage - 1;

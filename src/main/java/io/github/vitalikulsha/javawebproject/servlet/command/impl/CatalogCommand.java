@@ -6,11 +6,11 @@ import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
 import io.github.vitalikulsha.javawebproject.servlet.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 public class CatalogCommand implements Command {
@@ -27,9 +28,8 @@ public class CatalogCommand implements Command {
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        Pagination<BookDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         session.removeAttribute(SessionAttribute.BOOK_EXISTS);
-        String url = getUrl(request);
+        String url = buildUrl(request);
         try {
             List<BookDTO> catalog = getCatalog(request);
             log.info("url: " + url + ", catalog size: " + catalog.size());
@@ -39,7 +39,7 @@ public class CatalogCommand implements Command {
             } else {
                 request.setAttribute(SessionAttribute.URL, url);
                 session.setAttribute(SessionAttribute.BOOK_FOUND, true);
-                pagination.paginate(catalog, request, SessionAttribute.CATALOG);
+                request.setAttribute(SessionAttribute.CATALOG, catalog);
                 return new CommandInfo(Page.CATALOG, RoutingType.FORWARD);
             }
         } catch (ServiceException e) {
@@ -48,7 +48,16 @@ public class CatalogCommand implements Command {
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }
 
-    private String getUrl(HttpServletRequest request) {
+    private void setPagesAttribute(int count, HttpServletRequest request) {
+        int numPage = (count / ConfigParameter.ITEMS_ON_PAGE)
+                + (count % ConfigParameter.ITEMS_ON_PAGE == 0 ? 0 : 1);
+        List<Integer> pages = IntStream.range(1, numPage + 1)
+                .boxed()
+                .collect(Collectors.toList());
+        request.setAttribute(SessionAttribute.PAGES, pages);
+    }
+
+    private String buildUrl(HttpServletRequest request) {
         StringBuilder url = new StringBuilder(request.getContextPath() + request.getServletPath() + "?");
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         params.remove(RequestParameter.PAGE);
@@ -66,26 +75,27 @@ public class CatalogCommand implements Command {
         BookService bookService = ServiceFactory.instance().bookService();
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
         params.remove(RequestParameter.PAGE);
+        String page = request.getParameter(RequestParameter.PAGE);
+        int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
         if (!params.isEmpty()) {
             for (Map.Entry<String, String[]> entry : params.entrySet()) {
                 String param = entry.getKey();
+                String paramValue = entry.getValue()[0];
                 log.info("param: " + param);
                 switch (param) {
                     case (RequestParameter.BOOK_TITLE):
-                        return removeQuantityBooksZero(bookService.getBooksByTitle(entry.getValue()[0]));
+                        setPagesAttribute(bookService.countBySearchParam(Column.TITLE, paramValue), request);
+                        return bookService.getBooksByTitle(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
                     case (RequestParameter.AUTHOR_NAME):
-                        return removeQuantityBooksZero(bookService.getBooksByAuthorName(entry.getValue()[0]));
+                        setPagesAttribute(bookService.countBySearchParam(Column.LASTNAME, paramValue), request);
+                        return bookService.getBooksByAuthorName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
                     case (RequestParameter.CATEGORY_NAME):
-                        return removeQuantityBooksZero(bookService.getBooksByCategoryName(entry.getValue()[0]));
+                        setPagesAttribute(bookService.countBySearchParam(Column.NAME, paramValue), request);
+                        return bookService.getBooksByCategoryName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
                 }
             }
         }
-        return removeQuantityBooksZero(bookService.getAll());
-    }
-
-    private List<BookDTO> removeQuantityBooksZero(List<BookDTO> books) {
-        return books.stream()
-                .filter(b -> b.getQuantity() != 0)
-                .collect(Collectors.toList());
+        setPagesAttribute(bookService.countAll(), request);
+        return bookService.getAllPagination(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
     }
 }

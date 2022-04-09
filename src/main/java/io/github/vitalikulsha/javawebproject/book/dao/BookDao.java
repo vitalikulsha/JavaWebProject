@@ -15,34 +15,41 @@ import java.util.List;
  * {@link AbstractDao}
  */
 public interface BookDao extends Dao<Book> {
+
     /**
-     * Finds a book by title.
+     * Finds a book by title with pagination.
      *
      * @param title book title to search
      * @return found list of book
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<Book> findByBookTitle(String title) throws DaoException;
+    List<Book> findByBookTitle(int firstIndex, int itemsOnPage, String title) throws DaoException;
 
     /**
-     * Finds a book by author.
+     * Finds a book by author with pagination.
      *
      * @param name author last name for book search
      * @return found list of book
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<Book> findByAuthorName(String name) throws DaoException;
+    List<Book> findByAuthorName(int firstIndex, int itemsOnPage, String name) throws DaoException;
 
     /**
-     * Finds a book by category.
+     * Finds a book by category with pagination.
      *
      * @param name category name for book search
      * @return found list of book
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<Book> findByCategoryName(String name) throws DaoException;
+    List<Book> findByCategoryName(int firstIndex, int itemsOnPage, String name) throws DaoException;
 
-    List<Book> findAllPagination(int firstLow, int lastLow) throws DaoException;
-
-    int countBySearchParam(String searchParam, Column column) throws DaoException;
+    /**
+     * Counts the number of books according to the given parameters.
+     *
+     * @param column      book search parameter
+     * @param searchParam search column
+     * @return number of books found
+     * @throws DaoException thrown when DAO exception occurs while executing a query
+     */
+    int countBySearchParam(Column column, String searchParam) throws DaoException;
 }

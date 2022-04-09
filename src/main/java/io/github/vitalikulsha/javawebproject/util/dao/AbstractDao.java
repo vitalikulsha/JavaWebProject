@@ -27,16 +27,18 @@ public abstract class AbstractDao<T> implements Dao<T> {
     protected final String FIND_ALL_QUERY;
     protected final String FIND_BY_ID_QUERY;
     protected final String DELETE_BY_ID;
+    protected final String COUNT_ALL;
 
     protected final RowMapper<T> mapper;
     protected final QueryOperator<T> queryOperator;
 
-    public AbstractDao(RowMapper<T> mapper, String findAllQuery, String findById, String deleteById) {
+    public AbstractDao(RowMapper<T> mapper, String findAllQuery, String findById, String deleteById, String countAll) {
         this.mapper = mapper;
         this.queryOperator = new QueryOperator<>(mapper);
         this.FIND_ALL_QUERY = findAllQuery;
         this.FIND_BY_ID_QUERY = findById;
         this.DELETE_BY_ID = deleteById;
+        this.COUNT_ALL = countAll;
     }
 
     @Override
@@ -62,5 +64,10 @@ public abstract class AbstractDao<T> implements Dao<T> {
     @Override
     public int update(T t) throws DaoException {
         return 0;
+    }
+
+    @Override
+    public int countAll() throws DaoException {
+        return queryOperator.executeCountQuery(COUNT_ALL);
     }
 }

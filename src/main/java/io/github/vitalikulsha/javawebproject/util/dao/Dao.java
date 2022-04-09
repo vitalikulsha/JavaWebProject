@@ -33,6 +33,16 @@ public interface Dao<T> {
     T findById(int id) throws DaoException;
 
     /**
+     * Finds all entities with pagination.
+     *
+     * @param firstIndex  start index for pagination
+     * @param itemsOnPage number of items per page
+     * @return found list of entities
+     * @throws DaoException thrown when DAO exception occurs while executing a query
+     */
+    List<T> findAll(int firstIndex, int itemsOnPage) throws DaoException;
+
+    /**
      * Finds all entities.
      *
      * @return found list of entities
@@ -66,5 +76,13 @@ public interface Dao<T> {
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     int update(T t) throws DaoException;
+
+    /**
+     * Counts the number of all books.
+     *
+     * @return number of books found
+     * @throws DaoException thrown when DAO exception occurs while executing a query
+     */
+    int countAll() throws DaoException;
 }
 

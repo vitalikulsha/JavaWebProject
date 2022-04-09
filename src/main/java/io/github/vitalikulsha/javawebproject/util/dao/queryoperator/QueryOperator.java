@@ -100,14 +100,19 @@ public class QueryOperator<T> {
         }
     }
 
-    public int executeCountyQuery(String sqlQuery, Object... params) throws DaoException {
+    /**
+     * Executes a query to count the number of records.
+     *
+     * @param sqlQuery  SQL query
+     * @return number of records found
+     * @throws DaoException thrown when an SQL exception occurs
+     */
+    public int executeCountQuery(String sqlQuery) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
-            setStatementParam(preparedStatement, params);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            return resultSet.getInt("COUNT(*)");
+            return resultSet.next() ? resultSet.getInt(1) : 0;
         } catch (SQLException e) {
             log.error("Unable to execute select query.", e);
             throw new DaoException("SQLException while executing a select query.", e);

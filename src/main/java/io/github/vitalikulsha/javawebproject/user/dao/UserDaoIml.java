@@ -14,7 +14,8 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     public UserDaoIml() {
         super(RowMapperFactory.instance().userRowMapper(),
-                userSqlQuery.FIND_ALL, userSqlQuery.FIND_BY_ID, userSqlQuery.DELETE_BY_ID);
+                userSqlQuery.FIND_ALL, userSqlQuery.FIND_BY_ID,
+                userSqlQuery.DELETE_BY_ID, userSqlQuery.COUNT_ALL);
     }
 
     @Override
