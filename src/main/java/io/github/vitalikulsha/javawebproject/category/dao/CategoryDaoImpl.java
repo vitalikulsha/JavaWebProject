@@ -10,7 +10,7 @@ public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDa
 
     public CategoryDaoImpl() {
         super(RowMapperFactory.instance().categoryRowMapper(),
-                categorySqlQuery.FIND_ALL, categorySqlQuery.FIND_BY_ID,
+                categorySqlQuery.FIND_ALL, categorySqlQuery.FIND_ALL_PAGE, categorySqlQuery.FIND_BY_ID,
                 categorySqlQuery.DELETE_BY_ID, categorySqlQuery.COUNT_ALL);
     }
 }

@@ -33,6 +33,8 @@ public interface UserDao extends Dao<User> {
      */
     User findByEmail(String email) throws DaoException;
 
+    List<User> findByRole(int firstIndex, int itemsOnPage, Role role) throws DaoException;
+
     /**
      * Finds a list of users with the given role.
      *
@@ -50,4 +52,6 @@ public interface UserDao extends Dao<User> {
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     int update(User user) throws DaoException;
+
+    int countByRoleParam(Role role) throws DaoException;
 }

@@ -24,36 +24,38 @@ import java.util.List;
  * @param <T> element/entity type in this AbstractDAO
  */
 public abstract class AbstractDao<T> implements Dao<T> {
-    protected final String FIND_ALL_QUERY;
-    protected final String FIND_BY_ID_QUERY;
-    protected final String DELETE_BY_ID;
-    protected final String COUNT_ALL;
+    public final String FIND_ALL;
+    public final String FIND_ALL_PAGE;
+    public final String FIND_BY_ID;
+    public final String DELETE_BY_ID;
+    public final String COUNT_ALL;
 
-    protected final RowMapper<T> mapper;
-    protected final QueryOperator<T> queryOperator;
+    public final RowMapper<T> mapper;
+    public final QueryOperator<T> queryOperator;
 
-    public AbstractDao(RowMapper<T> mapper, String findAllQuery, String findById, String deleteById, String countAll) {
+    public AbstractDao(RowMapper<T> mapper, String findAll, String findAllPage, String findById, String deleteById, String countAll) {
         this.mapper = mapper;
         this.queryOperator = new QueryOperator<>(mapper);
-        this.FIND_ALL_QUERY = findAllQuery;
-        this.FIND_BY_ID_QUERY = findById;
+        this.FIND_ALL = findAll;
+        this.FIND_ALL_PAGE = findAllPage;
+        this.FIND_BY_ID = findById;
         this.DELETE_BY_ID = deleteById;
         this.COUNT_ALL = countAll;
     }
 
     @Override
     public T findById(int id) throws DaoException {
-        return queryOperator.executeSingleEntityQuery(FIND_BY_ID_QUERY, id);
+        return queryOperator.executeSingleEntityQuery(FIND_BY_ID, id);
     }
 
     @Override
     public List<T> findAll() throws DaoException {
-        return queryOperator.executeEntityListQuery(FIND_ALL_QUERY);
+        return queryOperator.executeEntityListQuery(FIND_ALL);
     }
 
     @Override
-    public int save(T t) throws DaoException {
-        return 0;
+    public List<T> findAll(int firstIndex, int itemsOnPage) throws DaoException{
+        return queryOperator.executeEntityListQuery(FIND_ALL_PAGE, firstIndex, itemsOnPage);
     }
 
     @Override
@@ -62,12 +64,17 @@ public abstract class AbstractDao<T> implements Dao<T> {
     }
 
     @Override
-    public int update(T t) throws DaoException {
+    public int countAll() throws DaoException {
+        return queryOperator.executeCountQuery(COUNT_ALL);
+    }
+
+    @Override
+    public int save(T t) throws DaoException {
         return 0;
     }
 
     @Override
-    public int countAll() throws DaoException {
-        return queryOperator.executeCountQuery(COUNT_ALL);
+    public int update(T t) throws DaoException {
+        return 0;
     }
 }

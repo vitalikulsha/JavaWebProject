@@ -14,7 +14,6 @@ import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
 import io.github.vitalikulsha.javawebproject.servlet.command.CommandInfo;
 import io.github.vitalikulsha.javawebproject.servlet.command.RoutingType;
-import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
 import io.github.vitalikulsha.javawebproject.servlet.path.UserPath;
 import lombok.extern.slf4j.Slf4j;
@@ -51,12 +50,11 @@ public class ReaderOrdersCommand implements Command {
 
     private CommandInfo getCommandInfoGet(HttpServletRequest request, HttpSession session) throws ServiceException {
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         UserDTO user = (UserDTO) session.getAttribute(SessionAttribute.USER);
         String url = request.getContextPath() + request.getServletPath() + "?";
         request.setAttribute(SessionAttribute.URL, url);
         List<OrderDTO> orders = orderService.getOrdersByUserId(user.getId());
-        pagination.paginate(orders, request, SessionAttribute.USER_ORDERS);
+        request.setAttribute(SessionAttribute.USER_ORDERS, orders);
         return new CommandInfo(Page.READER_ORDERS, RoutingType.FORWARD);
     }
 

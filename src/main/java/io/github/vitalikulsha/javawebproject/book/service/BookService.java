@@ -13,7 +13,6 @@ import java.util.List;
  * {@link Service}
  */
 public interface BookService extends Service<BookDTO> {
-    List<BookDTO> getAllPagination(int page, int itemsOnPage) throws ServiceException;
 
     /**
      * Gets a paginated list of DTO books by title.
@@ -57,14 +56,6 @@ public interface BookService extends Service<BookDTO> {
      * @throws ServiceException thrown when DAO exception occurs
      */
     int countBySearchParam(Column column, String searchParam) throws ServiceException;
-
-    /**
-     * Counts the number of all books.
-     *
-     * @return number of books found
-     * @throws ServiceException thrown when DAO exception occurs
-     */
-    int countAll() throws ServiceException;
 
     /**
      * Decreases the number of books with the given id by one.

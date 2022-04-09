@@ -107,10 +107,11 @@ public class QueryOperator<T> {
      * @return number of records found
      * @throws DaoException thrown when an SQL exception occurs
      */
-    public int executeCountQuery(String sqlQuery) throws DaoException {
+    public int executeCountQuery(String sqlQuery, Object... params) throws DaoException {
         log.info("SQL query: " + sqlQuery);
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
+            setStatementParam(preparedStatement, params);
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next() ? resultSet.getInt(1) : 0;
         } catch (SQLException e) {

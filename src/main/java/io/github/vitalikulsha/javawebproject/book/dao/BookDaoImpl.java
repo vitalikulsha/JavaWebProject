@@ -6,36 +6,33 @@ import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.Sql
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.book.entity.Book;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
-@Slf4j
 public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     private static final BookSqlQuery bookSqlQuery = SqlQueryFactory.instance().bookSqlQuery();
 
     public BookDaoImpl() {
         super(RowMapperFactory.instance().bookRowMapper(),
-                bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_BY_ID,
+                bookSqlQuery.FIND_ALL, bookSqlQuery.FIND_ALL_PAGE, bookSqlQuery.FIND_BY_ID,
                 bookSqlQuery.DELETE_BY_ID, bookSqlQuery.COUNT_ALL);
     }
 
     @Override
     public List<Book> findByBookTitle(int firstIndex, int itemsOnPage, String title) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.FIND_BY_TITLE_PAGE, title);
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_TITLE, title);
         return queryOperator.executeEntityListQuery(sqlQuery, firstIndex, itemsOnPage);
     }
 
     @Override
     public List<Book> findByAuthorName(int firstIndex, int itemsOnPage, String name) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.FIND_BY_AUTHOR_NAME_PAGE, name);
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_AUTHOR_NAME, name);
         return queryOperator.executeEntityListQuery(sqlQuery, firstIndex, itemsOnPage);
     }
 
-
     @Override
     public List<Book> findByCategoryName(int firstIndex, int itemsOnPage, String name) throws DaoException {
-        String sqlQuery = String.format(bookSqlQuery.FIND_BY_CATEGORY_NAME_PAGE, name);
+        String sqlQuery = String.format(bookSqlQuery.FIND_BY_CATEGORY_NAME, name);
         return queryOperator.executeEntityListQuery(sqlQuery, firstIndex, itemsOnPage);
     }
 
@@ -43,11 +40,6 @@ public class BookDaoImpl extends AbstractDao<Book> implements BookDao {
     public int update(Book book) throws DaoException {
         return queryOperator.executeUpdate(bookSqlQuery.UPDATE, book.getTitle(), book.getPublicationYear(),
                 book.getNumberPages(), book.getCategoryId(), book.getQuantity(), book.getId());
-    }
-
-    @Override
-    public List<Book> findAll(int firstIndex, int itemsOnPage) throws DaoException {
-        return queryOperator.executeEntityListQuery(bookSqlQuery.FIND_ALL_PAGE, firstIndex, itemsOnPage);
     }
 
     @Override

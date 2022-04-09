@@ -34,9 +34,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> getAll() throws ServiceException {
+    public List<OrderDTO> getAll(int page, int itemsOnPage) throws ServiceException {
+        int firstIndex = (page - 1) * itemsOnPage;
         try {
-            return orderDao.findAll()
+            return orderDao.findAll(firstIndex, itemsOnPage)
                     .stream()
                     .map(orderDTOConverter::toDto)
                     .collect(Collectors.toList());
@@ -95,6 +96,15 @@ public class OrderServiceImpl implements OrderService {
             orderDao.update(order);
         } catch (DaoException e) {
             throw new ServiceException("Exception when updating order reserve status", e);
+        }
+    }
+
+    @Override
+    public int countAll() throws ServiceException {
+        try {
+            return orderDao.countAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when counting records", e);
         }
     }
 }

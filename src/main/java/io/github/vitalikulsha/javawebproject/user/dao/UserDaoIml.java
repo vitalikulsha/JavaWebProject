@@ -14,7 +14,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     public UserDaoIml() {
         super(RowMapperFactory.instance().userRowMapper(),
-                userSqlQuery.FIND_ALL, userSqlQuery.FIND_BY_ID,
+                userSqlQuery.FIND_ALL, userSqlQuery.FIND_ALL_PAGE, userSqlQuery.FIND_BY_ID,
                 userSqlQuery.DELETE_BY_ID, userSqlQuery.COUNT_ALL);
     }
 
@@ -26,6 +26,11 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     @Override
     public User findByEmail(String email) throws DaoException {
         return queryOperator.executeSingleEntityQuery(userSqlQuery.FIND_BY_EMAIL, email);
+    }
+
+    @Override
+    public List<User> findByRole(int firstIndex, int itemsOnPage, Role role) throws DaoException {
+        return queryOperator.executeEntityListQuery(userSqlQuery.FIND_BY_ROLE, role.name());
     }
 
     @Override
@@ -43,5 +48,10 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
     public int update(User user) throws DaoException {
         return queryOperator.executeUpdate(userSqlQuery.UPDATE, user.getLogin(), user.getPassword(), user.getFirstName(),
                 user.getLastName(), user.getPhoneNumber(), user.getEmail(), user.getRole().name(), user.getId());
+    }
+
+    @Override
+    public int countByRoleParam(Role role) throws DaoException {
+        return queryOperator.executeCountQuery(userSqlQuery.COUNT_BY_ROLE, role.name());
     }
 }

@@ -33,6 +33,14 @@ public interface Dao<T> {
     T findById(int id) throws DaoException;
 
     /**
+     * Finds all entities.
+     *
+     * @return found list of entities
+     * @throws DaoException thrown when DAO exception occurs while executing a query
+     */
+    List<T> findAll() throws DaoException;
+
+    /**
      * Finds all entities with pagination.
      *
      * @param firstIndex  start index for pagination
@@ -41,14 +49,6 @@ public interface Dao<T> {
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     List<T> findAll(int firstIndex, int itemsOnPage) throws DaoException;
-
-    /**
-     * Finds all entities.
-     *
-     * @return found list of entities
-     * @throws DaoException thrown when DAO exception occurs while executing a query
-     */
-    List<T> findAll() throws DaoException;
 
     /**
      * Saves an entity to the database.

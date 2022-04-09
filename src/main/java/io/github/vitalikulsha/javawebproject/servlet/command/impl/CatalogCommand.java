@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Slf4j
 public class CatalogCommand implements Command {
@@ -48,15 +46,6 @@ public class CatalogCommand implements Command {
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }
 
-    private void setPagesAttribute(int count, HttpServletRequest request) {
-        int numPage = (count / ConfigParameter.ITEMS_ON_PAGE)
-                + (count % ConfigParameter.ITEMS_ON_PAGE == 0 ? 0 : 1);
-        List<Integer> pages = IntStream.range(1, numPage + 1)
-                .boxed()
-                .collect(Collectors.toList());
-        request.setAttribute(SessionAttribute.PAGES, pages);
-    }
-
     private String buildUrl(HttpServletRequest request) {
         StringBuilder url = new StringBuilder(request.getContextPath() + request.getServletPath() + "?");
         Map<String, String[]> params = new HashMap<>(request.getParameterMap());
@@ -77,6 +66,8 @@ public class CatalogCommand implements Command {
         params.remove(RequestParameter.PAGE);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
+        List<Integer> pages = new ArrayList<>();
+        List<BookDTO> books = new ArrayList<>();
         if (!params.isEmpty()) {
             for (Map.Entry<String, String[]> entry : params.entrySet()) {
                 String param = entry.getKey();
@@ -84,18 +75,24 @@ public class CatalogCommand implements Command {
                 log.info("param: " + param);
                 switch (param) {
                     case (RequestParameter.BOOK_TITLE):
-                        setPagesAttribute(bookService.countBySearchParam(Column.TITLE, paramValue), request);
-                        return bookService.getBooksByTitle(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.TITLE, paramValue));
+                        books = bookService.getBooksByTitle(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        break;
                     case (RequestParameter.AUTHOR_NAME):
-                        setPagesAttribute(bookService.countBySearchParam(Column.LASTNAME, paramValue), request);
-                        return bookService.getBooksByAuthorName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.LASTNAME, paramValue));
+                        books = bookService.getBooksByAuthorName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        break;
                     case (RequestParameter.CATEGORY_NAME):
-                        setPagesAttribute(bookService.countBySearchParam(Column.NAME, paramValue), request);
-                        return bookService.getBooksByCategoryName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.NAME, paramValue));
+                        books = bookService.getBooksByCategoryName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        break;
                 }
             }
+        } else {
+            pages = ConfigParameter.getPages(bookService.countAll());
+            books = bookService.getAll(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
         }
-        setPagesAttribute(bookService.countAll(), request);
-        return bookService.getAllPagination(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
+        request.setAttribute(SessionAttribute.PAGES, pages);
+        return books;
     }
 }

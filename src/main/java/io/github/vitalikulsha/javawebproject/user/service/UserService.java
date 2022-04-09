@@ -13,6 +13,8 @@ import java.util.List;
  * {@link Service}
  */
 public interface UserService extends Service<UserDTO> {
+    List<UserDTO> getUsersByRole(Role role, int page, int itemsOnPage) throws ServiceException;
+
     /**
      * Gets a list of users DTO by role.
      *
@@ -21,6 +23,8 @@ public interface UserService extends Service<UserDTO> {
      * @throws ServiceException thrown when DAO exception occurs
      */
     List<UserDTO> getUsersByRole(Role role) throws ServiceException;
+
+    int countByRoleParam(Role role) throws ServiceException;
 
     /**
      * Checks if a user exists with the given password and login.

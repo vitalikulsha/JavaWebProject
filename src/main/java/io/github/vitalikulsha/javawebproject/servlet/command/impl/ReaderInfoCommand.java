@@ -11,7 +11,6 @@ import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.user.service.UserService;
-import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.constant.Page;
 import io.github.vitalikulsha.javawebproject.servlet.path.AdminPath;
@@ -28,7 +27,6 @@ public class ReaderInfoCommand implements Command {
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
         UserService userService = ServiceFactory.instance().userService();
         OrderService orderService = ServiceFactory.instance().orderService();
-        Pagination<OrderDTO> pagination = new Pagination<>(ConfigParameter.ITEMS_ON_PAGE);
         int readerId = Integer.parseInt(request.getParameter(RequestParameter.READER_ID));
         String url = request.getServletContext().getContextPath()
                 + AdminPath.READER_INFO.getPath()
@@ -37,8 +35,8 @@ public class ReaderInfoCommand implements Command {
         try {
             UserDTO reader = userService.getById(readerId);
             List<OrderDTO> readerOrders = orderService.getOrdersByUserId(reader.getId());
+            request.setAttribute(SessionAttribute.READER_ORDERS, readerOrders);
             request.setAttribute(SessionAttribute.READER, reader);
-            pagination.paginate(readerOrders, request, SessionAttribute.READER_ORDERS);
             return new CommandInfo(Page.READER_INFO, RoutingType.FORWARD);
         } catch (ServiceException e) {
             log.error("Unable to get user information: " +  e.getMessage());

@@ -88,7 +88,6 @@
         </tr>
     </c:forEach>
 </table>
-    <jsp:include page="/WEB-INF/view/template/pagination.jsp" />
 </c:if>
 </body>
 </html>

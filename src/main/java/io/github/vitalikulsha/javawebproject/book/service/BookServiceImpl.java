@@ -34,12 +34,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getAll() throws ServiceException {
-        return null;
-    }
-
-    @Override
-    public List<BookDTO> getAllPagination(int page, int itemsOnPage) throws ServiceException {
+    public List<BookDTO> getAll(int page, int itemsOnPage) throws ServiceException {
         int firstIndex = (page - 1) * itemsOnPage;
         try {
             return bookDao.findAll(firstIndex, itemsOnPage)

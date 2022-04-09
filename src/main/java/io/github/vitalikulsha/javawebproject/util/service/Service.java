@@ -27,12 +27,12 @@ public interface Service<T> {
     T getById(int id) throws ServiceException;
 
     /**
-     * Gets all entities.
+     * Gets all entities with pagination.
      *
      * @return the resulting list of objects
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<T> getAll() throws ServiceException;
+    List<T> getAll(int page, int itemsOnPage) throws ServiceException;
 
     /**
      * Permanently deleting an entity.
@@ -41,4 +41,12 @@ public interface Service<T> {
      * @throws ServiceException thrown when DAO exception occurs
      */
     void deleteById(int id) throws ServiceException;
+
+    /**
+     * Counts the number of all entities.
+     *
+     * @return number of books found
+     * @throws ServiceException thrown when DAO exception occurs
+     */
+    int countAll() throws ServiceException;
 }

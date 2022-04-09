@@ -13,7 +13,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     public OrderDaoImpl() {
         super(RowMapperFactory.instance().orderRowMapper(),
-                orderSqlQuery.FIND_ALL, orderSqlQuery.FIND_BY_ID,
+                orderSqlQuery.FIND_ALL, orderSqlQuery.FIND_ALL_PAGE, orderSqlQuery.FIND_BY_ID,
                 orderSqlQuery.DELETE_BY_ID, orderSqlQuery.COUNT_ALL);
     }
 
@@ -29,7 +29,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
     }
 
     @Override
-    public int update(Order order)  throws DaoException {
+    public int update(Order order) throws DaoException {
         return queryOperator.executeUpdate(orderSqlQuery.UPDATE, order.getBookId(), order.getUserId(),
                 order.getReserveStatus().name(), order.getApproved(), order.getId());
     }

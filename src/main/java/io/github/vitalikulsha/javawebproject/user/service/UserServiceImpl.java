@@ -41,15 +41,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAll() throws ServiceException {
+    public List<UserDTO> getAll(int page, int itemsOnPage) throws ServiceException {
+        int firstIndex = (page - 1) * itemsOnPage;
         try {
-            return userDao.findAll()
+            return userDao.findAll(firstIndex, itemsOnPage)
                     .stream()
                     .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
             log.error("Unable to get all users.");
             throw new ServiceException("Exception when getting all users from DB.", e);
+        }
+    }
+
+    @Override
+    public List<UserDTO> getUsersByRole(Role role, int page, int itemsOnPage) throws ServiceException {
+        int firstIndex = (page - 1) * itemsOnPage;
+        try {
+            return userDao.findByRole(firstIndex, itemsOnPage, role)
+                    .stream()
+                    .map(userDTOConverter::toDto)
+                    .collect(Collectors.toList());
+        } catch (DaoException e) {
+            log.error("Unable to get users by role.");
+            throw new ServiceException("Exception when getting users from DB by role.", e);
         }
     }
 
@@ -61,6 +76,7 @@ public class UserServiceImpl implements UserService {
                     .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
+            log.error("Unable to get users by role.");
             throw new ServiceException("Exception when getting users from DB by role.", e);
         }
     }
@@ -70,7 +86,26 @@ public class UserServiceImpl implements UserService {
         try {
             userDao.deleteById(id);
         } catch (DaoException e) {
+            log.error("Unable to delete user by id.");
             throw new ServiceException("Exception when deleting a user", e);
+        }
+    }
+
+    @Override
+    public int countByRoleParam(Role role) throws ServiceException {
+        try {
+            return userDao.countByRoleParam(role);
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when counting records", e);
+        }
+    }
+
+    @Override
+    public int countAll() throws ServiceException {
+        try {
+            return userDao.countAll();
+        } catch (DaoException e) {
+            throw new ServiceException("Exception when counting records", e);
         }
     }
 
@@ -92,6 +127,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDTOConverter.toDto(userDao.findByLogin(login));
         } catch (DaoException e) {
+            log.error("Unable to get user by login.");
             throw new ServiceException("Exception when getting user from DB by login.", e);
         }
     }
@@ -101,6 +137,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDTOConverter.toDto(userDao.findByEmail(email));
         } catch (DaoException e) {
+            log.error("Unable to get user by email.");
             throw new ServiceException("Exception when getting user from DB by email.", e);
         }
     }
@@ -122,6 +159,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.save(user) == 1;
         } catch (DaoException e) {
+            log.error("Unable to save user.");
             throw new ServiceException("Exception when creating new user.", e);
         }
     }
@@ -141,6 +179,7 @@ public class UserServiceImpl implements UserService {
             }
             return userDao.update(user) == 1;
         } catch (DaoException e) {
+            log.error("Unable to edit user.");
             throw new ServiceException("Exception when updating user.", e);
         }
     }

@@ -13,6 +13,7 @@ import java.util.List;
  * {@link Service}
  */
 public interface OrderService extends Service<OrderDTO> {
+
     /**
      * Gets a list of orders DTO for the user with the given id.
      *

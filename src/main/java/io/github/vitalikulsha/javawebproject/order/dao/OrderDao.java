@@ -14,6 +14,7 @@ import java.util.List;
  * {@link AbstractDao}
  */
 public interface OrderDao extends Dao<Order> {
+
     /**
      * Finds a list of user orders with the given id.
      *
