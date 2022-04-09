@@ -29,6 +29,7 @@ public class BookServiceImpl implements BookService {
         try {
             return bookDTOConverter.toDto(bookDao.findById(id));
         } catch (DaoException e) {
+            log.error("Unable to get book by id.");
             throw new ServiceException("Exception when getting book from DB by id", e);
         }
     }
@@ -42,6 +43,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
+            log.error("Unable to get all books.");
             throw new ServiceException("Exception when getting all books from DB", e);
         }
     }
@@ -55,6 +57,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
+            log.error("Unable to get books by title.");
             throw new ServiceException("Exception when getting books from DB by title", e);
         }
     }
@@ -69,6 +72,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
+            log.error("Unable to get books by author name.");
             throw new ServiceException("Exception when getting books from DB by author name", e);
         }
     }
@@ -82,6 +86,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
+            log.error("Unable to get books by category name.");
             throw new ServiceException("Exception when getting books from DB by category name", e);
         }
     }
@@ -91,6 +96,7 @@ public class BookServiceImpl implements BookService {
         try {
             bookDao.deleteById(id);
         } catch (DaoException e) {
+            log.error("Unable to delete book by id.");
             throw new ServiceException("Exception when deleting a book", e);
         }
     }

@@ -50,7 +50,7 @@ public class OrderCommand implements Command {
         BookService bookService = ServiceFactory.instance().bookService();
         int bookId = Integer.parseInt(request.getParameter(RequestParameter.BOOK_ID));
         BookDTO bookDto = bookService.getById(bookId);
-        if (bookDto == null) {
+        if (bookDto == null || bookDto.getQuantity() == 0) {
             session.setAttribute(SessionAttribute.BOOK_FOUND, false);
             return new CommandInfo(UserPath.BOOK_SEARCH.getPath(), RoutingType.REDIRECT);
         } else {
