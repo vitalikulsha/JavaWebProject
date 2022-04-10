@@ -3,10 +3,14 @@ html, body, p {
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 h2 {
-    color: grey;
+    color: #8B00FF;
     font-size: 40px;
-	letter-spacing: 2px;
+	letter-spacing: 8px;
 	margin-top: 0px;
     margin-bottom: 30px;
 	text-align: center;
@@ -17,6 +21,7 @@ h2 {
     margin: auto;
     padding-top: 20px;
     padding-bottom: 20px;
+    background: #ffc93b;
 }
 
 .submit {
@@ -34,4 +39,10 @@ h2 {
     color: red;
     font-size: 25px;
     text-align: center;
+}
+
+.header{
+    color: #008080;
+    font-size: 16px;
+    text-align: right;
 }

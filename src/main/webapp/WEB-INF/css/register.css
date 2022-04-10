@@ -1,0 +1,58 @@
+th {
+    padding-left: 20px;
+    width: 35%;
+    height: 70px;
+    font-size: 25px;
+    font-weight: bold;
+    color: green;
+    text-align: left;
+	vertical-align: middle;
+}
+
+td {
+    vertical-align: middle;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+    margin: auto;
+}
+
+h6 {
+    color: black;
+    margin-bottom: 0;
+}
+
+.entry-field {
+    padding: 20px;
+    font-size: 20px;
+    width: 300px;
+    height: 30px;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.button {
+    margin-top: 20px;
+    width: 360px;
+    height: 50px;
+    cursor: pointer;
+	letter-spacing: 5px;
+    color: white;
+    font-size: 25px;
+    border-radius: 10px;
+    border: none;
+}
+
+.enter {
+    background: green;
+}
+
+.reset {
+    background: red;
+    margin-left: 540px;
+    position: relative;
+    top: -70px;
+}

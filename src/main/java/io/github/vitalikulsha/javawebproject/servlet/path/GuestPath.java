@@ -10,6 +10,7 @@ public enum GuestPath {
     ERROR_404_IMG("/img/404-error.png"),
     ERROR_500("/error-500"),
     ERROR_500_IMG("/img/500-error.png"),
+    IMG_BANNER("/img/library-banner.jpg"),
     LOCALE("/locale"),
     LOGIN("/login"),
     REGISTER("/register");
