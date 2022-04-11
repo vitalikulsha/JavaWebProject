@@ -48,7 +48,8 @@ public class LibraryServlet extends HttpServlet {
     }
 
     /**
-     * Executes a request based on the servlet path and type method (GET or POST) and forwards request or sends redirect.
+     * Executes a request based on the servlet path and type method (GET or POST)
+     * and forwards request or sends redirect.
      *
      * @param request  HTTP request
      * @param response HTTP response

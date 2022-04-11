@@ -29,6 +29,8 @@ public interface Service<T> {
     /**
      * Gets all entities with pagination.
      *
+     * @param page        page number
+     * @param itemsOnPage number of books per page
      * @return the resulting list of entities
      * @throws ServiceException thrown when DAO exception occurs
      */

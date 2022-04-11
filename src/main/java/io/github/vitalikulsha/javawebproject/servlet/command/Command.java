@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public interface Command {
     /**
      * Method is called by servlet when processing request.
+     * Gets an object of class CommandInfo
      *
      * @param request  servlet request
      * @param response servlet response

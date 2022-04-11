@@ -53,5 +53,12 @@ public interface UserDao extends Dao<User> {
      */
     int update(User user) throws DaoException;
 
+    /**
+     * Counts the number of users of a given role.
+     *
+     * @param role user role
+     * @return number of users found
+     * @throws DaoException thrown when DAO exception occurs while executing a query
+     */
     int countByRoleParam(Role role) throws DaoException;
 }

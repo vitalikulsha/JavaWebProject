@@ -78,9 +78,9 @@ public interface Dao<T> {
     int update(T t) throws DaoException;
 
     /**
-     * Counts the number of all books.
+     * Counts the number of all entries.
      *
-     * @return number of books found
+     * @return number of entries found
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
     int countAll() throws DaoException;

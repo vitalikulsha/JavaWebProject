@@ -13,17 +13,24 @@ import java.util.List;
  * {@link Service}
  */
 public interface UserService extends Service<UserDTO> {
-    List<UserDTO> getUsersByRole(Role role, int page, int itemsOnPage) throws ServiceException;
-
     /**
-     * Gets a list of users DTO by role.
+     * Gets a list of users DTO by role with pagination.
      *
-     * @param role user role
+     * @param role        user role
+     * @param page        page number
+     * @param itemsOnPage number of books per page
      * @return list of users DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<UserDTO> getUsersByRole(Role role) throws ServiceException;
+    List<UserDTO> getUsersByRole(Role role, int page, int itemsOnPage) throws ServiceException;
 
+    /**
+     * Counts the number of users of a given role.
+     *
+     * @param role user role
+     * @return number of users found
+     * @throws ServiceException thrown when DAO exception occurs
+     */
     int countByRoleParam(Role role) throws ServiceException;
 
     /**
