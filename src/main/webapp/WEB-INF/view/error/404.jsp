@@ -15,7 +15,7 @@
 </head>
 <body class="block">
 <p style="text-align: center">
-    <img src="${pageContext.request.contextPath}/img/404-error.png" alt="404" width="250px"/>
+    <img src="${pageContext.request.contextPath}/img/404-error.png" alt="404" width="400px"/>
 </p>
 <lt:err-msg error="404"  locale="${locale}"/>
 </body>

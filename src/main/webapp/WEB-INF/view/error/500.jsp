@@ -15,7 +15,7 @@
 </head>
 <body class="block">
 <p style="text-align: center">
-    <img src="${pageContext.request.contextPath}/img/500-error.png" alt="500" width="250px"/>
+    <img src="${pageContext.request.contextPath}/img/500-error.png" alt="500" width="400px"/>
 </p>
 <lt:err-msg error="500" locale="${locale}"/>
 </body>
