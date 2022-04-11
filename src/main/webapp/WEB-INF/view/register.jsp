@@ -17,12 +17,19 @@
     </style>
 </head>
 <body class="block">
-<h4 class="header">
-    <a href="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
-        | <fmt:message key="register.link-login"/> |
-    </a>
-    <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
-</h4>
+<div align="right">
+    <ul class="nav nav-link" >
+        <li>
+            <a href="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
+                | <fmt:message key="register.link-login"/> |
+            </a>
+        </li>
+        <li>
+            <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
+        </li>
+    </ul>
+</div>
+
 <h2><fmt:message key="register.header"/></h2>
 <form action="${pageContext.request.contextPath}${GuestPath.REGISTER.path}" method="post">
     <table>

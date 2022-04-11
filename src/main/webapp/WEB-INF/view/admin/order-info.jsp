@@ -12,49 +12,57 @@
 <head>
     <title><fmt:message key="admin.title-order"/></title>
     <style>
-        <%@include file='/WEB-INF/css/book-catalog-style.css' %>
+        <%@include file='/WEB-INF/css/user.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">
-        | <fmt:message key="admin.link-order-list"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
-        | <fmt:message key="admin.link-account"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
-        | <fmt:message key="admin.link-exit"/> |
-    </a>
-</h4>
+<div align="right">
+    <ul class="nav nav-link">
+        <li>
+            <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">
+                | <fmt:message key="admin.link-order-list"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+                | <fmt:message key="admin.link-account"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+                | <fmt:message key="admin.link-exit"/> |
+            </a>
+        </li>
+    </ul>
+</div>
 <c:set var="order" scope="request" value="${order}"/>
 <h2><fmt:message key="admin.header-order"/></h2>
-<table style="with: 900px; margin: auto;">
+<table style="with: 700px;">
     <tr>
-        <th><fmt:message key="order.id"/></th>
+        <th class="th-order"><fmt:message key="order.id"/></th>
         <td>${order.id}</td>
     </tr>
     <tr>
-        <th><fmt:message key="book.id"/></th>
+        <th class="th-order"><fmt:message key="book.id"/></th>
         <td>
             <a href="${pageContext.request.contextPath}${AdminPath.BOOK_INFO.path}?${RequestParameter.BOOK_ID}=${order.bookDto.id}">
                 ${order.bookDto.id} </a>
         </td>
     </tr>
     <tr>
-        <th><fmt:message key="admin.reader-id"/></th>
+        <th class="th-order"><fmt:message key="admin.reader-id"/></th>
         <td>
             <a href="${pageContext.request.contextPath}${AdminPath.READER_INFO.path}?${RequestParameter.READER_ID}=${order.userDto.id}">
                 ${order.userDto.id} </a>
         </td>
     </tr>
     <tr>
-        <th><fmt:message key="order.reserve"/></th>
+        <th class="th-order"><fmt:message key="order.reserve"/></th>
         <td>${order.reserveStatus.title}</td>
     </tr>
     <tr>
-        <th><fmt:message key="order.approval"/></th>
+        <th class="th-order"><fmt:message key="order.approval"/></th>
         <td>
             <c:choose>
                 <c:when test="${order.approved}">

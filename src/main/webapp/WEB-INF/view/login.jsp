@@ -39,12 +39,20 @@
         <input class="enter" type="submit" value="<fmt:message key="login.button-enter"/>">
     </form>
 </div>
-<h4 class="header">
-    <a href="${pageContext.request.contextPath}${GuestPath.REGISTER.path}">
-        | <fmt:message key="login.link-registration"/> |
-    </a>
-    <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
-</h4>
+
+<div align="right">
+    <ul class="nav" style="width: 150px; font-size: 16px;">
+        <li>
+            <a href="${pageContext.request.contextPath}${GuestPath.REGISTER.path}">
+                | <fmt:message key="login.link-registration"/> |
+            </a>
+        </li>
+        <li>
+            <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
+        </li>
+    </ul>
+</div>
+
 <c:if test="${not empty userFound && !userFound}">
     <h3 class="error"><fmt:message key="login.invalid"/><br><fmt:message key="login.try-again"/></h3>
 </c:if>

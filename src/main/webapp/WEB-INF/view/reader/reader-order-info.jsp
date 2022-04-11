@@ -10,32 +10,38 @@
 <head>
     <title><fmt:message key="reader.title-order-info"/></title>
     <style>
-        <%@include file='/WEB-INF/css/book-catalog-style.css' %>
+        <%@include file='/WEB-INF/css/user.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
-        | <fmt:message key="reader.link-account"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
-        | <fmt:message key="reader.link-exit"/> |
-    </a>
-</h4>
+<div align="right">
+    <ul class="nav nav-link">
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
+                | <fmt:message key="reader.link-account"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+                | <fmt:message key="reader.link-exit"/> |
+            </a>
+        </li>
+    </ul>
+</div>
 <c:set var="order" scope="request" value="${order}"/>
 <h2><fmt:message key="reader.header-order-info"/></h2>
-<table style="with: 900px; margin: auto;">
+<table  style="width: 700px;">
     <tr>
-        <th><fmt:message key="order.id"/></th>
+        <th class="th-order"><fmt:message key="order.id"/></th>
         <td>[${order.id}]</td>
     </tr>
     <tr>
-        <th><fmt:message key="book.title"/></th>
+        <th class="th-order"><fmt:message key="book.title"/></th>
         <td>[${order.bookDto.id}] - ${order.bookDto.title}</td>
     </tr>
     <tr>
-        <th><fmt:message key="book.authors"/></th>
+        <th class="th-order"><fmt:message key="book.authors"/></th>
         <td>
             <c:forEach var="author" items="${order.bookDto.authors}">
                 [${author.id}] - ${author.firstName} ${author.lastName}<br>
@@ -43,23 +49,23 @@
         </td>
     </tr>
     <tr>
-        <th><fmt:message key="book.publication-year"/></th>
+        <th class="th-order"><fmt:message key="book.publication-year"/></th>
         <td>${order.bookDto.publicationYear} г.</td>
     </tr>
     <tr>
-        <th><fmt:message key="book.number-pages"/></th>
+        <th class="th-order"><fmt:message key="book.number-pages"/></th>
         <td>${order.bookDto.numberPages} стр.</td>
     </tr>
     <tr>
-        <th><fmt:message key="book.category"/></th>
+        <th class="th-order"><fmt:message key="book.category"/></th>
         <td>[${order.bookDto.category.id}] - ${order.bookDto.category.name}</td>
     </tr>
     <tr>
-        <th><fmt:message key="order.reserve"/></th>
+        <th class="th-order"><fmt:message key="order.reserve"/></th>
         <td>${order.reserveStatus.title}</td>
     </tr>
     <tr>
-        <th><fmt:message key="order.approval"/></th>
+        <th class="th-order"><fmt:message key="order.approval"/></th>
         <td>
             <c:choose>
                 <c:when test="${order.approved}">

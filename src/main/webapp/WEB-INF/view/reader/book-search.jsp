@@ -11,20 +11,26 @@
 <head>
     <title><fmt:message key="reader.title-book-search"/></title>
     <style>
-        <%@include file='/WEB-INF/css/book-search-style.css' %>
+        <%@include file='/WEB-INF/css/book-search.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
 
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
-        | <fmt:message key="reader.link-account"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
-        | <fmt:message key="reader.link-exit"/> |
-    </a>
-</h4>
+<div align="right">
+    <ul class="nav nav-link">
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
+                | <fmt:message key="reader.link-account"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+                | <fmt:message key="reader.link-exit"/> |
+            </a>
+        </li>
+    </ul>
+</div>
 <h2><fmt:message key="reader.header-book-search"/></h2>
 <table>
     <form action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
@@ -34,7 +40,7 @@
                 <input class="entry-field" type="number" name="${RequestParameter.BOOK_ID}"
                        placeholder="<fmt:message key="reader.search-by-id-placeholder"/>" required>
             </td>
-            <td>
+            <td  style="with: 45%;">
                 <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>

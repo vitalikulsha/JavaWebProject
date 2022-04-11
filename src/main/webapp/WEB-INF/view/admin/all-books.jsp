@@ -11,38 +11,44 @@
 <head>
     <title><fmt:message key="admin.title-books"/></title>
     <style>
-          <%@include file='/WEB-INF/css/book-catalog-style.css' %>
+          <%@include file='/WEB-INF/css/user.css' %>
           <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
-        | <fmt:message key="admin.link-account"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
-        | <fmt:message key="admin.link-exit"/> |
-    </a>
-</h4>
+<div align="right">
+    <ul class="nav nav-link">
+        <li>
+            <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+                | <fmt:message key="admin.link-account"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+                | <fmt:message key="admin.link-exit"/> |
+            </a>
+        </li>
+    </ul>
+</div>
 <h2><fmt:message key="admin.header-books"/></h2>
 <c:if test="${empty catalog}">
     <h4 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h4>
 </c:if>
 <c:if test="${not empty catalog}">
-<table style="with: 900px; margin: auto;">
+<table style="width: 980px;">
     <thead>
     <tr>
-        <th><fmt:message key="book.id"/></th>
-        <th><fmt:message key="book.title"/></th>
-        <th><fmt:message key="book.authors"/></th>
-        <th><fmt:message key="book.category"/></th>
+        <th style="width: 10%;"><fmt:message key="book.id"/></th>
+        <th style="width: 35%;"><fmt:message key="book.title"/></th>
+        <th style="width: 20%;"><fmt:message key="book.authors"/></th>
+        <th style="width: 25%;"><fmt:message key="book.category"/></th>
         <th><fmt:message key="book.quantity"/></th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="book" items="${catalog}">
         <tr>
-            <td>
+            <td class="td-center">
                 <a href="${pageContext.request.contextPath}${AdminPath.BOOK_INFO.path}?${RequestParameter.BOOK_ID}=${book.id}">
                     ${book.id} </a>
             </td>
@@ -53,7 +59,7 @@
                 </c:forEach>
             </td>
             <td>${book.category.name}</td>
-            <td id="column">${book.quantity}</td>
+            <td class="td-center">${book.quantity}</td>
         </tr>
     </c:forEach>
     </tbody>

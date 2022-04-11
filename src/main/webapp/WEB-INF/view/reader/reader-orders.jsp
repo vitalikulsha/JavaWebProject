@@ -12,49 +12,57 @@
 <head>
     <title><fmt:message key="reader.title-order-list"/></title>
     <style>
-        <%@include file='/WEB-INF/css/reader-style.css' %>
+        <%@include file='/WEB-INF/css/user.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
 </head>
 <body class="block">
-<h4 style="text-align: right;">
-    <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
-        | <fmt:message key="reader.link-book-search"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
-        | <fmt:message key="reader.link-account"/> |
-    </a>
-    <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
-        | <fmt:message key="reader.link-exit"/> |
-    </a>
-</h4>
+<div align="right">
+    <ul class="nav nav-link">
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
+                | <fmt:message key="reader.link-book-search"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
+                | <fmt:message key="reader.link-account"/> |
+            </a>
+        </li>
+        <li>
+            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+                | <fmt:message key="reader.link-exit"/> |
+            </a>
+        </li>
+    </ul>
+</div>
 <h2><fmt:message key="reader.header-order-list"/></h2>
 <c:set var="user" scope="request" value="${user}"/>
 <c:if test="${empty userOrders}">
-    <h4 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h4>
+    <h3 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h3>
 </c:if>
 <c:if test="${not empty userOrders}">
-<table style="with: 900px; margin: auto;">
+<table style="width: 980px;">
     <thead>
     <tr>
-        <th><fmt:message key="order.id"/></th>
-        <th><fmt:message key="book.id"/></th>
-        <th><fmt:message key="book.title"/></th>
-        <th><fmt:message key="order.reserve"/></th>
+        <th style="width: 10%;"><fmt:message key="order.id"/></th>
+        <th style="width: 10%;"><fmt:message key="book.id"/></th>
+        <th style="width: 40%;"><fmt:message key="book.title"/></th>
+        <th style="width: 20%;"><fmt:message key="order.reserve"/></th>
         <th><fmt:message key="order.approval"/></th>
     </tr>
     </thead>
     <tbody>
     <c:forEach var="order" items="${userOrders}">
         <tr>
-            <td>
+            <td class="td-center">
                 <a href="${pageContext.request.contextPath}${UserPath.READER_ORDER_INFO.path}?${RequestParameter.ORDER_ID}=${order.id}">
                     ${order.id} </a>
             </td>
-            <td>${order.bookDto.id}</td>
+            <td style="text-align: center;">${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>
             <td>${order.reserveStatus.title}</td>
-            <td>
+            <td style="text-align: center;">
                 <c:choose>
                     <c:when test="${order.approved}">
                         <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
@@ -64,7 +72,7 @@
                                       method="post">
                                     <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
                                     <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.REFUND}">
-                                    <input type="submit" value="<fmt:message key="reader.button-return-book"/>">
+                                    <input class="button-approve return" type="submit" value="<fmt:message key="reader.button-return-book"/>">
                                 </form>
                             </c:if>
                         </c:if>
@@ -74,7 +82,7 @@
                         <form action="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}" method="post">
                             <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
                             <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
-                            <input type="submit" value="<fmt:message key="reader.button-cancel-order"/>">
+                            <input class="button-approve cancel" type="submit" value="<fmt:message key="reader.button-cancel-order"/>">
                         </form>
                     </c:otherwise>
                 </c:choose>

@@ -7,10 +7,10 @@
 
 <c:choose>
     <c:when test="${empty param.page}">
-        <h4><fmt:message key="pagination.page"/> 1 </h4>
+        <h4 style="text-align: center;"><fmt:message key="pagination.page"/> 1 </h4>
     </c:when>
     <c:otherwise>
-        <h4><fmt:message key="pagination.page"/> ${param.page} </h4>
+        <h4 style="text-align: center;"><fmt:message key="pagination.page"/> ${param.page} </h4>
     </c:otherwise>
 </c:choose>
 

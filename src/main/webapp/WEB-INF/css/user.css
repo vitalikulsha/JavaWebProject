@@ -1,0 +1,78 @@
+table {
+    border-collapse: collapse;
+    margin: auto;
+    font-size: 20px;
+}
+
+td, th {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+.th-user {
+    text-align: left;
+	width: 50%;
+}
+
+.th-order {
+    text-align: left;
+	width: 35%;
+}
+
+.td-center {
+    text-align: center;
+    font-size: 25px;
+}
+
+.button-approve {
+    margin-top: 10px;
+    width: 120px;
+    height: 30px;
+    cursor: pointer;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.return{
+    background: green;
+}
+
+.cancel {
+    background: red;
+}
+
+.button-reserve {
+    margin-top: 10px;
+    width: 200px;
+    height: 40px;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 1px solid black;
+    background: green;
+    margin-left: 600px;
+    position: relative;
+}
+
+.select {
+    font-size: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 200px;
+    height: 30px;
+}
+
+.title {
+    font-size: 30px;
+    text-align: center;
+    color: #8B00FF;
+}
