@@ -4,7 +4,6 @@ import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
-import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.author.entity.Author;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
@@ -12,7 +11,6 @@ import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import java.util.List;
 
 public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
-    private static final AuthorSqlQuery authorSqlQuery = SqlQueryFactory.instance().authorSqlQuery();
 
     public AuthorDaoImpl() {
         super(RowMapperFactory.instance().authorRowMapper(),
@@ -21,6 +19,8 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
 
     @Override
     public List<Author> findAuthorsByBookId(int bookId) throws DaoException {
-        return queryOperator.executeEntityListQuery(authorSqlQuery.FIND_BY_BOOK_ID, bookId);
+        String sqlQuery = "SELECT * FROM book_author b_a" +
+                " INNER JOIN author a ON b_a.author_id=a.author_id WHERE book_id=?";
+        return queryOperator.executeEntityListQuery(sqlQuery, bookId);
     }
 }

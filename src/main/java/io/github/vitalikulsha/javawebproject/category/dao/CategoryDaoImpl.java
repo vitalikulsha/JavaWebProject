@@ -4,7 +4,6 @@ import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
-import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.category.entity.Category;
 
