@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.javawebproject.user.service;
 
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.service.Service;
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
@@ -17,12 +18,11 @@ public interface UserService extends Service<UserDTO> {
      * Gets a list of users DTO by role with pagination.
      *
      * @param role        user role
-     * @param page        page number
-     * @param itemsOnPage number of books per page
+     * @param pagination  an object of the Pagination class with pagination parameters
      * @return list of users DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<UserDTO> getUsersByRole(Role role, int page, int itemsOnPage) throws ServiceException;
+    List<UserDTO> getUsersByRole(Role role, Pagination pagination) throws ServiceException;
 
     /**
      * Counts the number of users of a given role.

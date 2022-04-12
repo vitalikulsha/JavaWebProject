@@ -4,6 +4,7 @@ import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
@@ -28,8 +29,9 @@ public class AllReadersCommand implements Command {
         request.setAttribute(SessionAttribute.URL, url);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
+        Pagination pagination = new Pagination(pageNumber);
         try {
-            List<UserDTO> allReaders = userService.getUsersByRole(Role.READER, pageNumber, ConfigParameter.ITEMS_ON_PAGE);
+            List<UserDTO> allReaders = userService.getUsersByRole(Role.READER, pagination);
             List<Integer> pages = ConfigParameter.getPages(userService.countByRoleParam(Role.READER));
             request.setAttribute(SessionAttribute.ALL_READERS, allReaders);
             request.setAttribute(SessionAttribute.PAGES, pages);

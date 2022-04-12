@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.javawebproject.order.service;
 
 import io.github.vitalikulsha.javawebproject.order.dao.OrderDao;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverter;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverterFactory;
@@ -35,10 +36,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> getAll(int page, int itemsOnPage) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<OrderDTO> getAll(Pagination pagination) throws ServiceException {
         try {
-            return orderDao.findAll(firstIndex, itemsOnPage)
+            return orderDao.findAll(pagination.getFromIndex(), pagination.getItemsOnPage())
                     .stream()
                     .map(orderDTOConverter::toDto)
                     .collect(Collectors.toList());

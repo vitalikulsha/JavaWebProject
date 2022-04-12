@@ -2,6 +2,7 @@ package io.github.vitalikulsha.javawebproject.book.service;
 
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 import io.github.vitalikulsha.javawebproject.util.service.Service;
 
@@ -17,35 +18,32 @@ public interface BookService extends Service<BookDTO> {
     /**
      * Gets a paginated list of DTO books by title.
      *
-     * @param page        page number
-     * @param itemsOnPage number of books per page
-     * @param title       book title
+     * @param pagination an object of the Pagination class with pagination parameters
+     * @param title      book title
      * @return list of book DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<BookDTO> getBooksByTitle(int page, int itemsOnPage, String title) throws ServiceException;
+    List<BookDTO> getBooksByTitle(Pagination pagination, String title) throws ServiceException;
 
     /**
      * Gets a paginated list of DTO books by author.
      *
-     * @param page        page number
-     * @param itemsOnPage number of books per page
+     * @param pagination an object of the Pagination class with pagination parameters
      * @param authorName  author's last name
      * @return list of book DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<BookDTO> getBooksByAuthorName(int page, int itemsOnPage, String authorName) throws ServiceException;
+    List<BookDTO> getBooksByAuthorName(Pagination pagination, String authorName) throws ServiceException;
 
     /**
      * Gets a paginated list of DTO books by category.
      *
-     * @param page         page number
-     * @param itemsOnPage  number of books per page
+     * @param pagination an object of the Pagination class with pagination parameters
      * @param categoryName name of category
      * @return list of book DTO
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<BookDTO> getBooksByCategoryName(int page, int itemsOnPage, String categoryName) throws ServiceException;
+    List<BookDTO> getBooksByCategoryName(Pagination pagination, String categoryName) throws ServiceException;
 
     /**
      * Counts the number of books according to the given parameters.

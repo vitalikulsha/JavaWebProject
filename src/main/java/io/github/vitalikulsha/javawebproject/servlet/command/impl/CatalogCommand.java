@@ -4,6 +4,7 @@ import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.constant.SessionAttribute;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
@@ -66,6 +67,7 @@ public class CatalogCommand implements Command {
         params.remove(RequestParameter.PAGE);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
+        Pagination pagination = new Pagination(pageNumber);
         List<Integer> pages = new ArrayList<>();
         List<BookDTO> books = new ArrayList<>();
         if (!params.isEmpty()) {
@@ -76,21 +78,21 @@ public class CatalogCommand implements Command {
                 switch (param) {
                     case (RequestParameter.BOOK_TITLE):
                         pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.TITLE, paramValue));
-                        books = bookService.getBooksByTitle(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        books = bookService.getBooksByTitle(pagination, paramValue);
                         break;
                     case (RequestParameter.AUTHOR_NAME):
                         pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.LASTNAME, paramValue));
-                        books = bookService.getBooksByAuthorName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        books = bookService.getBooksByAuthorName(pagination, paramValue);
                         break;
                     case (RequestParameter.CATEGORY_NAME):
                         pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.NAME, paramValue));
-                        books = bookService.getBooksByCategoryName(pageNumber, ConfigParameter.ITEMS_ON_PAGE, paramValue);
+                        books = bookService.getBooksByCategoryName(pagination, paramValue);
                         break;
                 }
             }
         } else {
             pages = ConfigParameter.getPages(bookService.countAll());
-            books = bookService.getAll(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
+            books = bookService.getAll(pagination);
         }
         request.setAttribute(SessionAttribute.PAGES, pages);
         return books;

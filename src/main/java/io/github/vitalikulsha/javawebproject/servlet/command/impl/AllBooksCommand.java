@@ -4,6 +4,7 @@ import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
@@ -27,8 +28,9 @@ public class AllBooksCommand implements Command {
         request.setAttribute(SessionAttribute.URL, url);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
+        Pagination pagination = new Pagination(pageNumber);
         try {
-            List<BookDTO> catalog = bookService.getAll(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
+            List<BookDTO> catalog = bookService.getAll(pagination);
             List<Integer> pages = ConfigParameter.getPages(bookService.countAll());
             request.setAttribute(SessionAttribute.CATALOG, catalog);
             request.setAttribute(SessionAttribute.PAGES, pages);

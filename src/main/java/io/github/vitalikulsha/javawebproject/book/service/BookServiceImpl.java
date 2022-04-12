@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.javawebproject.book.service;
 
 import io.github.vitalikulsha.javawebproject.book.dao.BookDao;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
@@ -35,10 +36,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getAll(int page, int itemsOnPage) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<BookDTO> getAll(Pagination pagination) throws ServiceException {
         try {
-            return bookDao.findAll(firstIndex, itemsOnPage)
+            return bookDao.findAll(pagination.getFromIndex(), pagination.getItemsOnPage())
                     .stream()
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
@@ -49,10 +49,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getBooksByTitle(int page, int itemsOnPage, String title) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<BookDTO> getBooksByTitle(Pagination pagination, String title) throws ServiceException {
         try {
-            return bookDao.findByBookTitle(firstIndex, itemsOnPage, title)
+            return bookDao.findByBookTitle(pagination.getFromIndex(), pagination.getItemsOnPage(), title)
                     .stream()
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
@@ -64,10 +63,9 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public List<BookDTO> getBooksByAuthorName(int page, int itemsOnPage, String authorName) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<BookDTO> getBooksByAuthorName(Pagination pagination, String authorName) throws ServiceException {
         try {
-            return bookDao.findByAuthorName(firstIndex, itemsOnPage, authorName)
+            return bookDao.findByAuthorName(pagination.getFromIndex(), pagination.getItemsOnPage(), authorName)
                     .stream()
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
@@ -78,10 +76,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<BookDTO> getBooksByCategoryName(int page, int itemsOnPage, String categoryName) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<BookDTO> getBooksByCategoryName(Pagination pagination, String categoryName) throws ServiceException {
         try {
-            return bookDao.findByCategoryName(firstIndex, itemsOnPage, categoryName)
+            return bookDao.findByCategoryName(pagination.getFromIndex(), pagination.getItemsOnPage(), categoryName)
                     .stream()
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());

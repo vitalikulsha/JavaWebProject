@@ -4,6 +4,7 @@ import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.user.service.UserService;
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 
 import java.util.List;
 
@@ -29,12 +30,11 @@ public interface Service<T> {
     /**
      * Gets all entities with pagination.
      *
-     * @param page        page number
-     * @param itemsOnPage number of books per page
+     * @param pagination an object of the Pagination class with pagination parameters
      * @return the resulting list of entities
      * @throws ServiceException thrown when DAO exception occurs
      */
-    List<T> getAll(int page, int itemsOnPage) throws ServiceException;
+    List<T> getAll(Pagination pagination) throws ServiceException;
 
     /**
      * Permanently deleting an entity.

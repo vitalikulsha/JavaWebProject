@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.javawebproject.user.service;
 
+import io.github.vitalikulsha.javawebproject.util.Pagination;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.user.dao.UserDao;
 import io.github.vitalikulsha.javawebproject.util.dtoconverter.DTOConverter;
@@ -41,10 +42,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAll(int page, int itemsOnPage) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<UserDTO> getAll(Pagination pagination) throws ServiceException {
         try {
-            return userDao.findAll(firstIndex, itemsOnPage)
+            return userDao.findAll(pagination.getFromIndex(), pagination.getItemsOnPage())
                     .stream()
                     .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
@@ -55,28 +55,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getUsersByRole(Role role, int page, int itemsOnPage) throws ServiceException {
-        int firstIndex = (page - 1) * itemsOnPage;
+    public List<UserDTO> getUsersByRole(Role role, Pagination pagination) throws ServiceException {
         try {
-            return userDao.findByRole(firstIndex, itemsOnPage, role)
+            return userDao.findByRole(pagination.getFromIndex(), pagination.getItemsOnPage(), role)
                     .stream()
                     .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
-            log.error("Unable to get users by role.");
-            throw new ServiceException("Exception when getting users from DB by role.", e);
-        }
-    }
-
-    @Override
-    public List<UserDTO> getUsersByRole(Role role) throws ServiceException {
-        try {
-            return userDao.findByRole(role)
-                    .stream()
-                    .map(userDTOConverter::toDto)
-                    .collect(Collectors.toList());
-        } catch (DaoException e) {
-            log.error("Unable to get users by role.");
+            log.error(String.format("Unable to get users by role: %s", role));
             throw new ServiceException("Exception when getting users from DB by role.", e);
         }
     }
