@@ -17,6 +17,9 @@ import java.util.List;
  */
 @Slf4j
 public class QueryOperator<T> {
+    private static final String ERROR_CONNECT_DB = "Unable to connect to DB.";
+    private static final String ERROR_SQL_QUERY = "Unable to execute SQL query: %s";
+
     private final ConnectionSource connectionSource = ConnectionSource.instance();
     private final RowMapper<T> mapper;
 
@@ -44,9 +47,10 @@ public class QueryOperator<T> {
                 result.add(entity);
             }
         } catch (SQLException e) {
-            log.error("Unable to execute select query.", e);
+            log.error(String.format(ERROR_SQL_QUERY, sqlQuery));
             throw new DaoException("SQLException while executing a select query.", e);
         } catch (ConnectionException e) {
+            log.error(ERROR_CONNECT_DB);
             throw new DaoException("Unable to get connection", e);
         }
         return result;
@@ -68,9 +72,10 @@ public class QueryOperator<T> {
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next() ? mapper.getEntity(resultSet) : null;
         } catch (SQLException e) {
-            log.error("Unable to execute select query.", e);
+            log.error(String.format(ERROR_SQL_QUERY, sqlQuery));
             throw new DaoException("SQLException while executing a select query.", e);
         } catch (ConnectionException e) {
+            log.error(ERROR_CONNECT_DB);
             throw new DaoException("Unable to get connection", e);
         }
     }
@@ -90,9 +95,10 @@ public class QueryOperator<T> {
             setStatementParam(preparedStatement, params);
             return preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            log.error("Unable to execute update query.", e);
+            log.error(String.format(ERROR_SQL_QUERY, sqlQuery));
             throw new DaoException("SQLException while executing an update query.", e);
         } catch (ConnectionException e) {
+            log.error(ERROR_CONNECT_DB);
             throw new DaoException("Unable to get connection", e);
         }
     }
@@ -113,9 +119,10 @@ public class QueryOperator<T> {
             ResultSet resultSet = preparedStatement.executeQuery();
             return resultSet.next() ? resultSet.getInt(1) : 0;
         } catch (SQLException e) {
-            log.error("Unable to execute select query.", e);
+            log.error(String.format(ERROR_SQL_QUERY, sqlQuery));
             throw new DaoException("SQLException while executing a select query.", e);
         } catch (ConnectionException e) {
+            log.error(ERROR_CONNECT_DB);
             throw new DaoException("Unable to get connection", e);
         }
     }

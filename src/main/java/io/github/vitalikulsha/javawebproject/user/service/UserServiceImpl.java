@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDTOConverter.toDto(userDao.findById(id));
         } catch (DaoException e) {
-            log.error("Unable to get user by id.");
+            log.error(String.format("Unable to get user by id: #%d.", id));
             throw new ServiceException("Exception when getting user from DB by id.", e);
         }
     }
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
                     .map(userDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
-            log.error(String.format("Unable to get users by role: %s", role));
+            log.error(String.format("Unable to get users by role: %s.", role));
             throw new ServiceException("Exception when getting users from DB by role.", e);
         }
     }
@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
         try {
             userDao.deleteById(id);
         } catch (DaoException e) {
-            log.error("Unable to delete user by id.");
+            log.error(String.format("Unable to delete user by id: #%d.", id));
             throw new ServiceException("Exception when deleting a user", e);
         }
     }
@@ -82,6 +82,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.countByRoleParam(role);
         } catch (DaoException e) {
+            log.error(String.format("Unable to count the quantity of books by role: #%s.", role));
             throw new ServiceException("Exception when counting records", e);
         }
     }
@@ -91,6 +92,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.countAll();
         } catch (DaoException e) {
+            log.error("Unable to count the quantity of all users.");
             throw new ServiceException("Exception when counting records", e);
         }
     }
@@ -104,6 +106,7 @@ public class UserServiceImpl implements UserService {
             } else return user.getLogin().equals(login)
                     && user.getPassword().equals(DigestUtils.sha256Hex(password));
         } catch (DaoException e) {
+            log.error(String.format("Unable to check the existence of the user: login - %s; password - %s.", login, password));
             throw new ServiceException("Exception when comparing user by login and password.", e);
         }
     }
@@ -113,7 +116,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDTOConverter.toDto(userDao.findByLogin(login));
         } catch (DaoException e) {
-            log.error("Unable to get user by login.");
+            log.error(String.format("Unable to get user by login: %s.", login));
             throw new ServiceException("Exception when getting user from DB by login.", e);
         }
     }
@@ -123,7 +126,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDTOConverter.toDto(userDao.findByEmail(email));
         } catch (DaoException e) {
-            log.error("Unable to get user by email.");
+            log.error(String.format("Unable to get user by email: %s.", email));
             throw new ServiceException("Exception when getting user from DB by email.", e);
         }
     }
@@ -145,7 +148,7 @@ public class UserServiceImpl implements UserService {
         try {
             return userDao.save(user) == 1;
         } catch (DaoException e) {
-            log.error("Unable to save user.");
+            log.error(String.format("Unable to save user: %s.", user));
             throw new ServiceException("Exception when creating new user.", e);
         }
     }
@@ -160,12 +163,12 @@ public class UserServiceImpl implements UserService {
             user.setPhoneNumber(phoneNumber);
             user.setEmail(email);
             if (!userValidator.validate(user)) {
-                log.error("User is invalid.");
+                log.error(String.format("User is invalid: %s", user));
                 return false;
             }
             return userDao.update(user) == 1;
         } catch (DaoException e) {
-            log.error("Unable to edit user.");
+            log.error(String.format("Unable to edit user: id #%d", userId));
             throw new ServiceException("Exception when updating user.", e);
         }
     }

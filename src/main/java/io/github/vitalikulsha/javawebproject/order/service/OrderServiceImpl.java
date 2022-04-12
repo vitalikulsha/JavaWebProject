@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDTOConverter.toDto(orderDao.findById(id));
         } catch (DaoException e) {
-            log.error("Unable to get order by id.");
+            log.error(String.format("Unable to get order by id: #%d.", id));
             throw new ServiceException("Exception when getting order from DB by id", e);
         }
     }
@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
                     .map(orderDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
-            log.error("Unable to get orders by user id.");
+            log.error(String.format("Unable to get orders by user id: #%d.", userId));
             throw new ServiceException("Exception when getting orders from DB by user id", e);
         }
     }
@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderDao.save(order);
         } catch (DaoException e) {
-            log.error("Unable to save order.");
+            log.error(String.format("Unable to save order: %s.", order));
             throw new ServiceException("Exception when creating a new order", e);
         }
     }
@@ -77,7 +77,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             orderDao.deleteById(orderId);
         } catch (DaoException e) {
-            log.error("Unable to delete order by id.");
+            log.error(String.format("Unable to delete order by id: #%d.", orderId));
             throw new ServiceException("Exception when deleting a order", e);
         }
     }
@@ -89,7 +89,7 @@ public class OrderServiceImpl implements OrderService {
             order.setApproved(approved);
             orderDao.update(order);
         } catch (DaoException e) {
-            log.error("Unable to update order approval status.");
+            log.error(String.format("Unable to update order approval status %s, order id #%d.", approved, orderId));
             throw new ServiceException("Exception when updating order approval status", e);
         }
     }
@@ -101,7 +101,7 @@ public class OrderServiceImpl implements OrderService {
             order.setReserveStatus(reserveStatus);
             orderDao.update(order);
         } catch (DaoException e) {
-            log.error("Unable to update order reserve status.");
+            log.error(String.format("Unable to update order reserve status %s, order id #%d.", reserveStatus, orderId));
             throw new ServiceException("Exception when updating order reserve status", e);
         }
     }
@@ -111,6 +111,7 @@ public class OrderServiceImpl implements OrderService {
         try {
             return orderDao.countAll();
         } catch (DaoException e) {
+            log.error("Unable to count the quantity of all orders.");
             throw new ServiceException("Exception when counting records", e);
         }
     }

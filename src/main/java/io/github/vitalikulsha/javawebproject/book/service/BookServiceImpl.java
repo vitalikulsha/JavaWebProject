@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
         try {
             return bookDTOConverter.toDto(bookDao.findById(id));
         } catch (DaoException e) {
-            log.error("Unable to get book by id.");
+            log.error(String.format("Unable to get book by id: #%d", id));
             throw new ServiceException("Exception when getting book from DB by id", e);
         }
     }
@@ -56,7 +56,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
-            log.error("Unable to get books by title.");
+            log.error(String.format("Unable to get books by title: %s", title));
             throw new ServiceException("Exception when getting books from DB by title", e);
         }
     }
@@ -70,7 +70,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
-            log.error("Unable to get books by author name.");
+            log.error(String.format("Unable to get books by author name: %s", authorName));
             throw new ServiceException("Exception when getting books from DB by author name", e);
         }
     }
@@ -83,7 +83,7 @@ public class BookServiceImpl implements BookService {
                     .map(bookDTOConverter::toDto)
                     .collect(Collectors.toList());
         } catch (DaoException e) {
-            log.error("Unable to get books by category name.");
+            log.error(String.format("Unable to get books by category name: %s", categoryName));
             throw new ServiceException("Exception when getting books from DB by category name", e);
         }
     }
@@ -93,7 +93,7 @@ public class BookServiceImpl implements BookService {
         try {
             bookDao.deleteById(id);
         } catch (DaoException e) {
-            log.error("Unable to delete book by id.");
+            log.error(String.format("Unable to delete book by id: #%d", id));
             throw new ServiceException("Exception when deleting a book", e);
         }
     }
@@ -103,6 +103,7 @@ public class BookServiceImpl implements BookService {
         try {
             return bookDao.countBySearchParam(column, searchParam);
         } catch (DaoException e) {
+            log.error(String.format("Unable to count the quantity of books by search parameter: #%s", searchParam));
             throw new ServiceException("Exception when counting records", e);
         }
     }
@@ -112,6 +113,7 @@ public class BookServiceImpl implements BookService {
         try {
             return bookDao.countAll();
         } catch (DaoException e) {
+            log.error("Unable to count the quantity of all books.");
             throw new ServiceException("Exception when counting records", e);
         }
     }
@@ -128,6 +130,7 @@ public class BookServiceImpl implements BookService {
             book.setQuantity(--quantityBooks);
             bookDao.update(book);
         } catch (DaoException e) {
+            log.error(String.format("Unable to decrement the quantity of books with id #%d", bookId));
             throw new ServiceException("Exception when removing one book", e);
         }
     }
@@ -140,6 +143,7 @@ public class BookServiceImpl implements BookService {
             book.setQuantity(++quantityBooks);
             bookDao.update(book);
         } catch (DaoException e) {
+            log.error(String.format("Unable to increment the quantity of books with id #%d", bookId));
             throw new ServiceException("Exception when adding one book", e);
         }
     }
