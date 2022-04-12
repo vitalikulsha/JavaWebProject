@@ -1,5 +1,8 @@
 package io.github.vitalikulsha.javawebproject.order.dao;
 
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
@@ -13,8 +16,7 @@ public class OrderDaoImpl extends AbstractDao<Order> implements OrderDao {
 
     public OrderDaoImpl() {
         super(RowMapperFactory.instance().orderRowMapper(),
-                orderSqlQuery.FIND_ALL, orderSqlQuery.FIND_ALL_PAGE, orderSqlQuery.FIND_BY_ID,
-                orderSqlQuery.DELETE_BY_ID, orderSqlQuery.COUNT_ALL);
+                new CommonSqlQuery(Table.ORDER_BOOK, Column.ORDER_ID));
     }
 
     @Override

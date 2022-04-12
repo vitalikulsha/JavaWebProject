@@ -1,16 +1,17 @@
 package io.github.vitalikulsha.javawebproject.category.dao;
 
 import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.category.entity.Category;
 
 public class CategoryDaoImpl extends AbstractDao<Category> implements CategoryDao {
-    private static final CategorySqlQuery categorySqlQuery = SqlQueryFactory.instance().categorySqlQuery();
 
     public CategoryDaoImpl() {
         super(RowMapperFactory.instance().categoryRowMapper(),
-                categorySqlQuery.FIND_ALL, categorySqlQuery.FIND_ALL_PAGE, categorySqlQuery.FIND_BY_ID,
-                categorySqlQuery.DELETE_BY_ID, categorySqlQuery.COUNT_ALL);
+                new CommonSqlQuery(Table.CATEGORY, Column.CATEGORY_ID));
     }
 }

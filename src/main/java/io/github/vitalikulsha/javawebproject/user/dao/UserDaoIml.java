@@ -1,6 +1,9 @@
 package io.github.vitalikulsha.javawebproject.user.dao;
 
 import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
@@ -14,8 +17,7 @@ public class UserDaoIml extends AbstractDao<User> implements UserDao {
 
     public UserDaoIml() {
         super(RowMapperFactory.instance().userRowMapper(),
-                userSqlQuery.FIND_ALL, userSqlQuery.FIND_ALL_PAGE, userSqlQuery.FIND_BY_ID,
-                userSqlQuery.DELETE_BY_ID, userSqlQuery.COUNT_ALL);
+                new CommonSqlQuery(Table.USER, Column.USER_ID));
     }
 
     @Override

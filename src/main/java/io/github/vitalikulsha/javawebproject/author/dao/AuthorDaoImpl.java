@@ -1,6 +1,9 @@
 package io.github.vitalikulsha.javawebproject.author.dao;
 
 import io.github.vitalikulsha.javawebproject.util.dao.AbstractDao;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.SqlQueryFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapperFactory;
 import io.github.vitalikulsha.javawebproject.author.entity.Author;
@@ -13,8 +16,7 @@ public class AuthorDaoImpl extends AbstractDao<Author> implements AuthorDao {
 
     public AuthorDaoImpl() {
         super(RowMapperFactory.instance().authorRowMapper(),
-                authorSqlQuery.FIND_ALL, authorSqlQuery.FIND_ALL_PAGE, authorSqlQuery.FIND_BY_ID,
-                authorSqlQuery.DELETE_BY_ID, authorSqlQuery.COUNT_ALL);
+                new CommonSqlQuery(Table.AUTHOR, Column.AUTHOR_ID));
     }
 
     @Override
