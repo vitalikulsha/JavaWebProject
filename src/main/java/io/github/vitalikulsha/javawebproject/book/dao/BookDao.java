@@ -23,7 +23,7 @@ public interface BookDao extends Dao<Book> {
      * @return found list of book
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<Book> findByBookTitle(int firstIndex, int itemsOnPage, String title) throws DaoException;
+    List<Book> findByBookTitle(int fromIndex, int itemsOnPage, String title) throws DaoException;
 
     /**
      * Finds a book by author with pagination.
@@ -32,7 +32,7 @@ public interface BookDao extends Dao<Book> {
      * @return found list of book
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<Book> findByAuthorName(int firstIndex, int itemsOnPage, String name) throws DaoException;
+    List<Book> findByAuthorName(int fromIndex, int itemsOnPage, String name) throws DaoException;
 
     /**
      * Finds a book by category with pagination.
@@ -41,7 +41,7 @@ public interface BookDao extends Dao<Book> {
      * @return found list of book
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<Book> findByCategoryName(int firstIndex, int itemsOnPage, String name) throws DaoException;
+    List<Book> findByCategoryName(int fromIndex, int itemsOnPage, String name) throws DaoException;
 
     /**
      * Counts the number of books according to the given parameters.

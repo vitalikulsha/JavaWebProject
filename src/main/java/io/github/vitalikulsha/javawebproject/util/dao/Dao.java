@@ -43,12 +43,12 @@ public interface Dao<T> {
     /**
      * Finds all entities with pagination.
      *
-     * @param firstIndex  start index for pagination
+     * @param fromIndex  start index for pagination
      * @param itemsOnPage number of items per page
      * @return found list of entities
      * @throws DaoException thrown when DAO exception occurs while executing a query
      */
-    List<T> findAll(int firstIndex, int itemsOnPage) throws DaoException;
+    List<T> findAll(int fromIndex, int itemsOnPage) throws DaoException;
 
     /**
      * Saves an entity to the database.

@@ -42,17 +42,6 @@ public class UserDaoImlTest {
     }
 
     @Test
-    public void findByRole() throws DaoException {
-        UserDao userDao = DaoFactory.instance().userDao();
-        List<User> expected = getAllUsers().stream()
-                .filter(u -> u.getRole() == Role.ADMIN)
-                .collect(Collectors.toList());
-        assertEquals(expected, userDao.findByRole(Role.ADMIN));
-        assertNotEquals(expected, userDao.findByRole(Role.READER));
-        assertTrue(userDao.findByRole(Role.GUEST).isEmpty());
-    }
-
-    @Test
     public void updateAndSave() throws DaoException {
         UserDao userDao = DaoFactory.instance().userDao();
         User saveUser = new User(5, "Test", "test", "Test", "Test",

@@ -70,7 +70,7 @@
                     <c:if test="${order.reserveStatus eq 'REFUND'}">
                         <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                             <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
-                            <input type="submit" value="<fmt:message key="admin.order-button-close"/>">
+                            <input class="button-approve cancel" type="submit" value="<fmt:message key="admin.order-button-close"/>">
                         </form>
                     </c:if>
                 </c:when>
@@ -78,11 +78,11 @@
                     <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                         <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.APPROVE}">
-                        <input type="submit" value="<fmt:message key="admin.order-button-approve"/>">
+                        <input class="button-approve return" type="submit" value="<fmt:message key="admin.order-button-approve"/>">
                     </form>
                     <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                         <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
-                        <input type="submit" value="<fmt:message key="admin.order-button-cancel"/>">
+                        <input class="button-approve cancel" type="submit" value="<fmt:message key="admin.order-button-cancel"/>">
                     </form>
                 </c:otherwise>
             </c:choose>

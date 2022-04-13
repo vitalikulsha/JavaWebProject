@@ -4,7 +4,7 @@ import io.github.vitalikulsha.javawebproject.author.dao.AuthorDao;
 import io.github.vitalikulsha.javawebproject.book.dao.BookDao;
 import io.github.vitalikulsha.javawebproject.category.dao.CategoryDao;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.QueryOperator;
-import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.sqlquery.CommonSqlQuery;
+import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.CommonSqlQuery;
 import io.github.vitalikulsha.javawebproject.util.dao.rowmapper.RowMapper;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import io.github.vitalikulsha.javawebproject.order.dao.OrderDao;
@@ -35,17 +35,17 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public T findById(int id) throws DaoException {
-        return queryOperator.executeSingleEntityQuery(commonSqlQuery.SQL_FIND_BY_ID, id);
+        return queryOperator.executeSingleEntityQuery(commonSqlQuery.SQL_SELECT_BY_ID, id);
     }
 
     @Override
     public List<T> findAll() throws DaoException {
-        return queryOperator.executeEntityListQuery(commonSqlQuery.SQL_FIND_ALL);
+        return queryOperator.executeEntityListQuery(commonSqlQuery.SQL_SELECT_ALL);
     }
 
     @Override
-    public List<T> findAll(int firstIndex, int itemsOnPage) throws DaoException{
-        return queryOperator.executeEntityListQuery(commonSqlQuery.SQL_FIND_ALL_PAGE, firstIndex, itemsOnPage);
+    public List<T> findAll(int fromIndex, int itemsOnPage) throws DaoException{
+        return queryOperator.executeEntityListQuery(commonSqlQuery.SQL_SELECT_ALL_PAGE, fromIndex, itemsOnPage);
     }
 
     @Override
@@ -55,7 +55,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
 
     @Override
     public int countAll() throws DaoException {
-        return queryOperator.executeCountQuery(commonSqlQuery.SQL_COUNT_ALL);
+        return queryOperator.executeCountQuery(commonSqlQuery.SQL_SELECT_COUNT_ALL);
     }
 
     @Override
