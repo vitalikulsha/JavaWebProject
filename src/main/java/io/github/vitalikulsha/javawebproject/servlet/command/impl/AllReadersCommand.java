@@ -1,5 +1,6 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
+import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.user.entity.UserDTO;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
@@ -28,7 +29,7 @@ public class AllReadersCommand implements Command {
         request.setAttribute(SessionAttribute.URL, url);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
-        Pagination pagination = new Pagination(pageNumber);
+        Pagination pagination = new Pagination(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
         try {
             List<UserDTO> allReaders = userService.getUsersByRole(Role.READER, pagination);
             List<Integer> pages = pagination.getPages(userService.countByRoleParam(Role.READER));

@@ -1,6 +1,7 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
+import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.util.Pagination;
@@ -66,7 +67,7 @@ public class CatalogCommand implements Command {
         params.remove(RequestParameter.PAGE);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
-        Pagination pagination = new Pagination(pageNumber);
+        Pagination pagination = new Pagination(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
         List<Integer> pages = new ArrayList<>();
         List<BookDTO> books = new ArrayList<>();
         if (!params.isEmpty()) {
