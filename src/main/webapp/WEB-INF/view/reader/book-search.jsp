@@ -15,7 +15,7 @@
         <%@include file='/WEB-INF/css/style.css' %>
     </style>
     <script type="text/javascript" language="javascript">
-        <%@include file='/WEB-INF/script/submit-disabled.js' %>
+        <%@include file='/WEB-INF/script/book-search-form.js' %>
     </script>
 </head>
 <body class="block">
@@ -35,56 +35,68 @@
 </div>
 <h2><fmt:message key="reader.header-book-search"/></h2>
 <table>
-    <form name="form" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
+    <form name="formBookId" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-id"/></th>
             <td>
-                <input id="bookId" type="number" name="${RequestParameter.BOOK_ID}" onKeyup="checkSearchParam(this)"
+                <input id="bookId" type="number" name="${RequestParameter.BOOK_ID}"
+                       onchange="checkSearchParam('bookId', 'submitBookId');"
                        placeholder="<fmt:message key="reader.search-by-id-placeholder"/>" required>
             </td>
             <td  style="with: 45%;">
-                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submitBookId" class="submit" type="submit"
+                       onClick="this.form.submit(); this.disabled=true;"
+                       value="<fmt:message key="reader.button-search"/>" disabled >
             </td>
         </tr>
     </form>
 
-    <form name="form" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
+    <form name="formBookTitle" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-title"/></th>
             <td>
-                <input id="bookTitle" type="text" name="${RequestParameter.BOOK_TITLE}" onKeyup="checkform()"
+                <input id="bookTitle" type="text" name="${RequestParameter.BOOK_TITLE}"
+                       onchange="checkSearchParam('bookTitle', 'submitBookTitle');"
                        placeholder="<fmt:message key="reader.search-by-title-placeholder"/>" required>
             </td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submitBookTitle" class="submit" type="submit"
+                       onClick="this.form.submit(); this.disabled=true;"
+                       value="<fmt:message key="reader.button-search"/>" disabled >
             </td>
         </tr>
     </form>
 
-    <form name="form" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
+    <form name="formAuthorName" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-authors"/></th>
-            <td><input id="authorName" type="text" name="${RequestParameter.AUTHOR_NAME}" onKeyup="checkform()"
+            <td><input id="authorName" type="text" name="${RequestParameter.AUTHOR_NAME}"
+                       onchange="checkSearchParam('authorName', 'submitAuthorName');"
                        placeholder="<fmt:message key="reader.search-by-authors-placeholder"/>" required>
             </td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submitAuthorName" class="submit" type="submit"
+                       onClick="this.form.submit(); this.disabled=true;"
+                       value="<fmt:message key="reader.button-search"/>" disabled >
             </td>
         </tr>
     </form>
 
-    <form name="form" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
+    <form name="formCategoryName" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-category"/></th>
             <td>
-                <input id="categoryName" type="text" name="${RequestParameter.CATEGORY_NAME}" onKeyup="checkform()"
+                <input id="categoryName" type="text" name="${RequestParameter.CATEGORY_NAME}"
+                       onchange="checkSearchParam('categoryName', 'submitCategoryName');"
                        placeholder="<fmt:message key="reader.search-by-category-placeholder"/>" required>
             </td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input  id="submitCategoryName" class="submit" type="submit"
+                        onClick="this.form.submit(); this.disabled=true;"
+                        value="<fmt:message key="reader.button-search"/>" disabled>
             </td>
         </tr>
     </form>
@@ -95,7 +107,9 @@
             <td></td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input class="submit" type="submit" value="<fmt:message key="reader.button-get"/>">
+                <input class="submit" type="submit"
+                       onClick="this.form.submit(); this.disabled=true;"
+                       value="<fmt:message key="reader.button-get"/>">
             </td>
         </tr>
     </form>

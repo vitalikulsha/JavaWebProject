@@ -82,7 +82,19 @@
                     ${order.id} </a>
             </td>
             <td>${order.bookDto.title}</td>
-            <td style="text-align: center;">${order.reserveStatus.title}</td>
+            <td style="text-align: center;">
+                <c:choose>
+                    <c:when test="${order.reserveStatus eq 'REFUND'}">
+                        <fmt:message key="order.refund"/>
+                    </c:when>
+                    <c:when test="${order.reserveStatus eq 'LOANED'}">
+                        <fmt:message key="order.loaned"/>
+                    </c:when>
+                    <c:when test="${order.reserveStatus eq 'READING_ROOM'}">
+                        <fmt:message key="order.reading-room"/>
+                    </c:when>
+                </c:choose>
+            </td>
             <td style="text-align: center;">
                 <c:choose>
                     <c:when test="${order.approved}">

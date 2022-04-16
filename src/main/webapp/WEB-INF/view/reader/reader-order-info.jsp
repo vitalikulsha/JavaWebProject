@@ -62,7 +62,19 @@
     </tr>
     <tr>
         <th class="th-order"><fmt:message key="order.reserve"/></th>
-        <td>${order.reserveStatus.title}</td>
+        <td>
+            <c:choose>
+                <c:when test="${order.reserveStatus eq 'REFUND'}">
+                    <fmt:message key="order.refund"/>
+                </c:when>
+                <c:when test="${order.reserveStatus eq 'LOANED'}">
+                    <fmt:message key="order.loaned"/>
+                </c:when>
+                <c:when test="${order.reserveStatus eq 'READING_ROOM'}">
+                    <fmt:message key="order.reading-room"/>
+                </c:when>
+            </c:choose>
+        </td>
     </tr>
     <tr>
         <th class="th-order"><fmt:message key="order.approval"/></th>

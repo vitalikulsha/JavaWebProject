@@ -10,11 +10,3 @@ function checkForm(){
         document.getElementById('submit').disabled = 'disabled';
     }
 }
-
-function checkSearchParam(id){
-    if(id.value.length == 0) {
-        document.getElementById('submit').disabled = true;
-    } ele {
-        document.getElementById('submit').disabled = false;
-    }
-}
