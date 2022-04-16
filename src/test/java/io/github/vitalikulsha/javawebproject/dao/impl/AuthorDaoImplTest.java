@@ -13,40 +13,40 @@ import static org.junit.Assert.*;
 
 public class AuthorDaoImplTest {
 
-    @Test
-    public void findAuthorsByBookId() throws DaoException {
-        AuthorDao authorDao = DaoFactory.instance().authorDao();
-        List<Author> expected = new ArrayList<>() {{
-            this.add(new Author(1, "Бернар", "Вербер"));
-        }};
-        assertEquals(expected, authorDao.findAuthorsByBookId(10100));
-        assertNotEquals(expected, authorDao.findAuthorsByBookId(11200));
-        assertTrue(authorDao.findAuthorsByBookId(10000).isEmpty());
-        assertFalse(authorDao.findAuthorsByBookId(90002).isEmpty());
-    }
-
-    @Test
-    public void findById() throws DaoException {
-        AuthorDao authorDao = DaoFactory.instance().authorDao();
-        Author expected = new Author(1, "Бернар", "Вербер");
-        assertEquals(expected, authorDao.findById(1));
-        assertNotEquals(expected, authorDao.findById(2));
-        assertNull(authorDao.findById(28));
-        assertNotNull(authorDao.findById(27));
-    }
-
-    @Test
-    public void findAll() throws DaoException {
-        AuthorDao authorDao = DaoFactory.instance().authorDao();
-        assertEquals(getAllAuthors(), authorDao.findAll());
-    }
-
-    @Test
-    public void deleteById() throws DaoException {
-        AuthorDao authorDao = DaoFactory.instance().authorDao();
-        assertEquals(0, authorDao.deleteById(30));
-        assertEquals(1, authorDao.deleteById(10));
-    }
+////    @Test
+//    public void findAuthorsByBookId() throws DaoException {
+//        AuthorDao authorDao = DaoFactory.instance().authorDao();
+//        List<Author> expected = new ArrayList<>() {{
+//            this.add(new Author(1, "Бернар", "Вербер"));
+//        }};
+//        assertEquals(expected, authorDao.findAuthorsByBookId(10100));
+//        assertNotEquals(expected, authorDao.findAuthorsByBookId(11200));
+//        assertTrue(authorDao.findAuthorsByBookId(10000).isEmpty());
+//        assertFalse(authorDao.findAuthorsByBookId(90002).isEmpty());
+//    }
+//
+////    @Test
+//    public void findById() throws DaoException {
+//        AuthorDao authorDao = DaoFactory.instance().authorDao();
+//        Author expected = new Author(1, "Бернар", "Вербер");
+//        assertEquals(expected, authorDao.findById(1));
+//        assertNotEquals(expected, authorDao.findById(2));
+//        assertNull(authorDao.findById(28));
+//        assertNotNull(authorDao.findById(27));
+//    }
+//
+////    @Test
+//    public void findAll() throws DaoException {
+//        AuthorDao authorDao = DaoFactory.instance().authorDao();
+//        assertEquals(getAllAuthors(), authorDao.findAll());
+//    }
+//
+////    @Test
+//    public void deleteById() throws DaoException {
+//        AuthorDao authorDao = DaoFactory.instance().authorDao();
+//        assertEquals(0, authorDao.deleteById(30));
+//        assertEquals(1, authorDao.deleteById(10));
+//    }
 
     private List<Author> getAllAuthors() {
         return new ArrayList<>() {{

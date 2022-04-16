@@ -13,8 +13,10 @@
     <style>
         <%@include file='/WEB-INF/css/book-search.css' %>
         <%@include file='/WEB-INF/css/style.css' %>
-
     </style>
+    <script type="text/javascript" language="javascript">
+        <%@include file='/WEB-INF/script/submit-disabled.js' %>
+    </script>
 </head>
 <body class="block">
 <div align="right">
@@ -33,56 +35,56 @@
 </div>
 <h2><fmt:message key="reader.header-book-search"/></h2>
 <table>
-    <form action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
+    <form name="form" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-id"/></th>
             <td>
-                <input class="entry-field" type="number" name="${RequestParameter.BOOK_ID}"
+                <input id="bookId" type="number" name="${RequestParameter.BOOK_ID}" onKeyup="checkSearchParam(this)"
                        placeholder="<fmt:message key="reader.search-by-id-placeholder"/>" required>
             </td>
             <td  style="with: 45%;">
-                <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
+    <form name="form" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-title"/></th>
             <td>
-                <input class="entry-field" type="text" name="${RequestParameter.BOOK_TITLE}"
+                <input id="bookTitle" type="text" name="${RequestParameter.BOOK_TITLE}" onKeyup="checkform()"
                        placeholder="<fmt:message key="reader.search-by-title-placeholder"/>" required>
             </td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
+    <form name="form" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-authors"/></th>
-            <td><input class="entry-field" type="text" name="${RequestParameter.AUTHOR_NAME}"
+            <td><input id="authorName" type="text" name="${RequestParameter.AUTHOR_NAME}" onKeyup="checkform()"
                        placeholder="<fmt:message key="reader.search-by-authors-placeholder"/>" required>
             </td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
     </form>
 
-    <form action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
+    <form name="form" action="${pageContext.request.contextPath}${UserPath.CATALOG.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-category"/></th>
             <td>
-                <input class="entry-field" type="text" name="${RequestParameter.CATEGORY_NAME}"
+                <input id="categoryName" type="text" name="${RequestParameter.CATEGORY_NAME}" onKeyup="checkform()"
                        placeholder="<fmt:message key="reader.search-by-category-placeholder"/>" required>
             </td>
             <td>
                 <input type="hidden" name="${RequestParameter.PAGE}" value="1">
-                <input class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
+                <input id="submit" class="submit" type="submit" value="<fmt:message key="reader.button-search"/>">
             </td>
         </tr>
     </form>

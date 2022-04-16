@@ -14,70 +14,70 @@ import static org.junit.Assert.*;
 
 public class BookDaoImplTest {
 
-    @Test
-    public void findAll() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        assertEquals(getAllBooks(), bookDao.findAll());
-    }
-
-    @Test
-    public void findByBookTitle() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        List<Book> wholeTitleBookList = getAllBooks().stream()
-                .filter(b -> b.getTitle().equals("Гномы"))
-                .collect(Collectors.toList());
-        List<Book> partTitleBookList = getAllBooks().stream()
-                .filter(b -> b.getTitle().contains("Орган"))
-                .collect(Collectors.toList());
-//        assertEquals(wholeTitleBookList, bookDao.findByBookTitle("Гномы"));
-//        assertNotEquals(wholeTitleBookList, bookDao.findByBookTitle("Тест"));
-//        assertEquals(partTitleBookList, bookDao.findByBookTitle("Орган"));
-//        assertTrue(bookDao.findByBookTitle("Test").isEmpty());
-    }
-
-    @Test
-    public void findByAuthorName() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        List<Book> partAuthorNameBookList = new ArrayList<>() {{
-            this.add(new Book(20001, "Краткая история времени", 2019, 272, 20, 1));
-            this.add(new Book(20002, "Природа пространства и время", 2022, 192, 20, 10));
-        }};
-//        assertEquals(partAuthorNameBookList, bookDao.findByAuthorName("Хок"));
-//        assertNotEquals(partAuthorNameBookList, bookDao.findByAuthorName("Тест"));
-//        assertTrue(bookDao.findByAuthorName("Test").isEmpty());
-    }
-
-    @Test
-    public void findByCategoryName() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        List<Book> partCategoryNameBookList = getAllBooks().stream()
-                .filter(b -> b.getCategoryId() == 20 || b.getCategoryId() == 30 || b.getCategoryId() == 50
-                        || b.getCategoryId() == 60 || b.getCategoryId() == 80)
-                .collect(Collectors.toList());
-//        assertEquals(partCategoryNameBookList, bookDao.findByCategoryName("науки"));
-//        assertNotEquals(partCategoryNameBookList, bookDao.findByCategoryName("Наука"));
-//        assertTrue(bookDao.findByCategoryName("Test").isEmpty());
-    }
-
-    @Test
-    public void findById() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        Book expected = getAllBooks().stream()
-                .filter(b -> b.getId() == 11200)
-                .findFirst()
-                .get();
-        assertEquals(expected, bookDao.findById(11200));
-        assertNotEquals(expected, bookDao.findById(10100));
-        assertNull(bookDao.findById(10000));
-        assertNotNull(bookDao.findById(12300));
-    }
-
-    @Test
-    public void deleteById() throws DaoException {
-        BookDao bookDao = DaoFactory.instance().bookDao();
-        assertEquals(1, bookDao.deleteById(10100));
-        assertEquals(0, bookDao.deleteById(10000));
-    }
+////    @Test
+//    public void findAll() throws DaoException {
+//        BookDao bookDao = DaoFactory.instance().bookDao();
+//        assertEquals(getAllBooks(), bookDao.findAll());
+//    }
+//
+////    @Test
+//    public void findByBookTitle() throws DaoException {
+//        BookDao bookDao = DaoFactory.instance().bookDao();
+//        List<Book> wholeTitleBookList = getAllBooks().stream()
+//                .filter(b -> b.getTitle().equals("Гномы"))
+//                .collect(Collectors.toList());
+//        List<Book> partTitleBookList = getAllBooks().stream()
+//                .filter(b -> b.getTitle().contains("Орган"))
+//                .collect(Collectors.toList());
+////        assertEquals(wholeTitleBookList, bookDao.findByBookTitle("Гномы"));
+////        assertNotEquals(wholeTitleBookList, bookDao.findByBookTitle("Тест"));
+////        assertEquals(partTitleBookList, bookDao.findByBookTitle("Орган"));
+////        assertTrue(bookDao.findByBookTitle("Test").isEmpty());
+//    }
+//
+////    @Test
+//    public void findByAuthorName() throws DaoException {
+//        BookDao bookDao = DaoFactory.instance().bookDao();
+//        List<Book> partAuthorNameBookList = new ArrayList<>() {{
+//            this.add(new Book(20001, "Краткая история времени", 2019, 272, 20, 1));
+//            this.add(new Book(20002, "Природа пространства и время", 2022, 192, 20, 10));
+//        }};
+////        assertEquals(partAuthorNameBookList, bookDao.findByAuthorName("Хок"));
+////        assertNotEquals(partAuthorNameBookList, bookDao.findByAuthorName("Тест"));
+////        assertTrue(bookDao.findByAuthorName("Test").isEmpty());
+//    }
+//
+////    @Test
+//    public void findByCategoryName() throws DaoException {
+//        BookDao bookDao = DaoFactory.instance().bookDao();
+//        List<Book> partCategoryNameBookList = getAllBooks().stream()
+//                .filter(b -> b.getCategoryId() == 20 || b.getCategoryId() == 30 || b.getCategoryId() == 50
+//                        || b.getCategoryId() == 60 || b.getCategoryId() == 80)
+//                .collect(Collectors.toList());
+////        assertEquals(partCategoryNameBookList, bookDao.findByCategoryName("науки"));
+////        assertNotEquals(partCategoryNameBookList, bookDao.findByCategoryName("Наука"));
+////        assertTrue(bookDao.findByCategoryName("Test").isEmpty());
+//    }
+//
+////    @Test
+//    public void findById() throws DaoException {
+//        BookDao bookDao = DaoFactory.instance().bookDao();
+//        Book expected = getAllBooks().stream()
+//                .filter(b -> b.getId() == 11200)
+//                .findFirst()
+//                .get();
+//        assertEquals(expected, bookDao.findById(11200));
+//        assertNotEquals(expected, bookDao.findById(10100));
+//        assertNull(bookDao.findById(10000));
+//        assertNotNull(bookDao.findById(12300));
+//    }
+//
+////    @Test
+//    public void deleteById() throws DaoException {
+//        BookDao bookDao = DaoFactory.instance().bookDao();
+//        assertEquals(1, bookDao.deleteById(10100));
+//        assertEquals(0, bookDao.deleteById(10000));
+//    }
 
     private List<Book> getAllBooks() {
         return new ArrayList<>() {{

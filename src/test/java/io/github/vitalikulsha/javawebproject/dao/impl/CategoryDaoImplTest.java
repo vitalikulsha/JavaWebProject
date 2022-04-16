@@ -13,28 +13,28 @@ import static org.junit.Assert.*;
 
 public class CategoryDaoImplTest {
 
-    @Test
-    public void findById() throws DaoException {
-        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
-        Category expected = new Category(10, "Энциклопедии");
-        assertEquals(expected, categoryDao.findById(10));
-        assertNotEquals(expected, categoryDao.findById(20));
-        assertNull(categoryDao.findById(11));
-        assertNotNull(categoryDao.findById(30));
-    }
-
-    @Test
-    public void findAll() throws DaoException {
-        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
-        assertEquals(getAllCategories(), categoryDao.findAll());
-    }
-
-    @Test
-    public void deleteById() throws DaoException {
-        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
-        assertEquals(0, categoryDao.deleteById(1));
-        assertEquals(1, categoryDao.deleteById(10));
-    }
+////    @Test
+//    public void findById() throws DaoException {
+//        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
+//        Category expected = new Category(10, "Энциклопедии");
+//        assertEquals(expected, categoryDao.findById(10));
+//        assertNotEquals(expected, categoryDao.findById(20));
+//        assertNull(categoryDao.findById(11));
+//        assertNotNull(categoryDao.findById(30));
+//    }
+//
+////    @Test
+//    public void findAll() throws DaoException {
+//        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
+//        assertEquals(getAllCategories(), categoryDao.findAll());
+//    }
+//
+////    @Test
+//    public void deleteById() throws DaoException {
+//        CategoryDao categoryDao = DaoFactory.instance().categoryDao();
+//        assertEquals(0, categoryDao.deleteById(1));
+//        assertEquals(1, categoryDao.deleteById(10));
+//    }
 
     private List<Category> getAllCategories() {
         return new ArrayList<>() {{

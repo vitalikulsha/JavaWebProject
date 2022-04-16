@@ -14,29 +14,34 @@
         <%@include file='/WEB-INF/css/style.css' %>
         <%@include file='/WEB-INF/css/login.css' %>
     </style>
+    <script type="text/javascript" language="javascript">
+        <%@include file='/WEB-INF/script/submit-disabled.js' %>
+    </script>
 </head>
 <body class="block">
 <div class="banner"></div>
 <h2><fmt:message key="login.header"/></h2>
 <div align="center">
-    <form method="post" action="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
+    <form name="formReg" method="post" action="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
         <table>
             <tr>
                 <th><fmt:message key="register.login"/></th>
                 <td>
-                    <input class="entry-field" title="<fmt:message key="validation.login"/>" type="text"
-                    placeholder="<fmt:message key="register.login-placeholder"/>" required name="${RequestParameter.LOGIN}">
+                    <input title="<fmt:message key="validation.login"/>" type="text"
+                    onKeyup="checkForm()" placeholder="<fmt:message key="register.login-placeholder"/>"
+                    required name="${RequestParameter.LOGIN}">
                 </td>
             </tr>
             <tr>
                 <th><fmt:message key="register.password"/></th>
                 <td>
-                    <input class="entry-field" title="<fmt:message key="validation.password"/>" type="password"
-                    placeholder="<fmt:message key="register.password-placeholder"/>" required name="${RequestParameter.PASSWORD}">
+                    <input title="<fmt:message key="validation.password"/>" type="password"
+                    onKeyup="checkForm()" placeholder="<fmt:message key="register.password-placeholder"/>"
+                    required name="${RequestParameter.PASSWORD}">
                 </td>
             </tr>
         </table>
-        <input class="enter" type="submit" value="<fmt:message key="login.button-enter"/>">
+        <input id="submit" type="submit" value="<fmt:message key="login.button-enter"/>">
     </form>
 </div>
 

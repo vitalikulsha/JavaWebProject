@@ -19,6 +19,7 @@ import java.util.List;
 public class QueryOperator<T> {
     private static final String ERROR_CONNECT_DB = "Unable to connect to DB.";
     private static final String ERROR_SQL_QUERY = "Unable to execute SQL query: %s";
+//    private static final String
 
     private final ConnectionSource connectionSource = ConnectionSource.instance();
     private final RowMapper<T> mapper;

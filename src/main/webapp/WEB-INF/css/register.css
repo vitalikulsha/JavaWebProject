@@ -1,8 +1,8 @@
 th {
     padding-left: 20px;
-    width: 35%;
-    height: 70px;
-    font-size: 25px;
+    width: 30%;
+    height: 60px;
+    font-size: 20px;
     font-weight: bold;
     color: green;
     text-align: left;
@@ -12,6 +12,7 @@ th {
 td {
     vertical-align: middle;
     text-align: left;
+    font-size: 20px;
 }
 
 table {
@@ -24,9 +25,9 @@ h6 {
     margin-bottom: 0;
 }
 
-.entry-field {
+input[type=text], input[type=password], input[type=number], input[type=email]{
     padding: 20px;
-    font-size: 20px;
+    font-size: 16px;
     width: 300px;
     height: 30px;
     outline: none;
@@ -34,32 +35,56 @@ h6 {
     border-radius: 5px;
 }
 
-.button {
-    margin-top: 20px;
-    width: 360px;
-    height: 50px;
+input[type=submit], input[type=reset]{
+    margin-top: 30px;
+    width: 150px;
+    height: 30px;
     cursor: pointer;
-	letter-spacing: 5px;
     color: white;
-    font-size: 25px;
-    border-radius: 10px;
+    font-size: 16px;
+    border-radius: 5px;
     border: none;
 }
 
-.enter {
+input[type=submit]{
     background: green;
 }
 
+input[type=submit][disabled]{
+    background: grey;
+}
+
+input:invalid{
+    border: 2px solid red;
+}
+
+input:valid{
+    border: 2px solid green;
+}
+
+.enter {
+    margin-left: 750px;
+}
+
 .reset {
-    background: red;
-    margin-left: 540px;
+    background: orange;
+    margin-left: 550px;
     position: relative;
-    top: -70px;
+    top: -60px;
 }
 
 .save {
     background: green;
     width: 200px;
-    margin-left: 620px;
+    margin-left: 740px;
     position: relative;
+}
+
+.msg-error{
+    position: relative;
+    top: -60px;
+    color: red;
+    font-size: 20px;
+    font-weight:bold;
+    text-align: center;
 }

@@ -29,7 +29,7 @@
 </div>
 <h2><fmt:message key="reader.header"/></h2>
 <c:set var="user" scope="request" value="${user}"/>
-<table style="width: 500px;">
+<table style="width: 550px;">
     <tr>
         <th class="th-user"><fmt:message key="reader.first-name"/></th>
         <td>${user.firstName}</td>
@@ -56,7 +56,7 @@
     </tr>
 </table>
 
-<div align="center">
+<div align="center" style="margin-top: 20px;">
     <ul class="nav nav-page" style="width: 550px;" >
         <li>
             <a href="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}">
