@@ -21,13 +21,6 @@ public class OrderDTO implements Serializable {
     private OrderDTO() {
     }
 
-    public OrderDTO(int id, BookDTO bookDto, UserDTO userDto, ReserveStatus reserveStatus, boolean approved) {
-        this.id = id;
-        this.bookDto = bookDto;
-        this.userDto = userDto;
-        this.reserveStatus = reserveStatus;
-        this.approved = approved;
-    }
 
     public int getId() {
         return id;
@@ -97,34 +90,34 @@ public class OrderDTO implements Serializable {
      * Order DTO builder from order class
      */
     public static class Builder {
-        private OrderDTO orderDto;
+        private final OrderDTO orderDto;
 
         public Builder() {
             orderDto = new OrderDTO();
         }
 
         public Builder fixId(int id) {
-            orderDto.id = id;
+            orderDto.setId(id);
             return this;
         }
 
         public Builder fixBookDto(BookDTO bookDto) {
-            orderDto.bookDto = bookDto;
+            orderDto.setBookDto(bookDto);
             return this;
         }
 
         public Builder fixUser(UserDTO userDto) {
-            orderDto.userDto = userDto;
+            orderDto.setUserDto(userDto);
             return this;
         }
 
         public Builder fixReserveStatus(ReserveStatus reserveStatus) {
-            orderDto.reserveStatus = reserveStatus;
+            orderDto.setReserveStatus(reserveStatus);
             return this;
         }
 
         public Builder fixApproved(boolean approved) {
-            orderDto.approved = approved;
+            orderDto.setApproved(approved);
             return this;
         }
 

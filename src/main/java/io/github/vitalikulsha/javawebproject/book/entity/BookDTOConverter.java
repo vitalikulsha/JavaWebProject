@@ -27,7 +27,7 @@ public class BookDTOConverter implements DTOConverter<BookDTO, Book> {
             category = categoryDao.findById(book.getCategoryId());
             authors = authorDao.findAuthorsByBookId(book.getId());
         } catch (DaoException e) {
-            log.error("DaoException: category or/and authors is null");
+            log.error("DaoException: category or/and authors is null.");
             return null;
         }
         return new BookDTO.Builder()

@@ -3,6 +3,9 @@ package io.github.vitalikulsha.javawebproject.util.dao.queryoperator;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Table;
 
+/**
+ * Common SQL query class
+ */
 public class CommonSqlQuery {
     public final String SQL_SELECT_ALL;
     public final String SQL_SELECT_ALL_PAGE;

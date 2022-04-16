@@ -14,11 +14,4 @@ public class ConfigParameter {
 
     private ConfigParameter() {
     }
-
-    public static List<Integer> getPages(int count) {
-        int numPage = (count / ITEMS_ON_PAGE) + (count % ITEMS_ON_PAGE == 0 ? 0 : 1);
-        return IntStream.range(1, numPage + 1)
-                .boxed()
-                .collect(Collectors.toList());
-    }
 }

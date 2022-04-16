@@ -1,6 +1,5 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
-import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
@@ -31,7 +30,7 @@ public class AllBooksCommand implements Command {
         Pagination pagination = new Pagination(pageNumber);
         try {
             List<BookDTO> catalog = bookService.getAll(pagination);
-            List<Integer> pages = ConfigParameter.getPages(bookService.countAll());
+            List<Integer> pages = pagination.getPages(bookService.countAll());
             request.setAttribute(SessionAttribute.CATALOG, catalog);
             request.setAttribute(SessionAttribute.PAGES, pages);
             return new CommandInfo(Page.ALL_BOOKS, RoutingType.FORWARD);

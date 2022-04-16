@@ -110,44 +110,44 @@ public class BookDTO implements Serializable {
      * Book DTO builder from book class
      */
     public static class Builder {
-        private BookDTO bookDto;
+        private final BookDTO bookDto;
 
         public Builder() {
             bookDto = new BookDTO();
         }
 
         public Builder fixId(int id) {
-            bookDto.id = id;
+            bookDto.setId(id);
             return this;
         }
 
         public Builder fixTitle(String title) {
-            bookDto.title = title;
+            bookDto.setTitle(title);
             return this;
         }
 
         public Builder fixAuthors(List<Author> authors) {
-            bookDto.authors = authors;
+            bookDto.setAuthors(authors);
             return this;
         }
 
         public Builder fixPublicationYear(int publicationYear) {
-            bookDto.publicationYear = publicationYear;
+            bookDto.setPublicationYear(publicationYear);
             return this;
         }
 
         public Builder fixNumberPages(int numberPages) {
-            bookDto.numberPages = numberPages;
+            bookDto.setNumberPages(numberPages);
             return this;
         }
 
         public Builder fixCategory(Category category) {
-            bookDto.category = category;
+            bookDto.setCategory(category);
             return this;
         }
 
         public Builder fixQuantity(int quantity) {
-            bookDto.quantity = quantity;
+            bookDto.setQuantity(quantity);
             return this;
         }
 

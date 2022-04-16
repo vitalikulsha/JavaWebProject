@@ -32,7 +32,7 @@ public class OrderDTOConverter implements DTOConverter<OrderDTO, Order> {
             User user = userDao.findById(order.getUserId());
             userDto = userDTOConverter.toDto(user);
         } catch (DaoException e) {
-            log.error("DaoException: user or/and book is null");
+            log.error("DaoException: user or/and book is null.");
             return null;
         }
         return new OrderDTO.Builder()

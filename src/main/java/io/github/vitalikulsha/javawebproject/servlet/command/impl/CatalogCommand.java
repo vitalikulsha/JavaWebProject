@@ -1,6 +1,5 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
-import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.book.entity.BookDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.book.service.BookService;
@@ -77,21 +76,21 @@ public class CatalogCommand implements Command {
                 log.info("param: " + param);
                 switch (param) {
                     case (RequestParameter.BOOK_TITLE):
-                        pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.TITLE, paramValue));
+                        pages = pagination.getPages(bookService.countBySearchParam(Column.TITLE, paramValue));
                         books = bookService.getBooksByTitle(pagination, paramValue);
                         break;
                     case (RequestParameter.AUTHOR_NAME):
-                        pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.LASTNAME, paramValue));
+                        pages = pagination.getPages(bookService.countBySearchParam(Column.LASTNAME, paramValue));
                         books = bookService.getBooksByAuthorName(pagination, paramValue);
                         break;
                     case (RequestParameter.CATEGORY_NAME):
-                        pages = ConfigParameter.getPages(bookService.countBySearchParam(Column.NAME, paramValue));
+                        pages = pagination.getPages(bookService.countBySearchParam(Column.NAME, paramValue));
                         books = bookService.getBooksByCategoryName(pagination, paramValue);
                         break;
                 }
             }
         } else {
-            pages = ConfigParameter.getPages(bookService.countAll());
+            pages = pagination.getPages(bookService.countAll());
             books = bookService.getAll(pagination);
         }
         request.setAttribute(SessionAttribute.PAGES, pages);
