@@ -1,10 +1,12 @@
 package io.github.vitalikulsha.javawebproject.servlet.command.impl;
 
+import io.github.vitalikulsha.javawebproject.book.service.BookService;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.order.entity.OrderDTO;
 import io.github.vitalikulsha.javawebproject.exception.ServiceException;
 import io.github.vitalikulsha.javawebproject.order.service.OrderService;
 import io.github.vitalikulsha.javawebproject.util.Pagination;
+import io.github.vitalikulsha.javawebproject.util.constant.JspValue;
 import io.github.vitalikulsha.javawebproject.util.constant.RequestParameter;
 import io.github.vitalikulsha.javawebproject.util.service.ServiceFactory;
 import io.github.vitalikulsha.javawebproject.servlet.command.Command;
@@ -24,6 +26,15 @@ public class AllOrdersCommand implements Command {
 
     @Override
     public CommandInfo execute(HttpServletRequest request, HttpServletResponse response) {
+        String method = request.getMethod();
+        if (method.equals(JspValue.POST)) {
+            try {
+                return getCommandInfoPost(request);
+            } catch (ServiceException e) {
+                log.error("Unable to update order status: " + e.getMessage());
+                return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+            }
+        }
         OrderService orderService = ServiceFactory.instance().orderService();
         String url = request.getServletContext().getContextPath() + AdminPath.ALL_ORDERS.getPath() + "?";
         request.setAttribute(SessionAttribute.URL, url);
@@ -40,5 +51,23 @@ public class AllOrdersCommand implements Command {
             log.error("Unable to get all orders: " + e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
+    }
+
+    private CommandInfo getCommandInfoPost(HttpServletRequest request) throws ServiceException {
+        BookService bookService = ServiceFactory.instance().bookService();
+        OrderService orderService = ServiceFactory.instance().orderService();
+        int orderId = Integer.parseInt(request.getParameter(RequestParameter.ORDER_ID));
+        String action = request.getParameter(RequestParameter.ACTION);
+        OrderDTO orderDto = orderService.getById(orderId);
+        log.info("Order id = " + orderId + ", action = " + action);
+        if (action.equals(JspValue.APPROVE)) {
+            orderService.updateOrderApproval(true, orderId);
+            bookService.decrementQuantityBook(orderDto.getBookDto().getId());
+        } else if (action.equals(JspValue.CANCEL)) {
+            orderService.deleteById(orderDto.getId());
+            bookService.incrementQuantityBook(orderDto.getBookDto().getId());
+            return new CommandInfo(AdminPath.ALL_ORDERS.getPath(), RoutingType.REDIRECT);
+        }
+        return new CommandInfo(AdminPath.ALL_ORDERS.getPath(), RoutingType.REDIRECT);
     }
 }

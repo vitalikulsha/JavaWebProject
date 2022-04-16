@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.servlet.path.AdminPath" %>
+<%@ page import="io.github.vitalikulsha.javawebproject.util.constant.JspValue" %>
 <%@ page import="io.github.vitalikulsha.javawebproject.util.constant.RequestParameter" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -42,7 +43,7 @@
         <th style="width: 10%;"><fmt:message key="book.id"/></th>
         <th><fmt:message key="book.title"/></th>
         <th style="width: 10%;"><fmt:message key="order.reserve"/></th>
-        <th style="width: 10%;"><fmt:message key="order.approval"/></th>
+        <th style="width: 20%;"><fmt:message key="order.approval"/></th>
         <th style="width: 10%;"><fmt:message key="book.quantity"/></th>
         <th style="width: 10%;"><fmt:message key="admin.reader-id"/></th>
     </tr>
@@ -55,16 +56,47 @@
             </td>
             <td class="td-center">${order.bookDto.id}</td>
             <td>${order.bookDto.title}</td>
-            <td style="text-align: center;">${order.reserveStatus.title}</td>
             <td style="text-align: center;">
                 <c:choose>
+                    <c:when test="${order.reserveStatus eq 'REFUND'}">
+                        <fmt:message key="order.refund"/>
+                    </c:when>
+                    <c:when test="${order.reserveStatus eq 'LOANED'}">
+                        <fmt:message key="order.loaned"/>
+                    </c:when>
+                    <c:when test="${order.reserveStatus eq 'READING_ROOM'}">
+                        <fmt:message key="order.reading-room"/>
+                    </c:when>
+                </c:choose>
+            </td>
+            <td>
+                <ul class="nav" style="justify-content: space-between;">
+                <c:choose>
                     <c:when test="${order.approved}">
-                        <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
+                        <li><p style="color: green"><b><fmt:message key="order.approved"/></p></li>
+                        <c:if test="${order.reserveStatus eq 'REFUND'}">
+                            <li><form style="text-align: right; vertical-align: middle;" action="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}" method="post">
+                                <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
+                                <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
+                                <input class="click cancel" type="submit" value="X">
+                            </form></li>
+                        </c:if>
                     </c:when>
                     <c:otherwise>
-                        <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
+                        <li><p style="color:red"><b><fmt:message key="order.not-approved"/></p></li>
+                        <li><form style="text-align: right; vertical-align: middle;" action="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}" method="post">
+                            <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
+                            <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.APPROVE}">
+                            <input class="click return" type="submit" value="V">
+                        </form></li>
+                        <li><form style="text-align: right; vertical-align: middle;" action="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}" method="post">
+                            <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
+                            <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
+                            <input class="click cancel" type="submit" value="X">
+                        </form></li>
                     </c:otherwise>
                 </c:choose>
+                </ul>
             </td>
             <td class="td-center">${order.bookDto.quantity}</td>
             <td class="td-center">${order.userDto.id}</td>

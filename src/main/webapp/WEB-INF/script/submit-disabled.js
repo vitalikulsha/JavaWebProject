@@ -12,7 +12,7 @@ function checkForm(){
 }
 
 function checkSearchParam(id){
-    if(this.value.length == 0) {
+    if(id.value.length == 0) {
         document.getElementById('submit').disabled = true;
     } ele {
         document.getElementById('submit').disabled = false;

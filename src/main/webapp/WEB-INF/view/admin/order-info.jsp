@@ -59,31 +59,46 @@
     </tr>
     <tr>
         <th class="th-order"><fmt:message key="order.reserve"/></th>
-        <td>${order.reserveStatus.title}</td>
+        <td>
+            <c:choose>
+                <c:when test="${order.reserveStatus eq 'REFUND'}">
+                    <fmt:message key="order.refund"/>
+                </c:when>
+                <c:when test="${order.reserveStatus eq 'LOANED'}">
+                    <fmt:message key="order.loaned"/>
+                </c:when>
+                <c:when test="${order.reserveStatus eq 'READING_ROOM'}">
+                    <fmt:message key="order.reading-room"/>
+                </c:when>
+            </c:choose>
+        </td>
     </tr>
     <tr>
         <th class="th-order"><fmt:message key="order.approval"/></th>
         <td>
             <c:choose>
                 <c:when test="${order.approved}">
-                    <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
-                    <c:if test="${order.reserveStatus eq 'REFUND'}">
+                    <ul class="nav" style="justify-content: space-between;">
+                    <li><p style="color: green"><b><fmt:message key="order.approved"/></p></li>
+                    <li><c:if test="${order.reserveStatus eq 'REFUND'}">
                         <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                             <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
-                            <input class="button-approve cancel" type="submit" value="<fmt:message key="admin.order-button-close"/>">
+                            <input class="button approve cancel" type="submit" value="<fmt:message key="admin.order-button-close"/>">
                         </form>
-                    </c:if>
+                    </c:if></li>
+                    </ul>
                 </c:when>
                 <c:otherwise>
-                    <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
-                    <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
+                    <ul class="nav" style="justify-content: space-between;">
+                    <li><p style="color:red"><b><fmt:message key="order.not-approved"/></p></li>
+                    <li><form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                         <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.APPROVE}">
-                        <input class="button-approve return" type="submit" value="<fmt:message key="admin.order-button-approve"/>">
-                    </form>
-                    <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
+                        <input class="button approve return" type="submit" value="<fmt:message key="admin.order-button-approve"/>">
+                    </form></li>
+                    <li><form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                         <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
-                        <input class="button-approve cancel" type="submit" value="<fmt:message key="admin.order-button-cancel"/>">
-                    </form>
+                        <input class="button approve cancel" type="submit" value="<fmt:message key="admin.order-button-cancel"/>">
+                    </form></li>
                 </c:otherwise>
             </c:choose>
         </td>

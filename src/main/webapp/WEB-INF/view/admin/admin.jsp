@@ -52,7 +52,7 @@
     </tr>
 </table>
 
-<div align="center">
+<div align="center" style="margin-top: 20px;">
     <ul class="nav nav-page" style="width: 500px;" >
         <li>
             <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">

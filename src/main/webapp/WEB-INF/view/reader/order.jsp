@@ -73,12 +73,14 @@
         <th class="th-order"><fmt:message key="order.reserve"/></th>
         <td>
             <select class="select" name="${RequestParameter.RESERVE_STATUS}" form="order">
-                <option value="${ReserveStatus.READING_ROOM}">${ReserveStatus.READING_ROOM.title}</option>
-                <option value="${ReserveStatus.LOANED}">${ReserveStatus.LOANED.title}</option>
+                <option value="${ReserveStatus.READING_ROOM}"><fmt:message key="order.reading-room"/>
+                </option>
+                <option value="${ReserveStatus.LOANED}"><fmt:message key="order.loaned"/>
+                </option>
             </select>
         </td>
     </tr>
 </table>
-<input class="button-reserve" type="submit" form="order" value="<fmt:message key="reader.button-reserve"/>">
+<input class="button reserve" type="submit" form="order" value="<fmt:message key="reader.button-reserve"/>">
 </body>
 </html>
