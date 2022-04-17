@@ -1,0 +1,56 @@
+th {
+    padding-left: 20px;
+    width: 30%;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+    text-align: left;
+	vertical-align: middle;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table {
+    width: 320px;
+    margin: auto;
+}
+
+input[type=text], input[type=password] {
+    padding: 20px;
+    font-size: 16px;
+    width: 200px;
+    height: 30px;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+input[type=submit] {
+    margin-top: 10px;
+    margin-left: 200px;
+    width: 100px;
+    height: 35px;
+    cursor: pointer;
+	letter-spacing: 2px;
+    background: green;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+input[type=submit][disabled]{
+    background: grey;
+}
+
+.banner {
+    background-image: url("${pageContext.request.contextPath}/img/library-banner.jpg");
+    background-position: center;
+    background-size: cover;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

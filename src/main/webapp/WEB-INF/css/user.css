@@ -1,0 +1,101 @@
+table {
+    border-collapse: collapse;
+    margin: auto;
+    font-size: 20px;
+}
+
+td, th {
+    padding: 5px;
+    border: 1px solid black;
+    vertical-align: middle;
+}
+
+.th-user {
+    text-align: left;
+	width: 50%;
+}
+
+.th-order {
+    text-align: left;
+	width: 35%;
+}
+
+.td-center {
+    text-align: center;
+    font-size: 20px;
+}
+
+.button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+}
+
+.approve{
+    width: 120px;
+    height: 30px;
+    font-size: 13px;
+}
+
+.reserve {
+    font-size: 16px;
+    width: 200px;
+    height: 40px;
+    background: green;
+    margin-left: 600px;
+}
+
+.return{
+    background: green;
+}
+
+.cancel {
+    background: red;
+}
+
+.offset {
+    margin-left: 140px;
+    position: relative;
+    top: -40px;
+}
+
+.select {
+    font-size: 16px;
+    ont-family:'Times New Roman', serif;
+    padding-left: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+    width: 200px;
+    height: 30px;
+}
+
+.title {
+    font-size: 30px;
+    text-align: center;
+    color: #8B00FF;
+}
+
+.button {
+    margin-top: 10px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+}
+
+.click {
+    margin: 2px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    width: 30px;
+    height: 30px;
+}
