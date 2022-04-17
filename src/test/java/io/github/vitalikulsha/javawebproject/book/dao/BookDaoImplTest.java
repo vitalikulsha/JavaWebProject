@@ -4,7 +4,7 @@ import io.github.vitalikulsha.javawebproject.DataBase;
 import io.github.vitalikulsha.javawebproject.book.entity.Book;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
-import io.github.vitalikulsha.javawebproject.Pagination;
+import io.github.vitalikulsha.javawebproject.Paging;
 import io.github.vitalikulsha.javawebproject.util.dao.DaoFactory;
 import io.github.vitalikulsha.javawebproject.util.dao.queryoperator.constant.Column;
 import org.junit.Before;
@@ -21,13 +21,13 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BookDaoImplTest {
     BookDao bookDao;
-    Pagination<Book> pagination;
+    Paging<Book> paging;
     List<Book> bookList;
 
     @Before
     public void init() {
         bookDao = DaoFactory.instance().bookDao();
-        pagination = new Pagination<>(1, ConfigParameter.ITEMS_ON_PAGE);
+        paging = new Paging<>(1, ConfigParameter.ITEMS_ON_PAGE);
         bookList = DataBase.BOOK_TABLE;
     }
 
@@ -39,13 +39,13 @@ public class BookDaoImplTest {
         List<Book> partTitleBookList = bookList.stream()
                 .filter(b -> b.getTitle().contains("и"))
                 .collect(Collectors.toList());
-        assertEquals(pagination.paginate(fullTitleBookList),
+        assertEquals(paging.paginate(fullTitleBookList),
                 bookDao.findByBookTitle(0, ConfigParameter.ITEMS_ON_PAGE, "Гномы"));
-        assertNotEquals(pagination.paginate(fullTitleBookList),
+        assertNotEquals(paging.paginate(fullTitleBookList),
                 bookDao.findByBookTitle(0, ConfigParameter.ITEMS_ON_PAGE, "гномы"));
-        pagination.setFirstIndex(2);
-        int fromIndex = pagination.getFirstIndexFrom(2);
-        assertEquals(pagination.paginate(partTitleBookList),
+        paging.setFirstIndex(2);
+        int fromIndex = paging.getFirstIndexFrom(2);
+        assertEquals(paging.paginate(partTitleBookList),
                 bookDao.findByBookTitle(fromIndex, ConfigParameter.ITEMS_ON_PAGE, "и"));
         assertTrue(bookDao.findByBookTitle(0, 5, "Test").isEmpty());
     }
@@ -56,9 +56,9 @@ public class BookDaoImplTest {
             this.add(new Book(20001, "Краткая история времени", 2019, 272, 20, 1));
             this.add(new Book(20002, "Природа пространства и время", 2022, 192, 20, 10));
         }};
-        assertEquals(pagination.paginate(fullAuthorNameBookList),
+        assertEquals(paging.paginate(fullAuthorNameBookList),
                 bookDao.findByAuthorName(0, ConfigParameter.ITEMS_ON_PAGE, "Хокинг"));
-        assertNotEquals(pagination.paginate(fullAuthorNameBookList),
+        assertNotEquals(paging.paginate(fullAuthorNameBookList),
                 bookDao.findByAuthorName(0, ConfigParameter.ITEMS_ON_PAGE, "Тест"));
         assertTrue(bookDao.findByAuthorName(0, ConfigParameter.ITEMS_ON_PAGE, "Test").isEmpty());
         List<Book> partAuthorNameBookList = new ArrayList<>() {{
@@ -71,9 +71,9 @@ public class BookDaoImplTest {
             this.add(new Book(82001, "Преступление и наказание", 2019, 608, 80, 4));
             this.add(new Book(90002, "Афоризмы для умных мужчин", 2021, 192, 90, 0));
         }};
-        pagination.setFirstIndex(2);
-        int fromIndex = pagination.getFirstIndexFrom(2);
-        assertEquals(pagination.paginate(partAuthorNameBookList),
+        paging.setFirstIndex(2);
+        int fromIndex = paging.getFirstIndexFrom(2);
+        assertEquals(paging.paginate(partAuthorNameBookList),
                 bookDao.findByAuthorName(fromIndex, ConfigParameter.ITEMS_ON_PAGE, "и"));
     }
 
@@ -83,11 +83,11 @@ public class BookDaoImplTest {
                 .filter(b -> b.getCategoryId() == 20 || b.getCategoryId() == 30 || b.getCategoryId() == 50
                         || b.getCategoryId() == 60 || b.getCategoryId() == 80)
                 .collect(Collectors.toList());
-        pagination.setFirstIndex(2);
-        int fromIndex = pagination.getFirstIndexFrom(2);
-        assertEquals(pagination.paginate(partCategoryNameBookList),
+        paging.setFirstIndex(2);
+        int fromIndex = paging.getFirstIndexFrom(2);
+        assertEquals(paging.paginate(partCategoryNameBookList),
                 bookDao.findByCategoryName(fromIndex, ConfigParameter.ITEMS_ON_PAGE, "науки"));
-        assertNotEquals(pagination.paginate(partCategoryNameBookList),
+        assertNotEquals(paging.paginate(partCategoryNameBookList),
                 bookDao.findByCategoryName(0, ConfigParameter.ITEMS_ON_PAGE, "Наука"));
         assertTrue(bookDao.findByCategoryName(0, ConfigParameter.ITEMS_ON_PAGE, "Test").isEmpty());
     }
@@ -95,11 +95,11 @@ public class BookDaoImplTest {
     @Test
     public void findAll() throws DaoException {
         assertEquals(bookList, bookDao.findAll());
-        assertEquals(pagination.paginate(bookList),
+        assertEquals(paging.paginate(bookList),
                 bookDao.findAll(0, ConfigParameter.ITEMS_ON_PAGE));
-        pagination.setFirstIndex(3);
-        int fromIndex = pagination.getFirstIndexFrom(3);
-        assertEquals(pagination.paginate(bookList),
+        paging.setFirstIndex(3);
+        int fromIndex = paging.getFirstIndexFrom(3);
+        assertEquals(paging.paginate(bookList),
                 bookDao.findAll(fromIndex, ConfigParameter.ITEMS_ON_PAGE));
     }
 

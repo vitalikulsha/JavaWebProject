@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.author.dao;
 
 import io.github.vitalikulsha.javawebproject.DataBase;
-import io.github.vitalikulsha.javawebproject.Pagination;
+import io.github.vitalikulsha.javawebproject.Paging;
 import io.github.vitalikulsha.javawebproject.author.entity.Author;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
@@ -19,13 +19,13 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AuthorDaoImplTest {
     AuthorDao authorDao;
-    Pagination<Author> pagination;
+    Paging<Author> paging;
     List<Author> authorList;
 
     @Before
     public void init() {
         authorDao = DaoFactory.instance().authorDao();
-        pagination = new Pagination<>(1, ConfigParameter.ITEMS_ON_PAGE);
+        paging = new Paging<>(1, ConfigParameter.ITEMS_ON_PAGE);
         authorList = DataBase.AUTHOR_TABLE;
     }
 
@@ -44,11 +44,11 @@ public class AuthorDaoImplTest {
     @Test
     public void findAll() throws DaoException {
         assertEquals(authorList, authorDao.findAll());
-        assertEquals(pagination.paginate(authorList),
+        assertEquals(paging.paginate(authorList),
                 authorDao.findAll(0, ConfigParameter.ITEMS_ON_PAGE));
-        pagination.setFirstIndex(3);
-        int fromIndex = pagination.getFirstIndexFrom(3);
-        assertEquals(pagination.paginate(authorList),
+        paging.setFirstIndex(3);
+        int fromIndex = paging.getFirstIndexFrom(3);
+        assertEquals(paging.paginate(authorList),
                 authorDao.findAll(fromIndex, ConfigParameter.ITEMS_ON_PAGE));
         assertTrue(authorDao.findAll(100, ConfigParameter.ITEMS_ON_PAGE).isEmpty());
     }

@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.user.dao;
 
 import io.github.vitalikulsha.javawebproject.DataBase;
-import io.github.vitalikulsha.javawebproject.Pagination;
+import io.github.vitalikulsha.javawebproject.Paging;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import io.github.vitalikulsha.javawebproject.user.entity.Role;
@@ -20,13 +20,13 @@ import static org.junit.Assert.*;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserDaoImlTest {
     UserDao userDao;
-    Pagination<User> pagination;
+    Paging<User> paging;
     List<User> userList;
 
     @Before
     public void initial() {
         userDao = DaoFactory.instance().userDao();
-        pagination = new Pagination<>(1, ConfigParameter.ITEMS_ON_PAGE);
+        paging = new Paging<>(1, ConfigParameter.ITEMS_ON_PAGE);
         userList = DataBase.USER_TABLE;
     }
 
@@ -59,7 +59,7 @@ public class UserDaoImlTest {
         List<User> expected = userList.stream()
                 .filter(u -> u.getRole()==Role.READER)
                 .collect(Collectors.toList());
-        assertEquals(pagination.paginate(expected),
+        assertEquals(paging.paginate(expected),
                 userDao.findByRole(0,ConfigParameter.ITEMS_ON_PAGE, Role.READER));
         assertTrue(userDao.findByRole(15, ConfigParameter.ITEMS_ON_PAGE, Role.READER).isEmpty());
     }
@@ -67,7 +67,7 @@ public class UserDaoImlTest {
     @Test
     public void findAll() throws DaoException {
         assertEquals(userList, userDao.findAll());
-        assertEquals(pagination.paginate(userList),
+        assertEquals(paging.paginate(userList),
                 userDao.findAll(0, ConfigParameter.ITEMS_ON_PAGE));
         assertTrue(userDao.findAll(10, ConfigParameter.ITEMS_ON_PAGE).isEmpty());
     }

@@ -31,7 +31,7 @@ public interface UserService extends Service<UserDTO> {
      * @return number of users found
      * @throws ServiceException thrown when DAO exception occurs
      */
-    int countByRoleParam(Role role) throws ServiceException;
+    int countByRole(Role role) throws ServiceException;
 
     /**
      * Checks if a user exists with the given password and login.

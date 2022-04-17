@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @param <T> entity type in this Pagination
  */
-public class Pagination<T> {
+public class Paging<T> {
     /**
      * Number of entries per page.
      */
@@ -18,7 +18,7 @@ public class Pagination<T> {
      */
     private int firstIndex;
 
-    public Pagination(int pageNumber, int itemsOnPage) {
+    public Paging(int pageNumber, int itemsOnPage) {
         this.firstIndex = (pageNumber - 1) * itemsOnPage;
         this.itemsOnPage = itemsOnPage;
     }

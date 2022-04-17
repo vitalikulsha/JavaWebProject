@@ -32,7 +32,7 @@ public class AllReadersCommand implements Command {
         Pagination pagination = new Pagination(pageNumber, ConfigParameter.ITEMS_ON_PAGE);
         try {
             List<UserDTO> allReaders = userService.getUsersByRole(Role.READER, pagination);
-            List<Integer> pages = pagination.getPages(userService.countByRoleParam(Role.READER));
+            List<Integer> pages = pagination.getPages(userService.countByRole(Role.READER));
             request.setAttribute(SessionAttribute.ALL_READERS, allReaders);
             request.setAttribute(SessionAttribute.PAGES, pages);
             return new CommandInfo(Page.ALL_READERS, RoutingType.FORWARD);

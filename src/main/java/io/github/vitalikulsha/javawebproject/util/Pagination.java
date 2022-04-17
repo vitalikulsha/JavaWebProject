@@ -11,11 +11,11 @@ public class Pagination {
     /**
      * Number of entries per page.
      */
-    private final int itemsOnPage;
+    private int itemsOnPage;
     /**
      * Start index for pagination.
      */
-    private final int fromIndex;
+    private int fromIndex;
 
     public Pagination(int page, int itemsOnPage) {
         this.fromIndex = (page - 1) * itemsOnPage;
@@ -41,5 +41,13 @@ public class Pagination {
         return IntStream.range(1, numPage + 1)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public void setItemsOnPage(int itemsOnPage) {
+        this.itemsOnPage = itemsOnPage;
+    }
+
+    public void setFromIndex(int page) {
+        this.fromIndex = (page - 1) * itemsOnPage;
     }
 }

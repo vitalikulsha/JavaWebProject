@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.category.dao;
 
 import io.github.vitalikulsha.javawebproject.DataBase;
-import io.github.vitalikulsha.javawebproject.Pagination;
+import io.github.vitalikulsha.javawebproject.Paging;
 import io.github.vitalikulsha.javawebproject.category.entity.Category;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
@@ -15,13 +15,13 @@ import static org.junit.Assert.*;
 
 public class CategoryDaoImplTest {
     CategoryDao categoryDao;
-    Pagination<Category> pagination;
+    Paging<Category> paging;
     List<Category> categoryList;
 
     @Before
     public void init(){
         categoryDao = DaoFactory.instance().categoryDao();
-        pagination = new Pagination<>(1, ConfigParameter.ITEMS_ON_PAGE);
+        paging = new Paging<>(1, ConfigParameter.ITEMS_ON_PAGE);
         categoryList = DataBase.CATEGORY_TABLE;
     }
 
@@ -40,11 +40,11 @@ public class CategoryDaoImplTest {
     @Test
     public void findAll() throws DaoException {
         assertEquals(categoryList, categoryDao.findAll());
-        assertEquals(pagination.paginate(categoryList),
+        assertEquals(paging.paginate(categoryList),
                 categoryDao.findAll(0, ConfigParameter.ITEMS_ON_PAGE));
-        pagination.setFirstIndex(2);
-        int fromIndex = pagination.getFirstIndexFrom(2);
-        assertEquals(pagination.paginate(categoryList),
+        paging.setFirstIndex(2);
+        int fromIndex = paging.getFirstIndexFrom(2);
+        assertEquals(paging.paginate(categoryList),
                 categoryDao.findAll(fromIndex, ConfigParameter.ITEMS_ON_PAGE));
         assertTrue(categoryDao.findAll(100, ConfigParameter.ITEMS_ON_PAGE).isEmpty());
     }

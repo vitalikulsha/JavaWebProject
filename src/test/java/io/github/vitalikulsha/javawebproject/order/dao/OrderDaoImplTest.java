@@ -1,7 +1,7 @@
 package io.github.vitalikulsha.javawebproject.order.dao;
 
 import io.github.vitalikulsha.javawebproject.DataBase;
-import io.github.vitalikulsha.javawebproject.Pagination;
+import io.github.vitalikulsha.javawebproject.Paging;
 import io.github.vitalikulsha.javawebproject.config.ConfigParameter;
 import io.github.vitalikulsha.javawebproject.exception.DaoException;
 import io.github.vitalikulsha.javawebproject.order.entity.Order;
@@ -21,13 +21,13 @@ import static org.junit.Assert.*;
 public class OrderDaoImplTest {
 
     OrderDao orderDao;
-    Pagination<Order> pagination;
+    Paging<Order> paging;
     List<Order> orderList;
 
     @Before
     public void init() {
         orderDao = DaoFactory.instance().orderDao();
-        pagination = new Pagination<>(1, ConfigParameter.ITEMS_ON_PAGE);
+        paging = new Paging<>(1, ConfigParameter.ITEMS_ON_PAGE);
         orderList = DataBase.ORDER_TABLE;
     }
 
@@ -44,7 +44,7 @@ public class OrderDaoImplTest {
     @Test
     public void findAll() throws DaoException {
         assertEquals(orderList, orderDao.findAll());
-        assertEquals(pagination.paginate(orderList),
+        assertEquals(paging.paginate(orderList),
                 orderDao.findAll(0, ConfigParameter.ITEMS_ON_PAGE));
         assertTrue(orderDao.findAll(10, ConfigParameter.ITEMS_ON_PAGE).isEmpty());
     }

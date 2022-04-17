@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int countByRoleParam(Role role) throws ServiceException {
+    public int countByRole(Role role) throws ServiceException {
         try {
             return userDao.countByRoleParam(role);
         } catch (DaoException e) {
