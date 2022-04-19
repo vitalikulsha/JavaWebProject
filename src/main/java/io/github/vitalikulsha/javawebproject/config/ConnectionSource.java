@@ -54,7 +54,7 @@ public class ConnectionSource {
                 }
             }
         } catch (SQLException e) {
-            log.error("Failed to initialize connection", e);
+            log.error("Failed to initialize connection.");
             throw new RuntimeException();
         }
     }
@@ -68,7 +68,7 @@ public class ConnectionSource {
                 .collect(Collectors.joining("\n"));
     }
 
-    private static void init() {
+    private static void init(){
         Properties properties = new Properties();
         try (FileInputStream fileInputStream = new FileInputStream(PATH_TO_PROPERTY)) {
             properties.load(fileInputStream);
@@ -76,8 +76,7 @@ public class ConnectionSource {
             USER = properties.getProperty("DB.user");
             PASS = properties.getProperty("DB.password");
         } catch (IOException e) {
-            log.error("Failed to connect to " + PATH_TO_PROPERTY, e);
-            throw new RuntimeException();
+            log.error("Failed to connect to " + PATH_TO_PROPERTY);
         }
     }
 }

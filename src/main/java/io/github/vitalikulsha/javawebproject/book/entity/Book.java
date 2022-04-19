@@ -7,7 +7,7 @@ import java.util.Objects;
  * Book bean class (table "book" in database)
  */
 public class Book implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String title;

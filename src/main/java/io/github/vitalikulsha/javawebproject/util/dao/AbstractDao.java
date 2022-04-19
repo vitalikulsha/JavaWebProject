@@ -28,7 +28,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
     public final QueryOperator<T> queryOperator;
     public final CommonSqlQuery commonSqlQuery;
 
-    public AbstractDao(RowMapper<T> mapper, CommonSqlQuery commonSqlQuery){
+    protected AbstractDao(RowMapper<T> mapper, CommonSqlQuery commonSqlQuery){
         this.queryOperator = new QueryOperator<>(mapper);
         this.commonSqlQuery = commonSqlQuery;
     }

@@ -7,7 +7,7 @@ import java.util.Objects;
  * Category bean class  (table "category" in database)
  */
 public class Category implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Integer id;
     private String name;

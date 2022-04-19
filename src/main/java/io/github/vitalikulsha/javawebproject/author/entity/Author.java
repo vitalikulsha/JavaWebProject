@@ -7,7 +7,7 @@ import java.util.Objects;
  * Author bean class (table "author" in database)
  */
 public class Author implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String firstName;

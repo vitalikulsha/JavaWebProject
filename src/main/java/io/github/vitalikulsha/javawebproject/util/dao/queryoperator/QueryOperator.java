@@ -19,6 +19,7 @@ import java.util.List;
 public class QueryOperator<T> {
     private static final String ERROR_CONNECT_DB = "ConnectionException when trying to connect to DB.";
     private static final String ERROR_SQL_QUERY = "SQLException while executing SQL query query: %s.";
+    private static final String INFO_SQL_QUERY = "SQL query: %s.";
 
     private final ConnectionSource connectionSource = ConnectionSource.instance();
     private final RowMapper<T> mapper;
@@ -36,7 +37,7 @@ public class QueryOperator<T> {
      * @throws DaoException thrown when an SQL exception occurs
      */
     public List<T> executeEntityListQuery(String sqlQuery, Object... params) throws DaoException {
-        log.info("SQL query: " + sqlQuery);
+        log.info(String.format(INFO_SQL_QUERY, sqlQuery));
         List<T> result = new ArrayList<>();
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
@@ -65,7 +66,7 @@ public class QueryOperator<T> {
      * @throws DaoException thrown when an SQL exception occurs
      */
     public T executeSingleEntityQuery(String sqlQuery, Object... params) throws DaoException {
-        log.info("SQL query: " + sqlQuery);
+        log.info(String.format(INFO_SQL_QUERY, sqlQuery));
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             setStatementParam(preparedStatement, params);
@@ -89,7 +90,7 @@ public class QueryOperator<T> {
      * @throws DaoException thrown when an SQL exception occurs
      */
     public int executeUpdate(String sqlQuery, Object... params) throws DaoException {
-        log.info("SQL query: " + sqlQuery);
+        log.info(String.format(INFO_SQL_QUERY, sqlQuery));
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery, Statement.RETURN_GENERATED_KEYS)) {
             setStatementParam(preparedStatement, params);
@@ -112,7 +113,7 @@ public class QueryOperator<T> {
      * @throws DaoException thrown when an SQL exception occurs
      */
     public int executeCountQuery(String sqlQuery, Object... params) throws DaoException {
-        log.info("SQL query: " + sqlQuery);
+        log.info(String.format(INFO_SQL_QUERY, sqlQuery));
         try (Connection connection = connectionSource.createConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sqlQuery)) {
             setStatementParam(preparedStatement, params);

@@ -10,7 +10,7 @@ import java.util.Objects;
  * Order DTO bean class from order class
  */
 public class OrderDTO implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private BookDTO bookDto;

@@ -11,7 +11,7 @@ import java.util.Objects;
  * Book DTO bean class from book class
  */
 public class BookDTO implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String title;

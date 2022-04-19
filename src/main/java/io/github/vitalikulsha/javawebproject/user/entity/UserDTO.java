@@ -7,7 +7,7 @@ import java.util.Objects;
  * User DTO bean class from user class
  */
 public class UserDTO implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private int id;
     private String firstName;
@@ -105,7 +105,7 @@ public class UserDTO implements Serializable {
      * User DTO builder from user class
      */
     public static class Builder {
-        private UserDTO userDto;
+        private final UserDTO userDto;
 
         public Builder() {
             userDto = new UserDTO();
