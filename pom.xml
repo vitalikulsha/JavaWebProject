@@ -26,11 +26,9 @@
         <mockito.version>4.4.0</mockito.version>
         <testng.version>7.5</testng.version>
 
-        <sonar.projectKey>javaGuruBY_java-free-stream-5</sonar.projectKey>
-        <sonar.organization>javaguruby</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-        <sonar.login>d4a43c92cc5b4686b432aa2bcfea10d230cc5b73</sonar.login>
-
+        <sonar.projectKey>JavaWevProject</sonar.projectKey>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+        <sonar.login>86ed95c1371c43bf632120a46755e17f7cc8da49</sonar.login>
     </properties>
 
     <!-- Java EE -->
@@ -137,6 +135,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
             </plugin>
+
         </plugins>
     </build>
 </project>

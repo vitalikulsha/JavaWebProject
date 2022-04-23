@@ -14,32 +14,40 @@ import java.util.Map;
 public class CommandFactory {
     private static final CommandFactory instance = new CommandFactory();
 
-    private static final Map<String, Command> commands = new HashMap<>() {{
+    /**
+     * Command map for specific servlet paths.
+     */
+    private static final Map<String, Command> commands = new HashMap<>();
+
+    /*
+      Command map initialization.
+     */
+    static {
         //admin path
-        put(AdminPath.ADMIN.getPath(), new AdminCommand());
-        put(AdminPath.ALL_BOOKS.getPath(), new AllBooksCommand());
-        put(AdminPath.ALL_ORDERS.getPath(), new AllOrdersCommand());
-        put(AdminPath.ALL_READERS.getPath(), new AllReadersCommand());
-        put(AdminPath.BOOK_INFO.getPath(), new BookInfoCommand());
-        put(AdminPath.ORDER_INFO.getPath(), new OrderInfoCommand());
-        put(AdminPath.READER_INFO.getPath(), new ReaderInfoCommand());
+        commands.put(AdminPath.ADMIN.getPath(), new AdminCommand());
+        commands.put(AdminPath.ALL_BOOKS.getPath(), new AllBooksCommand());
+        commands.put(AdminPath.ALL_ORDERS.getPath(), new AllOrdersCommand());
+        commands.put(AdminPath.ALL_READERS.getPath(), new AllReadersCommand());
+        commands.put(AdminPath.BOOK_INFO.getPath(), new BookInfoCommand());
+        commands.put(AdminPath.ORDER_INFO.getPath(), new OrderInfoCommand());
+        commands.put(AdminPath.READER_INFO.getPath(), new ReaderInfoCommand());
         //user path
-        put(UserPath.BOOK_SEARCH.getPath(), new BookSearchCommand());
-        put(UserPath.CATALOG.getPath(), new CatalogCommand());
-        put(UserPath.EDIT.getPath(), new EditReaderCommand());
-        put(UserPath.ORDER.getPath(), new OrderCommand());
-        put(UserPath.READER.getPath(), new ReaderCommand());
-        put(UserPath.READER_ORDERS.getPath(), new ReaderOrdersCommand());
-        put(UserPath.READER_ORDER_INFO.getPath(), new ReaderOrderInfoCommand());
+        commands.put(UserPath.BOOK_SEARCH.getPath(), new BookSearchCommand());
+        commands.put(UserPath.CATALOG.getPath(), new CatalogCommand());
+        commands.put(UserPath.EDIT.getPath(), new EditReaderCommand());
+        commands.put(UserPath.ORDER.getPath(), new OrderCommand());
+        commands.put(UserPath.READER.getPath(), new ReaderCommand());
+        commands.put(UserPath.READER_ORDERS.getPath(), new ReaderOrdersCommand());
+        commands.put(UserPath.READER_ORDER_INFO.getPath(), new ReaderOrderInfoCommand());
         //general path
-        put(GuestPath.ERROR_403.getPath(), new Error403Command());
-        put(GuestPath.ERROR_404.getPath(), new Error404Command());
-        put(GuestPath.ERROR_500.getPath(), new Error500Command());
-        put(GuestPath.LOGIN.getPath(), new LoginCommand());
-        put(UserPath.LOGOUT.getPath(), new LogoutCommand());
-        put(GuestPath.LOCALE.getPath(), new LocaleCommand());
-        put(GuestPath.REGISTER.getPath(), new RegisterCommand());
-    }};
+        commands.put(GuestPath.ERROR_403.getPath(), new Error403Command());
+        commands.put(GuestPath.ERROR_404.getPath(), new Error404Command());
+        commands.put(GuestPath.ERROR_500.getPath(), new Error500Command());
+        commands.put(GuestPath.LOGIN.getPath(), new LoginCommand());
+        commands.put(UserPath.LOGOUT.getPath(), new LogoutCommand());
+        commands.put(GuestPath.LOCALE.getPath(), new LocaleCommand());
+        commands.put(GuestPath.REGISTER.getPath(), new RegisterCommand());
+    }
 
     private CommandFactory() {
     }

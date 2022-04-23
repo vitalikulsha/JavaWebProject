@@ -6,7 +6,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title>404</title>
     <style>

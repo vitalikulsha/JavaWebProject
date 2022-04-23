@@ -7,7 +7,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="reader.title-book-search"/></title>
     <style>
@@ -19,7 +19,7 @@
     </script>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
@@ -33,8 +33,10 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="reader.header-book-search"/></h2>
 <table>
+    <caption>
+        <h2><fmt:message key="reader.header-book-search"/></h2>
+    </caption>
     <form name="formBookId" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="get">
         <tr>
             <th><fmt:message key="reader.search-by-id"/></th>

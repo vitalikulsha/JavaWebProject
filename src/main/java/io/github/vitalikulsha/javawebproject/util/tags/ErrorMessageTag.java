@@ -46,6 +46,8 @@ public class ErrorMessageTag extends TagSupport {
                 case 500:
                     out.write(String.format(H3_TAG, bundle.getString("500.error")));
                     out.write(String.format(H4_TAG, bundle.getString("500.message")));
+                default:
+                    log.error("This error is not handled: " + error);
             }
             log.info("Error code: " + error);
         } catch (IOException e) {

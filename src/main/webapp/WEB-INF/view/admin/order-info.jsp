@@ -8,7 +8,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="admin.title-order"/></title>
     <style>
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">
@@ -37,8 +37,10 @@
     </ul>
 </div>
 <c:set var="order" scope="request" value="${order}"/>
-<h2><fmt:message key="admin.header-order"/></h2>
 <table style="with: 700px;">
+    <caption>
+        <h2><fmt:message key="admin.header-order"/></h2>
+    </caption>
     <tr>
         <th class="th-order"><fmt:message key="order.id"/></th>
         <td>${order.id}</td>
@@ -79,7 +81,7 @@
             <c:choose>
                 <c:when test="${order.approved}">
                     <ul class="nav" style="justify-content: space-between;">
-                    <li><p style="color: green"><b><fmt:message key="order.approved"/></p></li>
+                        <li><p style="color: green"><strong><fmt:message key="order.approved"/></strong></p></li>
                     <li><c:if test="${order.reserveStatus eq 'REFUND'}">
                         <form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                             <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.CANCEL}">
@@ -89,8 +91,8 @@
                     </ul>
                 </c:when>
                 <c:otherwise>
+                    <p style="color:red"><strong><fmt:message key="order.not-approved"/></strong></p>
                     <ul class="nav" style="justify-content: space-between;">
-                    <li><p style="color:red"><b><fmt:message key="order.not-approved"/></p></li>
                     <li><form action="${pageContext.request.contextPath}${AdminPath.ORDER_INFO.path}" method="post">
                         <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.APPROVE}">
                         <input class="button approve return" type="submit" value="<fmt:message key="admin.order-button-approve"/>">

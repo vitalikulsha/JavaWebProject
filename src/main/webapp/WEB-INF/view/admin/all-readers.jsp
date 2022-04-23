@@ -7,7 +7,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="admin.title-readers"/></title>
     <style>
@@ -16,7 +16,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
@@ -30,13 +30,15 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="admin.header-readers"/></h2>
 <c:if test="${empty allReaders}">
     <h4 style="text-align: center;"><fmt:message key="admin.readers-empty"/></h4>
 </c:if>
 <c:if test="${not empty allReaders}">
 <c:set var="user" scope="request" value="${user}"/>
 <table style="width: 500px;">
+    <caption>
+        <h2><fmt:message key="admin.header-readers"/></h2>
+    </caption>
     <thead>
     <tr>
         <th style="width: 10%;"><fmt:message key="admin.reader-id"/></th>

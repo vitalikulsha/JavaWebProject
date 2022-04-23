@@ -8,7 +8,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="reader.title-place-order"/></title>
     <style>
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
@@ -36,11 +36,13 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="reader.header-place-order"/></h2>
 <c:set var="book" scope="request" value="${book}"/>
 <form id="order" action="${pageContext.request.contextPath}${UserPath.ORDER.path}" method="post">
 </form>
 <table style="width: 700px;">
+    <caption>
+        <h2><fmt:message key="reader.header-place-order"/></h2>
+    </caption>
     <tr>
         <th class="th-order"><fmt:message key="book.id"/></th>
         <td>${book.id}</td>

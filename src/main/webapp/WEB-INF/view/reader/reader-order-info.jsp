@@ -6,7 +6,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="reader.title-order-info"/></title>
     <style>
@@ -15,7 +15,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
@@ -30,8 +30,10 @@
     </ul>
 </div>
 <c:set var="order" scope="request" value="${order}"/>
-<h2><fmt:message key="reader.header-order-info"/></h2>
 <table  style="width: 700px;">
+    <caption>
+        <h2><fmt:message key="reader.header-order-info"/></h2>
+    </caption>
     <tr>
         <th class="th-order"><fmt:message key="order.id"/></th>
         <td>[${order.id}]</td>
@@ -81,10 +83,10 @@
         <td>
             <c:choose>
                 <c:when test="${order.approved}">
-                    <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
+                    <p style="color: green"><strong><fmt:message key="order.approved"/></strong></p>
                 </c:when>
                 <c:otherwise>
-                    <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
+                    <p style="color:red"><strong><fmt:message key="order.not-approved"/></strong></p>
                 </c:otherwise>
             </c:choose>
         </td>

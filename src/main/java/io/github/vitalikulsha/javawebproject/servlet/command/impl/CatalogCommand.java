@@ -88,6 +88,8 @@ public class CatalogCommand implements Command {
                         pages = pagination.getPages(bookService.countBySearchParam(Column.NAME, paramValue));
                         books = bookService.getBooksByCategoryName(pagination, paramValue);
                         break;
+                    default:
+                        log.error("Unknown request parameter: " + param);
                 }
             }
         } else {

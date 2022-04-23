@@ -8,7 +8,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="reader.title-order-list"/></title>
     <style>
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
@@ -36,13 +36,15 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="reader.header-order-list"/></h2>
 <c:set var="user" scope="request" value="${user}"/>
 <c:if test="${empty userOrders}">
     <h3 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h3>
 </c:if>
 <c:if test="${not empty userOrders}">
 <table style="width: 900px;">
+    <caption>
+        <h2><fmt:message key="reader.header-order-list"/></h2>
+    </caption>
     <thead>
     <tr>
         <th style="width: 10%;"><fmt:message key="order.id"/></th>
@@ -78,10 +80,10 @@
             <td style="text-align: center;">
                 <c:choose>
                     <c:when test="${order.approved}">
-                        <p style="color: green"><b><fmt:message key="order.approved"/></p>
+                        <p style="color: green"><strong><fmt:message key="order.approved"/></strong></p>
                     </c:when>
                     <c:otherwise>
-                        <p style="color:red"><b><fmt:message key="order.not-approved"/></p>
+                        <p style="color:red"><strong><fmt:message key="order.not-approved"/></strong></p>
                     </c:otherwise>
                 </c:choose>
             </td>

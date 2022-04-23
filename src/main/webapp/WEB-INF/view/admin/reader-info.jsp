@@ -7,7 +7,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="admin.title-reader"/></title>
     <style>
@@ -16,7 +16,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}">
@@ -35,9 +35,11 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="admin.header-reader"/></h2>
 <c:set var="user" scope="request" value="${reader}"/>
 <table style="width: 500px;">
+    <caption>
+        <h2><fmt:message key="admin.header-reader"/></h2>
+    </caption>
     <tr>
         <th class="th-user"><fmt:message key="admin.reader-id"/></th>
         <td>${user.id}</td>
@@ -63,12 +65,14 @@
         <td>${user.role}</td>
     </tr>
 </table>
-<h3 class="title"><fmt:message key="admin.reader-order-list"/></h3>
 <c:if test="${empty readerOrders}">
     <h4 style="text-align: center;"><fmt:message key="admin.reader-order-list-empty"/></h4>
 </c:if>
 <c:if test="${not empty readerOrders}">
 <table style="width: 700px;">
+    <caption>
+        <h3 class="title"><fmt:message key="admin.reader-order-list"/></h3>
+    </caption>
     <tr>
         <th style="width: 10%;"><fmt:message key="order.id"/></th>
         <th style="width: 40%;"><fmt:message key="book.title"/></th>
@@ -98,10 +102,10 @@
             <td style="text-align: center;">
                 <c:choose>
                     <c:when test="${order.approved}">
-                        <p style="color: green"><b><fmt:message key="order.approved"/></b></p>
+                        <p style="color: green"><strong><fmt:message key="order.approved"/></strong></p>
                     </c:when>
                     <c:otherwise>
-                        <p style="color:red"><b><fmt:message key="order.not-approved"/></b></p>
+                        <p style="color:red"><strong><fmt:message key="order.not-approved"/></strong></p>
                     </c:otherwise>
                 </c:choose>
             </td>

@@ -8,7 +8,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="admin.title-orders"/></title>
     <style>
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
@@ -31,12 +31,14 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="admin.header-readers"/></h2>
 <c:if test="${empty allOrders}">
     <h4 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h4>
 </c:if>
 <c:if test="${not empty allOrders}">
 <table style="width: 900px;">
+    <caption>
+        <h2><fmt:message key="admin.header-readers"/></h2>
+    </caption>
     <thead>
     <tr>
         <th style="width: 10%;"><fmt:message key="order.id"/></th>
@@ -73,7 +75,7 @@
                 <ul class="nav" style="justify-content: space-between;">
                 <c:choose>
                     <c:when test="${order.approved}">
-                        <li><p style="color: green"><b><fmt:message key="order.approved"/></p></li>
+                        <li><p style="color: green"><strong><fmt:message key="order.approved"/></strong></strong></p></li>
                         <c:if test="${order.reserveStatus eq 'REFUND'}">
                             <li><form style="text-align: right; vertical-align: middle;" action="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}" method="post">
                                 <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
@@ -83,7 +85,7 @@
                         </c:if>
                     </c:when>
                     <c:otherwise>
-                        <li><p style="color:red"><b><fmt:message key="order.not-approved"/></p></li>
+                        <li><p style="color:red"><strong><fmt:message key="order.not-approved"/></strong></p></li>
                         <li><form style="text-align: right; vertical-align: middle;" action="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}" method="post">
                             <input type="hidden" name="${RequestParameter.ORDER_ID}" value="${order.id}">
                             <input type="hidden" name="${RequestParameter.ACTION}" value="${JspValue.APPROVE}">

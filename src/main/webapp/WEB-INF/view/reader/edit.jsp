@@ -8,7 +8,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="reader.title-edit-profile"/></title>
     <style>
@@ -17,7 +17,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
@@ -31,9 +31,11 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="reader.header-edit-profile"/></h2>
 <form action="${pageContext.request.contextPath}${UserPath.EDIT.path}" method="post">
     <table>
+        <caption>
+            <h2><fmt:message key="reader.header-edit-profile"/></h2>
+        </caption>
         <tr>
             <th><fmt:message key="register.first-name"/></th>
             <td>

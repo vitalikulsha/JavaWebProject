@@ -7,7 +7,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="login.title"/></title>
     <style>
@@ -20,10 +20,12 @@
 </head>
 <body class="block">
 <div class="banner"></div>
-<h2><fmt:message key="login.header"/></h2>
-<div align="center">
+<div>
     <form name="formReg" method="post" action="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
         <table>
+            <caption>
+                <h2><fmt:message key="login.header"/></h2>
+            </caption>
             <tr>
                 <th><fmt:message key="register.login"/></th>
                 <td>
@@ -45,7 +47,7 @@
     </form>
 </div>
 
-<div align="right">
+<div style="float: right;">
     <ul class="nav" style="width: 150px; font-size: 16px;">
         <li>
             <a href="${pageContext.request.contextPath}${GuestPath.REGISTER.path}">

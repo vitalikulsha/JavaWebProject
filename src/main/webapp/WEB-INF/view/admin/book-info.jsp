@@ -6,7 +6,7 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale"/>
 
-<html>
+<!DOCTYPE html>
 <head>
     <title><fmt:message key="admin.title-book"/></title>
     <style>
@@ -15,7 +15,7 @@
     </style>
 </head>
 <body class="block">
-<div align="right">
+<div style="float: right;">
     <ul class="nav nav-link">
         <li>
             <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">
@@ -34,9 +34,11 @@
         </li>
     </ul>
 </div>
-<h2><fmt:message key="admin.header-book"/></h2>
 <c:set var="book" scope="request" value="${book}"/>
 <table style="width: 700px;">
+    <caption>
+        <h2><fmt:message key="admin.header-book"/></h2>
+    </caption>
     <tr>
         <th class="th-order"><fmt:message key="book.id"/></th>
         <td>${book.id}</td>
