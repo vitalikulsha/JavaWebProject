@@ -28,9 +28,8 @@ public class ReaderInfoCommand implements Command {
         UserService userService = ServiceFactory.instance().userService();
         OrderService orderService = ServiceFactory.instance().orderService();
         int readerId = Integer.parseInt(request.getParameter(RequestParameter.READER_ID));
-        String url = request.getServletContext().getContextPath()
-                + AdminPath.READER_INFO.getPath()
-                + "?" + RequestParameter.READER_ID + "=" + readerId;
+        String url = request.getContextPath() + AdminPath.READER_INFO.getPath() + "?"
+                + RequestParameter.READER_ID + "=" + readerId;
         request.setAttribute(SessionAttribute.URL, url);
         try {
             UserDTO reader = userService.getById(readerId);
@@ -39,7 +38,7 @@ public class ReaderInfoCommand implements Command {
             request.setAttribute(SessionAttribute.READER, reader);
             return new CommandInfo(Page.READER_INFO, RoutingType.FORWARD);
         } catch (ServiceException e) {
-            log.error("Unable to get user information: " +  e.getMessage());
+            log.error("Unable to get user information: " + e.getMessage());
         }
         return new CommandInfo(Page.ERROR_500, RoutingType.FORWARD);
     }

@@ -36,7 +36,7 @@ public class AllOrdersCommand implements Command {
             }
         }
         OrderService orderService = ServiceFactory.instance().orderService();
-        String url = request.getServletContext().getContextPath() + AdminPath.ALL_ORDERS.getPath() + "?";
+        String url = request.getContextPath() + AdminPath.ALL_ORDERS.getPath() + "?";
         request.setAttribute(SessionAttribute.URL, url);
         String page = request.getParameter(RequestParameter.PAGE);
         int pageNumber = (page == null) ? 1 : Integer.parseInt(page);
