@@ -5,8 +5,10 @@
 <%@ page import="io.github.vitalikulsha.javawebproject.servlet.path.GuestPath" %>
 
 <c:if test="${sessionScope.locale eq 'en'}">
-    <a href="${pageContext.request.contextPath}${GuestPath.LOCALE.path}?${RequestParameter.LOCALE}=ru">| RU |</a>
+    <a href="${pageContext.request.contextPath}${GuestPath.LOCALE.path}?${RequestParameter.LOCALE}=ru"
+       class="link">| RU |</a>
 </c:if>
 <c:if test="${sessionScope.locale eq 'ru'}">
-    <a href="${pageContext.request.contextPath}${GuestPath.LOCALE.path}?${RequestParameter.LOCALE}=en">| EN |</a>
+    <a href="${pageContext.request.contextPath}${GuestPath.LOCALE.path}?${RequestParameter.LOCALE}=en"
+        class="link">| EN |</a>
 </c:if>

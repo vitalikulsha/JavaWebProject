@@ -47,18 +47,18 @@
     </form>
 </div>
 
-<div style="float: right;">
-    <ul class="nav" style="width: 150px; font-size: 16px;">
-        <li>
-            <a href="${pageContext.request.contextPath}${GuestPath.REGISTER.path}">
+<nav class="menu">
+    <ul class="nav nav-link" >
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${GuestPath.REGISTER.path}" class="link">
                 | <fmt:message key="login.link-registration"/> |
             </a>
         </li>
-        <li>
+        <li class="menu-li">
             <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
         </li>
     </ul>
-</div>
+</nav>
 
 <c:if test="${not empty userFound && !userFound}">
     <h3 class="error"><fmt:message key="login.invalid"/><br><fmt:message key="login.try-again"/></h3>

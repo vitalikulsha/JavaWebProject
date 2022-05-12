@@ -16,6 +16,6 @@
 
 <nav style="font-size: 20px; text-align: center;">
     <c:forEach var="page" items="${pages}">
-        <a href="${requestScope.url}&page=${page}">| - ${page} - |</a>
+        <a href="${requestScope.url}&page=${page}" class="link">| - ${page} - |</a>
     </c:forEach>
 </nav>

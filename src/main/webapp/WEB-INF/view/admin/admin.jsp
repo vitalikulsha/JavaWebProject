@@ -15,18 +15,18 @@
     </style>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link">
-        <li>
-            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}" class="link">
                 | <fmt:message key="admin.link-exit"/> |
             </a>
         </li>
-        <li>
+        <li class="menu-li">
             <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
         </li>
     </ul>
-</div>
+</nav>
 <c:set var="user" scope="request" value="${user}"/>
 <table style="width: 500px;">
     <caption>
@@ -53,19 +53,19 @@
         <td>${user.role}</td>
     </tr>
 </table>
-<ul class="nav nav-page" style="width: 500px;" >
-    <li>
-        <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}">
+<ul class="nav nav-page" style="width: 510px;" >
+    <li class="menu-li">
+        <a href="${pageContext.request.contextPath}${AdminPath.ALL_ORDERS.path}" class="link">
             | <fmt:message key="admin.link-order-list"/> |
         </a>
     </li>
-    <li>
-        <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}">
+    <li class="menu-li">
+        <a href="${pageContext.request.contextPath}${AdminPath.ALL_READERS.path}" class="link">
             | <fmt:message key="admin.link-reader-list"/> |
         </a>
     </li>
-    <li>
-        <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">
+    <li class="menu-li">
+        <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}" class="link">
             | <fmt:message key="admin.link-book-list"/> |
         </a>
     </li>

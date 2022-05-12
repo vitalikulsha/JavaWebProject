@@ -15,20 +15,20 @@
     </style>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link">
-        <li>
-            <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${UserPath.READER.path}" class="link">
                 | <fmt:message key="reader.link-account"/> |
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}" class="link">
                 | <fmt:message key="reader.link-exit"/> |
             </a>
         </li>
     </ul>
-</div>
+</nav>
 <c:set var="order" scope="request" value="${order}"/>
 <table  style="width: 700px;">
     <caption>

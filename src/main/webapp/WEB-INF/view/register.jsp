@@ -20,18 +20,18 @@
     </script>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link" >
-        <li>
-            <a href="${pageContext.request.contextPath}${GuestPath.LOGIN.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${GuestPath.LOGIN.path}" class="link">
                 | <fmt:message key="register.link-login"/> |
             </a>
         </li>
-        <li>
+        <li class="menu-li">
             <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
         </li>
     </ul>
-</div>
+</nav>
 <form name="formReg" action="${pageContext.request.contextPath}${GuestPath.REGISTER.path}" method="post">
     <table>
         <caption>

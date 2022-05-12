@@ -15,25 +15,25 @@
     </style>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link">
-        <li>
-            <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${AdminPath.ALL_BOOKS.path}" class="link">
                 | <fmt:message key="admin.link-book-list"/> |
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}" class="link">
                 | <fmt:message key="admin.link-account"/> |
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}" class="link">
                 | <fmt:message key="admin.link-exit"/> |
             </a>
         </li>
     </ul>
-</div>
+</nav>
 <c:set var="book" scope="request" value="${book}"/>
 <table style="width: 700px;">
     <caption>

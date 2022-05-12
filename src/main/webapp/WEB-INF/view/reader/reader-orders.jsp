@@ -17,25 +17,25 @@
     </style>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link">
-        <li>
-            <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}" class="link">
                 | <fmt:message key="reader.link-book-search"/> |
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}${UserPath.READER.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${UserPath.READER.path}" class="link">
                 | <fmt:message key="reader.link-account"/> |
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}" class="link">
                 | <fmt:message key="reader.link-exit"/> |
             </a>
         </li>
     </ul>
-</div>
+</nav>
 <c:set var="user" scope="request" value="${user}"/>
 <c:if test="${empty userOrders}">
     <h3 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h3>

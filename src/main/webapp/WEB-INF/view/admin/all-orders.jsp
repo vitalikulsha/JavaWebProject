@@ -17,20 +17,20 @@
     </style>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link">
-        <li>
-            <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${AdminPath.ADMIN.path}" class="link">
                 | <fmt:message key="admin.link-account"/> |
             </a>
         </li>
-        <li>
-            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${AdminPath.LOGOUT.path}" class="link">
                 | <fmt:message key="admin.link-exit"/> |
             </a>
         </li>
     </ul>
-</div>
+</nav>
 <c:if test="${empty allOrders}">
     <h4 style="text-align: center;"><fmt:message key="admin.orders-empty"/></h4>
 </c:if>

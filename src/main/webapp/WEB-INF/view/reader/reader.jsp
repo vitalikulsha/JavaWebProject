@@ -15,18 +15,18 @@
     </style>
 </head>
 <body class="block">
-<div style="float: right;">
+<nav class="menu">
     <ul class="nav nav-link">
-        <li>
-            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}">
+        <li class="menu-li">
+            <a href="${pageContext.request.contextPath}${UserPath.LOGOUT.path}" class="link">
                 | <fmt:message key="reader.link-exit"/> |
             </a>
         </li>
-        <li>
+        <li class="menu-li">
             <jsp:include page="/WEB-INF/view/template/locale.jsp"/>
         </li>
     </ul>
-</div>
+</nav>
 <c:set var="user" scope="request" value="${user}"/>
 <table style="width: 550px;">
     <caption>
@@ -57,22 +57,22 @@
         <td>${user.role}</td>
     </tr>
 </table>
-<ul class="nav nav-page" style="width: 550px;">
-    <li>
-        <a href="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}">
-                | <fmt:message key="reader.link-order-list"/> |
+<ul class="nav nav-page" style="width: 560px;">
+    <li class="menu-li">
+        <a href="${pageContext.request.contextPath}${UserPath.READER_ORDERS.path}" class="link">
+            | <fmt:message key="reader.link-order-list"/> |
         </a>
     </li>
-    <li>
-        <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}">
-                | <fmt:message key="reader.link-book-search"/> |
+    <li class="menu-li">
+        <a href="${pageContext.request.contextPath}${UserPath.BOOK_SEARCH.path}" class="link">
+            | <fmt:message key="reader.link-book-search"/> |
         </a>
     </li>
-    <li>
-        <a href="${pageContext.request.contextPath}${UserPath.EDIT.path}">
-                | <fmt:message key="reader.link-edit-profile"/> |
+    <li class="menu-li">
+        <a href="${pageContext.request.contextPath}${UserPath.EDIT.path}" class="link">
+            | <fmt:message key="reader.link-edit-profile"/> |
         </a>
-     </li>
+    </li>
 </ul>
 </body>
 </html>
